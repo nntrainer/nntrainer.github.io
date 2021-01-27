@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<base href="..">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<title>Coding Convention</title>
+
+<link rel="stylesheet" href="assets/css/custom_bootstrap.css" type="text/css">
+<link rel="stylesheet" href="assets/css/bootstrap-toc.min.css" type="text/css">
+<link rel="stylesheet" href="assets/css/frontend.css" type="text/css">
+<link rel="stylesheet" href="assets/css/jquery.mCustomScrollbar.min.css">
+<link rel="stylesheet" href="assets/js/search/enable_search.css" type="text/css">
+
+<link rel="stylesheet" href="assets/css/extra_frontend.css" type="text/css">
+<link rel="stylesheet" href="assets/css/prism-tomorrow.css" type="text/css">
+
+<script src="assets/js/mustache.min.js"></script>
+<script src="assets/js/jquery.js"></script>
+<script src="assets/js/scrollspy.js"></script>
+<script src="assets/js/bootstrap.js"></script>
+<script src="assets/js/typeahead.jquery.min.js"></script>
+<script src="assets/js/search.js"></script>
+<script src="assets/js/isotope.pkgd.min.js"></script>
+<script src="assets/js/compare-versions.js"></script>
+<script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="assets/js/bootstrap-toc.min.js"></script>
+<script src="assets/js/jquery.touchSwipe.min.js"></script>
+<script src="assets/js/anchor.min.js"></script>
+<script src="assets/js/tag_filtering.js"></script>
+<script src="assets/js/language_switching.js"></script>
+
+<script src="assets/js/lines_around_headings.js"></script>
+
+<script src="assets/js/trie.js"></script>
+<script src="assets/js/prism-core.js"></script>
+<script src="assets/js/prism-autoloader.js"></script>
+<script src="assets/js/prism_autoloader_path_override.js"></script>
+
+
+</head>
+
+<body class="no-script
+" data-spy="scroll" data-target="#toc" data-offset="70">
+
+<script>
+$('body').removeClass('no-script');
+</script>
+
+<nav class="navbar navbar-fixed-top navbar-default" id="topnav">
+	<div class="container-fluid">
+		<div class="navbar-right">
+			<a id="toc-toggle">
+				<span class="glyphicon glyphicon-menu-right"></span>
+				<span class="glyphicon glyphicon-menu-left"></span>
+			</a>
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-wrapper" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<form class="navbar-form pull-right" id="navbar-search-form">
+                               <div class="form-group has-feedback">
+                                       <input type="text" class="form-control input-sm" name="search" id="sidenav-lookup-field" placeholder="search" disabled>
+				       <span class="glyphicon glyphicon-search form-control-feedback" id="search-mgn-glass"></span>
+                               </div>
+                        </form>
+		</div>
+		<div class="navbar-header">
+			<a id="sidenav-toggle">
+				<span class="glyphicon glyphicon-menu-right"></span>
+				<span class="glyphicon glyphicon-menu-left"></span>
+			</a>
+			<a id="home-link" href="index.html" class="hotdoc-navbar-brand">
+				<img src="assets/images/home.svg" alt="Home">
+			</a>
+		</div>
+		<div class="navbar-collapse collapse" id="navbar-wrapper">
+			<ul class="nav navbar-nav" id="menu">
+				
+<li class="dropdown">
+    <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        API References<span class="caret"></span>
+    </a>
+	<ul class="dropdown-menu" id="modules-menu">
+					<li>
+				<a href="docs/hotdoc/index.html">NNTrainer doc</a>
+			</li>
+		</ul>
+</li>
+
+<li>
+	<a href="docs/hotdoc/index.html">Documents</a>
+</li>
+
+			</ul>
+			<div class="hidden-xs hidden-sm navbar-text navbar-center">
+							</div>
+		</div>
+	</div>
+</nav>
+
+<main>
+<div data-extension="core" data-hotdoc-in-toplevel="True" data-hotdoc-project="NNTrainer" data-hotdoc-ref="docs/coding-convention.html" class="page_container" id="page-wrapper">
+<script src="assets/js/utils.js"></script>
+
+<div class="panel panel-collapse oc-collapsed" id="sidenav" data-hotdoc-role="navigation">
+	<script src="assets/js/navigation.js"></script>
+	<script src="assets/js/sitemap.js"></script>
+</div>
+
+<div id="body">
+	<div id="main">
+				    <div id="page-description" data-hotdoc-role="main">
+        <h1 id="coding-convention">Coding Convention</h1>
+<h2 id="c-headers-h">C headers (.h)</h2>
+<p>You may indent differently from what clang-format does. You may also break the 80-column rule with header files.</p>
+<p>Except the two, you are required to follow the general coding styles mandated by clang-format.</p>
+<h2 id="cc-files-cpp-c">C/C++ files (.cpp, .c)</h2>
+<p>Use .h for headers and .cpp / .c for source.
+You have to use clang-format with the given <a href="https://github.com/nnstreamer/nntrainer/blob/main/.clang-format">.clang-format</a> file</p>
+<h2 id="other-files">Other files</h2>
+<ul>
+<li>[Java] TBD</li>
+<li>[Python] TBD</li>
+<li>[Bash] TBD</li>
+</ul>
+<h1 id="file-locations">File Locations</h1>
+<h2 id="directory-structure-of-nntrainergit">Directory structure of nntrainer.git</h2>
+<ul>
+<li>
+<strong>api</strong>: API definitions and implementations
+<ul>
+<li>
+<strong>capi</strong>: C-APIs (Tizen and others)</li>
+</ul>
+</li>
+<li>
+<strong>debian</strong>: Debian/Ubuntu packaging files</li>
+<li>
+<strong>docs</strong>: Documentations</li>
+<li>
+<strong>nntrainer</strong>: All core NNTrainer codes are located here</li>
+<li>
+<strong>nnstreamer</strong>: NNStreamer sub-filter codes for NNTrainer</li>
+<li>
+<strong>jni</strong>: Android/Java build scripts.</li>
+<li>
+<strong>Applications</strong>: Examples for NNtrainer</li>
+<li>
+<strong>packaging</strong>: Tizen RPM build scripts. OpenSUSE/Redhat Linux may reuse this.</li>
+<li>
+<strong>test</strong>: Unit test cases. We have GTEST test cases. There are subdirectories, which are groups of unit test cases.</li>
+<li>
+<strong>tools</strong>: Various developmental tools and scripts of NNTrainer.</li>
+</ul>
+<h2 id="related-git-repositories">Related git repositories</h2>
+<ul>
+<li><a href="https://github.com/nnstreamer/nnstreamer">NNStreamer</a></li>
+<li><a href="https://github.com/nnstreamer/TAOS-CI">TAOS-CI, CI Service for On-Device AI Systems</a></li>
+</ul>
+
+    </div>
+        
+
+
+
+
+		
+	</div>
+	<div id="search_results">
+		<p>The results of the search are</p>
+	</div>
+	<div id="footer">
+		    
+
+	</div>
+</div>
+
+<div id="toc-column">
+	
+		<div class="edit-button">
+		
+
+	</div>
+		<div id="toc-wrapper">
+		<nav id="toc"></nav>
+	</div>
+</div>
+</div>
+</main>
+
+
+<script src="assets/js/navbar_offset_scroller.js"></script>
+</body>
+</html>

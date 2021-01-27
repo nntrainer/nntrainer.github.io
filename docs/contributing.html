@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<base href="..">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<title>Contribution</title>
+
+<link rel="stylesheet" href="assets/css/custom_bootstrap.css" type="text/css">
+<link rel="stylesheet" href="assets/css/bootstrap-toc.min.css" type="text/css">
+<link rel="stylesheet" href="assets/css/frontend.css" type="text/css">
+<link rel="stylesheet" href="assets/css/jquery.mCustomScrollbar.min.css">
+<link rel="stylesheet" href="assets/js/search/enable_search.css" type="text/css">
+
+<link rel="stylesheet" href="assets/css/extra_frontend.css" type="text/css">
+<link rel="stylesheet" href="assets/css/prism-tomorrow.css" type="text/css">
+
+<script src="assets/js/mustache.min.js"></script>
+<script src="assets/js/jquery.js"></script>
+<script src="assets/js/scrollspy.js"></script>
+<script src="assets/js/bootstrap.js"></script>
+<script src="assets/js/typeahead.jquery.min.js"></script>
+<script src="assets/js/search.js"></script>
+<script src="assets/js/isotope.pkgd.min.js"></script>
+<script src="assets/js/compare-versions.js"></script>
+<script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="assets/js/bootstrap-toc.min.js"></script>
+<script src="assets/js/jquery.touchSwipe.min.js"></script>
+<script src="assets/js/anchor.min.js"></script>
+<script src="assets/js/tag_filtering.js"></script>
+<script src="assets/js/language_switching.js"></script>
+
+<script src="assets/js/lines_around_headings.js"></script>
+
+<script src="assets/js/trie.js"></script>
+<script src="assets/js/prism-core.js"></script>
+<script src="assets/js/prism-autoloader.js"></script>
+<script src="assets/js/prism_autoloader_path_override.js"></script>
+
+
+</head>
+
+<body class="no-script
+" data-spy="scroll" data-target="#toc" data-offset="70">
+
+<script>
+$('body').removeClass('no-script');
+</script>
+
+<nav class="navbar navbar-fixed-top navbar-default" id="topnav">
+	<div class="container-fluid">
+		<div class="navbar-right">
+			<a id="toc-toggle">
+				<span class="glyphicon glyphicon-menu-right"></span>
+				<span class="glyphicon glyphicon-menu-left"></span>
+			</a>
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-wrapper" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<form class="navbar-form pull-right" id="navbar-search-form">
+                               <div class="form-group has-feedback">
+                                       <input type="text" class="form-control input-sm" name="search" id="sidenav-lookup-field" placeholder="search" disabled>
+				       <span class="glyphicon glyphicon-search form-control-feedback" id="search-mgn-glass"></span>
+                               </div>
+                        </form>
+		</div>
+		<div class="navbar-header">
+			<a id="sidenav-toggle">
+				<span class="glyphicon glyphicon-menu-right"></span>
+				<span class="glyphicon glyphicon-menu-left"></span>
+			</a>
+			<a id="home-link" href="index.html" class="hotdoc-navbar-brand">
+				<img src="assets/images/home.svg" alt="Home">
+			</a>
+		</div>
+		<div class="navbar-collapse collapse" id="navbar-wrapper">
+			<ul class="nav navbar-nav" id="menu">
+				
+<li class="dropdown">
+    <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        API References<span class="caret"></span>
+    </a>
+	<ul class="dropdown-menu" id="modules-menu">
+					<li>
+				<a href="docs/hotdoc/index.html">NNTrainer doc</a>
+			</li>
+		</ul>
+</li>
+
+<li>
+	<a href="docs/hotdoc/index.html">Documents</a>
+</li>
+
+			</ul>
+			<div class="hidden-xs hidden-sm navbar-text navbar-center">
+							</div>
+		</div>
+	</div>
+</nav>
+
+<main>
+<div data-extension="core" data-hotdoc-in-toplevel="True" data-hotdoc-project="NNTrainer" data-hotdoc-ref="docs/contributing.html" class="page_container" id="page-wrapper">
+<script src="assets/js/utils.js"></script>
+
+<div class="panel panel-collapse oc-collapsed" id="sidenav" data-hotdoc-role="navigation">
+	<script src="assets/js/navigation.js"></script>
+	<script src="assets/js/sitemap.js"></script>
+</div>
+
+<div id="body">
+	<div id="main">
+				    <div id="page-description" data-hotdoc-role="main">
+        <h1 id="how-to-contribute">How to Contribute</h1>
+<h2 id="coding-convention">Coding Convention</h2>
+<p>Consistent code conventions are important for several reasons:</p>
+<ul>
+<li>
+<em>Most importantly:</em> To make it easy to read and understand the code. Remember: you may be the only one writing the code initially, but many people will need to read, understand, modify, and fix the code over its lifetime. These conventions attempt to make this task much easier. If the code consistently follows these standards, it improves developer understanding across the entire source base.</li>
+<li>To make it easy to debug the code, with both a system call tracer and GNU debuggers. It should be easy to set breakpoints, view locals, and display and view data structures.</li>
+<li>To attempt to improve code quality through consistency, and requiring patterns that are less likely to result in bugs either initially, or after code modification.</li>
+</ul>
+<p>For more information, please refer to <a href="docs/coding-convention.html">coding-convention.md</a>.</p>
+<p>For C/C++ code, you may apply clang-format with the given <a href="https://github.com/nnstreamer/nntrainer/blob/main/.clang-format">.clang-format</a> file.
+For C/C++ header files, we do not require strict style rules, but it is recommended to apply such rules.</p>
+<p>We do not have explicit and strict styling rules for other programming languages, yet.</p>
+<h2 id="code-reviews-and-prs">Code Reviews and PRs</h2>
+<p>You are encouraged to review incoming PRs; regardless whether you are a committer, a designated reviewer, or just a passer-by.</p>
+<p>If you are a committer or a reviewer of the specific component, you are obligated to review incoming related PRs within some reasonable time frame.
+However, even if you are not a reviewer (designated by committer or submitter), as long as you are in this project, you need to give feedback on PRs especially if you are working on similar topics/components.</p>
+<p>The submitter has the first responsibility of keeping the created PR clean and neat (rebase whenever there are merge conflicts), following up the feedback, testing when needed.</p>
+<h3 id="additional-requirements-for-codes">Additional requirements for codes</h3>
+<ul>
+<li>Each feature should come with a rich set of test cases that can be executed as unit tests during build. If the feature is more invasive or richer, you need more and richer test cases. Refer to other test cases in /tests directory, which use either GTest or SSAT.</li>
+<li>When new test cases are introduced, the number of new negative test cases should be larger than or equal to the number of new positive test cases.</li>
+<li>For C-code, try to stick with C89.</li>
+<li>For C++-code, try to be compatible with C++14. C++ code should be able to be built optionally. In other words, by disabling C++ build option, we should be able to build the whole system without C++ compilers.</li>
+<li>Avoid introducing additional dependencies of libraries. If you are going to use additional libraries, your codes may be located at /ext/* so that they can be "optional" features.</li>
+<li>If your functions or structs/classes are going to be accessed by other modules or NNStreamer users, provide full descriptions of all entries with Doxygen.</li>
+<li>Passing all the tests of TAOS-CI is a necessary condition, but not a satisfying condition.</li>
+</ul>
+<h3 id="merge-criteria">Merge Criteria</h3>
+<p>A PR is required to meet the following criteria.</p>
+<ul>
+<li>It has passed all the tests defined for TAOS-CI.
+<ul>
+<li>This includes unit tests and integration tests in various platforms and different static analysis tools.</li>
+<li>Note that one of the tests includes the "Signed-off-by" check, which means that the author has agreed with <a href="CODE_OF_CONDUCT.html">Code of Conduct</a>. You may need to refer to later section.</li>
+</ul>
+</li>
+<li>At least TWO committers (reviewers with voting rights) have approved the PR.
+<ul>
+<li>This is a necessary condition, not sufficient.</li>
+<li>If the PR touches sensitive codes or may affect wide ranges of components, reviewers will wait for other reviewers to back them up.</li>
+<li>If the PR is messy, you will need to wait indefinitely to get reviews.
+<ul>
+<li>Apply general rules of git commits and common senses.</li>
+<li>Do not write a lengthy commit. Apply a single commit per PR if you are new to the community. Have a single topic per commit. Provide enough background information and references. And so on.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>There is no rejections from any official reviewers.</li>
+<li>There is no pending negative feedbacks (unresolved issues) from reviewers.</li>
+<li>A committer with merging privilege will, then, be able to merge the given PR.</li>
+</ul>
+<h2 id="signing-off-commits">Signing off commits</h2>
+<p>Each commit is required to be signed-off by the corresponding author.
+With properly configured development environment, you can add sign-off for a commit with <code>-s</code> option: e.g., <code>git commit -s</code>.
+<a href="https://stackoverflow.com/questions/1962094/what-is-the-sign-off-feature-in-git-for">Here is some stories on sign-off</a></p>
+<ul>
+<li>How to give the developers zero cost:</li>
+</ul>
+<pre><code class="language-bash">$ vi ~/.gitconfig
+  [user]
+          name = Gildong Hong
+          email = gildong.hong@samsung.com
+$ git commit -s &lt;file-name&gt;
+// -s (--signoff) means automated signed-off-by statement
+</code></pre>
+<h3 id="what-does-it-mean-to-sign-off-commits-for-authors">What does it mean to sign off commits for authors?</h3>
+<p>Including a "Signed-off-by:" tag in your commit means that you are making the Developer Certificate of Origin (DCO) certification for that commit. A copy of the DCO text can be found at https://developercertificate.org/</p>
+
+    </div>
+        
+
+
+
+
+		
+	</div>
+	<div id="search_results">
+		<p>The results of the search are</p>
+	</div>
+	<div id="footer">
+		    
+
+	</div>
+</div>
+
+<div id="toc-column">
+	
+		<div class="edit-button">
+		
+
+	</div>
+		<div id="toc-wrapper">
+		<nav id="toc"></nav>
+	</div>
+</div>
+</div>
+</main>
+
+
+<script src="assets/js/navbar_offset_scroller.js"></script>
+</body>
+</html>

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<base href="..">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<title>Configuration ini</title>
+
+<link rel="stylesheet" href="assets/css/custom_bootstrap.css" type="text/css">
+<link rel="stylesheet" href="assets/css/bootstrap-toc.min.css" type="text/css">
+<link rel="stylesheet" href="assets/css/frontend.css" type="text/css">
+<link rel="stylesheet" href="assets/css/jquery.mCustomScrollbar.min.css">
+<link rel="stylesheet" href="assets/js/search/enable_search.css" type="text/css">
+
+<link rel="stylesheet" href="assets/css/extra_frontend.css" type="text/css">
+<link rel="stylesheet" href="assets/css/prism-tomorrow.css" type="text/css">
+
+<script src="assets/js/mustache.min.js"></script>
+<script src="assets/js/jquery.js"></script>
+<script src="assets/js/scrollspy.js"></script>
+<script src="assets/js/bootstrap.js"></script>
+<script src="assets/js/typeahead.jquery.min.js"></script>
+<script src="assets/js/search.js"></script>
+<script src="assets/js/isotope.pkgd.min.js"></script>
+<script src="assets/js/compare-versions.js"></script>
+<script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="assets/js/bootstrap-toc.min.js"></script>
+<script src="assets/js/jquery.touchSwipe.min.js"></script>
+<script src="assets/js/anchor.min.js"></script>
+<script src="assets/js/tag_filtering.js"></script>
+<script src="assets/js/language_switching.js"></script>
+
+<script src="assets/js/lines_around_headings.js"></script>
+
+<script src="assets/js/trie.js"></script>
+<script src="assets/js/prism-core.js"></script>
+<script src="assets/js/prism-autoloader.js"></script>
+<script src="assets/js/prism_autoloader_path_override.js"></script>
+
+
+</head>
+
+<body class="no-script
+" data-spy="scroll" data-target="#toc" data-offset="70">
+
+<script>
+$('body').removeClass('no-script');
+</script>
+
+<nav class="navbar navbar-fixed-top navbar-default" id="topnav">
+	<div class="container-fluid">
+		<div class="navbar-right">
+			<a id="toc-toggle">
+				<span class="glyphicon glyphicon-menu-right"></span>
+				<span class="glyphicon glyphicon-menu-left"></span>
+			</a>
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-wrapper" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<form class="navbar-form pull-right" id="navbar-search-form">
+                               <div class="form-group has-feedback">
+                                       <input type="text" class="form-control input-sm" name="search" id="sidenav-lookup-field" placeholder="search" disabled>
+				       <span class="glyphicon glyphicon-search form-control-feedback" id="search-mgn-glass"></span>
+                               </div>
+                        </form>
+		</div>
+		<div class="navbar-header">
+			<a id="sidenav-toggle">
+				<span class="glyphicon glyphicon-menu-right"></span>
+				<span class="glyphicon glyphicon-menu-left"></span>
+			</a>
+			<a id="home-link" href="index.html" class="hotdoc-navbar-brand">
+				<img src="assets/images/home.svg" alt="Home">
+			</a>
+		</div>
+		<div class="navbar-collapse collapse" id="navbar-wrapper">
+			<ul class="nav navbar-nav" id="menu">
+				
+<li class="dropdown">
+    <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        API References<span class="caret"></span>
+    </a>
+	<ul class="dropdown-menu" id="modules-menu">
+					<li>
+				<a href="docs/hotdoc/index.html">NNTrainer doc</a>
+			</li>
+		</ul>
+</li>
+
+<li>
+	<a href="docs/hotdoc/index.html">Documents</a>
+</li>
+
+			</ul>
+			<div class="hidden-xs hidden-sm navbar-text navbar-center">
+							</div>
+		</div>
+	</div>
+</nav>
+
+<main>
+<div data-extension="core" data-hotdoc-in-toplevel="True" data-hotdoc-project="NNTrainer" data-hotdoc-ref="docs/configuration-ini.html" class="page_container" id="page-wrapper">
+<script src="assets/js/utils.js"></script>
+
+<div class="panel panel-collapse oc-collapsed" id="sidenav" data-hotdoc-role="navigation">
+	<script src="assets/js/navigation.js"></script>
+	<script src="assets/js/sitemap.js"></script>
+</div>
+
+<div id="body">
+	<div id="main">
+				    <div id="page-description" data-hotdoc-role="main">
+        <h1 id="writing-configuration-file">Writing Configuration File</h1>
+<p>NNTrainer requires network configuration file which includes network layers and hyper-parameters. The format of configuration file is iniparser format which is commonly used. Keywords are not case sensitive and the line start with '#' will be ignored.</p>
+<p>If you want more about iniparser, please visit
+<a href="https://github.com/ndevilla/iniparser">https://github.com/ndevilla/iniparser</a></p>
+<h2 id="sections">Sections</h2>
+<p>Configuration file consists of Two Sections, Network and Layer</p>
+<h3 id="network-section">Network Section</h3>
+<p>Network section includes the hyper-parameters about Network such as batch size, name of model file to save trained weight, epochs and etc.</p>
+<p>Start with "[Model]"</p>
+<ol>
+<li>
+<p><code>type (mandatory) = &lt;string&gt;</code></p>
+<p>Type of Network</p>
+<ul>
+<li>regression : network for linear regression</li>
+<li>knn : K-nearest neighbor</li>
+<li>neuralnetwork : Deep Neural Network</li>
+</ul>
+</li>
+<li>
+<p><code>learning_rate = &lt;float&gt;</code></p>
+<p>Initial learning rate to decay</p>
+</li>
+<li>
+<p><code>epochs = &lt;unsigned int&gt;</code></p>
+<p>Number of epochs to train</p>
+</li>
+<li>
+<p><code>optimizer = &lt;string&gt;</code></p>
+<p>Optimizer to apply the gradients to weights.</p>
+<ul>
+<li>adam : Adaptive Moment Estimation</li>
+<li>sgd : stochastic gradient decent</li>
+</ul>
+</li>
+<li>
+<p><code>loss = &lt;string&gt;</code></p>
+<p>Loss function</p>
+<ul>
+<li>mse : mean squared error</li>
+<li>cross : cross entropy
+Only allowed with sigmoid and softmax activation function</li>
+</ul>
+</li>
+<li>
+<p><code>save_path = &lt;string&gt;</code></p>
+<p>Model file path to save updated weights</p>
+</li>
+<li>
+<p><code>batch_size = &lt;unsigned int&gt;</code></p>
+<p>Mini batch size</p>
+</li>
+<li>
+<p><code>beta1 = &lt;float&gt;</code></p>
+<p>beta1 parameter for adam optimizer. Only valid for adam.   0.9 is default.</p>
+</li>
+<li>
+<p><code>beta2 = &lt;float&gt;</code></p>
+<p>beta2 parameter for adam optimizer. Only valid for adam. 0.999 is default.</p>
+</li>
+<li>
+<p><code>epsilon = &lt;float&gt;</code></p>
+<p>Epsilon parameter for adam optimizer. Only valid for adam. 1.0e-7 is default.</p>
+</li>
+</ol>
+<p>Below is sample Network section.</p>
+<pre><code class="language-ini"># Network Section : Network
+[Model]
+Type = NeuralNetwork
+Learning_rate = 1e-4
+Epochs = 1500
+Optimizer = adam
+Loss = cross
+Save_Path = "model.bin"
+batch_size = 32
+beta1 = 0.9
+beta2 = 0.999
+epsilon = 1e-7
+</code></pre>
+<h3 id="dataset-section">DataSet Section</h3>
+<p>Define data set. training, validation, test data set.</p>
+<p>Start with "[ DataSet ]"</p>
+<ol>
+<li>
+<p><code>buffersize = &lt;unsigned int&gt;</code></p>
+<p>Define Buffer size. usually it is greater than batch size.</p>
+<p>Data buffer thread keeps reading the data from the file and stores the data into the data buffer.
+Meanwhile main thread gets the training data from this data buffer and feeds it to the model.
+This keyword defines the size of Data Buffer.</p>
+</li>
+<li>
+<p><code>traindata = &lt;string&gt;</code></p>
+<p>training data file path.   The data must be saved as following</p>
+<p><code>feature data[i], label data[i], feature data[i+1], label data[i+1], ...</code></p>
+</li>
+<li>
+<p><code>validdata = &lt;string&gt;</code></p>
+<p>validation data file path.   The data must be saved as following</p>
+<p><code>feature data[i], label data[i], feature data[i+1], label data[i+1], ...</code></p>
+</li>
+<li>
+<p><code>testdata = &lt;string&gt;</code></p>
+<p>test data file path.   The data must be saved as following</p>
+<p><code>feature data[i], label data[i], feature data[i+1], label data[i+1], ...</code></p>
+</li>
+<li>
+<p><code>labeldata = &lt;string&gt;</code></p>
+<p>label data file path. The data must be saved as following</p>
+<p><code>class Name [i], class name [i+1],...</code></p>
+</li>
+</ol>
+<h3 id="layer-section">Layer Section</h3>
+<p>Describe hyper-parameters for layer. Order of layers in the model follows the order of definition of layers here from top to bottom.</p>
+<p>Start with "[ ${layer name} ]". This layer name must be unique throughout network model.</p>
+<ol>
+<li>
+<p><code>type = &lt;string&gt;</code></p>
+<p>Type of Layer</p>
+<ul>
+<li>input : input layer</li>
+<li>conv2d : 2D convolution layer</li>
+<li>pooling2d : 2D pooling layer</li>
+<li>flatten : flatten layer</li>
+<li>fully_connected : fully connected layer</li>
+<li>batch_normalization : batch normalization layer</li>
+<li>activation : activation layer</li>
+</ul>
+</li>
+<li>
+<p><code>kernel_size = &lt;unsigned int&gt;,&lt;unsigned int&gt;</code></p>
+<p>Kernel size for convolution layer</p>
+</li>
+<li>
+<p><code>bias_init_zero = &lt;bool&gt;</code></p>
+<p>token to initialize bias with zeros. Setting to False would initialize bias randomly.</p>
+</li>
+<li>
+<p><code>normalization = &lt;bool&gt;</code></p>
+<p>normalization on the input of this layer.</p>
+</li>
+<li>
+<p><code>standardization = &lt;bool&gt;</code></p>
+<p>standardization on the input of this layer.</p>
+</li>
+<li>
+<p><code>input_shape = &lt;unsigned int&gt;:&lt;unsigned int&gt;:&lt;unsigned int&gt;</code></p>
+<p>shape of input (shouldn't be zero).</p>
+</li>
+<li>
+<p><code>activation = &lt;string&gt;</code></p>
+<p>set activation layer</p>
+<ul>
+<li>tanh : tanh function</li>
+<li>sigmoid : sigmoid function</li>
+<li>relu : ReLU function</li>
+<li>softmax : softmax function</li>
+</ul>
+</li>
+<li>
+<p><code>weight_decay = &lt;string&gt;</code></p>
+<p>set weight decay</p>
+<ul>
+<li>l2norm : L2 normalization</li>
+</ul>
+</li>
+<li>
+<p><code>weight_regularizer_constant = &lt;float&gt;</code></p>
+<p>coefficient for weight decay</p>
+</li>
+<li>
+<p><code>unit = &lt;unsigned int&gt;</code></p>
+<p>set the output layer for fully connected layer</p>
+</li>
+<li>
+<p><code>weight_initializer = &lt;string&gt;</code></p>
+<p>set weight initialization method</p>
+<ul>
+<li>zeros : Zero initialization</li>
+<li>lecun_normal : LeCun normal initialization</li>
+<li>lecun_uniform : LeCun uniform initialization</li>
+<li>xavier_normal : xavier normal initialization</li>
+<li>xavier_uniform : xavier uniform initialization</li>
+<li>he_normal : He normal initialization</li>
+<li>he_uniform : He uniform initialization</li>
+</ul>
+</li>
+<li>
+<p><code>filters = &lt;unsigned int&gt;</code></p>
+<p>set filters size for convolution layer</p>
+</li>
+<li>
+<p><code>stride = &lt;unsigned int&gt;,&lt;unsigned int&gt;</code></p>
+<p>set stride for convolution and pooling layer</p>
+</li>
+<li>
+<p><code>padding = &lt;unsigned int&gt;,&lt;unsigned int&gt;</code></p>
+<p>set padding for convolution and pooling layer</p>
+</li>
+<li>
+<p><code>pool_size = &lt;unsigned int&gt;,&lt;unsigned int&gt;</code></p>
+<p>set pooling size for pooling layer</p>
+</li>
+<li>
+<p><code>pooling = &lt;string&gt;</code></p>
+<p>define type of pooling</p>
+<ul>
+<li>max : max pooling</li>
+<li>average : average pooling</li>
+<li>global_max : global max pooling</li>
+<li>global_average : global average pooling</li>
+</ul>
+</li>
+<li>
+<p><code>flatten = &lt;bool&gt;</code></p>
+<p>flattens the output of this layer.</p>
+<p>Enabling this option is equivalent to attaching a flatten layer after the current layer.</p>
+</li>
+<li>
+<p><code>epsilon = &lt;float&gt;</code></p>
+<p>Epsilon parameter for batch normalization layer. Default is 0.001.</p>
+</li>
+</ol>
+<h3 id="properties-for-layer">Properties for layer</h3>
+<p>Each layer requires different properties.</p>
+<p>| Layer | Properties |
+|:-------:|:---|
+| conv2d |</p>
+<ul>
+<li>filters</li>
+<li>kernel_size</li>
+<li>stride</li>
+<li>padding</li>
+<li>normalization</li>
+<li>standardization</li>
+<li>input_shape</li>
+<li>bias_init_zero</li>
+<li>activation</li>
+<li>flatten</li>
+<li>weight_decay</li>
+<li>weight_regularizer_constant</li>
+<li>weight_initializer</li>
+</ul>|
+| pooling2d | <ul>
+<li>pooling</li>
+<li>pool_size</li>
+<li>stride</li>
+<li>padding</li>
+</ul> |
+| flatten | - |
+| fully_connected | <lu><li>unit</li>
+<li>normalization</li>
+<li>standardization</li>
+<li>input_shape</li>
+<li>bias_initializer</li>
+<li>activation</li>
+<li>flatten</li>
+<li>weight_decay</li>
+<li>weight_regularizer_constant</li>
+<li>weight_initializer</li></lu>|
+| input | <lu><li>normalization </li>
+<li>standardization</li>
+<li>input_shape</li>
+<li>flatten</li></lu>|
+| batch_normalization | <lu><li>epsilon</li>
+<li>flatten</li></lu> |
+<p>Below is sample for layers to define a model.</p>
+<pre><code class="language-ini">[conv2d_c2_layer]
+Type = conv2d
+kernel_size = 5,5
+bias_initializer=zeros
+Activation=sigmoid
+weight_initializer = xavier_uniform
+filters = 12
+stride = 1,1
+padding = 0,0
+
+[outputlayer]
+Type = fully_connected
+Unit = 10
+weight_initializer = xavier_uniform
+bias_initializer = zeros
+Activation = softmax
+</code></pre>
+<h3 id="backbone-section">Backbone section</h3>
+<p>This allows to describe another model, termed as backbone, to be used in the model described by the current ini file.
+The backbone to be used can be described with another ini configuration file path, or with model file for external frameworks.
+Support for backbones of external framework for Tensorflow-Lite is provided natively with Tensorflow-Lite framework.
+Support for backbones of other external frameworks is done using nnstreamer and its plugin.
+When using nnstreamer for external framework, ensure to add the corresponding baseline ML framework and its corresponding nnstreamer plugin as a dependency or install manually.
+For example, when using PyTorch based model as a backbone, both the packages <em>PyTorch</em> and <em>nnstreamer-pytorch</em> must be installed.</p>
+<p>Backbones made of nntrainer models, described using ini, support training the backbone also.
+However, this is not supported with external frameworks.
+It is possible to describe a backbone inside a backbone ini configuration file, as well as listing down multiple backbones to build a single model.
+For backbone ini configuration file, Model and Dataset sections are ignored.</p>
+<p>Describing a backbone is very similar to describing a layer.
+Start with a "[ ${layer name} ]" which must be unique throughtout the model. In case of backbone, the name of the backbone is prepended to the name of all the layers inside the backbone.</p>
+<ol>
+<li>
+<p><code>backbone = &lt;string&gt;</code></p>
+<p>Path of the backbone file. Supported model files:</p>
+<ul>
+<li>.ini - NNTrainer models</li>
+<li>.tflite - Tensorflow-Lite models</li>
+<li>.pb / .pt / .py / .circle etc via NNStreamer (corresponding nnstreamer plugin required)</li>
+</ul>
+</li>
+<li>
+<p><code>trainable = &lt;bool&gt;</code></p>
+<p>If this backbone must be trained (defaults to false). Only supported for ini backbones (nntrainer models).</p>
+</li>
+<li>
+<p><code>Preload = &lt;bool&gt;</code></p>
+<p>Load pretrained weights from the saved modelfile of backbone (defaults to false). Only supported for ini backbone (nntrainer models).</p>
+</li>
+<li>
+<p><code>ScaleSize = &lt;float&gt;</code></p>
+<p>Scale the size of the layers from backbone (defaults to 1.0). This applies for fully connected and convolution layer for now, where the units and the output channels are scaled respectively. Only supported for ini backbone (nntrainer models). If the model is being scaled, it cannot be preloaded from the saved modelfile. Only of the two options, ScaleSize and Preload, must be set at once.</p>
+</li>
+<li>
+<p><code>InputShape = &lt;string&gt;</code></p>
+<p>Set the shape of the input layer for the backbone model. Only supported for ini backbones (nntrainer models).</p>
+</li>
+<li>
+<p><code>InputLayer = &lt;string&gt;</code></p>
+<p>Choose the start layer for the backbone. This allows taking a subgraph starting with the specified layer name as a backbone. Only supported for ini backbones (nntrainer models).</p>
+</li>
+<li>
+<p><code>OutputLayer = &lt;string&gt;</code></p>
+<p>Choose the end layer for the backbone. This allows taking a subgraph ending with the specified layer name as a backbone. Only supported for ini backbones (nntrainer models).
+``
+Below is sample backbone section.</p>
+</li>
+</ol>
+<pre><code class="language-ini"># Model Section
+[Model]
+...
+
+# block1
+[block1]
+backbone = resnet_block.ini
+trainable = false
+
+# block2
+[block2]
+backbone = resnet_block.ini
+trainable = true
+
+[outputlayer]
+type = fully_connected
+unit = 10
+activation = softmax
+</code></pre>
+<h3 id="configuration-file-example">Configuration file example</h3>
+<p>This has one input layer, two convolution layers, two pooling layers, one flatten layer and one fully connected layer to classify MNIST example.</p>
+<p>It takes 1 x 28 x 28 gray data (0~255) as an input. Adam optimizer is used to apply gradient and learning rate is 1.0e-4.</p>
+<pre><code class="language-ini"># Model Section
+[Model]
+type = NeuralNetwork
+learning_rate = 1e-4
+epochs = 1500
+optimizer = adam
+loss = cross
+Save_Path = "model.bin"
+batch_size = 32
+beta1 = 0.9
+beta2 = 0.999
+epsilon = 1e-7
+
+# Layer Section
+[inputlayer]
+type = input
+input_shape = 1:28:28
+
+[conv2d_c1_layer]
+type = conv2d
+kernel_size = 5,5
+bias_initializer=zeros
+activation=sigmoid
+weight_initializer = xavier_uniform
+filters = 6
+stride = 1,1
+padding = 0,0
+
+[pooling2d_p1]
+type=pooling2d
+pool_size = 2,2
+stride =2,2
+padding = 0,0
+pooling = average
+
+[conv2d_c2_layer]
+type = conv2d
+kernel_size = 5,5
+bias_initializer=zeros
+activation=sigmoid
+weight_initializer = xavier_uniform
+filters = 12
+stride = 1,1
+padding = 0,0
+
+[pooling2d_p2]
+type=pooling2d
+pool_size = 2,2
+stride =2,2
+padding = 0,0
+pooling = average
+
+[flatten]
+type=flatten
+
+[outputlayer]
+type = fully_connected
+unit = 10
+weight_initializer = xavier_uniform
+bias_initializer = zeros
+activation = softmax
+</code></pre>
+
+    </div>
+        
+
+
+
+
+		
+	</div>
+	<div id="search_results">
+		<p>The results of the search are</p>
+	</div>
+	<div id="footer">
+		    
+
+	</div>
+</div>
+
+<div id="toc-column">
+	
+		<div class="edit-button">
+		
+
+	</div>
+		<div id="toc-wrapper">
+		<nav id="toc"></nav>
+	</div>
+</div>
+</div>
+</main>
+
+
+<script src="assets/js/navbar_offset_scroller.js"></script>
+</body>
+</html>

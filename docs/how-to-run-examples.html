@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<base href="..">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<title>How to run examples</title>
+
+<link rel="stylesheet" href="assets/css/custom_bootstrap.css" type="text/css">
+<link rel="stylesheet" href="assets/css/bootstrap-toc.min.css" type="text/css">
+<link rel="stylesheet" href="assets/css/frontend.css" type="text/css">
+<link rel="stylesheet" href="assets/css/jquery.mCustomScrollbar.min.css">
+<link rel="stylesheet" href="assets/js/search/enable_search.css" type="text/css">
+
+<link rel="stylesheet" href="assets/css/extra_frontend.css" type="text/css">
+<link rel="stylesheet" href="assets/css/prism-tomorrow.css" type="text/css">
+
+<script src="assets/js/mustache.min.js"></script>
+<script src="assets/js/jquery.js"></script>
+<script src="assets/js/scrollspy.js"></script>
+<script src="assets/js/bootstrap.js"></script>
+<script src="assets/js/typeahead.jquery.min.js"></script>
+<script src="assets/js/search.js"></script>
+<script src="assets/js/isotope.pkgd.min.js"></script>
+<script src="assets/js/compare-versions.js"></script>
+<script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="assets/js/bootstrap-toc.min.js"></script>
+<script src="assets/js/jquery.touchSwipe.min.js"></script>
+<script src="assets/js/anchor.min.js"></script>
+<script src="assets/js/tag_filtering.js"></script>
+<script src="assets/js/language_switching.js"></script>
+
+<script src="assets/js/lines_around_headings.js"></script>
+
+<script src="assets/js/trie.js"></script>
+<script src="assets/js/prism-core.js"></script>
+<script src="assets/js/prism-autoloader.js"></script>
+<script src="assets/js/prism_autoloader_path_override.js"></script>
+
+
+</head>
+
+<body class="no-script
+" data-spy="scroll" data-target="#toc" data-offset="70">
+
+<script>
+$('body').removeClass('no-script');
+</script>
+
+<nav class="navbar navbar-fixed-top navbar-default" id="topnav">
+	<div class="container-fluid">
+		<div class="navbar-right">
+			<a id="toc-toggle">
+				<span class="glyphicon glyphicon-menu-right"></span>
+				<span class="glyphicon glyphicon-menu-left"></span>
+			</a>
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-wrapper" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<form class="navbar-form pull-right" id="navbar-search-form">
+                               <div class="form-group has-feedback">
+                                       <input type="text" class="form-control input-sm" name="search" id="sidenav-lookup-field" placeholder="search" disabled>
+				       <span class="glyphicon glyphicon-search form-control-feedback" id="search-mgn-glass"></span>
+                               </div>
+                        </form>
+		</div>
+		<div class="navbar-header">
+			<a id="sidenav-toggle">
+				<span class="glyphicon glyphicon-menu-right"></span>
+				<span class="glyphicon glyphicon-menu-left"></span>
+			</a>
+			<a id="home-link" href="index.html" class="hotdoc-navbar-brand">
+				<img src="assets/images/home.svg" alt="Home">
+			</a>
+		</div>
+		<div class="navbar-collapse collapse" id="navbar-wrapper">
+			<ul class="nav navbar-nav" id="menu">
+				
+<li class="dropdown">
+    <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        API References<span class="caret"></span>
+    </a>
+	<ul class="dropdown-menu" id="modules-menu">
+					<li>
+				<a href="docs/hotdoc/index.html">NNTrainer doc</a>
+			</li>
+		</ul>
+</li>
+
+<li>
+	<a href="docs/hotdoc/index.html">Documents</a>
+</li>
+
+			</ul>
+			<div class="hidden-xs hidden-sm navbar-text navbar-center">
+							</div>
+		</div>
+	</div>
+</nav>
+
+<main>
+<div data-extension="core" data-hotdoc-in-toplevel="True" data-hotdoc-project="NNTrainer" data-hotdoc-ref="docs/how-to-run-examples.html" class="page_container" id="page-wrapper">
+<script src="assets/js/utils.js"></script>
+
+<div class="panel panel-collapse oc-collapsed" id="sidenav" data-hotdoc-role="navigation">
+	<script src="assets/js/navigation.js"></script>
+	<script src="assets/js/sitemap.js"></script>
+</div>
+
+<div id="body">
+	<div id="main">
+				    <div id="page-description" data-hotdoc-role="main">
+        <h1 id="how-to-run-examples">How to run examples</h1>
+<h2 id="preparing-nntrainer-for-execution">Preparing NNTrainer for execution</h2>
+<h3 id="use-ppa">Use PPA</h3>
+<p>If you don't want to build build binaries, you can directly download from PPA with daily releases.</p>
+<pre><code class="language-bash">sudo add-apt-repository ppa:nnstreamer/ppa
+sudo apt-get update
+sudo apt-get install nntrainer
+</code></pre>
+<p>Note that this may install Tensorflow-Lite packaged by us.</p>
+<h2 id="build-examples-ubuntu-1804">Build examples (Ubuntu 18.04)</h2>
+<p>Refer <a href="https://github.com/nnstreamer/nntrainer/blob/master/docs/getting-started.md">https://github.com/nnstreamer/nntrainer/blob/master/docs/getting-started.md</a> for more info.</p>
+<p>Install related packages before building nntrainer and examples.</p>
+<ol>
+<li>gcc/g++ &gt;=4.9 ( std=c++14 is used )</li>
+<li>meson &gt;= 0.50</li>
+<li>libopenblas-dev and base</li>
+<li>tensorflow-lite &gt;=1.14.0</li>
+<li>libiniparser</li>
+<li>libjsoncpp &gt;=0.6.0 ( if you wand to use open AI )</li>
+<li>libcurl3 &gt;=7.47 ( if you wand to use open AI )</li>
+<li>libgtest ( for testing )</li>
+</ol>
+<p>Important build options (meson)</p>
+<ol>
+<li>enable-tizen : default false, add option for tizen build (-Denable-tizen=false)</li>
+<li>enable-blas : default true, add option to enable blas (-Denable-blas=true)</li>
+<li>enable-app : default true, add option to enable Applications (-Denable-app=true)</li>
+<li>install-app : default true, add option to install Applications (-Dinstall-app=true)</li>
+<li>use_gym : default false, add option to use openAI gym (-Duse_gym=false)</li>
+<li>enable-capi : default true, add option to install C-API (-Denable-capi=true)</li>
+<li>enable-test : default true, add option to test (-Denable-test=true)</li>
+<li>enable-logging : default true, add option to do logging (-Denable-logging=true)</li>
+<li>enable-tizen-feature-check : default true, add option to enable tizen feature check (-Denable-tizen-feature-check=true)</li>
+</ol>
+<p>For example, to build and install NNTrainer and C-API,</p>
+<pre><code class="language-bash">meson --prefix=${NNTRAINER_ROOT} --sysconfdir=${NNTRAINER_ROOT} --libdir=lib --bindir=bin --includedir=include -Denable-capi=true build
+</code></pre>
+<p>Build source code</p>
+<pre><code class="language-bash"># Set your own path to install libraries and header files
+$ sudo vi ~/.bashrc
+
+export NNTRAINER_ROOT=$HOME/nntrainer
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$NNTRAINER_ROOT/lib
+# Include NNStreamer headers and libraries
+export C_INCLUDE_PATH=$C_INCLUDE_PATH:$NNTRAINER_ROOT/include
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$NNTRAINER_ROOT/include
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$NNTRAINER_ROOT/lib/pkgconfig
+
+$ source ~/.bashrc
+
+# Download source, then compile it.
+# Build and install nntrainer
+$ git clone https://github.com/nnstreamer/nntrainer.git nntrainer.git
+$ meson --prefix=${NNTRAINER_ROOT} --sysconfdir=${NNTRAINER_ROOT} --libdir=lib --bindir=bin --includedir=include build
+$ ninja -C build install
+$ cd ..
+</code></pre>
+
+    </div>
+        
+
+
+
+
+		
+	</div>
+	<div id="search_results">
+		<p>The results of the search are</p>
+	</div>
+	<div id="footer">
+		    
+
+	</div>
+</div>
+
+<div id="toc-column">
+	
+		<div class="edit-button">
+		
+
+	</div>
+		<div id="toc-wrapper">
+		<nav id="toc"></nav>
+	</div>
+</div>
+</div>
+</main>
+
+
+<script src="assets/js/navbar_offset_scroller.js"></script>
+</body>
+</html>
