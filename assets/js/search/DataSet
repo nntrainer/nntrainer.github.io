@@ -1,1 +1,1 @@
-urls_downloaded_cb({"token":"DataSet","urls":[{"url":"docs/configuration-ini.html#dataset-section","node_type":"h3","context":{"gi-language":["default"]}},{"url":"docs/configuration-ini.html#page-description","node_type":"p","context":{"gi-language":["default"]}}]});
+urls_downloaded_cb({"token": "DataSet", "urls": [{"url": "docs/configuration-ini.html#dataset-section", "context": {"gi-language": ["default"]}}, {"url": "docs/configuration-ini.html#page-description", "context": {"gi-language": ["default"]}}]});

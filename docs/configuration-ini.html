@@ -15,7 +15,6 @@
 <link rel="stylesheet" href="assets/css/bootstrap-toc.min.css" type="text/css">
 <link rel="stylesheet" href="assets/css/frontend.css" type="text/css">
 <link rel="stylesheet" href="assets/css/jquery.mCustomScrollbar.min.css">
-<link rel="stylesheet" href="assets/js/search/enable_search.css" type="text/css">
 
 <link rel="stylesheet" href="assets/css/extra_frontend.css" type="text/css">
 <link rel="stylesheet" href="assets/css/prism-tomorrow.css" type="text/css">
@@ -107,7 +106,7 @@ $('body').removeClass('no-script');
 </nav>
 
 <main>
-<div data-extension="core" data-hotdoc-in-toplevel="True" data-hotdoc-project="NNTrainer" data-hotdoc-ref="docs/configuration-ini.html" class="page_container" id="page-wrapper">
+<div data-extension="core" data-hotdoc-in-toplevel="True" data-hotdoc-project="NNTrainer-0.3.0" data-hotdoc-ref="docs/configuration-ini.html" class="page_container" id="page-wrapper">
 <script src="assets/js/utils.js"></script>
 
 <div class="panel panel-collapse oc-collapsed" id="sidenav" data-hotdoc-role="navigation">
@@ -117,7 +116,7 @@ $('body').removeClass('no-script');
 
 <div id="body">
 	<div id="main">
-				    <div id="page-description" data-hotdoc-role="main">
+				    <div id="page-description" data-hotdoc-source="configuration-ini.md" data-hotdoc-role="main">
         <h1 id="writing-configuration-file">Writing Configuration File</h1>
 <p>NNTrainer requires network configuration file which includes network layers and hyper-parameters. The format of configuration file is iniparser format which is commonly used. Keywords are not case sensitive and the line start with '#' will be ignored.</p>
 <p>If you want more about iniparser, please visit
@@ -138,20 +137,9 @@ $('body').removeClass('no-script');
 </ul>
 </li>
 <li>
-<p><code>learning_rate = &lt;float&gt;</code></p>
-<p>Initial learning rate to decay</p>
-</li>
-<li>
 <p><code>epochs = &lt;unsigned int&gt;</code></p>
 <p>Number of epochs to train</p>
-</li>
-<li>
-<p><code>optimizer = &lt;string&gt;</code></p>
-<p>Optimizer to apply the gradients to weights.</p>
-<ul>
-<li>adam : Adaptive Moment Estimation</li>
-<li>sgd : stochastic gradient decent</li>
-</ul>
+<p>Create a new section for this</p>
 </li>
 <li>
 <p><code>loss = &lt;string&gt;</code></p>
@@ -160,6 +148,7 @@ $('body').removeClass('no-script');
 <li>mse : mean squared error</li>
 <li>cross : cross entropy
 Only allowed with sigmoid and softmax activation function</li>
+<li>skip this property if no loss is desired for the model (this model will only support inference)</li>
 </ul>
 </li>
 <li>
@@ -169,6 +158,32 @@ Only allowed with sigmoid and softmax activation function</li>
 <li>
 <p><code>batch_size = &lt;unsigned int&gt;</code></p>
 <p>Mini batch size</p>
+</li>
+</ol>
+<p>Below is sample Network section.</p>
+<pre><code class="language-ini"># Network Section : Network
+[Model]
+Type = NeuralNetwork
+Epochs = 1500
+Loss = cross
+Save_Path = "model.bin"
+batch_size = 32
+</code></pre>
+<h3 id="optimizer-section">Optimizer Section</h3>
+<p>Define the optimizer to be used for training. This is an optional section needed only for training, and can be skipped for inference.</p>
+<p>Start with "[ Optimizer ]"</p>
+<ol>
+<li>
+<p><code>type = &lt;string&gt;</code></p>
+<p>Optimizer type to apply the gradients to weights.</p>
+<ul>
+<li>adam : Adaptive Moment Estimation</li>
+<li>sgd : stochastic gradient decent</li>
+</ul>
+</li>
+<li>
+<p><code>learning_rate = &lt;float&gt;</code></p>
+<p>Initial learning rate to decay</p>
 </li>
 <li>
 <p><code>beta1 = &lt;float&gt;</code></p>
@@ -183,15 +198,11 @@ Only allowed with sigmoid and softmax activation function</li>
 <p>Epsilon parameter for adam optimizer. Only valid for adam. 1.0e-7 is default.</p>
 </li>
 </ol>
-<p>Below is sample Network section.</p>
-<pre><code class="language-ini"># Network Section : Network
-[Model]
-Type = NeuralNetwork
+<p>Below is a sample Optimizer section.</p>
+<pre><code class="language-ini"># Optimizer Section
+[Optimizer]
+Type = adam
 Learning_rate = 1e-4
-Epochs = 1500
-Optimizer = adam
-Loss = cross
-Save_Path = "model.bin"
 batch_size = 32
 beta1 = 0.9
 beta2 = 0.999
@@ -277,7 +288,7 @@ This keyword defines the size of Data Buffer.</p>
 </ul>
 </li>
 <li>
-<p><code>weight_decay = &lt;string&gt;</code></p>
+<p><code>weight_regularizer = &lt;string&gt;</code></p>
 <p>set weight decay</p>
 <ul>
 <li>l2norm : L2 normalization</li>
@@ -356,7 +367,7 @@ This keyword defines the size of Data Buffer.</p>
 <li>bias_init_zero</li>
 <li>activation</li>
 <li>flatten</li>
-<li>weight_decay</li>
+<li>weight_regularizer</li>
 <li>weight_regularizer_constant</li>
 <li>weight_initializer</li>
 </ul>|
@@ -374,7 +385,7 @@ This keyword defines the size of Data Buffer.</p>
 <li>bias_initializer</li>
 <li>activation</li>
 <li>flatten</li>
-<li>weight_decay</li>
+<li>weight_regularizer</li>
 <li>weight_regularizer_constant</li>
 <li>weight_initializer</li></lu>|
 | input | <lu><li>normalization </li>
@@ -431,10 +442,6 @@ Start with a "[ ${layer name} ]" which must be unique throughtout the model. In 
 <li>
 <p><code>Preload = &lt;bool&gt;</code></p>
 <p>Load pretrained weights from the saved modelfile of backbone (defaults to false). Only supported for ini backbone (nntrainer models).</p>
-</li>
-<li>
-<p><code>ScaleSize = &lt;float&gt;</code></p>
-<p>Scale the size of the layers from backbone (defaults to 1.0). This applies for fully connected and convolution layer for now, where the units and the output channels are scaled respectively. Only supported for ini backbone (nntrainer models). If the model is being scaled, it cannot be preloaded from the saved modelfile. Only of the two options, ScaleSize and Preload, must be set at once.</p>
 </li>
 <li>
 <p><code>InputShape = &lt;string&gt;</code></p>

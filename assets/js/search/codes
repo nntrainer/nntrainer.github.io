@@ -1,1 +1,1 @@
-urls_downloaded_cb({"token":"codes","urls":[{"url":"docs/coding-convention.html#page-description","node_type":"ul","context":{"gi-language":["default"]}},{"url":"docs/contributing.html#additional-requirements-for-codes","node_type":"h3","context":{"gi-language":["default"]}},{"url":"docs/contributing.html#page-description","node_type":"ul","context":{"gi-language":["default"]}}]});
+urls_downloaded_cb({"token": "codes", "urls": [{"url": "docs/contributing.html#additional-requirements-for-codes", "context": {"gi-language": ["default"]}}]});

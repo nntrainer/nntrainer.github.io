@@ -15,7 +15,6 @@
 <link rel="stylesheet" href="assets/css/bootstrap-toc.min.css" type="text/css">
 <link rel="stylesheet" href="assets/css/frontend.css" type="text/css">
 <link rel="stylesheet" href="assets/css/jquery.mCustomScrollbar.min.css">
-<link rel="stylesheet" href="assets/js/search/enable_search.css" type="text/css">
 
 <link rel="stylesheet" href="assets/css/extra_frontend.css" type="text/css">
 <link rel="stylesheet" href="assets/css/prism-tomorrow.css" type="text/css">
@@ -107,7 +106,7 @@ $('body').removeClass('no-script');
 </nav>
 
 <main>
-<div data-extension="core" data-hotdoc-in-toplevel="True" data-hotdoc-project="NNTrainer" data-hotdoc-ref="docs/getting-started.html" class="page_container" id="page-wrapper">
+<div data-extension="core" data-hotdoc-in-toplevel="True" data-hotdoc-project="NNTrainer-0.3.0" data-hotdoc-ref="docs/getting-started.html" class="page_container" id="page-wrapper">
 <script src="assets/js/utils.js"></script>
 
 <div class="panel panel-collapse oc-collapsed" id="sidenav" data-hotdoc-role="navigation">
@@ -117,15 +116,15 @@ $('body').removeClass('no-script');
 
 <div id="body">
 	<div id="main">
-				    <div id="page-description" data-hotdoc-role="main">
+				    <div id="page-description" data-hotdoc-source="getting-started.md" data-hotdoc-role="main">
         <h1 id="getting-started">Getting Started</h1>
 <h2 id="prerequisites">Prerequisites</h2>
 <p>The following dependencies are needed to compile/build/run.</p>
 <ul>
-<li>gcc/g++ &gt;=4.9 ( std=c++14 is used )</li>
+<li>gcc/g++ &gt;= 7 ( std=c++17 is used )</li>
 <li>meson &gt;= 0.50</li>
 <li>libopenblas-dev and base</li>
-<li>tensorflow-lite &gt;=1.14.0</li>
+<li>tensorflow-lite &gt;= 2.3.0</li>
 <li>libiniparser</li>
 <li>libjsoncpp &gt;=0.6.0 ( if you wand to use open AI )</li>
 <li>libcurl3 &gt;=7.47 ( if you wand to use open AI )</li>
@@ -166,7 +165,7 @@ $ ls -al /var/cache/pbuilder/result/*.deb
 </code></pre>
 <p>Alternatively, you may simply download binary packages from PPA:</p>
 <pre><code class="language-bash">sudo apt-add-repository ppa:nnstreamer
-sudo apt install tensorflow-lite-dev
+sudo apt install tensorflow2-lite-dev
 </code></pre>
 <h4 id="build-deb-package">Build .deb package</h4>
 <pre><code class="language-bash">cd nntrainer &amp;&amp; sudo mk-build-deps --install debian/control &amp;&amp; sudo dpkg -i *.deb
@@ -193,7 +192,7 @@ sudo apt-get update
 </code></pre>
 <p>Install the required packages.</p>
 <pre><code class="language-bash">sudo apt install meson ninja-build
-sudo apt install gcc g++ pkg-config libopenblas-dev libiniparser-dev libjsoncpp-dev libcurl3-dev tensorflow-lite-dev nnstreamer-dev libglib2.0-dev libgstreamer1.0-dev libgtest-dev
+sudo apt install gcc g++ pkg-config libopenblas-dev libiniparser-dev libjsoncpp-dev libcurl3-dev tensorflow2-lite-dev nnstreamer-dev libglib2.0-dev libgstreamer1.0-dev libgtest-dev ml-api-common-dev flatbuffers-compiler ml-inference-api-dev
 </code></pre>
 <p>Build at the git repo root directory, this will install nntrainer and related files.</p>
 <pre><code class="language-bash">meson build

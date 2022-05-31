@@ -1,1 +1,1 @@
-urls_downloaded_cb({"token":"contributors","urls":[{"url":"CODE_OF_CONDUCT.html#contributors-responsibilities","node_type":"h2","context":{"gi-language":["default"]}},{"url":"CODE_OF_CONDUCT.html#page-description","node_type":"p","context":{"gi-language":["default"]}}]});
+urls_downloaded_cb({"token": "contributors", "urls": [{"url": "CODE_OF_CONDUCT.html#contributors-responsibilities", "context": {"gi-language": ["default"]}}, {"url": "CODE_OF_CONDUCT.html#page-description", "context": {"gi-language": ["default"]}}]});

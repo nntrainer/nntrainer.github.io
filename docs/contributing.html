@@ -15,7 +15,6 @@
 <link rel="stylesheet" href="assets/css/bootstrap-toc.min.css" type="text/css">
 <link rel="stylesheet" href="assets/css/frontend.css" type="text/css">
 <link rel="stylesheet" href="assets/css/jquery.mCustomScrollbar.min.css">
-<link rel="stylesheet" href="assets/js/search/enable_search.css" type="text/css">
 
 <link rel="stylesheet" href="assets/css/extra_frontend.css" type="text/css">
 <link rel="stylesheet" href="assets/css/prism-tomorrow.css" type="text/css">
@@ -107,7 +106,7 @@ $('body').removeClass('no-script');
 </nav>
 
 <main>
-<div data-extension="core" data-hotdoc-in-toplevel="True" data-hotdoc-project="NNTrainer" data-hotdoc-ref="docs/contributing.html" class="page_container" id="page-wrapper">
+<div data-extension="core" data-hotdoc-in-toplevel="True" data-hotdoc-project="NNTrainer-0.3.0" data-hotdoc-ref="docs/contributing.html" class="page_container" id="page-wrapper">
 <script src="assets/js/utils.js"></script>
 
 <div class="panel panel-collapse oc-collapsed" id="sidenav" data-hotdoc-role="navigation">
@@ -117,7 +116,7 @@ $('body').removeClass('no-script');
 
 <div id="body">
 	<div id="main">
-				    <div id="page-description" data-hotdoc-role="main">
+				    <div id="page-description" data-hotdoc-source="contributing.md" data-hotdoc-role="main">
         <h1 id="how-to-contribute">How to Contribute</h1>
 <h2 id="coding-convention">Coding Convention</h2>
 <p>Consistent code conventions are important for several reasons:</p>
@@ -127,7 +126,7 @@ $('body').removeClass('no-script');
 <li>To make it easy to debug the code, with both a system call tracer and GNU debuggers. It should be easy to set breakpoints, view locals, and display and view data structures.</li>
 <li>To attempt to improve code quality through consistency, and requiring patterns that are less likely to result in bugs either initially, or after code modification.</li>
 </ul>
-<p>For more information, please refer to <a href="docs/coding-convention.html">coding-convention.md</a>.</p>
+<p>For more information, please refer to <a href="https://github.com/nnstreamer/nntrainer/blob/main/docs/coding-convention.md">coding-convention.md</a>.</p>
 <p>For C/C++ code, you may apply clang-format with the given <a href="https://github.com/nnstreamer/nntrainer/blob/main/.clang-format">.clang-format</a> file.
 For C/C++ header files, we do not require strict style rules, but it is recommended to apply such rules.</p>
 <p>We do not have explicit and strict styling rules for other programming languages, yet.</p>
@@ -141,7 +140,7 @@ However, even if you are not a reviewer (designated by committer or submitter), 
 <li>Each feature should come with a rich set of test cases that can be executed as unit tests during build. If the feature is more invasive or richer, you need more and richer test cases. Refer to other test cases in /tests directory, which use either GTest or SSAT.</li>
 <li>When new test cases are introduced, the number of new negative test cases should be larger than or equal to the number of new positive test cases.</li>
 <li>For C-code, try to stick with C89.</li>
-<li>For C++-code, try to be compatible with C++14. C++ code should be able to be built optionally. In other words, by disabling C++ build option, we should be able to build the whole system without C++ compilers.</li>
+<li>For C++-code, try to be compatible with C++17. C++ code should be able to be built optionally. In other words, by disabling C++ build option, we should be able to build the whole system without C++ compilers.</li>
 <li>Avoid introducing additional dependencies of libraries. If you are going to use additional libraries, your codes may be located at /ext/* so that they can be "optional" features.</li>
 <li>If your functions or structs/classes are going to be accessed by other modules or NNStreamer users, provide full descriptions of all entries with Doxygen.</li>
 <li>Passing all the tests of TAOS-CI is a necessary condition, but not a satisfying condition.</li>
@@ -152,7 +151,7 @@ However, even if you are not a reviewer (designated by committer or submitter), 
 <li>It has passed all the tests defined for TAOS-CI.
 <ul>
 <li>This includes unit tests and integration tests in various platforms and different static analysis tools.</li>
-<li>Note that one of the tests includes the "Signed-off-by" check, which means that the author has agreed with <a href="CODE_OF_CONDUCT.html">Code of Conduct</a>. You may need to refer to later section.</li>
+<li>Note that one of the tests includes the "Signed-off-by" check, which means that the author has agreed with <a href="https://github.com/nnstreamer/nntrainer/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a>. You may need to refer to later section.</li>
 </ul>
 </li>
 <li>At least TWO committers (reviewers with voting rights) have approved the PR.

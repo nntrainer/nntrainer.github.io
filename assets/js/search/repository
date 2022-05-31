@@ -1,1 +1,1 @@
-urls_downloaded_cb({"token":"repository","urls":[{"url":"docs/getting-started.html#install-via-ppa-repository-debianubuntu","node_type":"h2","context":{"gi-language":["default"]}},{"url":"docs/getting-started.html#page-description","node_type":"p","context":{"gi-language":["default"]}}]});
+urls_downloaded_cb({"token": "repository", "urls": [{"url": "docs/getting-started.html#install-via-ppa-repository-debianubuntu", "context": {"gi-language": ["default"]}}, {"url": "docs/getting-started.html#page-description", "context": {"gi-language": ["default"]}}]});

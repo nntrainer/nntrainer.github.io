@@ -1,1 +1,1 @@
-urls_downloaded_cb({"token":"tizen","urls":[{"url":"docs/coding-convention.html#page-description","node_type":"ul","context":{"gi-language":["default"]}},{"url":"docs/getting-started.html#build-on-tizen","node_type":"h2","context":{"gi-language":["default"]}}]});
+urls_downloaded_cb({"token": "tizen", "urls": [{"url": "docs/getting-started.html#build-on-tizen", "context": {"gi-language": ["default"]}}]});

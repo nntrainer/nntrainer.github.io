@@ -1,1 +1,1 @@
-urls_downloaded_cb({"token":"clean","urls":[{"url":"docs/contributing.html#page-description","node_type":"p","context":{"gi-language":["default"]}},{"url":"docs/getting-started.html#clean-build-with-pdebuild-ubuntu-1804","node_type":"h2","context":{"gi-language":["default"]}}]});
+urls_downloaded_cb({"token": "clean", "urls": [{"url": "docs/getting-started.html#clean-build-with-pdebuild-ubuntu-1804", "context": {"gi-language": ["default"]}}, {"url": "docs/contributing.html#page-description", "context": {"gi-language": ["default"]}}]});

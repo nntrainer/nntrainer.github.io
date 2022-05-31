@@ -1,1 +1,1 @@
-urls_downloaded_cb({"token":"pledge","urls":[{"url":"CODE_OF_CONDUCT.html#our-pledge","node_type":"h2","context":{"gi-language":["default"]}},{"url":"CODE_OF_CONDUCT.html#page-description","node_type":"p","context":{"gi-language":["default"]}}]});
+urls_downloaded_cb({"token": "pledge", "urls": [{"url": "CODE_OF_CONDUCT.html#our-pledge", "context": {"gi-language": ["default"]}}, {"url": "CODE_OF_CONDUCT.html#page-description", "context": {"gi-language": ["default"]}}]});

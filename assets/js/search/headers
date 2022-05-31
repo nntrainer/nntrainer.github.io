@@ -1,1 +1,1 @@
-urls_downloaded_cb({"token":"headers","urls":[{"url":"docs/coding-convention.html#c-headers-h","node_type":"h2","context":{"gi-language":["default"]}},{"url":"docs/coding-convention.html#page-description","node_type":"p","context":{"gi-language":["default"]}}]});
+urls_downloaded_cb({"token": "headers", "urls": [{"url": "docs/coding-convention.html#c-headers-h", "context": {"gi-language": ["default"]}}, {"url": "docs/coding-convention.html#page-description", "context": {"gi-language": ["default"]}}]});

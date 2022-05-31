@@ -1,1 +1,1 @@
-urls_downloaded_cb({"token":"repositories","urls":[{"url":"docs/coding-convention.html#related-git-repositories","node_type":"h2","context":{"gi-language":["default"]}},{"url":"docs/getting-started.html#clone-the-needed-repositories","node_type":"h4","context":{"gi-language":["default"]}}]});
+urls_downloaded_cb({"token": "repositories", "urls": [{"url": "docs/coding-convention.html#related-git-repositories", "context": {"gi-language": ["default"]}}, {"url": "docs/getting-started.html#clone-the-needed-repositories", "context": {"gi-language": ["default"]}}]});

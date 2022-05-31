@@ -1,1 +1,1 @@
-urls_downloaded_cb({"token":"package","urls":[{"url":"docs/getting-started.html#build-deb-package","node_type":"h4","context":{"gi-language":["default"]}},{"url":"docs/getting-started.html#page-description","node_type":"p","context":{"gi-language":["default"]}}]});
+urls_downloaded_cb({"token": "package", "urls": [{"url": "docs/getting-started.html#build-deb-package", "context": {"gi-language": ["default"]}}, {"url": "docs/getting-started.html#page-description", "context": {"gi-language": ["default"]}}]});
