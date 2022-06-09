@@ -15,17 +15,17 @@
 <link rel="stylesheet" href="assets/css/bootstrap-toc.min.css" type="text/css">
 <link rel="stylesheet" href="assets/css/frontend.css" type="text/css">
 <link rel="stylesheet" href="assets/css/jquery.mCustomScrollbar.min.css">
+<link rel="stylesheet" href="assets/js/search/enable_search.css" type="text/css">
 
 <link rel="stylesheet" href="assets/css/extra_frontend.css" type="text/css">
 <link rel="stylesheet" href="assets/css/prism-tomorrow.css" type="text/css">
 
 <script src="assets/js/mustache.min.js"></script>
 <script src="assets/js/jquery.js"></script>
-<script src="assets/js/scrollspy.js"></script>
 <script src="assets/js/bootstrap.js"></script>
+<script src="assets/js/scrollspy.js"></script>
 <script src="assets/js/typeahead.jquery.min.js"></script>
 <script src="assets/js/search.js"></script>
-<script src="assets/js/isotope.pkgd.min.js"></script>
 <script src="assets/js/compare-versions.js"></script>
 <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="assets/js/bootstrap-toc.min.js"></script>
@@ -36,16 +36,16 @@
 
 <script src="assets/js/lines_around_headings.js"></script>
 
-<script src="assets/js/trie.js"></script>
 <script src="assets/js/prism-core.js"></script>
 <script src="assets/js/prism-autoloader.js"></script>
 <script src="assets/js/prism_autoloader_path_override.js"></script>
+<script src="assets/js/trie.js"></script>
 
 
 </head>
 
 <body class="no-script
-" data-spy="scroll" data-target="#toc" data-offset="70">
+">
 
 <script>
 $('body').removeClass('no-script');
@@ -106,7 +106,7 @@ $('body').removeClass('no-script');
 </nav>
 
 <main>
-<div data-extension="core" data-hotdoc-in-toplevel="True" data-hotdoc-project="NNTrainer-0.3.0" data-hotdoc-ref="docs/configuration-ini.html" class="page_container" id="page-wrapper">
+<div data-extension="core" data-hotdoc-in-toplevel="True" data-hotdoc-project="NNTrainer" data-hotdoc-ref="docs/configuration-ini.html" class="page_container" id="page-wrapper">
 <script src="assets/js/utils.js"></script>
 
 <div class="panel panel-collapse oc-collapsed" id="sidenav" data-hotdoc-role="navigation">
@@ -116,15 +116,14 @@ $('body').removeClass('no-script');
 
 <div id="body">
 	<div id="main">
-				    <div id="page-description" data-hotdoc-source="configuration-ini.md" data-hotdoc-role="main">
+				    <div id="page-description" data-hotdoc-role="main">
         <h1 id="writing-configuration-file">Writing Configuration File</h1>
 <p>NNTrainer requires network configuration file which includes network layers and hyper-parameters. The format of configuration file is iniparser format which is commonly used. Keywords are not case sensitive and the line start with '#' will be ignored.</p>
 <p>If you want more about iniparser, please visit
 <a href="https://github.com/ndevilla/iniparser">https://github.com/ndevilla/iniparser</a></p>
 <h2 id="sections">Sections</h2>
-<p>Configuration file consists of Two Sections, Network and Layer</p>
-<h3 id="network-section">Network Section</h3>
-<p>Network section includes the hyper-parameters about Network such as batch size, name of model file to save trained weight, epochs and etc.</p>
+<h3 id="model-section">Model Section</h3>
+<p>Model section includes the hyper-parameters for the Network such type, epochs, loss, save path and batch size.</p>
 <p>Start with "[Model]"</p>
 <ol>
 <li>
@@ -163,83 +162,142 @@ Only allowed with sigmoid and softmax activation function</li>
 <p>Below is sample Network section.</p>
 <pre><code class="language-ini"># Network Section : Network
 [Model]
-Type = NeuralNetwork
-Epochs = 1500
-Loss = cross
-Save_Path = "model.bin"
+type = NeuralNetwork
+epochs = 1500
+loss = cross
+save_path = "model.bin"
 batch_size = 32
 </code></pre>
 <h3 id="optimizer-section">Optimizer Section</h3>
 <p>Define the optimizer to be used for training. This is an optional section needed only for training, and can be skipped for inference.</p>
-<p>Start with "[ Optimizer ]"</p>
+<p>Start with "[Optimizer]"</p>
 <ol>
 <li>
 <p><code>type = &lt;string&gt;</code></p>
-<p>Optimizer type to apply the gradients to weights.</p>
+<p>Optimizer type to apply the gradients to weights. The default value is adam if the type is not used.</p>
 <ul>
 <li>adam : Adaptive Moment Estimation</li>
 <li>sgd : stochastic gradient decent</li>
 </ul>
 </li>
 <li>
-<p><code>learning_rate = &lt;float&gt;</code></p>
-<p>Initial learning rate to decay</p>
-</li>
-<li>
 <p><code>beta1 = &lt;float&gt;</code></p>
-<p>beta1 parameter for adam optimizer. Only valid for adam.   0.9 is default.</p>
+<p>beta1 parameter for adam optimizer. Only valid for adam. The default value is 0.9.</p>
 </li>
 <li>
 <p><code>beta2 = &lt;float&gt;</code></p>
-<p>beta2 parameter for adam optimizer. Only valid for adam. 0.999 is default.</p>
+<p>beta2 parameter for adam optimizer. Only valid for adam. The default value is 0.999.</p>
 </li>
 <li>
 <p><code>epsilon = &lt;float&gt;</code></p>
-<p>Epsilon parameter for adam optimizer. Only valid for adam. 1.0e-7 is default.</p>
+<p>Epsilon parameter for adam optimizer. Only valid for adam. The default value is 1.0e-7.</p>
 </li>
 </ol>
 <p>Below is a sample Optimizer section.</p>
 <pre><code class="language-ini"># Optimizer Section
 [Optimizer]
-Type = adam
-Learning_rate = 1e-4
-batch_size = 32
+type = adam
 beta1 = 0.9
 beta2 = 0.999
 epsilon = 1e-7
 </code></pre>
-<h3 id="dataset-section">DataSet Section</h3>
-<p>Define data set. training, validation, test data set.</p>
-<p>Start with "[ DataSet ]"</p>
+<h3 id="learning-rate-scheduler-section">Learning Rate Scheduler Section</h3>
+<p>Define the type, learning rate, decay steps and decay rate.</p>
+<p>Start with "[LearningRateScheduler]"</p>
 <ol>
 <li>
-<p><code>buffersize = &lt;unsigned int&gt;</code></p>
-<p>Define Buffer size. usually it is greater than batch size.</p>
-<p>Data buffer thread keeps reading the data from the file and stores the data into the data buffer.
-Meanwhile main thread gets the training data from this data buffer and feeds it to the model.
-This keyword defines the size of Data Buffer.</p>
+<p><code>type = &lt;string&gt;</code></p>
+<p>constant, exponential and step are supported.</p>
+<ul>
+<li>constant : constant learning rate</li>
+<li>exponential : exponential decay</li>
+<li>step: step decay</li>
+</ul>
 </li>
 <li>
-<p><code>traindata = &lt;string&gt;</code></p>
-<p>training data file path.   The data must be saved as following</p>
-<p><code>feature data[i], label data[i], feature data[i+1], label data[i+1], ...</code></p>
+<p><code>learning_rate = &lt;float&gt;</code></p>
+<p>Initial learning rate to decay.</p>
+<p>Constant and exponential receive only one float value.</p>
+<p>However, step must receive two or more float values separated by commas.</p>
+<p><code>learning_rate = &lt;float&gt;, &lt;float&gt;, ..., &lt;float&gt;</code></p>
 </li>
 <li>
-<p><code>validdata = &lt;string&gt;</code></p>
-<p>validation data file path.   The data must be saved as following</p>
-<p><code>feature data[i], label data[i], feature data[i+1], label data[i+1], ...</code></p>
+<p><code>decay_steps = &lt;float&gt;</code></p>
+<p>Decay steps. Only valid for exponential.</p>
 </li>
 <li>
-<p><code>testdata = &lt;string&gt;</code></p>
-<p>test data file path.   The data must be saved as following</p>
-<p><code>feature data[i], label data[i], feature data[i+1], label data[i+1], ...</code></p>
+<p><code>decay_rate = &lt;float&gt;</code></p>
+<p>Decay rate</p>
 </li>
 <li>
-<p><code>labeldata = &lt;string&gt;</code></p>
-<p>label data file path. The data must be saved as following</p>
-<p><code>class Name [i], class name [i+1],...</code></p>
+<p><code>iteration = &lt;unsigned int&gt;, &lt;unsigned int&gt;, ..., &lt;unsigned int&gt;</code></p>
+<p>Iteration, Only valid for step.
+Step receive one or more unsigned int value separated by commas.</p>
 </li>
 </ol>
+<p>Below is a sample Learning Rate scheduler Section.</p>
+<pre><code class="language-ini"># Learning Rate Scheduler Section
+[LearningRateScheduler]
+type=constant
+learning_rate = 1e-4 	# Learning Rate
+</code></pre>
+<h3 id="train-set-section">Train Set Section</h3>
+<p>Define the type and path of the traing data file.</p>
+<p>Start with "[train_set]"</p>
+<ol>
+<li>
+<p><code>type = &lt;string&gt;</code></p>
+<p>Currently only file is supported.</p>
+</li>
+<li>
+<p><code>path = &lt;string&gt;</code></p>
+<p>Data path for training, The path is mandatory.</p>
+</li>
+</ol>
+<p>Below is a sample Train Set section.</p>
+<pre><code class="language-ini"># Train Set Section
+[train_set]
+type = file
+path = trainDataset.dat
+</code></pre>
+<h3 id="validation-set-section">Validation Set Section</h3>
+<p>Define the type and path of the validation data file.</p>
+<p>Start with "[valid_set]"</p>
+<ol>
+<li>
+<p><code>type = &lt;string&gt;</code></p>
+<p>Currently only file is supported.</p>
+</li>
+<li>
+<p><code>path = &lt;string&gt;</code></p>
+<p>Data path for validation.</p>
+</li>
+</ol>
+<p>Below is a sample Validation Set Section.</p>
+<pre><code class="language-ini"># Validation Set Section
+[valid_set]
+type = file
+path = validDataset.dat
+</code></pre>
+<h3 id="test-set-section">Test Set Section</h3>
+<p>Define the type and path of the test data file.</p>
+<p>Start with "[test_set]"</p>
+<ol>
+<li>
+<p><code>type = &lt;string&gt;</code></p>
+<p>Currently only file is supported.</p>
+</li>
+<li>
+<p><code>path = &lt;string&gt;</code></p>
+<p>Data path for test.</p>
+</li>
+</ol>
+<p>Below is a sample Test Set Section.</p>
+<pre><code class="language-ini"># Test Set Section
+[test_set]
+type = file
+path = testDataset.dat
+</code></pre>
 <h3 id="layer-section">Layer Section</h3>
 <p>Describe hyper-parameters for layer. Order of layers in the model follows the order of definition of layers here from top to bottom.</p>
 <p>Start with "[ ${layer name} ]". This layer name must be unique throughout network model.</p>
@@ -249,168 +307,1338 @@ This keyword defines the size of Data Buffer.</p>
 <p>Type of Layer</p>
 <ul>
 <li>input : input layer</li>
-<li>conv2d : 2D convolution layer</li>
-<li>pooling2d : 2D pooling layer</li>
-<li>flatten : flatten layer</li>
 <li>fully_connected : fully connected layer</li>
 <li>batch_normalization : batch normalization layer</li>
+<li>conv2d : convolution 2D layer</li>
+<li>pooling2d : pooling 2D layer</li>
+<li>flatten : flatten layer</li>
 <li>activation : activation layer</li>
+<li>addition : addition layer</li>
+<li>concat : concat layer</li>
+<li>multiout : multiout layer</li>
+<li>embedding : embedding layer</li>
+<li>rnn : RNN layer</li>
+<li>lstm : LSTM layer</li>
+<li>split : split layer</li>
+<li>gru : GRU layer</li>
+<li>permute : permute layer</li>
+<li>dropout : dropout layer</li>
+<li>backbone_nnstreamer : backbone layer using nnstreamer</li>
+<li>backbone_tflite : backbone layer using tflite</li>
+<li>centroid_knn : centroid KNN layer</li>
+<li>conv1d : convolution 1D layer</li>
+<li>lstmcell : LSTM Cell layer</li>
+<li>grucell : GRU Cell layer</li>
+<li>rnncell : RNN Cell layer</li>
+<li>zoneout_lstmcell : Zoneout LSTM Cell layer</li>
+<li>preprocess_flip : preprocess flip layer</li>
+<li>preprocess_translate : preprocess translate layer</li>
+<li>preprocess_l2norm : preprocess l2norm layer</li>
+<li>mse : MSE loss layer</li>
+<li>cross_sigmoid : cross entropy with sigmoid loss layer</li>
+<li>cross_softmax : Cross entropy with softmax loss layer</li>
 </ul>
 </li>
 <li>
-<p><code>kernel_size = &lt;unsigned int&gt;,&lt;unsigned int&gt;</code></p>
-<p>Kernel size for convolution layer</p>
-</li>
-<li>
-<p><code>bias_init_zero = &lt;bool&gt;</code></p>
-<p>token to initialize bias with zeros. Setting to False would initialize bias randomly.</p>
-</li>
-<li>
-<p><code>normalization = &lt;bool&gt;</code></p>
-<p>normalization on the input of this layer.</p>
-</li>
-<li>
-<p><code>standardization = &lt;bool&gt;</code></p>
-<p>standardization on the input of this layer.</p>
-</li>
-<li>
-<p><code>input_shape = &lt;unsigned int&gt;:&lt;unsigned int&gt;:&lt;unsigned int&gt;</code></p>
-<p>shape of input (shouldn't be zero).</p>
-</li>
-<li>
-<p><code>activation = &lt;string&gt;</code></p>
-<p>set activation layer</p>
-<ul>
-<li>tanh : tanh function</li>
-<li>sigmoid : sigmoid function</li>
-<li>relu : ReLU function</li>
-<li>softmax : softmax function</li>
-</ul>
-</li>
-<li>
-<p><code>weight_regularizer = &lt;string&gt;</code></p>
-<p>set weight decay</p>
-<ul>
-<li>l2norm : L2 normalization</li>
-</ul>
-</li>
-<li>
-<p><code>weight_regularizer_constant = &lt;float&gt;</code></p>
-<p>coefficient for weight decay</p>
-</li>
-<li>
-<p><code>unit = &lt;unsigned int&gt;</code></p>
-<p>set the output layer for fully connected layer</p>
-</li>
-<li>
-<p><code>weight_initializer = &lt;string&gt;</code></p>
-<p>set weight initialization method</p>
-<ul>
-<li>zeros : Zero initialization</li>
-<li>lecun_normal : LeCun normal initialization</li>
-<li>lecun_uniform : LeCun uniform initialization</li>
-<li>xavier_normal : xavier normal initialization</li>
-<li>xavier_uniform : xavier uniform initialization</li>
-<li>he_normal : He normal initialization</li>
-<li>he_uniform : He uniform initialization</li>
-</ul>
-</li>
-<li>
-<p><code>filters = &lt;unsigned int&gt;</code></p>
-<p>set filters size for convolution layer</p>
-</li>
-<li>
-<p><code>stride = &lt;unsigned int&gt;,&lt;unsigned int&gt;</code></p>
-<p>set stride for convolution and pooling layer</p>
-</li>
-<li>
-<p><code>padding = &lt;unsigned int&gt;,&lt;unsigned int&gt;</code></p>
-<p>set padding for convolution and pooling layer</p>
-</li>
-<li>
-<p><code>pool_size = &lt;unsigned int&gt;,&lt;unsigned int&gt;</code></p>
-<p>set pooling size for pooling layer</p>
-</li>
-<li>
-<p><code>pooling = &lt;string&gt;</code></p>
-<p>define type of pooling</p>
-<ul>
-<li>max : max pooling</li>
-<li>average : average pooling</li>
-<li>global_max : global max pooling</li>
-<li>global_average : global average pooling</li>
-</ul>
-</li>
-<li>
-<p><code>flatten = &lt;bool&gt;</code></p>
-<p>flattens the output of this layer.</p>
-<p>Enabling this option is equivalent to attaching a flatten layer after the current layer.</p>
-</li>
-<li>
-<p><code>epsilon = &lt;float&gt;</code></p>
-<p>Epsilon parameter for batch normalization layer. Default is 0.001.</p>
-</li>
-</ol>
-<h3 id="properties-for-layer">Properties for layer</h3>
-<p>Each layer requires different properties.</p>
-<p>| Layer | Properties |
-|:-------:|:---|
-| conv2d |</p>
-<ul>
-<li>filters</li>
-<li>kernel_size</li>
-<li>stride</li>
-<li>padding</li>
-<li>normalization</li>
-<li>standardization</li>
-<li>input_shape</li>
-<li>bias_init_zero</li>
-<li>activation</li>
-<li>flatten</li>
-<li>weight_regularizer</li>
-<li>weight_regularizer_constant</li>
-<li>weight_initializer</li>
-</ul>|
-| pooling2d | <ul>
-<li>pooling</li>
-<li>pool_size</li>
-<li>stride</li>
-<li>padding</li>
-</ul> |
-| flatten | - |
-| fully_connected | <lu><li>unit</li>
-<li>normalization</li>
-<li>standardization</li>
-<li>input_shape</li>
-<li>bias_initializer</li>
-<li>activation</li>
-<li>flatten</li>
-<li>weight_regularizer</li>
-<li>weight_regularizer_constant</li>
-<li>weight_initializer</li></lu>|
-| input | <lu><li>normalization </li>
-<li>standardization</li>
-<li>input_shape</li>
-<li>flatten</li></lu>|
-| batch_normalization | <lu><li>epsilon</li>
-<li>flatten</li></lu> |
+<p><code>key = value</code></p>
+<p>The table below shows the available keys and values for each layer type. There are two types of layers. One type includes commonly trainable weights and the other type does not include.
+The following are the available properties for each layer type which include commonly trainable weights:</p>
+<div class="d-block" style="overflow-x:auto"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Key</th>
+<th>Value</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(Universal properties)</td>
+<td></td>
+<td></td>
+<td></td>
+<td>Universal properties that applies to every layer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>name</td>
+<td>(string)</td>
+<td></td>
+<td>An identifier for each layer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>trainable</td>
+<td>(boolean)</td>
+<td>true</td>
+<td>Allow weights to be trained if true</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>input_layers</td>
+<td>(string)</td>
+<td></td>
+<td>Comma-separated names of layers to be inputs of the current layer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>input_shape</td>
+<td>(string)</td>
+<td></td>
+<td>Comma-separated Formatted string as “channel:height:width”. If there is no channel then it must be 1. First layer of the model must have input_shape. Other can be omitted as it is calculated at compile phase.</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>flatten</td>
+<td>(boolean)</td>
+<td></td>
+<td>Flatten shape from <code>c:h:w</code> to <code>1:1:c*h*w</code></td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>activation</td>
+<td>(categorical)</td>
+<td></td>
+<td>Activation type</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>tanh</td>
+<td></td>
+<td>Hyperbolic tangent</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>sigmoid</td>
+<td></td>
+<td>Sigmoid function</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>relu</td>
+<td></td>
+<td>Relu function</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>softmax</td>
+<td></td>
+<td>Softmax function</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>loss</td>
+<td>(float)</td>
+<td>0</td>
+<td>Loss</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>weight_initializer</td>
+<td>(categorical)</td>
+<td>xavier_uniform</td>
+<td>Weight initializer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>zeros</td>
+<td></td>
+<td>Zero initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>lecun_normal</td>
+<td></td>
+<td>LeCun normal initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>lecun_uniform</td>
+<td></td>
+<td>LeCun uniform initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>xavier_normal</td>
+<td></td>
+<td>Xavier normal initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>xavier_uniform</td>
+<td></td>
+<td>Xavier uniform initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>he_normal</td>
+<td></td>
+<td>He normal initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>he_uniform</td>
+<td></td>
+<td>He uniform initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>bias_initializer</td>
+<td>(categorical)</td>
+<td>zeros</td>
+<td>Bias initializer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>zeros</td>
+<td></td>
+<td>Zero initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>lecun_normal</td>
+<td></td>
+<td>LeCun normal initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>lecun_uniform</td>
+<td></td>
+<td>LeCun uniform initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>xavier_normal</td>
+<td></td>
+<td>Xavier normal initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>xavier_uniform</td>
+<td></td>
+<td>Xavier uniform initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>he_normal</td>
+<td></td>
+<td>He normal initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>he_uniform</td>
+<td></td>
+<td>He uniform initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>weight_regularizer</td>
+<td>(categorical)</td>
+<td></td>
+<td>Weight regularizer. Currently, only l2norm is supported</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>l2norm</td>
+<td></td>
+<td>L2 weight regularizer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>weight_regularizer_constant</td>
+<td>(float)</td>
+<td>1</td>
+<td>Weight regularizer constant</td>
+</tr>
+<tr>
+<td><code>fully_connected</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Fully connected layer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>unit</td>
+<td>(unsigned integer)</td>
+<td></td>
+<td>Number of outputs</td>
+</tr>
+<tr>
+<td><code>conv2d</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2D Convolution layer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>filters</td>
+<td>(unsigned integer)</td>
+<td></td>
+<td>Number of filters</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>kernel_size</td>
+<td>(array of unsigned integer)</td>
+<td></td>
+<td>Comma-separated unsigned integers for kernel size, <code>height, width</code>  respectively</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>stride</td>
+<td>(array of unsigned integer)</td>
+<td>1, 1</td>
+<td>Comma-separated unsigned integers for strides, <code>height, width</code>  respectively</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>padding</td>
+<td>(categorical)</td>
+<td>valid</td>
+<td>Padding type</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>valid</td>
+<td></td>
+<td>No padding</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>same</td>
+<td></td>
+<td>Preserve height/width dimension</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>(unsigned integer)</td>
+<td></td>
+<td>Size of padding applied uniformly to all side</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>(array of unsigned integer of size 2)</td>
+<td></td>
+<td>Padding for height, width</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>(array of unsigned integer of size 4)</td>
+<td></td>
+<td>Padding for top, bottom, left, right</td>
+</tr>
+<tr>
+<td><code>embedding</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Embedding layer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>in_dim</td>
+<td>(unsigned integer)</td>
+<td></td>
+<td>Vocabulary size</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>out_dim</td>
+<td>(unsigned integer)</td>
+<td></td>
+<td>Word embeddeing size</td>
+</tr>
+<tr>
+<td><code>rnn</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>RNN layer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>unit</td>
+<td>(unsigned integer)</td>
+<td></td>
+<td>Number of output neurons</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>hidden_state_activation</td>
+<td>(categorical)</td>
+<td>tanh</td>
+<td>Activation type</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>tanh</td>
+<td></td>
+<td>Hyperbolic tangent</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>sigmoid</td>
+<td></td>
+<td>Sigmoid function</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>relu</td>
+<td></td>
+<td>Relu function</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>softmax</td>
+<td></td>
+<td>Softmax function</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>return_sequences</td>
+<td>(boolean)</td>
+<td>false</td>
+<td>Return only the last output if true, else return full output</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>dropout</td>
+<td>(float)</td>
+<td>0</td>
+<td>Dropout rate</td>
+</tr>
+<tr>
+<td><code>lstm</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>LSTM layer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>unit</td>
+<td>(unsigned integer)</td>
+<td></td>
+<td>Number of output neurons</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>hidden_state_activation</td>
+<td>(categorical)</td>
+<td>tanh</td>
+<td>Activation type</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>tanh</td>
+<td></td>
+<td>Hyperbolic tangent</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>sigmoid</td>
+<td></td>
+<td>Sigmoid function</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>relu</td>
+<td></td>
+<td>Relu function</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>softmax</td>
+<td></td>
+<td>Softmax function</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>recurrent_activation</td>
+<td>(categorical)</td>
+<td>sigmoid</td>
+<td>Activation type for recurrent step</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>tanh</td>
+<td></td>
+<td>Hyperbolic tangent</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>sigmoid</td>
+<td></td>
+<td>Sigmoid function</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>relu</td>
+<td></td>
+<td>Relu function</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>softmax</td>
+<td></td>
+<td>Softmax function</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>return_sequences</td>
+<td>(boolean)</td>
+<td>false</td>
+<td>Return only the last output if true, else return full output</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>dropout</td>
+<td>(float)</td>
+<td>0</td>
+<td>Dropout rate</td>
+</tr>
+<tr>
+<td><code>gru</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>GRU layer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>unit</td>
+<td>(unsigned integer)</td>
+<td></td>
+<td>Number of output neurons</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>hidden_state_activation</td>
+<td>(categorical)</td>
+<td>tanh</td>
+<td>Activation type</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>tanh</td>
+<td></td>
+<td>Hyperbolic tangent</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>sigmoid</td>
+<td></td>
+<td>Sigmoid function</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>relu</td>
+<td></td>
+<td>Relu function</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>softmax</td>
+<td></td>
+<td>Softmax function</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>recurrent_activation</td>
+<td>(categorical)</td>
+<td>sigmoid</td>
+<td>Activation type for recurrent step</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>tanh</td>
+<td></td>
+<td>Hyperbolic tangent</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>sigmoid</td>
+<td></td>
+<td>Sigmoid function</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>relu</td>
+<td></td>
+<td>Relu function</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>softmax</td>
+<td></td>
+<td>Softmax function</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>return_sequences</td>
+<td>(boolean)</td>
+<td>false</td>
+<td>Return only the last output if true, else return full output</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>dropout</td>
+<td>(float)</td>
+<td>0</td>
+<td>Dropout rate</td>
+</tr>
+</tbody>
+</table></div>
+<p>The following are the available properties for each layer type which does not include (<code>weight_initializer</code>, <code>bias_initializer</code>, <code>weight_regularizer</code>, <code>weight_regularizer_constant</code>) properties.</p>
+<div class="d-block" style="overflow-x:auto"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Key</th>
+<th>Value</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(Universal properties)</td>
+<td></td>
+<td></td>
+<td></td>
+<td>Universal properties that applies to every layer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>name</td>
+<td>(string)</td>
+<td></td>
+<td>An identifier for each layer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>trainable</td>
+<td>(boolean)</td>
+<td>true</td>
+<td>Allow weights to be trained if true</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>input_layers</td>
+<td>(string)</td>
+<td></td>
+<td>Comma-separated names of layers to be inputs of the current layer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>input_shape</td>
+<td>(string)</td>
+<td></td>
+<td>Comma-separated Formatted string as “channel:height:width”. If there is no channel then it must be 1. First layer of the model must have input_shape. Other can be omitted as it is calculated at compile phase.</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>flatten</td>
+<td>(boolean)</td>
+<td></td>
+<td>Flatten shape from <code>c:h:w</code> to <code>1:1:c*h*w</code></td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>activation</td>
+<td>(categorical)</td>
+<td></td>
+<td>Activation type</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>tanh</td>
+<td></td>
+<td>Hyperbolic tangent</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>sigmoid</td>
+<td></td>
+<td>Sigmoid function</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>relu</td>
+<td></td>
+<td>Relu function</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>softmax</td>
+<td></td>
+<td>Softmax function</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>loss</td>
+<td>(float)</td>
+<td>0</td>
+<td>Loss</td>
+</tr>
+<tr>
+<td><code>input</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Input layer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>normalization</td>
+<td>(boolean)</td>
+<td>false</td>
+<td>Normalize input if true</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>standardization</td>
+<td>(boolean)</td>
+<td>false</td>
+<td>Standardize input if true</td>
+</tr>
+<tr>
+<td><code>batch_normalization</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Batch normalization layer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>epsilon</td>
+<td>(float)</td>
+<td>0.001</td>
+<td>Small value to avoid divide by zero</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>moving_mean_initializer</td>
+<td>(categorical)</td>
+<td>zeros</td>
+<td>Moving mean initializer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>zeros</td>
+<td></td>
+<td>Zero initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>lecun_normal</td>
+<td></td>
+<td>LeCun normal initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>lecun_uniform</td>
+<td></td>
+<td>LeCun uniform initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>xavier_normal</td>
+<td></td>
+<td>Xavier normal initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>xavier_uniform</td>
+<td></td>
+<td>Xavier uniform initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>he_normal</td>
+<td></td>
+<td>He normal initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>he_uniform</td>
+<td></td>
+<td>He uniform initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>moving_variance_initializer</td>
+<td>(categorical)</td>
+<td>ones</td>
+<td>Moving variance initializer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>zeros</td>
+<td></td>
+<td>Zero initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>lecun_normal</td>
+<td></td>
+<td>LeCun normal initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>lecun_uniform</td>
+<td></td>
+<td>LeCun uniform initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>xavier_normal</td>
+<td></td>
+<td>Xavier normal initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>xavier_uniform</td>
+<td></td>
+<td>Xavier uniform initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>he_normal</td>
+<td></td>
+<td>He normal initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>he_uniform</td>
+<td></td>
+<td>He uniform initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>gamma_initializer</td>
+<td>(categorical)</td>
+<td>ones</td>
+<td>Gamma initializer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>zeros</td>
+<td></td>
+<td>Zero initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>lecun_normal</td>
+<td></td>
+<td>LeCun normal initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>lecun_uniform</td>
+<td></td>
+<td>LeCun uniform initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>xavier_normal</td>
+<td></td>
+<td>Xavier normal initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>xavier_uniform</td>
+<td></td>
+<td>Xavier uniform initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>he_normal</td>
+<td></td>
+<td>He normal initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>he_uniform</td>
+<td></td>
+<td>He uniform initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>beta_initializer</td>
+<td>(categorical)</td>
+<td>zeros</td>
+<td>Beta initializer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>zeros</td>
+<td></td>
+<td>Zero initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>lecun_normal</td>
+<td></td>
+<td>LeCun normal initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>lecun_uniform</td>
+<td></td>
+<td>LeCun uniform initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>xavier_normal</td>
+<td></td>
+<td>Xavier normal initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>xavier_uniform</td>
+<td></td>
+<td>Xavier uniform initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>he_normal</td>
+<td></td>
+<td>He normal initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>he_uniform</td>
+<td></td>
+<td>He uniform initialization</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>momentum</td>
+<td>(float)</td>
+<td>0.99</td>
+<td>Momentum for moving average in batch normalization</td>
+</tr>
+<tr>
+<td><code>pooling2d</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Pooling layer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>pooling</td>
+<td>(categorical)</td>
+<td></td>
+<td>Pooling type</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>max</td>
+<td></td>
+<td>Max pooling</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>average</td>
+<td></td>
+<td>Average pooling</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>global_max</td>
+<td></td>
+<td>Global max pooling</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>global_average</td>
+<td></td>
+<td>Global average pooling</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>pool_size</td>
+<td>(array of unsigned integer)</td>
+<td></td>
+<td>Comma-separated unsigned intergers for pooling size, <code>height, width</code>  respectively</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>stride</td>
+<td>(array of unsigned integer)</td>
+<td>1, 1</td>
+<td>Comma-separated unsigned intergers for stride, <code>height, width</code>  respectively</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>padding</td>
+<td>(categorical)</td>
+<td>valid</td>
+<td>Padding type</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>valid</td>
+<td></td>
+<td>No padding</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>same</td>
+<td></td>
+<td>Preserve height/width dimension</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>(unsigned integer)</td>
+<td></td>
+<td>Size of padding applied uniformly to all side</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>(array of unsigned integer of size 2)</td>
+<td></td>
+<td>Padding for height, width</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>(array of unsigned integer of size 4)</td>
+<td></td>
+<td>Padding for top, bottom, left, right</td>
+</tr>
+<tr>
+<td><code>flatten</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Flatten layer</td>
+</tr>
+<tr>
+<td><code>activation</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Activation layer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>activation</td>
+<td>(categorical)</td>
+<td></td>
+<td>Activation type</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>tanh</td>
+<td></td>
+<td>Hyperbolic tangent</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>sigmoid</td>
+<td></td>
+<td>Sigmoid function</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>relu</td>
+<td></td>
+<td>Relu function</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>softmax</td>
+<td></td>
+<td>Softmax function</td>
+</tr>
+<tr>
+<td><code>addition</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Addition layer</td>
+</tr>
+<tr>
+<td><code>concat</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Concat layer</td>
+</tr>
+<tr>
+<td><code>multiout</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Multiout layer</td>
+</tr>
+<tr>
+<td><code>split</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Split layer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>split_dimension</td>
+<td>(unsigned integer)</td>
+<td></td>
+<td>Which dimension to split. Split batch dimension is not allowed</td>
+</tr>
+<tr>
+<td><code>permute</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Permute layer</td>
+</tr>
+<tr>
+<td><code>dropout</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Dropout layer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>dropout</td>
+<td>(float)</td>
+<td>0</td>
+<td>Dropout rate</td>
+</tr>
+<tr>
+<td><code>backbone_nnstreamer</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>NNStreamer layer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>model_path</td>
+<td>(string)</td>
+<td></td>
+<td>NNStreamer model path</td>
+<tr>
+<td><code>backbone_tflite</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>TensorFlow Lite layer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>model_path</td>
+<td>(string)</td>
+<td></td>
+<td>TensorFlow Lite model path</td>
+</tr>
+<tr>
+<td><code>centroid_knn</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Centroid KNN layer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>num_class</td>
+<td>(unsigned integer)</td>
+<td></td>
+<td>Number of class</td>
+</tr>
+<tr>
+<td><code>preprocess_flip</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Preprocess flip layer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>flip_direction</td>
+<td>(categorical)</td>
+<td></td>
+<td>Flip direction</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>horizontal</td>
+<td></td>
+<td>Horizontal direction</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>vertical</td>
+<td></td>
+<td>Vertiacl direction</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td></td>
+<td>horizontal_and_vertical</td>
+<td>horizontal_and_vertical</td>
+<td>Horizontal_and vertical direction</td>
+</tr>
+<tr>
+<td><code>preprocess_translate</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Preprocess translate layer</td>
+</tr>
+<tr>
+<td>﻿</td>
+<td>random_translate</td>
+<td>(float)</td>
+<td></td>
+<td>Translate factor value</td>
+</tr>
+<tr>
+<td><code>preprocess_l2norm</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Preprocess l2norm layer</td>
+</tr>
+<tr>
+<td><code>mse</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>MSE loss layer</td>
+</tr>
+<tr>
+<td><code>cross_sigmoid</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Cross entropy with sigmoid loss layer</td>
+</tr>
+<tr>
+<td><code>cross_softmax</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Cross entropy with softmax loss layer</td>
+</tr>
+</tbody>
+</table></div>
 <p>Below is sample for layers to define a model.</p>
 <pre><code class="language-ini">[conv2d_c2_layer]
-Type = conv2d
+type = conv2d
 kernel_size = 5,5
-bias_initializer=zeros
-Activation=sigmoid
+bias_initializer = zeros
+activation = sigmoid
 weight_initializer = xavier_uniform
 filters = 12
 stride = 1,1
 padding = 0,0
 
 [outputlayer]
-Type = fully_connected
+type = fully_connected
 Unit = 10
 weight_initializer = xavier_uniform
 bias_initializer = zeros
-Activation = softmax
+activation = softmax
 </code></pre>
 <h3 id="backbone-section">Backbone section</h3>
 <p>This allows to describe another model, termed as backbone, to be used in the model described by the current ini file.
@@ -439,25 +1667,8 @@ Start with a "[ ${layer name} ]" which must be unique throughtout the model. In 
 <p><code>trainable = &lt;bool&gt;</code></p>
 <p>If this backbone must be trained (defaults to false). Only supported for ini backbones (nntrainer models).</p>
 </li>
-<li>
-<p><code>Preload = &lt;bool&gt;</code></p>
-<p>Load pretrained weights from the saved modelfile of backbone (defaults to false). Only supported for ini backbone (nntrainer models).</p>
-</li>
-<li>
-<p><code>InputShape = &lt;string&gt;</code></p>
-<p>Set the shape of the input layer for the backbone model. Only supported for ini backbones (nntrainer models).</p>
-</li>
-<li>
-<p><code>InputLayer = &lt;string&gt;</code></p>
-<p>Choose the start layer for the backbone. This allows taking a subgraph starting with the specified layer name as a backbone. Only supported for ini backbones (nntrainer models).</p>
-</li>
-<li>
-<p><code>OutputLayer = &lt;string&gt;</code></p>
-<p>Choose the end layer for the backbone. This allows taking a subgraph ending with the specified layer name as a backbone. Only supported for ini backbones (nntrainer models).
-``
-Below is sample backbone section.</p>
-</li>
 </ol>
+<p>Below is sample backbone section.</p>
 <pre><code class="language-ini"># Model Section
 [Model]
 ...
@@ -478,69 +1689,96 @@ unit = 10
 activation = softmax
 </code></pre>
 <h3 id="configuration-file-example">Configuration file example</h3>
-<p>This has one input layer, two convolution layers, two pooling layers, one flatten layer and one fully connected layer to classify MNIST example.</p>
-<p>It takes 1 x 28 x 28 gray data (0~255) as an input. Adam optimizer is used to apply gradient and learning rate is 1.0e-4.</p>
+<p>Only INI formatted files *.ini is supported to construct a model from a file.
+Special sections [Model], [Optimizers], [LearningRateScheduler], [train_set], [valid_set], [test_set] are respectively referring to model, optimizer and data provider objects. Rest of INI sections map to a layer. Keys and values from each section set properties of the layer. All keys and values are treated as case-insensitive.</p>
+<p>The following restrictions must be adhered to:</p>
+<ul>
+<li>Model file must have a <code>[Model]</code> section.</li>
+<li>Model file must have at least one layer.</li>
+<li>Valid keys must have valid properties. The invalid keys in each section result in an error.</li>
+<li>All paths inside the INI file are relative to the INI file path unless the absolute path is stated.</li>
+</ul>
+<p>Below is sample backbone section.
+It takes 1 x 28 x 28 gray data (0~255) as an input. Adam optimizer is used to apply gradient and learning rate is 1.0e-4.</p>
 <pre><code class="language-ini"># Model Section
 [Model]
-type = NeuralNetwork
-learning_rate = 1e-4
-epochs = 1500
-optimizer = adam
-loss = cross
-Save_Path = "model.bin"
-batch_size = 32
-beta1 = 0.9
-beta2 = 0.999
-epsilon = 1e-7
+type = NeuralNetwork          # Network Type : Regression, KNN, NeuralNetwork
+epochs = 1500                 # Epochs
+loss = cross                  # Loss function : mse (mean squared error)
+                              #                 cross ( for cross entropy )
+save_path = "mnist_model.bin" # model path to save / read
+batch_size = 32               # batch size
 
-# Layer Section
+[Optimizer]
+type = adam
+beta1 = 0.9       # beta 1 for adam
+beta2 = 0.999     # beta 2 for adam
+epsilon = 1e-7    # epsilon for adam
+
+[LearningRateScheduler]
+type=constant
+learning_rate = 1e-4 # Learning Rate
+
+# Train Set Section
+[train_set]
+type = file
+path = "trainDataset.dat"
+
+# Layer Section : Name
 [inputlayer]
 type = input
 input_shape = 1:28:28
 
+# Layer Section : Name
 [conv2d_c1_layer]
 type = conv2d
+input_layers = inputlayer
 kernel_size = 5,5
-bias_initializer=zeros
-activation=sigmoid
+bias_initializer = zeros
+activation = sigmoid
 weight_initializer = xavier_uniform
 filters = 6
 stride = 1,1
 padding = 0,0
 
 [pooling2d_p1]
-type=pooling2d
+type = pooling2d
+input_layers = conv2d_c1_layer
 pool_size = 2,2
-stride =2,2
+stride = 2,2
 padding = 0,0
 pooling = average
 
 [conv2d_c2_layer]
 type = conv2d
+input_layers = pooling2d_p1
 kernel_size = 5,5
-bias_initializer=zeros
-activation=sigmoid
+bias_initializer = zeros
+activation = sigmoid
 weight_initializer = xavier_uniform
 filters = 12
 stride = 1,1
 padding = 0,0
 
 [pooling2d_p2]
-type=pooling2d
+type = pooling2d
+input_layers = conv2d_c2_layer
 pool_size = 2,2
 stride =2,2
 padding = 0,0
 pooling = average
 
 [flatten]
-type=flatten
+type = flatten
+input_layers = pooling2d_p2
 
 [outputlayer]
 type = fully_connected
-unit = 10
+input_layers = flatten
+unit = 10		# Output Layer Dimension ( = Weight Width )
 weight_initializer = xavier_uniform
 bias_initializer = zeros
-activation = softmax
+activation = softmax 	# activation : sigmoid, softmax
 </code></pre>
 
     </div>
