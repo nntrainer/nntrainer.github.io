@@ -1,0 +1,238 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage_filtered.info - nntrainer/tensor/swap_device.h</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">nntrainer/tensor</a> - swap_device.h<span style="font-size: 80%;"> (source / <a href="swap_device.h.func-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage_filtered.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
+            <td class="headerCovTableEntry">14</td>
+            <td class="headerCovTableEntry">0</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2025-12-11 07:50:56</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">0</td>
+          </tr>
+                  <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : // SPDX-License-Identifier: Apache-2.0</span>
+<span id="L2"><span class="lineNum">       2</span>              : /**</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * Copyright (C) 2022 Jiho Chu &lt;jiho.chu@samsung.com&gt;</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * @file   swap_device.cpp</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * @date   01 July 2022</span>
+<span id="L7"><span class="lineNum">       7</span>              :  * @see    https://github.com/nnstreamer/nntrainer</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * @author Jiho Chu &lt;jiho.chu@samsung.com&gt;</span>
+<span id="L9"><span class="lineNum">       9</span>              :  * @bug    No known bugs except for NYI items</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * @brief  Swap device class</span>
+<span id="L11"><span class="lineNum">      11</span>              :  *</span>
+<span id="L12"><span class="lineNum">      12</span>              :  */</span>
+<span id="L13"><span class="lineNum">      13</span>              : </span>
+<span id="L14"><span class="lineNum">      14</span>              : #ifndef __SWAP_DEVICE_H__</span>
+<span id="L15"><span class="lineNum">      15</span>              : #define __SWAP_DEVICE_H__</span>
+<span id="L16"><span class="lineNum">      16</span>              : </span>
+<span id="L17"><span class="lineNum">      17</span>              : #include &lt;common.h&gt;</span>
+<span id="L18"><span class="lineNum">      18</span>              : #include &lt;fcntl.h&gt;</span>
+<span id="L19"><span class="lineNum">      19</span>              : #include &lt;filesystem&gt;</span>
+<span id="L20"><span class="lineNum">      20</span>              : #include &lt;map&gt;</span>
+<span id="L21"><span class="lineNum">      21</span>              : #include &lt;memory&gt;</span>
+<span id="L22"><span class="lineNum">      22</span>              : #include &lt;mutex&gt;</span>
+<span id="L23"><span class="lineNum">      23</span>              : #include &lt;nntrainer_error.h&gt;</span>
+<span id="L24"><span class="lineNum">      24</span>              : #include &lt;string&gt;</span>
+<span id="L25"><span class="lineNum">      25</span>              : #include &lt;sys/stat.h&gt;</span>
+<span id="L26"><span class="lineNum">      26</span>              : #include &lt;sys/types.h&gt;</span>
+<span id="L27"><span class="lineNum">      27</span>              : #include &lt;system_error&gt;</span>
+<span id="L28"><span class="lineNum">      28</span>              : #include &lt;utility&gt;</span>
+<span id="L29"><span class="lineNum">      29</span>              : #include &lt;vector&gt;</span>
+<span id="L30"><span class="lineNum">      30</span>              : #if defined(_WIN32)</span>
+<span id="L31"><span class="lineNum">      31</span>              : #include &quot;utils/mman_windows.h&quot;</span>
+<span id="L32"><span class="lineNum">      32</span>              : #include &lt;io.h&gt;</span>
+<span id="L33"><span class="lineNum">      33</span>              : #define O_SYNC 0UL</span>
+<span id="L34"><span class="lineNum">      34</span>              : #else</span>
+<span id="L35"><span class="lineNum">      35</span>              : #include &lt;sys/mman.h&gt;</span>
+<span id="L36"><span class="lineNum">      36</span>              : #include &lt;unistd.h&gt;</span>
+<span id="L37"><span class="lineNum">      37</span>              : #endif</span>
+<span id="L38"><span class="lineNum">      38</span>              : </span>
+<span id="L39"><span class="lineNum">      39</span>              : #if defined(_WIN32)</span>
+<span id="L40"><span class="lineNum">      40</span>              : using ssize_t = std::make_signed_t&lt;size_t&gt;;</span>
+<span id="L41"><span class="lineNum">      41</span>              : #endif</span>
+<span id="L42"><span class="lineNum">      42</span>              : </span>
+<span id="L43"><span class="lineNum">      43</span>              : namespace nntrainer {</span>
+<span id="L44"><span class="lineNum">      44</span>              : /**</span>
+<span id="L45"><span class="lineNum">      45</span>              :  * @class   SwapDevice</span>
+<span id="L46"><span class="lineNum">      46</span>              :  * @brief   A device used to storing data with long access time</span>
+<span id="L47"><span class="lineNum">      47</span>              :  */</span>
+<span id="L48"><span class="lineNum">      48</span>              : class SwapDevice {</span>
+<span id="L49"><span class="lineNum">      49</span>              : public:</span>
+<span id="L50"><span class="lineNum">      50</span>              :   /**</span>
+<span id="L51"><span class="lineNum">      51</span>              :    * @brief SwapDevice default constructor</span>
+<span id="L52"><span class="lineNum">      52</span>              :    *</span>
+<span id="L53"><span class="lineNum">      53</span>              :    */</span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaUNC tlaBgUNC">           0 :   explicit SwapDevice(const std::string &amp;name) :</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaUNC">           0 :     dev_path(std::filesystem::path(std::filesystem::current_path())</span></span>
+<span id="L56"><span class="lineNum">      56</span>              :                .append(name)</span>
+<span id="L57"><span class="lineNum">      57</span>              :                .string()),</span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaUNC">           0 :     fd(-1),</span></span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaUNC">           0 :     execution_mode(ml::train::ExecutionMode::TRAIN) {}</span></span>
+<span id="L60"><span class="lineNum">      60</span>              : </span>
+<span id="L61"><span class="lineNum">      61</span>              :   /**</span>
+<span id="L62"><span class="lineNum">      62</span>              :    * @brief SwapDevice default constructor</span>
+<span id="L63"><span class="lineNum">      63</span>              :    *</span>
+<span id="L64"><span class="lineNum">      64</span>              :    */</span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaUNC">           0 :   explicit SwapDevice(const std::string &amp;path, const std::string &amp;name) :</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaUNC">           0 :     dev_path(std::filesystem::path(path).append(name).string()),</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaUNC">           0 :     fd(-1),</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaUNC">           0 :     execution_mode(ml::train::ExecutionMode::TRAIN) {}</span></span>
+<span id="L69"><span class="lineNum">      69</span>              : </span>
+<span id="L70"><span class="lineNum">      70</span>              :   /**</span>
+<span id="L71"><span class="lineNum">      71</span>              :    * @brief SwapDevice destructor</span>
+<span id="L72"><span class="lineNum">      72</span>              :    *</span>
+<span id="L73"><span class="lineNum">      73</span>              :    */</span>
+<span id="L74"><span class="lineNum">      74</span> <span class="tlaUNC">           0 :   virtual ~SwapDevice() = default;</span></span>
+<span id="L75"><span class="lineNum">      75</span>              : </span>
+<span id="L76"><span class="lineNum">      76</span>              :   /**</span>
+<span id="L77"><span class="lineNum">      77</span>              :    * @brief Start device</span>
+<span id="L78"><span class="lineNum">      78</span>              :    *</span>
+<span id="L79"><span class="lineNum">      79</span>              :    * @param size The size of requested swap device space</span>
+<span id="L80"><span class="lineNum">      80</span>              :    * @param writeable Writeable flag</span>
+<span id="L81"><span class="lineNum">      81</span>              :    *</span>
+<span id="L82"><span class="lineNum">      82</span>              :    */</span>
+<span id="L83"><span class="lineNum">      83</span>              :   void start(size_t size, ml::train::ExecutionMode _execution_mode =</span>
+<span id="L84"><span class="lineNum">      84</span>              :                             ml::train::ExecutionMode::TRAIN);</span>
+<span id="L85"><span class="lineNum">      85</span>              : </span>
+<span id="L86"><span class="lineNum">      86</span>              :   /**</span>
+<span id="L87"><span class="lineNum">      87</span>              :    * @brief Allocate and get data</span>
+<span id="L88"><span class="lineNum">      88</span>              :    *</span>
+<span id="L89"><span class="lineNum">      89</span>              :    * @param offset Requested offset of swap device file</span>
+<span id="L90"><span class="lineNum">      90</span>              :    * @param size Requested size.</span>
+<span id="L91"><span class="lineNum">      91</span>              :    * @param memory_ptr memory ptr that allocate FSU data (mapping)</span>
+<span id="L92"><span class="lineNum">      92</span>              :    * @param alloc_only only allocate buffer without reading data</span>
+<span id="L93"><span class="lineNum">      93</span>              :    *</span>
+<span id="L94"><span class="lineNum">      94</span>              :    * @return The pointer of the swap space</span>
+<span id="L95"><span class="lineNum">      95</span>              :    *</span>
+<span id="L96"><span class="lineNum">      96</span>              :    */</span>
+<span id="L97"><span class="lineNum">      97</span>              :   void *getBuffer(off_t offset, size_t size, void *memory_ptr, unsigned int id,</span>
+<span id="L98"><span class="lineNum">      98</span>              :                   bool alloc_only = false);</span>
+<span id="L99"><span class="lineNum">      99</span>              : </span>
+<span id="L100"><span class="lineNum">     100</span>              :   /**</span>
+<span id="L101"><span class="lineNum">     101</span>              :    * @brief Deallocate and put data</span>
+<span id="L102"><span class="lineNum">     102</span>              :    *</span>
+<span id="L103"><span class="lineNum">     103</span>              :    * @param ptr The pointer obtained from getBuffer</span>
+<span id="L104"><span class="lineNum">     104</span>              :    * @param dealloc_only only deallocate buffer without writing data</span>
+<span id="L105"><span class="lineNum">     105</span>              :    */</span>
+<span id="L106"><span class="lineNum">     106</span>              :   void putBuffer(void *ptr, bool dealloc_only = false);</span>
+<span id="L107"><span class="lineNum">     107</span>              : </span>
+<span id="L108"><span class="lineNum">     108</span>              :   /**</span>
+<span id="L109"><span class="lineNum">     109</span>              :    * @brief Close device</span>
+<span id="L110"><span class="lineNum">     110</span>              :    *</span>
+<span id="L111"><span class="lineNum">     111</span>              :    */</span>
+<span id="L112"><span class="lineNum">     112</span>              :   void finish();</span>
+<span id="L113"><span class="lineNum">     113</span>              : </span>
+<span id="L114"><span class="lineNum">     114</span>              :   /**</span>
+<span id="L115"><span class="lineNum">     115</span>              :    * @brief Check device is operating</span>
+<span id="L116"><span class="lineNum">     116</span>              :    *</span>
+<span id="L117"><span class="lineNum">     117</span>              :    * @return Device operating status</span>
+<span id="L118"><span class="lineNum">     118</span>              :    *</span>
+<span id="L119"><span class="lineNum">     119</span>              :    */</span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaUNC">           0 :   bool isOperating() const { return (fd &gt;= 0); }</span></span>
+<span id="L121"><span class="lineNum">     121</span>              : </span>
+<span id="L122"><span class="lineNum">     122</span>              :   /**</span>
+<span id="L123"><span class="lineNum">     123</span>              :    * @brief Get device path</span>
+<span id="L124"><span class="lineNum">     124</span>              :    *</span>
+<span id="L125"><span class="lineNum">     125</span>              :    * @return Device path</span>
+<span id="L126"><span class="lineNum">     126</span>              :    *</span>
+<span id="L127"><span class="lineNum">     127</span>              :    */</span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaUNC">           0 :   const std::string getDevicePath() const { return dev_path; }</span></span>
+<span id="L129"><span class="lineNum">     129</span>              : </span>
+<span id="L130"><span class="lineNum">     130</span>              :   /**</span>
+<span id="L131"><span class="lineNum">     131</span>              :    * @brief set FSU weight path</span>
+<span id="L132"><span class="lineNum">     132</span>              :    *</span>
+<span id="L133"><span class="lineNum">     133</span>              :    * @param path FSU weight file path</span>
+<span id="L134"><span class="lineNum">     134</span>              :    */</span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaUNC">           0 :   void setFsuWeightPath(std::string file_path) { dev_path = file_path; }</span></span>
+<span id="L136"><span class="lineNum">     136</span>              : </span>
+<span id="L137"><span class="lineNum">     137</span>              :   /**</span>
+<span id="L138"><span class="lineNum">     138</span>              :    * @brief set weight file offset for FSU loading</span>
+<span id="L139"><span class="lineNum">     139</span>              :    *</span>
+<span id="L140"><span class="lineNum">     140</span>              :    * @param offsets weight file offset</span>
+<span id="L141"><span class="lineNum">     141</span>              :    */</span>
+<span id="L142"><span class="lineNum">     142</span>              :   void setWeightOffset(std::vector&lt;std::pair&lt;size_t, size_t&gt;&gt; offsets) {</span>
+<span id="L143"><span class="lineNum">     143</span> <span class="tlaUNC">           0 :     weight_offset = offsets;</span></span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaUNC">           0 :   }</span></span>
+<span id="L145"><span class="lineNum">     145</span>              : </span>
+<span id="L146"><span class="lineNum">     146</span>              : private:</span>
+<span id="L147"><span class="lineNum">     147</span>              :   mutable std::mutex mutex;</span>
+<span id="L148"><span class="lineNum">     148</span>              :   std::string dev_path; /**&lt; device path */</span>
+<span id="L149"><span class="lineNum">     149</span>              :   int fd;               /**&lt; device file description */</span>
+<span id="L150"><span class="lineNum">     150</span>              :   std::vector&lt;std::pair&lt;size_t, size_t&gt;&gt; weight_offset;</span>
+<span id="L151"><span class="lineNum">     151</span>              :   ml::train::ExecutionMode execution_mode;</span>
+<span id="L152"><span class="lineNum">     152</span>              : #ifdef USE_MMAP</span>
+<span id="L153"><span class="lineNum">     153</span>              :   std::map&lt;void *, std::tuple&lt;void *, size_t, off_t, ssize_t&gt;&gt;</span>
+<span id="L154"><span class="lineNum">     154</span>              :     mapped; /**&lt; &lt;pointer, &lt;orig_pointer, size, offset, origianl size&gt;&gt; */</span>
+<span id="L155"><span class="lineNum">     155</span>              : #else</span>
+<span id="L156"><span class="lineNum">     156</span>              :   std::map&lt;void *, std::pair&lt;off_t, ssize_t&gt;&gt;</span>
+<span id="L157"><span class="lineNum">     157</span>              :     allocated; /**&lt; &lt;pointer, &lt;offset, size&gt;&gt; */</span>
+<span id="L158"><span class="lineNum">     158</span>              : #endif</span>
+<span id="L159"><span class="lineNum">     159</span>              : };</span>
+<span id="L160"><span class="lineNum">     160</span>              : } // namespace nntrainer</span>
+<span id="L161"><span class="lineNum">     161</span>              : </span>
+<span id="L162"><span class="lineNum">     162</span>              : #endif /** __SWAP_DEVICE_H__ */</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

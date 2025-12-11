@@ -1,0 +1,775 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage_filtered.info - nntrainer/graph/network_graph.h</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">nntrainer/graph</a> - network_graph.h<span style="font-size: 80%;"> (source / <a href="network_graph.h.func-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage_filtered.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryMed">87.5&nbsp;%</td>
+            <td class="headerCovTableEntry">56</td>
+            <td class="headerCovTableEntry">49</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2025-12-11 07:50:56</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryMed">77.8&nbsp;%</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntry">7</td>
+          </tr>
+                  <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : // SPDX-License-Identifier: Apache-2.0</span>
+<span id="L2"><span class="lineNum">       2</span>              : /**</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * Copyright (C) 2020 Jijoong Moon &lt;jijoong.moon@samsung.com&gt;</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * @file    network_graph.h</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * @date    19 Oct 2020</span>
+<span id="L7"><span class="lineNum">       7</span>              :  * @see     https://github.com/nnstreamer/nntrainer</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * @author  Jijoong Moon &lt;jijoong.moon@samsung.com&gt;</span>
+<span id="L9"><span class="lineNum">       9</span>              :  * @bug     No known bugs except for NYI items</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * @brief   This is Network Graph Class for Neural Network</span>
+<span id="L11"><span class="lineNum">      11</span>              :  *</span>
+<span id="L12"><span class="lineNum">      12</span>              :  */</span>
+<span id="L13"><span class="lineNum">      13</span>              : </span>
+<span id="L14"><span class="lineNum">      14</span>              : #ifndef __NETWORK_GRAPH_H__</span>
+<span id="L15"><span class="lineNum">      15</span>              : #define __NETWORK_GRAPH_H__</span>
+<span id="L16"><span class="lineNum">      16</span>              : #ifdef __cplusplus</span>
+<span id="L17"><span class="lineNum">      17</span>              : </span>
+<span id="L18"><span class="lineNum">      18</span>              : #include &lt;list&gt;</span>
+<span id="L19"><span class="lineNum">      19</span>              : #include &lt;map&gt;</span>
+<span id="L20"><span class="lineNum">      20</span>              : #include &lt;memory&gt;</span>
+<span id="L21"><span class="lineNum">      21</span>              : #include &lt;stack&gt;</span>
+<span id="L22"><span class="lineNum">      22</span>              : #include &lt;vector&gt;</span>
+<span id="L23"><span class="lineNum">      23</span>              : </span>
+<span id="L24"><span class="lineNum">      24</span>              : #include &lt;graph_core.h&gt;</span>
+<span id="L25"><span class="lineNum">      25</span>              : #include &lt;layer_node.h&gt;</span>
+<span id="L26"><span class="lineNum">      26</span>              : #include &lt;manager.h&gt;</span>
+<span id="L27"><span class="lineNum">      27</span>              : </span>
+<span id="L28"><span class="lineNum">      28</span>              : namespace nntrainer {</span>
+<span id="L29"><span class="lineNum">      29</span>              : using ExecutionMode = ml::train::ExecutionMode;</span>
+<span id="L30"><span class="lineNum">      30</span>              : </span>
+<span id="L31"><span class="lineNum">      31</span>              : class Connection;</span>
+<span id="L32"><span class="lineNum">      32</span>              : /**</span>
+<span id="L33"><span class="lineNum">      33</span>              :  * @class   NeuralNetwork Graph Class</span>
+<span id="L34"><span class="lineNum">      34</span>              :  * @brief   NeuralNetwork Graph Class which manage layers</span>
+<span id="L35"><span class="lineNum">      35</span>              :  */</span>
+<span id="L36"><span class="lineNum">      36</span>              : class NetworkGraph {</span>
+<span id="L37"><span class="lineNum">      37</span>              : public:</span>
+<span id="L38"><span class="lineNum">      38</span>              :   /**</span>
+<span id="L39"><span class="lineNum">      39</span>              :    * @brief     Constructor of NeuralNetwork Graph Class</span>
+<span id="L40"><span class="lineNum">      40</span>              :    */</span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC tlaBgGNC">         849 :   NetworkGraph() :</span></span>
+<span id="L42"><span class="lineNum">      42</span>              :     tensor_manager(std::make_shared&lt;Manager&gt;()),</span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">         849 :     graph(),</span></span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">         849 :     compiled(false),</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">         849 :     batch_size(0),</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">         849 :     graph_exec_end(0),</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">         849 :     backward_iter_end(nullptr),</span></span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">         849 :     forward_iter_end(nullptr),</span></span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">         849 :     optimize_memory(true),</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">         849 :     exec_mode(ExecutionMode::TRAIN),</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">         849 :     tensor_format(&quot;NCHW&quot;),</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">        2547 :     tensor_dtype(split(&quot;FP32-FP32&quot;, getRegex(&quot;\\-&quot;))),</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">         849 :     is_clip_grad(false),</span></span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">         849 :     loss_scale(1.0f) {</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">         849 :     nan_count = 0;</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">         849 :   }</span></span>
+<span id="L57"><span class="lineNum">      57</span>              : </span>
+<span id="L58"><span class="lineNum">      58</span>              :   /**</span>
+<span id="L59"><span class="lineNum">      59</span>              :    * @brief     Constructor of NeuralNetwork Graph Class</span>
+<span id="L60"><span class="lineNum">      60</span>              :    * @param[in] enable_fsu enable memory fsu for tensor</span>
+<span id="L61"><span class="lineNum">      61</span>              :    * @param[in] mode execution mode (default ExecutionMode::TRAIN)</span>
+<span id="L62"><span class="lineNum">      62</span>              :    * @param[in] fsu_path memory fsu file path when the fsu is enabled</span>
+<span id="L63"><span class="lineNum">      63</span>              :    * @param[in] tensor_format define tensor format. One of NCHW and NHWC</span>
+<span id="L64"><span class="lineNum">      64</span>              :    * (default NCHW)</span>
+<span id="L65"><span class="lineNum">      65</span>              :    * @param[in] tensor_type It says weight type and activation type (default</span>
+<span id="L66"><span class="lineNum">      66</span>              :    * FP32-FP32)</span>
+<span id="L67"><span class="lineNum">      67</span>              :    */</span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">         694 :   NetworkGraph(bool enable_fsu, ExecutionMode mode = ExecutionMode::TRAIN,</span></span>
+<span id="L69"><span class="lineNum">      69</span>              :                const std::string &amp;fsu_path = &quot;&quot;, unsigned int lookahead = 0,</span>
+<span id="L70"><span class="lineNum">      70</span>              :                const std::string &amp;tensor_format_ = &quot;NCHW&quot;,</span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">         694 :                const std::string &amp;tensor_dtype_ = &quot;FP32-FP32&quot;) :</span></span>
+<span id="L72"><span class="lineNum">      72</span>              :     tensor_manager(std::make_shared&lt;Manager&gt;(</span>
+<span id="L73"><span class="lineNum">      73</span>              :       enable_fsu, fsu_path, lookahead, tensor_format_, tensor_dtype_, mode)),</span>
+<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">         694 :     graph(),</span></span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">         694 :     compiled(false),</span></span>
+<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">         694 :     batch_size(0),</span></span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">         694 :     graph_exec_end(0),</span></span>
+<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">         694 :     backward_iter_end(nullptr),</span></span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">         694 :     forward_iter_end(nullptr),</span></span>
+<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">         694 :     optimize_memory(true),</span></span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">         694 :     exec_mode(mode),</span></span>
+<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">         694 :     tensor_format(tensor_format_),</span></span>
+<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">        1388 :     tensor_dtype(split(tensor_dtype_, getRegex(&quot;\\-&quot;))),</span></span>
+<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">         694 :     is_clip_grad(false),</span></span>
+<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">         694 :     loss_scale(1.0f) {</span></span>
+<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">         694 :     nan_count = 0;</span></span>
+<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">         694 :   }</span></span>
+<span id="L88"><span class="lineNum">      88</span>              : </span>
+<span id="L89"><span class="lineNum">      89</span>              :   /**</span>
+<span id="L90"><span class="lineNum">      90</span>              :    * @brief   Destructor of the NeuralNetwork Graph class</span>
+<span id="L91"><span class="lineNum">      91</span>              :    *</span>
+<span id="L92"><span class="lineNum">      92</span>              :    */</span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">        5112 :   ~NetworkGraph() = default;</span></span>
+<span id="L94"><span class="lineNum">      94</span>              : </span>
+<span id="L95"><span class="lineNum">      95</span>              :   /**</span>
+<span id="L96"><span class="lineNum">      96</span>              :    * @brief     Compile the graph</span>
+<span id="L97"><span class="lineNum">      97</span>              :    * @param[in] loss_type loss for the graph</span>
+<span id="L98"><span class="lineNum">      98</span>              :    * returns ML_ERROR_NONE on success, error on failure</span>
+<span id="L99"><span class="lineNum">      99</span>              :    */</span>
+<span id="L100"><span class="lineNum">     100</span>              :   int compile(const std::string &amp;loss_type);</span>
+<span id="L101"><span class="lineNum">     101</span>              : </span>
+<span id="L102"><span class="lineNum">     102</span>              :   /**</span>
+<span id="L103"><span class="lineNum">     103</span>              :    * @brief Create new LayerNode and add into Graph</span>
+<span id="L104"><span class="lineNum">     104</span>              :    * @param[in] layer shared_ptr of Layer</span>
+<span id="L105"><span class="lineNum">     105</span>              :    */</span>
+<span id="L106"><span class="lineNum">     106</span>              :   void addLayer(std::shared_ptr&lt;LayerNode&gt; layer);</span>
+<span id="L107"><span class="lineNum">     107</span>              : </span>
+<span id="L108"><span class="lineNum">     108</span>              :   /**</span>
+<span id="L109"><span class="lineNum">     109</span>              :    * @brief get current flat graph from the model before sorting</span>
+<span id="L110"><span class="lineNum">     110</span>              :    * @note graph contains pointer to the actual nodes, which is not deeply</span>
+<span id="L111"><span class="lineNum">     111</span>              :    * copied.</span>
+<span id="L112"><span class="lineNum">     112</span>              :    * @retval current flat graph</span>
+<span id="L113"><span class="lineNum">     113</span>              :    *</span>
+<span id="L114"><span class="lineNum">     114</span>              :    * @todo remove getting unsorted layers from model loader, compile model</span>
+<span id="L115"><span class="lineNum">     115</span>              :    * loader</span>
+<span id="L116"><span class="lineNum">     116</span>              :    */</span>
+<span id="L117"><span class="lineNum">     117</span>              :   std::vector&lt;std::shared_ptr&lt;LayerNode&gt;&gt;</span>
+<span id="L118"><span class="lineNum">     118</span>              :   getUnsortedLayers(const std::string &amp;input_layer,</span>
+<span id="L119"><span class="lineNum">     119</span>              :                     const std::string &amp;output_layer) const;</span>
+<span id="L120"><span class="lineNum">     120</span>              : </span>
+<span id="L121"><span class="lineNum">     121</span>              :   /**</span>
+<span id="L122"><span class="lineNum">     122</span>              :    * @brief getter of number of nodes</span>
+<span id="L123"><span class="lineNum">     123</span>              :    * @param[out] number of nodes</span>
+<span id="L124"><span class="lineNum">     124</span>              :    */</span>
+<span id="L125"><span class="lineNum">     125</span>              :   unsigned int size() const { return graph.size(); }</span>
+<span id="L126"><span class="lineNum">     126</span>              : </span>
+<span id="L127"><span class="lineNum">     127</span>              :   /**</span>
+<span id="L128"><span class="lineNum">     128</span>              :    * @brief get if the graph is empty</span>
+<span id="L129"><span class="lineNum">     129</span>              :    * @param[out] true if empty, else false</span>
+<span id="L130"><span class="lineNum">     130</span>              :    */</span>
+<span id="L131"><span class="lineNum">     131</span>              :   bool empty() const { return graph.empty(); }</span>
+<span id="L132"><span class="lineNum">     132</span>              : </span>
+<span id="L133"><span class="lineNum">     133</span>              :   /**</span>
+<span id="L134"><span class="lineNum">     134</span>              :    * @brief     Swap function for the class</span>
+<span id="L135"><span class="lineNum">     135</span>              :    */</span>
+<span id="L136"><span class="lineNum">     136</span>              :   friend void swap(NetworkGraph &amp;lhs, NetworkGraph &amp;rhs) {</span>
+<span id="L137"><span class="lineNum">     137</span>              :     /// @fixme this swap function need maintenance</span>
+<span id="L138"><span class="lineNum">     138</span>              :     using std::swap;</span>
+<span id="L139"><span class="lineNum">     139</span>              : </span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">         540 :     swap(lhs.graph, rhs.graph);</span></span>
+<span id="L141"><span class="lineNum">     141</span>              :   }</span>
+<span id="L142"><span class="lineNum">     142</span>              : </span>
+<span id="L143"><span class="lineNum">     143</span>              :   /**</span>
+<span id="L144"><span class="lineNum">     144</span>              :    * @brief getter of Sorted LayerNode with index number</span>
+<span id="L145"><span class="lineNum">     145</span>              :    * @param[in] index</span>
+<span id="L146"><span class="lineNum">     146</span>              :    * @ret LayerNode</span>
+<span id="L147"><span class="lineNum">     147</span>              :    */</span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">       20332 :   std::shared_ptr&lt;LayerNode&gt; getSortedLayerNode(unsigned int ith) const {</span></span>
+<span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">       20332 :     return std::static_pointer_cast&lt;LayerNode&gt;(graph.getSortedNode(ith));</span></span>
+<span id="L150"><span class="lineNum">     150</span>              :   }</span>
+<span id="L151"><span class="lineNum">     151</span>              : </span>
+<span id="L152"><span class="lineNum">     152</span>              :   /**</span>
+<span id="L153"><span class="lineNum">     153</span>              :    * @brief getter of LayerNode with layer name</span>
+<span id="L154"><span class="lineNum">     154</span>              :    * @param[in] layer name</span>
+<span id="L155"><span class="lineNum">     155</span>              :    * @retval LayerNode</span>
+<span id="L156"><span class="lineNum">     156</span>              :    */</span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">       10181 :   std::shared_ptr&lt;LayerNode&gt; getLayerNode(const std::string &amp;layer_name) const {</span></span>
+<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">       10181 :     return std::static_pointer_cast&lt;LayerNode&gt;(graph.getNode(layer_name));</span></span>
+<span id="L159"><span class="lineNum">     159</span>              :   }</span>
+<span id="L160"><span class="lineNum">     160</span>              : </span>
+<span id="L161"><span class="lineNum">     161</span>              :   /**</span>
+<span id="L162"><span class="lineNum">     162</span>              :    * @brief getter all the layer nodes in the model</span>
+<span id="L163"><span class="lineNum">     163</span>              :    * @retval Layer nodes</span>
+<span id="L164"><span class="lineNum">     164</span>              :    * @note these layer nodes will be in sorted order if the model is compiled,</span>
+<span id="L165"><span class="lineNum">     165</span>              :    * otherwise the order is the order of addition of layer nodes in the model.</span>
+<span id="L166"><span class="lineNum">     166</span>              :    */</span>
+<span id="L167"><span class="lineNum">     167</span>              :   std::vector&lt;std::shared_ptr&lt;LayerNode&gt;&gt; getLayerNodes() const;</span>
+<span id="L168"><span class="lineNum">     168</span>              : </span>
+<span id="L169"><span class="lineNum">     169</span>              :   /**</span>
+<span id="L170"><span class="lineNum">     170</span>              :    * @brief     set batch size</span>
+<span id="L171"><span class="lineNum">     171</span>              :    * @param[in] batch size</span>
+<span id="L172"><span class="lineNum">     172</span>              :    */</span>
+<span id="L173"><span class="lineNum">     173</span>              :   void setBatchSize(unsigned int batch_size);</span>
+<span id="L174"><span class="lineNum">     174</span>              : </span>
+<span id="L175"><span class="lineNum">     175</span>              :   /**</span>
+<span id="L176"><span class="lineNum">     176</span>              :    * @brief     reset input dimensions of a model</span>
+<span id="L177"><span class="lineNum">     177</span>              :    * @param[in] dims input dimensions</span>
+<span id="L178"><span class="lineNum">     178</span>              :    * @note Similar to reinitialize, the resetInputDimension API is used for</span>
+<span id="L179"><span class="lineNum">     179</span>              :    * modifying input dimensions after model initialization. The reinitialize</span>
+<span id="L180"><span class="lineNum">     180</span>              :    * function should be the officially called API when changing input</span>
+<span id="L181"><span class="lineNum">     181</span>              :    * dimensions, as it properly recalculates weights, tensors, and outputs for</span>
+<span id="L182"><span class="lineNum">     182</span>              :    * each layer. On the other hand, resetInputDimension is a specialized API</span>
+<span id="L183"><span class="lineNum">     183</span>              :    * created to modify only specific dimensions (specifically height values)</span>
+<span id="L184"><span class="lineNum">     184</span>              :    * within input/output dimensions. Since this API uniformly adjusts the height</span>
+<span id="L185"><span class="lineNum">     185</span>              :    * across all model layers, developers must verify that every layer in their</span>
+<span id="L186"><span class="lineNum">     186</span>              :    * model architecture can safely accommodate such height modifications.</span>
+<span id="L187"><span class="lineNum">     187</span>              :    */</span>
+<span id="L188"><span class="lineNum">     188</span>              :   void resetInputDimension(std::vector&lt;TensorDim&gt; dims);</span>
+<span id="L189"><span class="lineNum">     189</span>              : </span>
+<span id="L190"><span class="lineNum">     190</span>              :   /**</span>
+<span id="L191"><span class="lineNum">     191</span>              :    * @brief try apply gradient if possible</span>
+<span id="L192"><span class="lineNum">     192</span>              :    * @note if it is not the last of the gradient access, this is noop</span>
+<span id="L193"><span class="lineNum">     193</span>              :    * @note if the gradient is to be clipped by norm, this is noop</span>
+<span id="L194"><span class="lineNum">     194</span>              :    *</span>
+<span id="L195"><span class="lineNum">     195</span>              :    * @param node node to try apply gradient</span>
+<span id="L196"><span class="lineNum">     196</span>              :    * @param apply_func apply function</span>
+<span id="L197"><span class="lineNum">     197</span>              :    */</span>
+<span id="L198"><span class="lineNum">     198</span>              :   static void applyGradients(LayerNode *node,</span>
+<span id="L199"><span class="lineNum">     199</span>              :                              const std::function&lt;void(Weight &amp;)&gt; &amp;apply_func);</span>
+<span id="L200"><span class="lineNum">     200</span>              : </span>
+<span id="L201"><span class="lineNum">     201</span>              :   /**</span>
+<span id="L202"><span class="lineNum">     202</span>              :    * @brief     forwarding network graph</span>
+<span id="L203"><span class="lineNum">     203</span>              :    * @param[in] training true if forwarding is on training</span>
+<span id="L204"><span class="lineNum">     204</span>              :    * @retval output tensors</span>
+<span id="L205"><span class="lineNum">     205</span>              :    */</span>
+<span id="L206"><span class="lineNum">     206</span>              :   sharedConstTensors forwarding(</span>
+<span id="L207"><span class="lineNum">     207</span>              :     bool training = false,</span>
+<span id="L208"><span class="lineNum">     208</span>              :     std::function&lt;void(std::shared_ptr&lt;LayerNode&gt;, bool)&gt; forwarding_op =</span>
+<span id="L209"><span class="lineNum">     209</span>              :       [](std::shared_ptr&lt;LayerNode&gt;, bool) {},</span>
+<span id="L210"><span class="lineNum">     210</span>              :     std::function&lt;bool(void *userdata)&gt; stop_cb =</span>
+<span id="L211"><span class="lineNum">     211</span>              :       [](void *user_data) { return false; },</span>
+<span id="L212"><span class="lineNum">     212</span>              :     void *user_data = nullptr);</span>
+<span id="L213"><span class="lineNum">     213</span>              : </span>
+<span id="L214"><span class="lineNum">     214</span>              :   /**</span>
+<span id="L215"><span class="lineNum">     215</span>              :    * @brief     forwarding network graph</span>
+<span id="L216"><span class="lineNum">     216</span>              :    * @param[in] from start step</span>
+<span id="L217"><span class="lineNum">     217</span>              :    * @param[in] to end step</span>
+<span id="L218"><span class="lineNum">     218</span>              :    * @param[in] training true if forwarding is on training</span>
+<span id="L219"><span class="lineNum">     219</span>              :    * @retval output tensors</span>
+<span id="L220"><span class="lineNum">     220</span>              :    */</span>
+<span id="L221"><span class="lineNum">     221</span>              :   sharedConstTensors incremental_forwarding(</span>
+<span id="L222"><span class="lineNum">     222</span>              :     unsigned int from, unsigned int to, bool training = false,</span>
+<span id="L223"><span class="lineNum">     223</span>              :     std::function&lt;void(std::shared_ptr&lt;LayerNode&gt;, bool)&gt; forwarding_op =</span>
+<span id="L224"><span class="lineNum">     224</span>              :       [](std::shared_ptr&lt;LayerNode&gt;, bool) {},</span>
+<span id="L225"><span class="lineNum">     225</span>              :     std::function&lt;bool(void *userdata)&gt; stop_cb =</span>
+<span id="L226"><span class="lineNum">     226</span>              :       [](void *user_data) { return false; },</span>
+<span id="L227"><span class="lineNum">     227</span>              :     void *user_data = nullptr);</span>
+<span id="L228"><span class="lineNum">     228</span>              : </span>
+<span id="L229"><span class="lineNum">     229</span>              :   /**</span>
+<span id="L230"><span class="lineNum">     230</span>              :    * @brief     backwarding the network graph</span>
+<span id="L231"><span class="lineNum">     231</span>              :    * @param[in] iteration current iteration number</span>
+<span id="L232"><span class="lineNum">     232</span>              :    * @param[in] forwarding_op operation for the forwarding</span>
+<span id="L233"><span class="lineNum">     233</span>              :    * @param[in] backwarding_op operation for the backwarding</span>
+<span id="L234"><span class="lineNum">     234</span>              :    * @param[in] lazy_apply_grad_op operation for applying the lazy gradients</span>
+<span id="L235"><span class="lineNum">     235</span>              :    * @retval ret it is false then the gradient has NaN valude in mixed precision</span>
+<span id="L236"><span class="lineNum">     236</span>              :    * training. If it is, then we need to control the loss scale factor and</span>
+<span id="L237"><span class="lineNum">     237</span>              :    * compute again the derivatives.</span>
+<span id="L238"><span class="lineNum">     238</span>              :    */</span>
+<span id="L239"><span class="lineNum">     239</span>              :   bool backwarding(</span>
+<span id="L240"><span class="lineNum">     240</span>              :     int iteration,</span>
+<span id="L241"><span class="lineNum">     241</span>              :     std::function&lt;void(std::shared_ptr&lt;LayerNode&gt;, bool)&gt; &amp;forwarding_op,</span>
+<span id="L242"><span class="lineNum">     242</span>              :     std::function&lt;bool(std::shared_ptr&lt;LayerNode&gt;, int)&gt; &amp;backwarding_op,</span>
+<span id="L243"><span class="lineNum">     243</span>              :     std::function&lt;void(Weight &amp;, int)&gt; &amp;lazy_apply_grad_op,</span>
+<span id="L244"><span class="lineNum">     244</span>              :     std::function&lt;bool(void *userdata)&gt; stop_cb =</span>
+<span id="L245"><span class="lineNum">     245</span>              :       [](void *user_data) { return false; },</span>
+<span id="L246"><span class="lineNum">     246</span>              :     void *user_data = nullptr);</span>
+<span id="L247"><span class="lineNum">     247</span>              : </span>
+<span id="L248"><span class="lineNum">     248</span>              :   /**</span>
+<span id="L249"><span class="lineNum">     249</span>              :    * @brief     get begin iterator for the graph</span>
+<span id="L250"><span class="lineNum">     250</span>              :    * @retval    const iterator</span>
+<span id="L251"><span class="lineNum">     251</span>              :    */</span>
+<span id="L252"><span class="lineNum">     252</span>              :   graph_const_iterator&lt;LayerNode&gt; cbegin() const {</span>
+<span id="L253"><span class="lineNum">     253</span>              :     return graph.cbegin&lt;LayerNode&gt;();</span>
+<span id="L254"><span class="lineNum">     254</span>              :   }</span>
+<span id="L255"><span class="lineNum">     255</span>              : </span>
+<span id="L256"><span class="lineNum">     256</span>              :   /**</span>
+<span id="L257"><span class="lineNum">     257</span>              :    * @brief     get end iterator for the graph</span>
+<span id="L258"><span class="lineNum">     258</span>              :    * @retval    const iterator</span>
+<span id="L259"><span class="lineNum">     259</span>              :    */</span>
+<span id="L260"><span class="lineNum">     260</span>              :   graph_const_iterator&lt;LayerNode&gt; cend() const {</span>
+<span id="L261"><span class="lineNum">     261</span>              :     return graph.cend&lt;LayerNode&gt;();</span>
+<span id="L262"><span class="lineNum">     262</span>              :   }</span>
+<span id="L263"><span class="lineNum">     263</span>              : </span>
+<span id="L264"><span class="lineNum">     264</span>              :   /**</span>
+<span id="L265"><span class="lineNum">     265</span>              :    * @brief     get reverse begin iterator for the graph</span>
+<span id="L266"><span class="lineNum">     266</span>              :    * @retval    const reverse iterator</span>
+<span id="L267"><span class="lineNum">     267</span>              :    */</span>
+<span id="L268"><span class="lineNum">     268</span>              :   graph_const_reverse_iterator&lt;LayerNode&gt; crbegin() const {</span>
+<span id="L269"><span class="lineNum">     269</span>              :     return graph.crbegin&lt;LayerNode&gt;();</span>
+<span id="L270"><span class="lineNum">     270</span>              :   }</span>
+<span id="L271"><span class="lineNum">     271</span>              : </span>
+<span id="L272"><span class="lineNum">     272</span>              :   /**</span>
+<span id="L273"><span class="lineNum">     273</span>              :    * @brief     get reverse end iterator for the graph</span>
+<span id="L274"><span class="lineNum">     274</span>              :    * @retval    const reverse iterator</span>
+<span id="L275"><span class="lineNum">     275</span>              :    */</span>
+<span id="L276"><span class="lineNum">     276</span>              :   graph_const_reverse_iterator&lt;LayerNode&gt; crend() const {</span>
+<span id="L277"><span class="lineNum">     277</span>              :     return graph.crend&lt;LayerNode&gt;();</span>
+<span id="L278"><span class="lineNum">     278</span>              :   }</span>
+<span id="L279"><span class="lineNum">     279</span>              : </span>
+<span id="L280"><span class="lineNum">     280</span>              :   /**</span>
+<span id="L281"><span class="lineNum">     281</span>              :    * @brief     get begin iterator for the backwarding</span>
+<span id="L282"><span class="lineNum">     282</span>              :    * @retval    const reverse iterator marking the begin of backwarding</span>
+<span id="L283"><span class="lineNum">     283</span>              :    */</span>
+<span id="L284"><span class="lineNum">     284</span>              :   graph_const_reverse_iterator&lt;LayerNode&gt; getBackwardingBeginIter() const {</span>
+<span id="L285"><span class="lineNum">     285</span>              :     return crbegin();</span>
+<span id="L286"><span class="lineNum">     286</span>              :   }</span>
+<span id="L287"><span class="lineNum">     287</span>              : </span>
+<span id="L288"><span class="lineNum">     288</span>              :   /**</span>
+<span id="L289"><span class="lineNum">     289</span>              :    * @brief     get end iterator for the backwarding</span>
+<span id="L290"><span class="lineNum">     290</span>              :    * @retval    const reverse iterator marking the end of backwarding</span>
+<span id="L291"><span class="lineNum">     291</span>              :    */</span>
+<span id="L292"><span class="lineNum">     292</span>              :   graph_const_reverse_iterator&lt;LayerNode&gt; getBackwardingEndIter() const {</span>
+<span id="L293"><span class="lineNum">     293</span>              :     return crend();</span>
+<span id="L294"><span class="lineNum">     294</span>              :   }</span>
+<span id="L295"><span class="lineNum">     295</span>              : </span>
+<span id="L296"><span class="lineNum">     296</span>              :   /**</span>
+<span id="L297"><span class="lineNum">     297</span>              :    * @brief     getter of output dimension of graph</span>
+<span id="L298"><span class="lineNum">     298</span>              :    * @retval    output tensor dim list</span>
+<span id="L299"><span class="lineNum">     299</span>              :    */</span>
+<span id="L300"><span class="lineNum">     300</span>              :   std::vector&lt;TensorDim&gt; getOutputDimension() const;</span>
+<span id="L301"><span class="lineNum">     301</span>              : </span>
+<span id="L302"><span class="lineNum">     302</span>              :   /**</span>
+<span id="L303"><span class="lineNum">     303</span>              :    * @brief     getter of input dimension of graph</span>
+<span id="L304"><span class="lineNum">     304</span>              :    * @retval    input tensor dim list</span>
+<span id="L305"><span class="lineNum">     305</span>              :    */</span>
+<span id="L306"><span class="lineNum">     306</span>              :   std::vector&lt;TensorDim&gt; getInputDimension() const;</span>
+<span id="L307"><span class="lineNum">     307</span>              : </span>
+<span id="L308"><span class="lineNum">     308</span>              :   /**</span>
+<span id="L309"><span class="lineNum">     309</span>              :    * @brief Get the Batch Size object of current model</span>
+<span id="L310"><span class="lineNum">     310</span>              :    *</span>
+<span id="L311"><span class="lineNum">     311</span>              :    * @return unsigned int</span>
+<span id="L312"><span class="lineNum">     312</span>              :    */</span>
+<span id="L313"><span class="lineNum">     313</span>              :   unsigned int getBatchSize() const;</span>
+<span id="L314"><span class="lineNum">     314</span>              : </span>
+<span id="L315"><span class="lineNum">     315</span>              :   /**</span>
+<span id="L316"><span class="lineNum">     316</span>              :    * @brief     Copy the graph</span>
+<span id="L317"><span class="lineNum">     317</span>              :    * @param[in] from Graph Object to copy</span>
+<span id="L318"><span class="lineNum">     318</span>              :    * @retval    Graph Object copyed</span>
+<span id="L319"><span class="lineNum">     319</span>              :    */</span>
+<span id="L320"><span class="lineNum">     320</span>              :   NetworkGraph &amp;copy(NetworkGraph &amp;from) {</span>
+<span id="L321"><span class="lineNum">     321</span>              :     graph.copy(from.graph);</span>
+<span id="L322"><span class="lineNum">     322</span> <span class="tlaUNC tlaBgUNC">           0 :     return *this;</span></span>
+<span id="L323"><span class="lineNum">     323</span>              :   }</span>
+<span id="L324"><span class="lineNum">     324</span>              : </span>
+<span id="L325"><span class="lineNum">     325</span>              :   /**</span>
+<span id="L326"><span class="lineNum">     326</span>              :    * @brief initialize network graph</span>
+<span id="L327"><span class="lineNum">     327</span>              :    *</span>
+<span id="L328"><span class="lineNum">     328</span>              :    * @param model_input_names model input connection if empty list given, all of</span>
+<span id="L329"><span class="lineNum">     329</span>              :    * node that can be inputs will be identified in the sort order</span>
+<span id="L330"><span class="lineNum">     330</span>              :    * @param model_label_names model label names if empty list given, all of node</span>
+<span id="L331"><span class="lineNum">     331</span>              :    * that can be labels will be identified in the sort order</span>
+<span id="L332"><span class="lineNum">     332</span>              :    * @return int ML_ERROR_NONE if successful</span>
+<span id="L333"><span class="lineNum">     333</span>              :    */</span>
+<span id="L334"><span class="lineNum">     334</span>              :   int initialize(ExecutionMode mode = ExecutionMode::TRAIN,</span>
+<span id="L335"><span class="lineNum">     335</span>              :                  const std::vector&lt;Connection&gt; &amp;model_input_names = {},</span>
+<span id="L336"><span class="lineNum">     336</span>              :                  const std::vector&lt;Connection&gt; &amp;model_label_names = {});</span>
+<span id="L337"><span class="lineNum">     337</span>              : </span>
+<span id="L338"><span class="lineNum">     338</span>              :   /**</span>
+<span id="L339"><span class="lineNum">     339</span>              :    * @brief reinitialize network graph</span>
+<span id="L340"><span class="lineNum">     340</span>              :    *</span>
+<span id="L341"><span class="lineNum">     341</span>              :    * @param model_input_names model input connection if empty list given, all of</span>
+<span id="L342"><span class="lineNum">     342</span>              :    * node that can be inputs will be identified in the sort order</span>
+<span id="L343"><span class="lineNum">     343</span>              :    * @param model_label_names model label names if empty list given, all of node</span>
+<span id="L344"><span class="lineNum">     344</span>              :    * that can be labels will be identified in the sort order</span>
+<span id="L345"><span class="lineNum">     345</span>              :    * @return int ML_ERROR_NONE if successful</span>
+<span id="L346"><span class="lineNum">     346</span>              :    */</span>
+<span id="L347"><span class="lineNum">     347</span>              :   int reinitialize(const std::vector&lt;Connection&gt; &amp;model_input_names = {},</span>
+<span id="L348"><span class="lineNum">     348</span>              :                    const std::vector&lt;Connection&gt; &amp;model_label_names = {});</span>
+<span id="L349"><span class="lineNum">     349</span>              : </span>
+<span id="L350"><span class="lineNum">     350</span>              :   /**</span>
+<span id="L351"><span class="lineNum">     351</span>              :    * @brief Create run layer context from the given init layer context</span>
+<span id="L352"><span class="lineNum">     352</span>              :    *</span>
+<span id="L353"><span class="lineNum">     353</span>              :    * @param lnode layer node to finalize and set run context</span>
+<span id="L354"><span class="lineNum">     354</span>              :    * @param prev_inputs previous input information</span>
+<span id="L355"><span class="lineNum">     355</span>              :    */</span>
+<span id="L356"><span class="lineNum">     356</span>              :   std::vector&lt;Var_Grad *&gt;</span>
+<span id="L357"><span class="lineNum">     357</span>              :   finalizeContext(const std::shared_ptr&lt;LayerNode&gt; &amp;lnode,</span>
+<span id="L358"><span class="lineNum">     358</span>              :                   const std::vector&lt;Var_Grad *&gt; &amp;prev_inputs);</span>
+<span id="L359"><span class="lineNum">     359</span>              : </span>
+<span id="L360"><span class="lineNum">     360</span>              :   /**</span>
+<span id="L361"><span class="lineNum">     361</span>              :    * @brief Recreate run layer context from the given init layer context</span>
+<span id="L362"><span class="lineNum">     362</span>              :    *</span>
+<span id="L363"><span class="lineNum">     363</span>              :    * @param lnode layer node to finalize and set run context</span>
+<span id="L364"><span class="lineNum">     364</span>              :    * @param prev_inputs previous input information</span>
+<span id="L365"><span class="lineNum">     365</span>              :    */</span>
+<span id="L366"><span class="lineNum">     366</span>              :   std::vector&lt;Var_Grad *&gt;</span>
+<span id="L367"><span class="lineNum">     367</span>              :   refinalizeContext(const std::shared_ptr&lt;LayerNode&gt; &amp;lnode,</span>
+<span id="L368"><span class="lineNum">     368</span>              :                     const std::vector&lt;Var_Grad *&gt; &amp;prev_inputs);</span>
+<span id="L369"><span class="lineNum">     369</span>              : </span>
+<span id="L370"><span class="lineNum">     370</span>              :   /** Interface for manager */</span>
+<span id="L371"><span class="lineNum">     371</span>              : </span>
+<span id="L372"><span class="lineNum">     372</span>              :   /**</span>
+<span id="L373"><span class="lineNum">     373</span>              :    * @brief Allocate memory for all the managed tensors</span>
+<span id="L374"><span class="lineNum">     374</span>              :    *</span>
+<span id="L375"><span class="lineNum">     375</span>              :    * @param[in] training If true, initialize derivates/gradients, else, do not.</span>
+<span id="L376"><span class="lineNum">     376</span>              :    */</span>
+<span id="L377"><span class="lineNum">     377</span>              :   void allocateTensors(ExecutionMode exec_mode_);</span>
+<span id="L378"><span class="lineNum">     378</span>              : </span>
+<span id="L379"><span class="lineNum">     379</span>              :   /**</span>
+<span id="L380"><span class="lineNum">     380</span>              :    * @brief Deallocate memory for all the managed tensors</span>
+<span id="L381"><span class="lineNum">     381</span>              :    */</span>
+<span id="L382"><span class="lineNum">     382</span>              :   void deallocateTensors(bool dealloc_weights = false) {</span>
+<span id="L383"><span class="lineNum">     383</span> <span class="tlaGNC tlaBgGNC">        2484 :     tensor_manager-&gt;deallocateTensors(dealloc_weights);</span></span>
+<span id="L384"><span class="lineNum">     384</span> <span class="tlaGNC">        1775 :   }</span></span>
+<span id="L385"><span class="lineNum">     385</span>              : </span>
+<span id="L386"><span class="lineNum">     386</span>              :   /**</span>
+<span id="L387"><span class="lineNum">     387</span>              :    * @brief Allocate memory for all the managed weights</span>
+<span id="L388"><span class="lineNum">     388</span>              :    */</span>
+<span id="L389"><span class="lineNum">     389</span>              :   void allocateWeights(bool init = true) {</span>
+<span id="L390"><span class="lineNum">     390</span>              :     unsigned int max_exec_order =</span>
+<span id="L391"><span class="lineNum">     391</span> <span class="tlaGNC">         617 :       std::get&lt;3&gt;(backward_iter_end-&gt;getExecutionOrder());</span></span>
+<span id="L392"><span class="lineNum">     392</span>              : </span>
+<span id="L393"><span class="lineNum">     393</span> <span class="tlaGNC">         617 :     if (exec_mode == ExecutionMode::INFERENCE)</span></span>
+<span id="L394"><span class="lineNum">     394</span> <span class="tlaGNC">           1 :       max_exec_order = std::get&lt;0&gt;(forward_iter_end-&gt;getExecutionOrder());</span></span>
+<span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">         617 :     tensor_manager-&gt;allocateWeights(max_exec_order, init);</span></span>
+<span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC">         617 :   }</span></span>
+<span id="L397"><span class="lineNum">     397</span>              : </span>
+<span id="L398"><span class="lineNum">     398</span>              :   /**</span>
+<span id="L399"><span class="lineNum">     399</span>              :    * @brief Deallocate memory for all the weights</span>
+<span id="L400"><span class="lineNum">     400</span>              :    */</span>
+<span id="L401"><span class="lineNum">     401</span>              :   void deallocateWeights() { tensor_manager-&gt;deallocateWeights(); }</span>
+<span id="L402"><span class="lineNum">     402</span>              : </span>
+<span id="L403"><span class="lineNum">     403</span>              :   /**</span>
+<span id="L404"><span class="lineNum">     404</span>              :    * @brief     Enable the memory optimizations for the network</span>
+<span id="L405"><span class="lineNum">     405</span>              :    *</span>
+<span id="L406"><span class="lineNum">     406</span>              :    * @param val true to enable, else false</span>
+<span id="L407"><span class="lineNum">     407</span>              :    */</span>
+<span id="L408"><span class="lineNum">     408</span>              :   void setMemoryOptimizations(bool val) {</span>
+<span id="L409"><span class="lineNum">     409</span>              :     tensor_manager-&gt;setOptimizations(val);</span>
+<span id="L410"><span class="lineNum">     410</span> <span class="tlaGNC">         695 :     optimize_memory = val;</span></span>
+<span id="L411"><span class="lineNum">     411</span>              :   }</span>
+<span id="L412"><span class="lineNum">     412</span>              : </span>
+<span id="L413"><span class="lineNum">     413</span>              :   /**</span>
+<span id="L414"><span class="lineNum">     414</span>              :    * @brief     Create optimizer variable for every weights</span>
+<span id="L415"><span class="lineNum">     415</span>              :    *</span>
+<span id="L416"><span class="lineNum">     416</span>              :    * @param cb  Call back function which will return vector of dimension</span>
+<span id="L417"><span class="lineNum">     417</span>              :    * @param request_only_trainable true when only request trainable weight</span>
+<span id="L418"><span class="lineNum">     418</span>              :    */</span>
+<span id="L419"><span class="lineNum">     419</span>              :   void requestOptimizerVariable(</span>
+<span id="L420"><span class="lineNum">     420</span>              :     std::function&lt;std::vector&lt;TensorDim&gt;(const TensorDim &amp;)&gt; cb,</span>
+<span id="L421"><span class="lineNum">     421</span>              :     bool request_only_trainable = true);</span>
+<span id="L422"><span class="lineNum">     422</span>              : </span>
+<span id="L423"><span class="lineNum">     423</span>              :   /**</span>
+<span id="L424"><span class="lineNum">     424</span>              :    * @brief Feed inputs and labels to the graph</span>
+<span id="L425"><span class="lineNum">     425</span>              :    *</span>
+<span id="L426"><span class="lineNum">     426</span>              :    * @param inputs Input data</span>
+<span id="L427"><span class="lineNum">     427</span>              :    * @param labels Label data</span>
+<span id="L428"><span class="lineNum">     428</span>              :    */</span>
+<span id="L429"><span class="lineNum">     429</span>              :   void setInputsLabels(const std::vector&lt;Tensor&gt; &amp;inputs,</span>
+<span id="L430"><span class="lineNum">     430</span>              :                        const std::vector&lt;Tensor&gt; &amp;labels);</span>
+<span id="L431"><span class="lineNum">     431</span>              : </span>
+<span id="L432"><span class="lineNum">     432</span>              :   /**</span>
+<span id="L433"><span class="lineNum">     433</span>              :    * @brief Feed inputs and labels to the graph</span>
+<span id="L434"><span class="lineNum">     434</span>              :    *</span>
+<span id="L435"><span class="lineNum">     435</span>              :    * @param inputs Input data</span>
+<span id="L436"><span class="lineNum">     436</span>              :    * @param labels Label data</span>
+<span id="L437"><span class="lineNum">     437</span>              :    */</span>
+<span id="L438"><span class="lineNum">     438</span>              :   void setInputsLabels(sharedConstTensors &amp;inputs, sharedConstTensors &amp;labels);</span>
+<span id="L439"><span class="lineNum">     439</span>              : </span>
+<span id="L440"><span class="lineNum">     440</span>              :   /**</span>
+<span id="L441"><span class="lineNum">     441</span>              :    * @brief Get the Output Tensors list for the graph</span>
+<span id="L442"><span class="lineNum">     442</span>              :    *</span>
+<span id="L443"><span class="lineNum">     443</span>              :    * @return std::vector&lt;Tensor&gt; List of output tensors</span>
+<span id="L444"><span class="lineNum">     444</span>              :    * @note this tensor list is analogous to the label list</span>
+<span id="L445"><span class="lineNum">     445</span>              :    */</span>
+<span id="L446"><span class="lineNum">     446</span>              :   std::vector&lt;Tensor&gt; getOutputTensors() const;</span>
+<span id="L447"><span class="lineNum">     447</span>              : </span>
+<span id="L448"><span class="lineNum">     448</span>              :   /**</span>
+<span id="L449"><span class="lineNum">     449</span>              :    * @brief return model tensor type</span>
+<span id="L450"><span class="lineNum">     450</span>              :    *</span>
+<span id="L451"><span class="lineNum">     451</span>              :    * @return TensorDim::Format NCHW or NHWC</span>
+<span id="L452"><span class="lineNum">     452</span>              :    */</span>
+<span id="L453"><span class="lineNum">     453</span> <span class="tlaGNC">        4946 :   std::array&lt;std::string, 3&gt; getTensorType() {</span></span>
+<span id="L454"><span class="lineNum">     454</span> <span class="tlaGNC">        4946 :     return {tensor_format, tensor_dtype[0], tensor_dtype[1]};</span></span>
+<span id="L455"><span class="lineNum">     455</span> <span class="tlaGNC">       14838 :   };</span></span>
+<span id="L456"><span class="lineNum">     456</span>              : </span>
+<span id="L457"><span class="lineNum">     457</span>              :   /**</span>
+<span id="L458"><span class="lineNum">     458</span>              :    * @brief Flush data to the device</span>
+<span id="L459"><span class="lineNum">     459</span>              :    *</span>
+<span id="L460"><span class="lineNum">     460</span>              :    */</span>
+<span id="L461"><span class="lineNum">     461</span>              :   void flushCache();</span>
+<span id="L462"><span class="lineNum">     462</span>              : </span>
+<span id="L463"><span class="lineNum">     463</span>              :   /**</span>
+<span id="L464"><span class="lineNum">     464</span>              :    * @brief Flush data to the device except order</span>
+<span id="L465"><span class="lineNum">     465</span>              :    *</span>
+<span id="L466"><span class="lineNum">     466</span>              :    * @param order except execution order</span>
+<span id="L467"><span class="lineNum">     467</span>              :    */</span>
+<span id="L468"><span class="lineNum">     468</span>              :   void flushCacheExcept(const unsigned int order);</span>
+<span id="L469"><span class="lineNum">     469</span>              : </span>
+<span id="L470"><span class="lineNum">     470</span>              :   /**</span>
+<span id="L471"><span class="lineNum">     471</span>              :    * @brief Load data of order to the device</span>
+<span id="L472"><span class="lineNum">     472</span>              :    *</span>
+<span id="L473"><span class="lineNum">     473</span>              :    * @param order execution order</span>
+<span id="L474"><span class="lineNum">     474</span>              :    */</span>
+<span id="L475"><span class="lineNum">     475</span>              :   void LoadTensors(const unsigned int order,</span>
+<span id="L476"><span class="lineNum">     476</span>              :                    unsigned int remainder_lookahead = 0);</span>
+<span id="L477"><span class="lineNum">     477</span>              : </span>
+<span id="L478"><span class="lineNum">     478</span>              :   /**</span>
+<span id="L479"><span class="lineNum">     479</span>              :    * @brief check data of order is loaded</span>
+<span id="L480"><span class="lineNum">     480</span>              :    *</span>
+<span id="L481"><span class="lineNum">     481</span>              :    * @param order execution order</span>
+<span id="L482"><span class="lineNum">     482</span>              :    */</span>
+<span id="L483"><span class="lineNum">     483</span>              :   bool checkLoadComplete(const unsigned int order);</span>
+<span id="L484"><span class="lineNum">     484</span>              : </span>
+<span id="L485"><span class="lineNum">     485</span>              :   /**</span>
+<span id="L486"><span class="lineNum">     486</span>              :    * @brief inactive the elem</span>
+<span id="L487"><span class="lineNum">     487</span>              :    *</span>
+<span id="L488"><span class="lineNum">     488</span>              :    */</span>
+<span id="L489"><span class="lineNum">     489</span>              :   bool inActive(unsigned int order);</span>
+<span id="L490"><span class="lineNum">     490</span>              : </span>
+<span id="L491"><span class="lineNum">     491</span>              :   /**</span>
+<span id="L492"><span class="lineNum">     492</span>              :    * @brief check data of order is Unloaded</span>
+<span id="L493"><span class="lineNum">     493</span>              :    *</span>
+<span id="L494"><span class="lineNum">     494</span>              :    * @param order execution order</span>
+<span id="L495"><span class="lineNum">     495</span>              :    */</span>
+<span id="L496"><span class="lineNum">     496</span>              :   bool checkUnloadComplete(const unsigned int order);</span>
+<span id="L497"><span class="lineNum">     497</span>              : </span>
+<span id="L498"><span class="lineNum">     498</span>              :   /**</span>
+<span id="L499"><span class="lineNum">     499</span>              :    * @brief Load data of order to the device</span>
+<span id="L500"><span class="lineNum">     500</span>              :    *</span>
+<span id="L501"><span class="lineNum">     501</span>              :    * @param order execution order</span>
+<span id="L502"><span class="lineNum">     502</span>              :    */</span>
+<span id="L503"><span class="lineNum">     503</span>              :   void UnloadTensors(const unsigned int order);</span>
+<span id="L504"><span class="lineNum">     504</span>              : </span>
+<span id="L505"><span class="lineNum">     505</span>              : #ifdef ENABLE_TEST</span>
+<span id="L506"><span class="lineNum">     506</span>              :   /**</span>
+<span id="L507"><span class="lineNum">     507</span>              :    * @brief Get layer node's tenexecution orders</span>
+<span id="L508"><span class="lineNum">     508</span>              :    *</span>
+<span id="L509"><span class="lineNum">     509</span>              :    * @param lnode layer node</span>
+<span id="L510"><span class="lineNum">     510</span>              :    * @note this is for test purpose only</span>
+<span id="L511"><span class="lineNum">     511</span>              :    */</span>
+<span id="L512"><span class="lineNum">     512</span>              :   std::map&lt;std::string, std::vector&lt;unsigned int&gt;&gt;</span>
+<span id="L513"><span class="lineNum">     513</span>              :   getLayerExecutionOrders(const std::shared_ptr&lt;LayerNode&gt; &amp;lnode);</span>
+<span id="L514"><span class="lineNum">     514</span>              : #endif // ENABLE_TEST</span>
+<span id="L515"><span class="lineNum">     515</span>              : </span>
+<span id="L516"><span class="lineNum">     516</span>              :   /**</span>
+<span id="L517"><span class="lineNum">     517</span>              :    * @brief     reset the loss scale</span>
+<span id="L518"><span class="lineNum">     518</span>              :    * @param[in] scale</span>
+<span id="L519"><span class="lineNum">     519</span>              :    */</span>
+<span id="L520"><span class="lineNum">     520</span>              :   void resetLossScale(float scale);</span>
+<span id="L521"><span class="lineNum">     521</span>              : </span>
+<span id="L522"><span class="lineNum">     522</span>              :   /**</span>
+<span id="L523"><span class="lineNum">     523</span>              :    * @brief     check if it is mixed precision training</span>
+<span id="L524"><span class="lineNum">     524</span>              :    */</span>
+<span id="L525"><span class="lineNum">     525</span> <span class="tlaGNC">        7511 :   bool isMixedPrecision() { return (!istrequal(tensor_dtype[1], &quot;FP32&quot;)); }</span></span>
+<span id="L526"><span class="lineNum">     526</span>              : </span>
+<span id="L527"><span class="lineNum">     527</span>              :   /**</span>
+<span id="L528"><span class="lineNum">     528</span>              :    * @brief set FSU weight path</span>
+<span id="L529"><span class="lineNum">     529</span>              :    *</span>
+<span id="L530"><span class="lineNum">     530</span>              :    * @param path FSU weight file path</span>
+<span id="L531"><span class="lineNum">     531</span>              :    */</span>
+<span id="L532"><span class="lineNum">     532</span> <span class="tlaUNC tlaBgUNC">           0 :   void setFsuWeightPath(const std::string &amp;path) {</span></span>
+<span id="L533"><span class="lineNum">     533</span> <span class="tlaUNC">           0 :     tensor_manager-&gt;setFsuWeightPath(path);</span></span>
+<span id="L534"><span class="lineNum">     534</span> <span class="tlaUNC">           0 :   }</span></span>
+<span id="L535"><span class="lineNum">     535</span>              : </span>
+<span id="L536"><span class="lineNum">     536</span>              :   /**</span>
+<span id="L537"><span class="lineNum">     537</span>              :    * @brief set weight file offset for FSU loading</span>
+<span id="L538"><span class="lineNum">     538</span>              :    *</span>
+<span id="L539"><span class="lineNum">     539</span>              :    * @param offsets weight file offset</span>
+<span id="L540"><span class="lineNum">     540</span>              :    */</span>
+<span id="L541"><span class="lineNum">     541</span> <span class="tlaUNC">           0 :   void setWeightOffset(std::vector&lt;std::pair&lt;size_t, size_t&gt;&gt; &amp;offsets) {</span></span>
+<span id="L542"><span class="lineNum">     542</span> <span class="tlaUNC">           0 :     tensor_manager-&gt;setWeightOffset(offsets);</span></span>
+<span id="L543"><span class="lineNum">     543</span> <span class="tlaUNC">           0 :   }</span></span>
+<span id="L544"><span class="lineNum">     544</span>              : </span>
+<span id="L545"><span class="lineNum">     545</span>              : private:</span>
+<span id="L546"><span class="lineNum">     546</span>              :   std::map&lt;std::string, std::string&gt; sub_in_out; /** This is map to identify</span>
+<span id="L547"><span class="lineNum">     547</span>              :                  input and output layer name of subgraph */</span>
+<span id="L548"><span class="lineNum">     548</span>              :   std::shared_ptr&lt;Manager&gt; tensor_manager;       /**&lt; tensors manager */</span>
+<span id="L549"><span class="lineNum">     549</span>              : </span>
+<span id="L550"><span class="lineNum">     550</span>              :   GraphCore graph;              /** core graph object */</span>
+<span id="L551"><span class="lineNum">     551</span>              :   bool compiled;                /**&lt; if the model graph is compiled */</span>
+<span id="L552"><span class="lineNum">     552</span>              :   unsigned int batch_size;      /**&lt; current batch_size */</span>
+<span id="L553"><span class="lineNum">     553</span>              :   unsigned int graph_exec_end;  /**&lt; Inclusive, last execution order of the</span>
+<span id="L554"><span class="lineNum">     554</span>              :                                  given graph */</span>
+<span id="L555"><span class="lineNum">     555</span>              :   LayerNode *backward_iter_end; /**&lt; inclusive end node of the valid backward</span>
+<span id="L556"><span class="lineNum">     556</span>              :                                          execution when initialized, nodes after</span>
+<span id="L557"><span class="lineNum">     557</span>              :                                    this node does not required backwarding thus</span>
+<span id="L558"><span class="lineNum">     558</span>              :                                    making it noop */</span>
+<span id="L559"><span class="lineNum">     559</span>              :   LayerNode *forward_iter_end;  /**&lt; inclusive end node of the forward execution</span>
+<span id="L560"><span class="lineNum">     560</span>              :                                  when initialize */</span>
+<span id="L561"><span class="lineNum">     561</span>              : </span>
+<span id="L562"><span class="lineNum">     562</span>              :   /// @note *_list and *_dims must be synced at all times. Consider put it as a</span>
+<span id="L563"><span class="lineNum">     563</span>              :   /// structure</span>
+<span id="L564"><span class="lineNum">     564</span>              :   std::vector&lt;std::string&gt; label_list;  /**&lt; identifier for the model labels */</span>
+<span id="L565"><span class="lineNum">     565</span>              :   std::vector&lt;std::string&gt; input_list;  /**&lt; identifier for the model inputs */</span>
+<span id="L566"><span class="lineNum">     566</span>              :   std::vector&lt;std::string&gt; output_list; /**&lt; identifier for the model outputs */</span>
+<span id="L567"><span class="lineNum">     567</span>              :   std::vector&lt;TensorDim&gt; label_dims_;   /**&lt; graph label dimensions */</span>
+<span id="L568"><span class="lineNum">     568</span>              :   std::vector&lt;TensorDim&gt; input_dims_;   /**&lt; graph input dimensions */</span>
+<span id="L569"><span class="lineNum">     569</span>              : </span>
+<span id="L570"><span class="lineNum">     570</span>              :   bool optimize_memory;    /**&lt; optimize memory */</span>
+<span id="L571"><span class="lineNum">     571</span>              :   ExecutionMode exec_mode; /**&lt; execution mode with which the graph has been</span>
+<span id="L572"><span class="lineNum">     572</span>              :                             currently set or previously set */</span>
+<span id="L573"><span class="lineNum">     573</span>              : </span>
+<span id="L574"><span class="lineNum">     574</span>              :   std::string tensor_format; /**&lt; Model Tensor Format: NCHW or NHWC */</span>
+<span id="L575"><span class="lineNum">     575</span>              : </span>
+<span id="L576"><span class="lineNum">     576</span>              :   std::vector&lt;std::string&gt; tensor_dtype; /**&lt; Model Tensor Type: FP32, FP16 */</span>
+<span id="L577"><span class="lineNum">     577</span>              : </span>
+<span id="L578"><span class="lineNum">     578</span>              :   std::unordered_map&lt;std::string, int&gt;</span>
+<span id="L579"><span class="lineNum">     579</span>              :     profile_keys; /**&lt; profile keys based on the layer type */</span>
+<span id="L580"><span class="lineNum">     580</span>              :   std::vector&lt;Weight *&gt;</span>
+<span id="L581"><span class="lineNum">     581</span>              :     lazy_weights; /**&lt; weights with delayed grad update, e.g., gradient</span>
+<span id="L582"><span class="lineNum">     582</span>              :                      clipping, loss scaling */</span>
+<span id="L583"><span class="lineNum">     583</span>              :   bool is_clip_grad;</span>
+<span id="L584"><span class="lineNum">     584</span>              :   float loss_scale;</span>
+<span id="L585"><span class="lineNum">     585</span>              :   unsigned int nan_count;</span>
+<span id="L586"><span class="lineNum">     586</span>              : </span>
+<span id="L587"><span class="lineNum">     587</span>              :   /**</span>
+<span id="L588"><span class="lineNum">     588</span>              :    * @brief     topological sort</span>
+<span id="L589"><span class="lineNum">     589</span>              :    * @param[in] ith index of LayerNode</span>
+<span id="L590"><span class="lineNum">     590</span>              :    * @param[in] visited temp list</span>
+<span id="L591"><span class="lineNum">     591</span>              :    * @param[in] stack for Node list to visit.</span>
+<span id="L592"><span class="lineNum">     592</span>              :    */</span>
+<span id="L593"><span class="lineNum">     593</span>              :   void topologicalSortUtil(unsigned int ith, std::vector&lt;bool&gt; &amp;visited,</span>
+<span id="L594"><span class="lineNum">     594</span>              :                            std::stack&lt;std::shared_ptr&lt;LayerNode&gt;&gt; &amp;Stack);</span>
+<span id="L595"><span class="lineNum">     595</span>              : </span>
+<span id="L596"><span class="lineNum">     596</span>              :   /**</span>
+<span id="L597"><span class="lineNum">     597</span>              :    * @brief     check if graph is ready to compile.</span>
+<span id="L598"><span class="lineNum">     598</span>              :    * @retval #ML_ERROR_NONE graph is ready to compile</span>
+<span id="L599"><span class="lineNum">     599</span>              :    * @retval #ML_ERROR_INVALID_PARAMETER not ready to compile.</span>
+<span id="L600"><span class="lineNum">     600</span>              :    */</span>
+<span id="L601"><span class="lineNum">     601</span>              :   int isCompilable();</span>
+<span id="L602"><span class="lineNum">     602</span>              : </span>
+<span id="L603"><span class="lineNum">     603</span>              :   /**</span>
+<span id="L604"><span class="lineNum">     604</span>              :    * @brief     check if the compiled graph is of correct form.</span>
+<span id="L605"><span class="lineNum">     605</span>              :    * @retval #ML_ERROR_NONE graph is compiled correctly</span>
+<span id="L606"><span class="lineNum">     606</span>              :    * @retval #ML_ERROR_INVALID_PARAMETER did not compile correctly</span>
+<span id="L607"><span class="lineNum">     607</span>              :    */</span>
+<span id="L608"><span class="lineNum">     608</span>              :   int checkCompiledGraph();</span>
+<span id="L609"><span class="lineNum">     609</span>              : </span>
+<span id="L610"><span class="lineNum">     610</span>              :   /**</span>
+<span id="L611"><span class="lineNum">     611</span>              :    * @brief     mark nodes required for backwarding.</span>
+<span id="L612"><span class="lineNum">     612</span>              :    */</span>
+<span id="L613"><span class="lineNum">     613</span>              :   void markNodesForBackwarding();</span>
+<span id="L614"><span class="lineNum">     614</span>              : </span>
+<span id="L615"><span class="lineNum">     615</span>              :   /**</span>
+<span id="L616"><span class="lineNum">     616</span>              :    * @brief     adding loss layer at last position</span>
+<span id="L617"><span class="lineNum">     617</span>              :    * @param[in] loss_type loss type</span>
+<span id="L618"><span class="lineNum">     618</span>              :    * @retval #ML_ERROR_NONE Successful.</span>
+<span id="L619"><span class="lineNum">     619</span>              :    * @retval #ML_ERROR_INVALID_PARAMETER invalid parameter.</span>
+<span id="L620"><span class="lineNum">     620</span>              :    */</span>
+<span id="L621"><span class="lineNum">     621</span>              :   int addLossLayer(const std::string &amp;loss_type);</span>
+<span id="L622"><span class="lineNum">     622</span>              : </span>
+<span id="L623"><span class="lineNum">     623</span>              :   /**</span>
+<span id="L624"><span class="lineNum">     624</span>              :    * @brief     set output connections for all the layers</span>
+<span id="L625"><span class="lineNum">     625</span>              :    */</span>
+<span id="L626"><span class="lineNum">     626</span>              :   void setOutputConnections();</span>
+<span id="L627"><span class="lineNum">     627</span>              : </span>
+<span id="L628"><span class="lineNum">     628</span>              :   /**</span>
+<span id="L629"><span class="lineNum">     629</span>              :    * @brief     Ensure that layer has a name.</span>
+<span id="L630"><span class="lineNum">     630</span>              :    * @param[in] layer Layer whose name is to be ensured to be valid</span>
+<span id="L631"><span class="lineNum">     631</span>              :    * @param[in] prefix Prefix to be attached to the layer name</span>
+<span id="L632"><span class="lineNum">     632</span>              :    * @param[in] postfix Postfix to be attached to the layer name</span>
+<span id="L633"><span class="lineNum">     633</span>              :    * @param[in] force_rename If the layer must be forcefully rename</span>
+<span id="L634"><span class="lineNum">     634</span>              :    * @details   Ensures that the layer has a unique and a valid name. A valid</span>
+<span id="L635"><span class="lineNum">     635</span>              :    * name pre-assigned to the layer can be changed if force_rename is enabled.</span>
+<span id="L636"><span class="lineNum">     636</span>              :    */</span>
+<span id="L637"><span class="lineNum">     637</span>              :   void ensureName(std::shared_ptr&lt;Layer&gt; layer, const std::string &amp;prefix = &quot;&quot;,</span>
+<span id="L638"><span class="lineNum">     638</span>              :                   const std::string &amp;postfix = &quot;&quot;, bool force_rename = false);</span>
+<span id="L639"><span class="lineNum">     639</span>              : </span>
+<span id="L640"><span class="lineNum">     640</span>              :   /**</span>
+<span id="L641"><span class="lineNum">     641</span>              :    * @brief Create new LayerNode and add into Graph</span>
+<span id="L642"><span class="lineNum">     642</span>              :    * @param[in] layer shared_ptr of Layer</span>
+<span id="L643"><span class="lineNum">     643</span>              :    */</span>
+<span id="L644"><span class="lineNum">     644</span>              :   void addLayerNode(std::unique_ptr&lt;Layer&gt; layer);</span>
+<span id="L645"><span class="lineNum">     645</span>              : </span>
+<span id="L646"><span class="lineNum">     646</span>              :   /**</span>
+<span id="L647"><span class="lineNum">     647</span>              :    * @brief finalize already added loss layers</span>
+<span id="L648"><span class="lineNum">     648</span>              :    *</span>
+<span id="L649"><span class="lineNum">     649</span>              :    * @details This involves verify if the requirements of the added loss layers</span>
+<span id="L650"><span class="lineNum">     650</span>              :    * match and merging loss layers with activation layers if needed.</span>
+<span id="L651"><span class="lineNum">     651</span>              :    */</span>
+<span id="L652"><span class="lineNum">     652</span>              :   void finalizeLossLayer();</span>
+<span id="L653"><span class="lineNum">     653</span>              : </span>
+<span id="L654"><span class="lineNum">     654</span>              :   /**</span>
+<span id="L655"><span class="lineNum">     655</span>              :    * @brief Set the order of execution for all the nodes in the graph</span>
+<span id="L656"><span class="lineNum">     656</span>              :    *</span>
+<span id="L657"><span class="lineNum">     657</span>              :    * @details This sets the order of execution using the order from the</span>
+<span id="L658"><span class="lineNum">     658</span>              :    * topological sort. The order of forwarding matches the topological sort. The</span>
+<span id="L659"><span class="lineNum">     659</span>              :    * order for backwarding is in the exact reverse order. The calcDerivative()</span>
+<span id="L660"><span class="lineNum">     660</span>              :    * is expected to be called right after calcGradient().</span>
+<span id="L661"><span class="lineNum">     661</span>              :    */</span>
+<span id="L662"><span class="lineNum">     662</span>              :   void setExecutionOrder();</span>
+<span id="L663"><span class="lineNum">     663</span>              : </span>
+<span id="L664"><span class="lineNum">     664</span>              :   /**</span>
+<span id="L665"><span class="lineNum">     665</span>              :    * @brief Set external data to the given tensors with name</span>
+<span id="L666"><span class="lineNum">     666</span>              :    *</span>
+<span id="L667"><span class="lineNum">     667</span>              :    * @param data External data</span>
+<span id="L668"><span class="lineNum">     668</span>              :    * @param names Names of the tensor to set the data to</span>
+<span id="L669"><span class="lineNum">     669</span>              :    */</span>
+<span id="L670"><span class="lineNum">     670</span>              :   void setExternalTensors(const std::vector&lt;Tensor&gt; &amp;data,</span>
+<span id="L671"><span class="lineNum">     671</span>              :                           const std::vector&lt;std::string&gt; names);</span>
+<span id="L672"><span class="lineNum">     672</span>              : </span>
+<span id="L673"><span class="lineNum">     673</span>              :   /**</span>
+<span id="L674"><span class="lineNum">     674</span>              :    * @brief     Optimize the graph memory utilization for in-place operations</span>
+<span id="L675"><span class="lineNum">     675</span>              :    */</span>
+<span id="L676"><span class="lineNum">     676</span>              :   void inPlaceOptimize();</span>
+<span id="L677"><span class="lineNum">     677</span>              : </span>
+<span id="L678"><span class="lineNum">     678</span>              :   /**</span>
+<span id="L679"><span class="lineNum">     679</span>              :    * @brief     Check if the given node can execute in-place</span>
+<span id="L680"><span class="lineNum">     680</span>              :    *</span>
+<span id="L681"><span class="lineNum">     681</span>              :    * @param lnode node to check for in-place execution</span>
+<span id="L682"><span class="lineNum">     682</span>              :    *</span>
+<span id="L683"><span class="lineNum">     683</span>              :    * @return the mode of inplace for the layer</span>
+<span id="L684"><span class="lineNum">     684</span>              :    */</span>
+<span id="L685"><span class="lineNum">     685</span>              :   InPlaceType canExecuteInPlace(const std::shared_ptr&lt;LayerNode&gt; &amp;lnode);</span>
+<span id="L686"><span class="lineNum">     686</span>              : </span>
+<span id="L687"><span class="lineNum">     687</span>              :   /**</span>
+<span id="L688"><span class="lineNum">     688</span>              :    * @brief compute optimized backward end. This function calculated the valid</span>
+<span id="L689"><span class="lineNum">     689</span>              :    * end of the graph backward, if memory_optimize is unset, this returns</span>
+<span id="L690"><span class="lineNum">     690</span>              :    * beginning of the graph node.</span>
+<span id="L691"><span class="lineNum">     691</span>              :    *</span>
+<span id="L692"><span class="lineNum">     692</span>              :    * @return end of the backward iter;</span>
+<span id="L693"><span class="lineNum">     693</span>              :    */</span>
+<span id="L694"><span class="lineNum">     694</span>              :   LayerNode *computeBackwardEnd();</span>
+<span id="L695"><span class="lineNum">     695</span>              : };</span>
+<span id="L696"><span class="lineNum">     696</span>              : } // namespace nntrainer</span>
+<span id="L697"><span class="lineNum">     697</span>              : </span>
+<span id="L698"><span class="lineNum">     698</span>              : #endif /* __cplusplus */</span>
+<span id="L699"><span class="lineNum">     699</span>              : #endif /* __NETWORK_GRAPH_H__ */</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

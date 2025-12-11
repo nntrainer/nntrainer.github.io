@@ -1,0 +1,437 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage_filtered.info - nntrainer/compiler/tflite_opnode.h</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">nntrainer/compiler</a> - tflite_opnode.h<span style="font-size: 80%;"> (source / <a href="tflite_opnode.h.func-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage_filtered.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryLo">67.9&nbsp;%</td>
+            <td class="headerCovTableEntry">28</td>
+            <td class="headerCovTableEntry">19</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2025-12-11 07:50:56</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+          </tr>
+                  <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : // SPDX-License-Identifier: Apache-2.0</span>
+<span id="L2"><span class="lineNum">       2</span>              : /**</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * Copyright (C) 2021 Jihoon Lee &lt;jhoon.it.lee@samsung.com&gt;</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * @file tflite_opnode.h</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * @date 28 April 2021</span>
+<span id="L7"><span class="lineNum">       7</span>              :  * @brief contains tflite opnode which has information to convert to tflite file</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * @see https://github.com/nnstreamer/nntrainer</span>
+<span id="L9"><span class="lineNum">       9</span>              :  * @author Jihoon Lee &lt;jhoon.it.lee@samsung.com&gt;</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * @author Donghak Park &lt;donghak.park@samsung.com&gt;</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * @bug No known bugs except for NYI items</span>
+<span id="L12"><span class="lineNum">      12</span>              :  */</span>
+<span id="L13"><span class="lineNum">      13</span>              : </span>
+<span id="L14"><span class="lineNum">      14</span>              : #ifndef __TFLITE_OPNODE_H__</span>
+<span id="L15"><span class="lineNum">      15</span>              : #define __TFLITE_OPNODE_H__</span>
+<span id="L16"><span class="lineNum">      16</span>              : </span>
+<span id="L17"><span class="lineNum">      17</span>              : #include &lt;functional&gt;</span>
+<span id="L18"><span class="lineNum">      18</span>              : #include &lt;utility&gt;</span>
+<span id="L19"><span class="lineNum">      19</span>              : #include &lt;vector&gt;</span>
+<span id="L20"><span class="lineNum">      20</span>              : </span>
+<span id="L21"><span class="lineNum">      21</span>              : #include &lt;tensor.h&gt;</span>
+<span id="L22"><span class="lineNum">      22</span>              : #include &lt;tf_schema_generated.h&gt;</span>
+<span id="L23"><span class="lineNum">      23</span>              : </span>
+<span id="L24"><span class="lineNum">      24</span>              : namespace nntrainer {</span>
+<span id="L25"><span class="lineNum">      25</span>              : </span>
+<span id="L26"><span class="lineNum">      26</span>              : class LayerNode;</span>
+<span id="L27"><span class="lineNum">      27</span>              : class RunLayerContext;</span>
+<span id="L28"><span class="lineNum">      28</span>              : /**</span>
+<span id="L29"><span class="lineNum">      29</span>              :  * @brief tensorflow operational node representation. This class contains,</span>
+<span id="L30"><span class="lineNum">      30</span>              :  * information to build operation flatbuffer</span>
+<span id="L31"><span class="lineNum">      31</span>              :  *</span>
+<span id="L32"><span class="lineNum">      32</span>              :  */</span>
+<span id="L33"><span class="lineNum">      33</span>              : class TfOpNode {</span>
+<span id="L34"><span class="lineNum">      34</span>              : public:</span>
+<span id="L35"><span class="lineNum">      35</span>              :   using Variables = std::vector&lt;const Tensor *&gt;;</span>
+<span id="L36"><span class="lineNum">      36</span>              : </span>
+<span id="L37"><span class="lineNum">      37</span>              :   using TransformFn =</span>
+<span id="L38"><span class="lineNum">      38</span>              :     std::function&lt;std::vector&lt;Tensor&gt;(std::vector&lt;const Tensor *&gt; &amp;)&gt;;</span>
+<span id="L39"><span class="lineNum">      39</span>              : </span>
+<span id="L40"><span class="lineNum">      40</span>              :   /**</span>
+<span id="L41"><span class="lineNum">      41</span>              :    * @brief Construct a new Tf object</span>
+<span id="L42"><span class="lineNum">      42</span>              :    *</span>
+<span id="L43"><span class="lineNum">      43</span>              :    */</span>
+<span id="L44"><span class="lineNum">      44</span>              :   TfOpNode();</span>
+<span id="L45"><span class="lineNum">      45</span>              : </span>
+<span id="L46"><span class="lineNum">      46</span>              :   /**</span>
+<span id="L47"><span class="lineNum">      47</span>              :    * @brief finalize tf op node will be transformed to required variables</span>
+<span id="L48"><span class="lineNum">      48</span>              :    * in this phase, weights are merged into inputs</span>
+<span id="L49"><span class="lineNum">      49</span>              :    *</span>
+<span id="L50"><span class="lineNum">      50</span>              :    */</span>
+<span id="L51"><span class="lineNum">      51</span>              :   void finalize();</span>
+<span id="L52"><span class="lineNum">      52</span>              : </span>
+<span id="L53"><span class="lineNum">      53</span>              :   /**</span>
+<span id="L54"><span class="lineNum">      54</span>              :    * @brief Set common informations from layer node</span>
+<span id="L55"><span class="lineNum">      55</span>              :    *</span>
+<span id="L56"><span class="lineNum">      56</span>              :    * @param layer node layer node</span>
+<span id="L57"><span class="lineNum">      57</span>              :    */</span>
+<span id="L58"><span class="lineNum">      58</span>              :   void setLayerNode(const LayerNode &amp;layer);</span>
+<span id="L59"><span class="lineNum">      59</span>              : </span>
+<span id="L60"><span class="lineNum">      60</span>              :   /**</span>
+<span id="L61"><span class="lineNum">      61</span>              :    * @brief Set the Weight Transform Fn object</span>
+<span id="L62"><span class="lineNum">      62</span>              :    *</span>
+<span id="L63"><span class="lineNum">      63</span>              :    * @param fn fn will be called before get</span>
+<span id="L64"><span class="lineNum">      64</span>              :    */</span>
+<span id="L65"><span class="lineNum">      65</span>              :   void setWeightTransformFn(TransformFn fn);</span>
+<span id="L66"><span class="lineNum">      66</span>              : </span>
+<span id="L67"><span class="lineNum">      67</span>              :   /**</span>
+<span id="L68"><span class="lineNum">      68</span>              :    * @brief Set the Input Transform Fn object</span>
+<span id="L69"><span class="lineNum">      69</span>              :    *</span>
+<span id="L70"><span class="lineNum">      70</span>              :    * @param fn fn will be called before get</span>
+<span id="L71"><span class="lineNum">      71</span>              :    */</span>
+<span id="L72"><span class="lineNum">      72</span>              :   void setInputTransformFn(TransformFn fn);</span>
+<span id="L73"><span class="lineNum">      73</span>              : </span>
+<span id="L74"><span class="lineNum">      74</span>              :   /**</span>
+<span id="L75"><span class="lineNum">      75</span>              :    * @brief Set the Op Type object</span>
+<span id="L76"><span class="lineNum">      76</span>              :    *</span>
+<span id="L77"><span class="lineNum">      77</span>              :    * @param op_type_ operation type</span>
+<span id="L78"><span class="lineNum">      78</span>              :    */</span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC tlaBgGNC">          22 :   void setOpType(tflite::BuiltinOperator op_type_) { op_type = op_type_; }</span></span>
+<span id="L80"><span class="lineNum">      80</span>              : </span>
+<span id="L81"><span class="lineNum">      81</span>              :   /**</span>
+<span id="L82"><span class="lineNum">      82</span>              :    * @brief Set the Builtin Options object,</span>
+<span id="L83"><span class="lineNum">      83</span>              :    * @note this can go private, export from a layer and fill this out</span>
+<span id="L84"><span class="lineNum">      84</span>              :    *</span>
+<span id="L85"><span class="lineNum">      85</span>              :    * @param builtin_option_type_ builtin option type</span>
+<span id="L86"><span class="lineNum">      86</span>              :    * @param builtin_ops_ flatbuffer offset of builtin_ops</span>
+<span id="L87"><span class="lineNum">      87</span>              :    */</span>
+<span id="L88"><span class="lineNum">      88</span>              :   void setBuiltinOptions(tflite::BuiltinOptions builtin_option_type_,</span>
+<span id="L89"><span class="lineNum">      89</span>              :                          const flatbuffers::Offset&lt;void&gt; &amp;builtin_ops_);</span>
+<span id="L90"><span class="lineNum">      90</span>              : </span>
+<span id="L91"><span class="lineNum">      91</span>              :   /**</span>
+<span id="L92"><span class="lineNum">      92</span>              :    * @brief Set the Need Reorder Weight object</span>
+<span id="L93"><span class="lineNum">      93</span>              :    *</span>
+<span id="L94"><span class="lineNum">      94</span>              :    */</span>
+<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">           4 :   void setNeedReorderWeight() { need_reorder_weight = true; }</span></span>
+<span id="L96"><span class="lineNum">      96</span>              : </span>
+<span id="L97"><span class="lineNum">      97</span>              :   /**</span>
+<span id="L98"><span class="lineNum">      98</span>              :    * @brief Set the To Be Removed object</span>
+<span id="L99"><span class="lineNum">      99</span>              :    *</span>
+<span id="L100"><span class="lineNum">     100</span>              :    */</span>
+<span id="L101"><span class="lineNum">     101</span> <span class="tlaUNC tlaBgUNC">           0 :   void setToBeRemoved(bool to_be_removed) { is_to_be_removed = to_be_removed; }</span></span>
+<span id="L102"><span class="lineNum">     102</span>              : </span>
+<span id="L103"><span class="lineNum">     103</span>              :   /**</span>
+<span id="L104"><span class="lineNum">     104</span>              :    * @brief Set the Trainable object</span>
+<span id="L105"><span class="lineNum">     105</span>              :    *</span>
+<span id="L106"><span class="lineNum">     106</span>              :    */</span>
+<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC tlaBgGNC">          14 :   void setTrainable(bool trainable) { is_trainable = trainable; }</span></span>
+<span id="L108"><span class="lineNum">     108</span>              : </span>
+<span id="L109"><span class="lineNum">     109</span>              :   /**</span>
+<span id="L110"><span class="lineNum">     110</span>              :    * @brief Set the Inputs object</span>
+<span id="L111"><span class="lineNum">     111</span>              :    *</span>
+<span id="L112"><span class="lineNum">     112</span>              :    * @param inputs_</span>
+<span id="L113"><span class="lineNum">     113</span>              :    */</span>
+<span id="L114"><span class="lineNum">     114</span> <span class="tlaUNC tlaBgUNC">           0 :   void setInputs(const Variables &amp;inputs_) { inputs = inputs_; }</span></span>
+<span id="L115"><span class="lineNum">     115</span>              : </span>
+<span id="L116"><span class="lineNum">     116</span>              :   /**</span>
+<span id="L117"><span class="lineNum">     117</span>              :    * @brief Set the Outputs object</span>
+<span id="L118"><span class="lineNum">     118</span>              :    *</span>
+<span id="L119"><span class="lineNum">     119</span>              :    * @param outputs_</span>
+<span id="L120"><span class="lineNum">     120</span>              :    */</span>
+<span id="L121"><span class="lineNum">     121</span> <span class="tlaUNC">           0 :   void setOutputs(const Variables &amp;outputs_) { outputs = outputs_; }</span></span>
+<span id="L122"><span class="lineNum">     122</span>              : </span>
+<span id="L123"><span class="lineNum">     123</span>              :   /**</span>
+<span id="L124"><span class="lineNum">     124</span>              :    * @brief Set the Weights object</span>
+<span id="L125"><span class="lineNum">     125</span>              :    *</span>
+<span id="L126"><span class="lineNum">     126</span>              :    * @param weights_</span>
+<span id="L127"><span class="lineNum">     127</span>              :    */</span>
+<span id="L128"><span class="lineNum">     128</span>              :   void setWeights(Variables weights_, bool weight_transpose = false);</span>
+<span id="L129"><span class="lineNum">     129</span>              :   /**</span>
+<span id="L130"><span class="lineNum">     130</span>              :    * @brief Replace the Weights object</span>
+<span id="L131"><span class="lineNum">     131</span>              :    *</span>
+<span id="L132"><span class="lineNum">     132</span>              :    * @param weights_</span>
+<span id="L133"><span class="lineNum">     133</span>              :    */</span>
+<span id="L134"><span class="lineNum">     134</span> <span class="tlaUNC">           0 :   void replaceWeights(const Variables &amp;weights_) { weights = weights_; }</span></span>
+<span id="L135"><span class="lineNum">     135</span>              :   /**</span>
+<span id="L136"><span class="lineNum">     136</span>              :    * @brief Set(Append) the Props object</span>
+<span id="L137"><span class="lineNum">     137</span>              :    *</span>
+<span id="L138"><span class="lineNum">     138</span>              :    * @param value</span>
+<span id="L139"><span class="lineNum">     139</span>              :    */</span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC tlaBgGNC">           6 :   void AppendProps(const int &amp;value) { props_vector.push_back(value); }</span></span>
+<span id="L141"><span class="lineNum">     141</span>              : </span>
+<span id="L142"><span class="lineNum">     142</span>              :   /**</span>
+<span id="L143"><span class="lineNum">     143</span>              :    * @brief Set(Append) the Additional Props object</span>
+<span id="L144"><span class="lineNum">     144</span>              :    *</span>
+<span id="L145"><span class="lineNum">     145</span>              :    * @param value</span>
+<span id="L146"><span class="lineNum">     146</span>              :    */</span>
+<span id="L147"><span class="lineNum">     147</span>              :   void AppendAdditionalProps(const float &amp;value) {</span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaUNC tlaBgUNC">           0 :     additional_props.push_back(value);</span></span>
+<span id="L149"><span class="lineNum">     149</span>              :   }</span>
+<span id="L150"><span class="lineNum">     150</span>              : </span>
+<span id="L151"><span class="lineNum">     151</span>              :   /**</span>
+<span id="L152"><span class="lineNum">     152</span>              :    * @brief Reorder Weight in case of NCHW --&gt; NHWC</span>
+<span id="L153"><span class="lineNum">     153</span>              :    *</span>
+<span id="L154"><span class="lineNum">     154</span>              :    * @param node_count</span>
+<span id="L155"><span class="lineNum">     155</span>              :    */</span>
+<span id="L156"><span class="lineNum">     156</span>              :   void weightReorder(unsigned int node_count);</span>
+<span id="L157"><span class="lineNum">     157</span>              : </span>
+<span id="L158"><span class="lineNum">     158</span>              :   /**</span>
+<span id="L159"><span class="lineNum">     159</span>              :    * @brief Get the Inputs object</span>
+<span id="L160"><span class="lineNum">     160</span>              :    *</span>
+<span id="L161"><span class="lineNum">     161</span>              :    * @return Variables&amp; inputs</span>
+<span id="L162"><span class="lineNum">     162</span>              :    */</span>
+<span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC tlaBgGNC">          10 :   Variables &amp;getInputs() { return inputs; }</span></span>
+<span id="L164"><span class="lineNum">     164</span>              : </span>
+<span id="L165"><span class="lineNum">     165</span>              :   /**</span>
+<span id="L166"><span class="lineNum">     166</span>              :    * @brief Get the weights object</span>
+<span id="L167"><span class="lineNum">     167</span>              :    *</span>
+<span id="L168"><span class="lineNum">     168</span>              :    * @return const Variables&amp; weights</span>
+<span id="L169"><span class="lineNum">     169</span>              :    */</span>
+<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC">          22 :   const Variables &amp;getWeights() const { return weights; }</span></span>
+<span id="L171"><span class="lineNum">     171</span>              : </span>
+<span id="L172"><span class="lineNum">     172</span>              :   /**</span>
+<span id="L173"><span class="lineNum">     173</span>              :    * @brief Get the weights object</span>
+<span id="L174"><span class="lineNum">     174</span>              :    *</span>
+<span id="L175"><span class="lineNum">     175</span>              :    * @return Variables&amp; weights</span>
+<span id="L176"><span class="lineNum">     176</span>              :    */</span>
+<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">          22 :   Variables &amp;getWeights() { return weights; }</span></span>
+<span id="L178"><span class="lineNum">     178</span>              : </span>
+<span id="L179"><span class="lineNum">     179</span>              :   /**</span>
+<span id="L180"><span class="lineNum">     180</span>              :    * @brief Get the Inputs object</span>
+<span id="L181"><span class="lineNum">     181</span>              :    *</span>
+<span id="L182"><span class="lineNum">     182</span>              :    * @return const Variables&amp; inputs</span>
+<span id="L183"><span class="lineNum">     183</span>              :    */</span>
+<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">           5 :   const Variables &amp;getInputs() const { return inputs; }</span></span>
+<span id="L185"><span class="lineNum">     185</span>              : </span>
+<span id="L186"><span class="lineNum">     186</span>              :   /**</span>
+<span id="L187"><span class="lineNum">     187</span>              :    * @brief Get the Outputs object</span>
+<span id="L188"><span class="lineNum">     188</span>              :    *</span>
+<span id="L189"><span class="lineNum">     189</span>              :    * @return Variables&amp;</span>
+<span id="L190"><span class="lineNum">     190</span>              :    */</span>
+<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">          27 :   Variables &amp;getOutputs() { return outputs; }</span></span>
+<span id="L192"><span class="lineNum">     192</span>              : </span>
+<span id="L193"><span class="lineNum">     193</span>              :   /**</span>
+<span id="L194"><span class="lineNum">     194</span>              :    * @brief Get the Outputs object</span>
+<span id="L195"><span class="lineNum">     195</span>              :    *</span>
+<span id="L196"><span class="lineNum">     196</span>              :    * @return const Variables&amp; outputs</span>
+<span id="L197"><span class="lineNum">     197</span>              :    */</span>
+<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">          22 :   const Variables &amp;getOutputs() const { return outputs; }</span></span>
+<span id="L199"><span class="lineNum">     199</span>              : </span>
+<span id="L200"><span class="lineNum">     200</span>              :   /**</span>
+<span id="L201"><span class="lineNum">     201</span>              :    * @brief check if this op node is model input</span>
+<span id="L202"><span class="lineNum">     202</span>              :    *</span>
+<span id="L203"><span class="lineNum">     203</span>              :    * @retval true if op node is model input</span>
+<span id="L204"><span class="lineNum">     204</span>              :    * @retval false if op node is not model input</span>
+<span id="L205"><span class="lineNum">     205</span>              :    */</span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">          66 :   bool isInputNode() const { return is_input; }</span></span>
+<span id="L207"><span class="lineNum">     207</span>              : </span>
+<span id="L208"><span class="lineNum">     208</span>              :   /**</span>
+<span id="L209"><span class="lineNum">     209</span>              :    * @brief check if this op node is model output</span>
+<span id="L210"><span class="lineNum">     210</span>              :    *</span>
+<span id="L211"><span class="lineNum">     211</span>              :    * @retval true if op node is model output</span>
+<span id="L212"><span class="lineNum">     212</span>              :    * @retval false if op node is not model output</span>
+<span id="L213"><span class="lineNum">     213</span>              :    */</span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">          22 :   bool isOutputNode() const { return is_output; }</span></span>
+<span id="L215"><span class="lineNum">     215</span>              : </span>
+<span id="L216"><span class="lineNum">     216</span>              :   /**</span>
+<span id="L217"><span class="lineNum">     217</span>              :    * @brief check if this op node is virtual node</span>
+<span id="L218"><span class="lineNum">     218</span>              :    *</span>
+<span id="L219"><span class="lineNum">     219</span>              :    * virtual node is a node that will not be exported</span>
+<span id="L220"><span class="lineNum">     220</span>              :    */</span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">          83 :   bool isVirtualNode() const { return is_virtual; }</span></span>
+<span id="L222"><span class="lineNum">     222</span>              : </span>
+<span id="L223"><span class="lineNum">     223</span>              :   /**</span>
+<span id="L224"><span class="lineNum">     224</span>              :    * @brief check if this layer need to reorder</span>
+<span id="L225"><span class="lineNum">     225</span>              :    *</span>
+<span id="L226"><span class="lineNum">     226</span>              :    * @return true if weight need to reorder</span>
+<span id="L227"><span class="lineNum">     227</span>              :    * @return false if reordering is not required</span>
+<span id="L228"><span class="lineNum">     228</span>              :    */</span>
+<span id="L229"><span class="lineNum">     229</span>              :   bool isNeedReorder() const { return need_reorder_weight; }</span>
+<span id="L230"><span class="lineNum">     230</span>              : </span>
+<span id="L231"><span class="lineNum">     231</span>              :   /**</span>
+<span id="L232"><span class="lineNum">     232</span>              :    * @brief check if this layer is trainable</span>
+<span id="L233"><span class="lineNum">     233</span>              :    *</span>
+<span id="L234"><span class="lineNum">     234</span>              :    * @return true if layer(OpNode) trainable</span>
+<span id="L235"><span class="lineNum">     235</span>              :    * @return false if layer(OpNode) non-trainable</span>
+<span id="L236"><span class="lineNum">     236</span>              :    */</span>
+<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">          17 :   bool isTrainable() const { return is_trainable; }</span></span>
+<span id="L238"><span class="lineNum">     238</span>              : </span>
+<span id="L239"><span class="lineNum">     239</span>              :   /**</span>
+<span id="L240"><span class="lineNum">     240</span>              :    * @brief check if this layer is to be removed</span>
+<span id="L241"><span class="lineNum">     241</span>              :    *</span>
+<span id="L242"><span class="lineNum">     242</span>              :    * @return true</span>
+<span id="L243"><span class="lineNum">     243</span>              :    * @return false</span>
+<span id="L244"><span class="lineNum">     244</span>              :    */</span>
+<span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">          22 :   bool isToBeRemoved() const { return is_to_be_removed; }</span></span>
+<span id="L246"><span class="lineNum">     246</span>              : </span>
+<span id="L247"><span class="lineNum">     247</span>              :   /**</span>
+<span id="L248"><span class="lineNum">     248</span>              :    * @brief Get the Props Vector</span>
+<span id="L249"><span class="lineNum">     249</span>              :    *</span>
+<span id="L250"><span class="lineNum">     250</span>              :    * @return const std::vector&lt;int&gt; props_vector</span>
+<span id="L251"><span class="lineNum">     251</span>              :    */</span>
+<span id="L252"><span class="lineNum">     252</span> <span class="tlaUNC tlaBgUNC">           0 :   std::vector&lt;int&gt; getProps() const { return props_vector; }</span></span>
+<span id="L253"><span class="lineNum">     253</span>              : </span>
+<span id="L254"><span class="lineNum">     254</span>              :   /**</span>
+<span id="L255"><span class="lineNum">     255</span>              :    * @brief Get the Additional Props Vector</span>
+<span id="L256"><span class="lineNum">     256</span>              :    *</span>
+<span id="L257"><span class="lineNum">     257</span>              :    * @return const std::vector&lt;float&gt; additional_props</span>
+<span id="L258"><span class="lineNum">     258</span>              :    */</span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaUNC">           0 :   std::vector&lt;float&gt; getAdditionalProps() const { return additional_props; }</span></span>
+<span id="L260"><span class="lineNum">     260</span>              : </span>
+<span id="L261"><span class="lineNum">     261</span>              :   /**</span>
+<span id="L262"><span class="lineNum">     262</span>              :    * @brief Get the Op Type object</span>
+<span id="L263"><span class="lineNum">     263</span>              :    *</span>
+<span id="L264"><span class="lineNum">     264</span>              :    * @return const tflite::BuiltinOperator</span>
+<span id="L265"><span class="lineNum">     265</span>              :    */</span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC tlaBgGNC">          95 :   const tflite::BuiltinOperator getOpType() const { return op_type; }</span></span>
+<span id="L267"><span class="lineNum">     267</span>              : </span>
+<span id="L268"><span class="lineNum">     268</span>              :   /**</span>
+<span id="L269"><span class="lineNum">     269</span>              :    * @brief Get the Op Type object</span>
+<span id="L270"><span class="lineNum">     270</span>              :    *</span>
+<span id="L271"><span class="lineNum">     271</span>              :    * @return const tflite::BuiltinOperator</span>
+<span id="L272"><span class="lineNum">     272</span>              :    */</span>
+<span id="L273"><span class="lineNum">     273</span>              :   const tflite::BuiltinOptions getOptionType() const {</span>
+<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">          66 :     return builtin_option_type;</span></span>
+<span id="L275"><span class="lineNum">     275</span>              :   }</span>
+<span id="L276"><span class="lineNum">     276</span>              : </span>
+<span id="L277"><span class="lineNum">     277</span>              :   /**</span>
+<span id="L278"><span class="lineNum">     278</span>              :    * @brief Get the Op Options object</span>
+<span id="L279"><span class="lineNum">     279</span>              :    * @param f Flatbuffer Builder</span>
+<span id="L280"><span class="lineNum">     280</span>              :    * @retval const tflite::Offset&lt;void&gt;</span>
+<span id="L281"><span class="lineNum">     281</span>              :    */</span>
+<span id="L282"><span class="lineNum">     282</span>              :   flatbuffers::Offset&lt;void&gt; getBuiltinOps() const;</span>
+<span id="L283"><span class="lineNum">     283</span>              : </span>
+<span id="L284"><span class="lineNum">     284</span>              :   /**</span>
+<span id="L285"><span class="lineNum">     285</span>              :    * @brief Get input nodes</span>
+<span id="L286"><span class="lineNum">     286</span>              :    *</span>
+<span id="L287"><span class="lineNum">     287</span>              :    * @return const std::vector&lt;TfOpNode *&gt; &amp;input_nodes</span>
+<span id="L288"><span class="lineNum">     288</span>              :    */</span>
+<span id="L289"><span class="lineNum">     289</span>              :   const std::vector&lt;TfOpNode *&gt; &amp;getInputNodes() const { return input_nodes; }</span>
+<span id="L290"><span class="lineNum">     290</span>              : </span>
+<span id="L291"><span class="lineNum">     291</span>              :   /**</span>
+<span id="L292"><span class="lineNum">     292</span>              :    * @brief Set arity</span>
+<span id="L293"><span class="lineNum">     293</span>              :    *</span>
+<span id="L294"><span class="lineNum">     294</span>              :    * @param value value to set</span>
+<span id="L295"><span class="lineNum">     295</span>              :    */</span>
+<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">          22 :   void arity(size_t value) { input_nodes.resize(value); }</span></span>
+<span id="L297"><span class="lineNum">     297</span>              : </span>
+<span id="L298"><span class="lineNum">     298</span>              :   /**</span>
+<span id="L299"><span class="lineNum">     299</span>              :    * @brief Get arity</span>
+<span id="L300"><span class="lineNum">     300</span>              :    *</span>
+<span id="L301"><span class="lineNum">     301</span>              :    * @return const unsigned input_nodes.size()</span>
+<span id="L302"><span class="lineNum">     302</span>              :    */</span>
+<span id="L303"><span class="lineNum">     303</span> <span class="tlaUNC tlaBgUNC">           0 :   const unsigned arity() const { return input_nodes.size(); }</span></span>
+<span id="L304"><span class="lineNum">     304</span>              : </span>
+<span id="L305"><span class="lineNum">     305</span>              :   /**</span>
+<span id="L306"><span class="lineNum">     306</span>              :    * @brief Set n-th argument of the node</span>
+<span id="L307"><span class="lineNum">     307</span>              :    *</span>
+<span id="L308"><span class="lineNum">     308</span>              :    * @param index argument index to set</span>
+<span id="L309"><span class="lineNum">     309</span>              :    * @param node the node to be argument</span>
+<span id="L310"><span class="lineNum">     310</span>              :    */</span>
+<span id="L311"><span class="lineNum">     311</span> <span class="tlaGNC tlaBgGNC">          17 :   void setArg(size_t index, TfOpNode *node) { input_nodes.at(index) = node; }</span></span>
+<span id="L312"><span class="lineNum">     312</span>              : </span>
+<span id="L313"><span class="lineNum">     313</span>              :   /**</span>
+<span id="L314"><span class="lineNum">     314</span>              :    * @brief Get n-th argument of the node</span>
+<span id="L315"><span class="lineNum">     315</span>              :    *</span>
+<span id="L316"><span class="lineNum">     316</span>              :    * @return TfOpNode *input_nodes.at(index)</span>
+<span id="L317"><span class="lineNum">     317</span>              :    */</span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaUNC tlaBgUNC">           0 :   TfOpNode *arg(size_t index) const { return input_nodes.at(index); }</span></span>
+<span id="L319"><span class="lineNum">     319</span>              : </span>
+<span id="L320"><span class="lineNum">     320</span>              : private:</span>
+<span id="L321"><span class="lineNum">     321</span>              :   Variables inputs;                    /**&lt; input variables */</span>
+<span id="L322"><span class="lineNum">     322</span>              :   Variables outputs;                   /**&lt; output variables */</span>
+<span id="L323"><span class="lineNum">     323</span>              :   Variables weights;                   /**&lt; weight variables */</span>
+<span id="L324"><span class="lineNum">     324</span>              :   std::vector&lt;TfOpNode *&gt; input_nodes; /**&lt; input nodes */</span>
+<span id="L325"><span class="lineNum">     325</span>              :   std::vector&lt;int&gt; props_vector;       /**&lt; props vector */</span>
+<span id="L326"><span class="lineNum">     326</span>              :   std::vector&lt;float&gt; additional_props; /**&lt; additional props vector */</span>
+<span id="L327"><span class="lineNum">     327</span>              : </span>
+<span id="L328"><span class="lineNum">     328</span>              :   /**</span>
+<span id="L329"><span class="lineNum">     329</span>              :    * Q) Why do we need input transform?</span>
+<span id="L330"><span class="lineNum">     330</span>              :    * A) To transform the nntrainer input data format(NCHW) to tflite</span>
+<span id="L331"><span class="lineNum">     331</span>              :    *format(NHWC)</span>
+<span id="L332"><span class="lineNum">     332</span>              :    **/</span>
+<span id="L333"><span class="lineNum">     333</span>              :   TransformFn weight_transform; /**&lt; weight transforms */</span>
+<span id="L334"><span class="lineNum">     334</span>              :   TransformFn input_transform;  /**&lt; input transforms */</span>
+<span id="L335"><span class="lineNum">     335</span>              : </span>
+<span id="L336"><span class="lineNum">     336</span>              :   bool is_input;            /**&lt; true if given input is input; */</span>
+<span id="L337"><span class="lineNum">     337</span>              :   bool is_output;           /**&lt; true if given output is output; */</span>
+<span id="L338"><span class="lineNum">     338</span>              :   bool is_virtual;          /**&lt; true if given node is virtual; */</span>
+<span id="L339"><span class="lineNum">     339</span>              :   bool is_trainable;        /**&lt; true if given node has weight and trainable */</span>
+<span id="L340"><span class="lineNum">     340</span>              :   bool is_to_be_removed;    /**&lt; true if given node is to be removed */</span>
+<span id="L341"><span class="lineNum">     341</span>              :   bool need_reorder_weight; /**&lt; true if given node need to reorder weight; */</span>
+<span id="L342"><span class="lineNum">     342</span>              : </span>
+<span id="L343"><span class="lineNum">     343</span>              :   /// @todo change to shared_ptr or unique_ptr</span>
+<span id="L344"><span class="lineNum">     344</span>              :   /// why? the addresses of existing tensors in the vector could become invalid</span>
+<span id="L345"><span class="lineNum">     345</span>              :   /// due to memory reallocation</span>
+<span id="L346"><span class="lineNum">     346</span>              :   std::vector&lt;Tensor&gt;</span>
+<span id="L347"><span class="lineNum">     347</span>              :     node_owned_variable; /**&lt; when node should be transformed it's own type, it</span>
+<span id="L348"><span class="lineNum">     348</span>              :                           * needs to be owned by someone, so @a TfOpNode owns</span>
+<span id="L349"><span class="lineNum">     349</span>              :                           * those orphaned tensors until the instance is</span>
+<span id="L350"><span class="lineNum">     350</span>              :                           * destroyed */</span>
+<span id="L351"><span class="lineNum">     351</span>              : </span>
+<span id="L352"><span class="lineNum">     352</span>              :   tflite::BuiltinOperator op_type;</span>
+<span id="L353"><span class="lineNum">     353</span>              : </span>
+<span id="L354"><span class="lineNum">     354</span>              :   /// retrieve this from export_to</span>
+<span id="L355"><span class="lineNum">     355</span>              :   flatbuffers::Offset&lt;void&gt; builtin_ops;</span>
+<span id="L356"><span class="lineNum">     356</span>              :   tflite::BuiltinOptions builtin_option_type;</span>
+<span id="L357"><span class="lineNum">     357</span>              : };</span>
+<span id="L358"><span class="lineNum">     358</span>              : </span>
+<span id="L359"><span class="lineNum">     359</span>              : } // namespace nntrainer</span>
+<span id="L360"><span class="lineNum">     360</span>              : </span>
+<span id="L361"><span class="lineNum">     361</span>              : #endif // __TFLITE_OPNODE_H__</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

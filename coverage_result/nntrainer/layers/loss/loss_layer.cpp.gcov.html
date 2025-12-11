@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage_filtered.info - nntrainer/layers/loss/loss_layer.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">nntrainer/layers/loss</a> - loss_layer.cpp<span style="font-size: 80%;"> (source / <a href="loss_layer.cpp.func-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage_filtered.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">91.3&nbsp;%</td>
+            <td class="headerCovTableEntry">23</td>
+            <td class="headerCovTableEntry">21</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2025-12-11 07:50:56</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">4</td>
+          </tr>
+                  <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : // SPDX-License-Identifier: Apache-2.0</span>
+<span id="L2"><span class="lineNum">       2</span>              : /**</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * Copyright (C) 2020 Parichay Kapoor &lt;pk.kapoor@samsung.com&gt;</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * @file        loss_layer.cpp</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * @date        12 June 2020</span>
+<span id="L7"><span class="lineNum">       7</span>              :  * @brief       This is Loss Layer Class for Neural Network</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * @see         https://github.com/nnstreamer/nntrainer</span>
+<span id="L9"><span class="lineNum">       9</span>              :  * @author      Parichay Kapoor &lt;pk.kapoor@samsung.com&gt;</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * @bug         No known bugs except for NYI items</span>
+<span id="L11"><span class="lineNum">      11</span>              :  *</span>
+<span id="L12"><span class="lineNum">      12</span>              :  */</span>
+<span id="L13"><span class="lineNum">      13</span>              : </span>
+<span id="L14"><span class="lineNum">      14</span>              : #include &lt;layer_context.h&gt;</span>
+<span id="L15"><span class="lineNum">      15</span>              : #include &lt;loss_layer.h&gt;</span>
+<span id="L16"><span class="lineNum">      16</span>              : </span>
+<span id="L17"><span class="lineNum">      17</span>              : namespace nntrainer {</span>
+<span id="L18"><span class="lineNum">      18</span> <span class="tlaGNC tlaBgGNC">         648 : void LossLayer::finalize(InitLayerContext &amp;context) {</span></span>
+<span id="L19"><span class="lineNum">      19</span> <span class="tlaGNC">         648 :   std::vector&lt;TensorDim&gt; input_dim = context.getInputDimensions();</span></span>
+<span id="L20"><span class="lineNum">      20</span> <span class="tlaGNC">         648 :   std::vector&lt;TensorDim&gt; output_dim = input_dim;</span></span>
+<span id="L21"><span class="lineNum">      21</span>              : </span>
+<span id="L22"><span class="lineNum">      22</span> <span class="tlaGNC">        1296 :   for (auto &amp;d : output_dim)</span></span>
+<span id="L23"><span class="lineNum">      23</span> <span class="tlaGNC">        1296 :     d.setDataType(</span></span>
+<span id="L24"><span class="lineNum">      24</span>              :       str_converter&lt;enum_class_prop_tag,</span>
+<span id="L25"><span class="lineNum">      25</span>              :                     nntrainer::TensorDataTypeInfo&gt;::from_string(&quot;FP32&quot;));</span>
+<span id="L26"><span class="lineNum">      26</span>              : </span>
+<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">         648 :   context.setOutputDimensions(output_dim);</span></span>
+<span id="L28"><span class="lineNum">      28</span>              : </span>
+<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">         648 :   is_inplace = true;</span></span>
+<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">         648 :   if (context.getActivationDataType() != ml::train::TensorDim::DataType::FP32)</span></span>
+<span id="L31"><span class="lineNum">      31</span> <span class="tlaUNC tlaBgUNC">           0 :     is_inplace = false;</span></span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC tlaBgGNC">         648 : }</span></span>
+<span id="L33"><span class="lineNum">      33</span>              : </span>
+<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">        6141 : void LossLayer::updateLoss(RunLayerContext &amp;context, const Tensor &amp;l) {</span></span>
+<span id="L35"><span class="lineNum">      35</span>              :   float loss_sum = 0.0f;</span>
+<span id="L36"><span class="lineNum">      36</span>              :   const float *data = l.getData();</span>
+<span id="L37"><span class="lineNum">      37</span>              : </span>
+<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC">       15856 :   for (unsigned int i = 0; i &lt; l.batch(); i++) {</span></span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">        9715 :     loss_sum += data[i];</span></span>
+<span id="L40"><span class="lineNum">      40</span>              :   }</span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">        6141 :   context.setLoss(loss_sum / (float)l.batch());</span></span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">        6141 : }</span></span>
+<span id="L43"><span class="lineNum">      43</span>              : </span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">         599 : void LossLayer::applyLossScale(RunLayerContext &amp;context, Tensor &amp;ret_deriv) {</span></span>
+<span id="L45"><span class="lineNum">      45</span>              : </span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">         599 :   float loss_scale = context.getLossScale();</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">         599 :   if (loss_scale != 1.0)</span></span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaUNC tlaBgUNC">           0 :     ret_deriv.multiply_i(loss_scale);</span></span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC tlaBgGNC">         599 : }</span></span>
+<span id="L50"><span class="lineNum">      50</span>              : </span>
+<span id="L51"><span class="lineNum">      51</span>              : /**</span>
+<span id="L52"><span class="lineNum">      52</span>              :  * @copydoc Layer::setProperty(const std::vector&lt;std::string&gt; &amp;values)</span>
+<span id="L53"><span class="lineNum">      53</span>              :  */</span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">        3409 : void LossLayer::setProperty(const std::vector&lt;std::string&gt; &amp;values) {</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">        3427 :   NNTR_THROW_IF(!values.empty(), std::invalid_argument)</span></span>
+<span id="L56"><span class="lineNum">      56</span>              :     &lt;&lt; &quot;[Layer] Unknown Layer Properties count = &quot; &lt;&lt; values.size();</span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">        3391 : }</span></span>
+<span id="L58"><span class="lineNum">      58</span>              : </span>
+<span id="L59"><span class="lineNum">      59</span>              : } /* namespace nntrainer */</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

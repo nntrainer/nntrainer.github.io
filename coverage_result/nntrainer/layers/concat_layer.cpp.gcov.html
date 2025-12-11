@@ -1,0 +1,406 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage_filtered.info - nntrainer/layers/concat_layer.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">nntrainer/layers</a> - concat_layer.cpp<span style="font-size: 80%;"> (source / <a href="concat_layer.cpp.func-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage_filtered.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryMed">77.3&nbsp;%</td>
+            <td class="headerCovTableEntry">110</td>
+            <td class="headerCovTableEntry">85</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2025-12-11 07:50:56</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryMed">85.7&nbsp;%</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntry">6</td>
+          </tr>
+                  <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : // SPDX-License-Identifier: Apache-2.0</span>
+<span id="L2"><span class="lineNum">       2</span>              : /**</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * Copyright (C) 2020 Jijoong Moon &lt;jijoong.moon@samsung.com&gt;</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * @file   concat_layer.cpp</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * @date   27 Oct 2020</span>
+<span id="L7"><span class="lineNum">       7</span>              :  * @see    https://github.com/nnstreamer/nntrainer</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * @author Jijoong Moon &lt;jijoong.moon@samsung.com&gt;</span>
+<span id="L9"><span class="lineNum">       9</span>              :  * @author Donghyeon Jeong &lt;dhyeon.jeong@samsung.com&gt;</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * @bug    No known bugs except for NYI items</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * @brief  This is Concat Layer Class for Neural Network</span>
+<span id="L12"><span class="lineNum">      12</span>              :  *</span>
+<span id="L13"><span class="lineNum">      13</span>              :  * @todo merge concat and split layer to a common implementation</span>
+<span id="L14"><span class="lineNum">      14</span>              :  */</span>
+<span id="L15"><span class="lineNum">      15</span>              : </span>
+<span id="L16"><span class="lineNum">      16</span>              : #include &lt;cstring&gt;</span>
+<span id="L17"><span class="lineNum">      17</span>              : #include &lt;vector&gt;</span>
+<span id="L18"><span class="lineNum">      18</span>              : </span>
+<span id="L19"><span class="lineNum">      19</span>              : #include &lt;concat_layer.h&gt;</span>
+<span id="L20"><span class="lineNum">      20</span>              : #include &lt;layer_context.h&gt;</span>
+<span id="L21"><span class="lineNum">      21</span>              : #include &lt;nntr_threads.h&gt;</span>
+<span id="L22"><span class="lineNum">      22</span>              : #include &lt;nntrainer_error.h&gt;</span>
+<span id="L23"><span class="lineNum">      23</span>              : #include &lt;nntrainer_log.h&gt;</span>
+<span id="L24"><span class="lineNum">      24</span>              : #include &lt;node_exporter.h&gt;</span>
+<span id="L25"><span class="lineNum">      25</span>              : #include &lt;tensor_dim.h&gt;</span>
+<span id="L26"><span class="lineNum">      26</span>              : #include &lt;util_func.h&gt;</span>
+<span id="L27"><span class="lineNum">      27</span>              : </span>
+<span id="L28"><span class="lineNum">      28</span>              : namespace nntrainer {</span>
+<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC tlaBgGNC">         132 : ConcatLayer::ConcatLayer() : Layer(), leading_helper_dim(1) {}</span></span>
+<span id="L30"><span class="lineNum">      30</span>              : </span>
+<span id="L31"><span class="lineNum">      31</span>              : static constexpr size_t SINGLE_INOUT_IDX = 0;</span>
+<span id="L32"><span class="lineNum">      32</span>              : </span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">         108 : void ConcatLayer::finalize(InitLayerContext &amp;context) {</span></span>
+<span id="L34"><span class="lineNum">      34</span>              :   auto &amp;concat_dimension_prop = std::get&lt;props::ConcatDimension&gt;(concat_props);</span>
+<span id="L35"><span class="lineNum">      35</span>              :   /** for backward compatibility, default concat dimension will be channel */</span>
+<span id="L36"><span class="lineNum">      36</span>              :   /// @todo this is hacky way to force concat dimension to width if channel</span>
+<span id="L37"><span class="lineNum">      37</span>              :   /// dimension is taken, this is because recurrent realizer, return sequence</span>
+<span id="L38"><span class="lineNum">      38</span>              :   /// exploits concat layer but have no control over where to stack/axis</span>
+<span id="L39"><span class="lineNum">      39</span>              :   unsigned int concat_dimension =</span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">         108 :     context.getInputDimensions().front().channel() &gt; 1 ? 3 : 1;</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">         108 :   if (!concat_dimension_prop.empty())</span></span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">           3 :     concat_dimension = concat_dimension_prop.get();</span></span>
+<span id="L43"><span class="lineNum">      43</span>              : </span>
+<span id="L44"><span class="lineNum">      44</span>              :   /**</span>
+<span id="L45"><span class="lineNum">      45</span>              :    * The concat is only done along the axis dimension.</span>
+<span id="L46"><span class="lineNum">      46</span>              :    * For example, consider 2 inputs a, b with dimensions [b,c,h,w] each</span>
+<span id="L47"><span class="lineNum">      47</span>              :    * 1. concat_dimension = 1, output_dim = [b,c_a+c_b,h,w]</span>
+<span id="L48"><span class="lineNum">      48</span>              :    * 2. concat_dimension = 2, output_dim = [b,c,h_a+h_b,w]</span>
+<span id="L49"><span class="lineNum">      49</span>              :    * 3. concat_dimension = 3, output_dim = [b,c,h,w_a+w_b]</span>
+<span id="L50"><span class="lineNum">      50</span>              :    */</span>
+<span id="L51"><span class="lineNum">      51</span>              :   auto const &amp;input_dims = context.getInputDimensions();</span>
+<span id="L52"><span class="lineNum">      52</span>              :   const TensorDim &amp;input_dim_0 = input_dims[SINGLE_INOUT_IDX];</span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">         108 :   unsigned int concat_dim_val = input_dim_0.getTensorDim(concat_dimension);</span></span>
+<span id="L54"><span class="lineNum">      54</span>              : </span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">         212 :   for (unsigned int idx = 1; idx &lt; input_dims.size(); ++idx) {</span></span>
+<span id="L56"><span class="lineNum">      56</span>              :     const TensorDim &amp;dim = input_dims[idx];</span>
+<span id="L57"><span class="lineNum">      57</span>              : </span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">         520 :     for (unsigned int i = 0; i &lt; ml::train::TensorDim::getNumDim(); ++i) {</span></span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">         416 :       if (i == concat_dimension)</span></span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">         104 :         continue;</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">         312 :       NNTR_THROW_IF(input_dim_0[i] != dim[i], std::runtime_error)</span></span>
+<span id="L62"><span class="lineNum">      62</span>              :         &lt;&lt; &quot;Error: concat layer requires same shape from all input layers &quot;</span>
+<span id="L63"><span class="lineNum">      63</span>              :            &quot;along non-concat dimension&quot;;</span>
+<span id="L64"><span class="lineNum">      64</span>              :     }</span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">         104 :     concat_dim_val += dim[concat_dimension];</span></span>
+<span id="L66"><span class="lineNum">      66</span>              :   }</span>
+<span id="L67"><span class="lineNum">      67</span>              : </span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">         108 :   TensorDim output_dim = input_dim_0;</span></span>
+<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">         108 :   output_dim.setTensorDim(concat_dimension, concat_dim_val);</span></span>
+<span id="L70"><span class="lineNum">      70</span>              : </span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">         108 :   context.setOutputDimensions({output_dim});</span></span>
+<span id="L72"><span class="lineNum">      72</span>              : </span>
+<span id="L73"><span class="lineNum">      73</span>              :   /**</span>
+<span id="L74"><span class="lineNum">      74</span>              :    * The following helper shapes facilitate efficient concatenation and split of</span>
+<span id="L75"><span class="lineNum">      75</span>              :    * the data.</span>
+<span id="L76"><span class="lineNum">      76</span>              :    *</span>
+<span id="L77"><span class="lineNum">      77</span>              :    * The helper shapes are created by consolidating all the dimensions before</span>
+<span id="L78"><span class="lineNum">      78</span>              :    * the concat dimension to the first axis and all the remaining dimensions to</span>
+<span id="L79"><span class="lineNum">      79</span>              :    * the last axis.</span>
+<span id="L80"><span class="lineNum">      80</span>              :    *</span>
+<span id="L81"><span class="lineNum">      81</span>              :    * @note This is possible since the data starting from the concat dimension to</span>
+<span id="L82"><span class="lineNum">      82</span>              :    * the end is always continuous.</span>
+<span id="L83"><span class="lineNum">      83</span>              :    *</span>
+<span id="L84"><span class="lineNum">      84</span>              :    * @example the following shows how the helper dimension will look with given</span>
+<span id="L85"><span class="lineNum">      85</span>              :    * inputs and concat dimension.</span>
+<span id="L86"><span class="lineNum">      86</span>              :    *</span>
+<span id="L87"><span class="lineNum">      87</span>              :    *          | cat_dim 1 | cat_dim 2 | cat_dim 3</span>
+<span id="L88"><span class="lineNum">      88</span>              :    *  --------|-----------|-----------|-----------</span>
+<span id="L89"><span class="lineNum">      89</span>              :    *  input0  |  2:1:2:3  |  1:2:1:3  |  1:2:2:3</span>
+<span id="L90"><span class="lineNum">      90</span>              :    *  input1  |  2:3:2:3  |  1:2:3:3  |  1:2:2:1</span>
+<span id="L91"><span class="lineNum">      91</span>              :    *  --------|-----------|-----------|-----------</span>
+<span id="L92"><span class="lineNum">      92</span>              :    *  helper0 |  2:1:1:6  |  2:1:1:3  |  4:1:1:3</span>
+<span id="L93"><span class="lineNum">      93</span>              :    *  helper1 |  2:1:1:18 |  2:1:1:9  |  4:1:1:1</span>
+<span id="L94"><span class="lineNum">      94</span>              :    *</span>
+<span id="L95"><span class="lineNum">      95</span>              :    */</span>
+<span id="L96"><span class="lineNum">      96</span>              :   /// Setup output_reshape_helper (how output should be reshaped)</span>
+<span id="L97"><span class="lineNum">      97</span> <span class="tlaGNC">         108 :   output_reshape_helper.channel(1);</span></span>
+<span id="L98"><span class="lineNum">      98</span> <span class="tlaGNC">         108 :   output_reshape_helper.height(1);</span></span>
+<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC">         108 :   output_reshape_helper.width(1);</span></span>
+<span id="L100"><span class="lineNum">     100</span> <span class="tlaGNC">         321 :   for (unsigned int axis = concat_dimension;</span></span>
+<span id="L101"><span class="lineNum">     101</span> <span class="tlaGNC">         429 :        axis &lt; ml::train::TensorDim::getNumDim(); ++axis) {</span></span>
+<span id="L102"><span class="lineNum">     102</span> <span class="tlaGNC">         642 :     output_reshape_helper.width(output_reshape_helper.width() *</span></span>
+<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">         321 :                                 output_dim.getTensorDim(axis));</span></span>
+<span id="L104"><span class="lineNum">     104</span>              :   }</span>
+<span id="L105"><span class="lineNum">     105</span>              : </span>
+<span id="L106"><span class="lineNum">     106</span>              :   /// Setup input_reshape_helper (how inputs should be reshaped)</span>
+<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">         108 :   input_reshape_helper.resize(input_dims.size());</span></span>
+<span id="L108"><span class="lineNum">     108</span>              : </span>
+<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">         320 :   for (unsigned int idx = 0; idx &lt; input_reshape_helper.size(); idx++) {</span></span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">         212 :     input_reshape_helper[idx].channel(1);</span></span>
+<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">         212 :     input_reshape_helper[idx].height(1);</span></span>
+<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">         212 :     input_reshape_helper[idx].width(1);</span></span>
+<span id="L113"><span class="lineNum">     113</span>              : </span>
+<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">         630 :     for (unsigned int axis = concat_dimension;</span></span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">         842 :          axis &lt; ml::train::TensorDim::getNumDim(); ++axis) {</span></span>
+<span id="L116"><span class="lineNum">     116</span>              : </span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">        1260 :       input_reshape_helper[idx].width(input_reshape_helper[idx].width() *</span></span>
+<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">         630 :                                       input_dims[idx].getTensorDim(axis));</span></span>
+<span id="L119"><span class="lineNum">     119</span>              :     }</span>
+<span id="L120"><span class="lineNum">     120</span>              :   }</span>
+<span id="L121"><span class="lineNum">     121</span>              : </span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">         108 :   leading_helper_dim = 1;</span></span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">         111 :   for (unsigned int idx = 1; idx &lt; concat_dimension; ++idx) {</span></span>
+<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">           3 :     leading_helper_dim *= output_dim.getTensorDim(idx);</span></span>
+<span id="L125"><span class="lineNum">     125</span>              :   }</span>
+<span id="L126"><span class="lineNum">     126</span>              : </span>
+<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">         108 :   setBatch(input_dims[SINGLE_INOUT_IDX].batch());</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">         108 : }</span></span>
+<span id="L129"><span class="lineNum">     129</span>              : </span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">         365 : void ConcatLayer::forwarding(RunLayerContext &amp;context, bool training) {</span></span>
+<span id="L131"><span class="lineNum">     131</span>              :   /**</span>
+<span id="L132"><span class="lineNum">     132</span>              :    * Forwarding in ConcatLayer works as follows</span>
+<span id="L133"><span class="lineNum">     133</span>              :    *</span>
+<span id="L134"><span class="lineNum">     134</span>              :    *    in1        in2       in3                  output</span>
+<span id="L135"><span class="lineNum">     135</span>              :    * |---0---| |----3----| |--6--|      |---0---||----3----||--6--|</span>
+<span id="L136"><span class="lineNum">     136</span>              :    * |---1---| |----4----| |--7--|  =&gt;  |---1---||----4----||--7--|</span>
+<span id="L137"><span class="lineNum">     137</span>              :    * |---2---| |----5----| |--8--|      |---2---||----5----||--8--|</span>
+<span id="L138"><span class="lineNum">     138</span>              :    *</span>
+<span id="L139"><span class="lineNum">     139</span>              :    * @note For each input tensor, it iterates batches and copies the entire</span>
+<span id="L140"><span class="lineNum">     140</span>              :    * width size to the corresponding output position. In the diagram above, the</span>
+<span id="L141"><span class="lineNum">     141</span>              :    * row would be a batch, and the column would be a width. the number of each</span>
+<span id="L142"><span class="lineNum">     142</span>              :    * block in the diagram indicates the order of copy to output.</span>
+<span id="L143"><span class="lineNum">     143</span>              :    *</span>
+<span id="L144"><span class="lineNum">     144</span>              :    * @todo avoid copy by creating input here as a shared_tensor of the output</span>
+<span id="L145"><span class="lineNum">     145</span>              :    * here and then this layer can be in_place as well</span>
+<span id="L146"><span class="lineNum">     146</span>              :    */</span>
+<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">         365 :   Tensor &amp;output = context.getOutput(SINGLE_INOUT_IDX);</span></span>
+<span id="L148"><span class="lineNum">     148</span>              : </span>
+<span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">         365 :   const TensorDim out_dim = output.getDim();</span></span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">         365 :   output.reshape(output_reshape_helper);</span></span>
+<span id="L151"><span class="lineNum">     151</span>              :   unsigned int output_width_offset = 0;</span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">         365 :   TensorDim::TensorType tensor_type = output.getTensorType();</span></span>
+<span id="L153"><span class="lineNum">     153</span>              : </span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">        1095 :   for (unsigned int idx = 0; idx &lt; context.getNumInputs(); idx++) {</span></span>
+<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">         730 :     Tensor &amp;input = context.getInput(idx);</span></span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">         730 :     const TensorDim in_dim = input.getDim();</span></span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">         730 :     auto const &amp;irh = input_reshape_helper[idx];</span></span>
+<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">         730 :     input.reshape(irh);</span></span>
+<span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">         730 :     unsigned int data_copy_size = irh.width();</span></span>
+<span id="L160"><span class="lineNum">     160</span>              : </span>
+<span id="L161"><span class="lineNum">     161</span>              :     /** loop over the dimensions before the concat dimension */</span>
+<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">         730 :     if (in_dim.getDataType() == TensorDim::DataType::FP32) {</span></span>
+<span id="L163"><span class="lineNum">     163</span>              :       /** copy continous tensor data (reshaped width) */</span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">        9458 :       for (unsigned int batch = 0; batch &lt; output.batch(); batch++) {</span></span>
+<span id="L165"><span class="lineNum">     165</span>              :         Tensor dest_tensor = Tensor::Map&lt;float&gt;(</span>
+<span id="L166"><span class="lineNum">     166</span>              :           output.getAddress&lt;float&gt;(batch, 0, 0, output_width_offset),</span>
+<span id="L167"><span class="lineNum">     167</span>              :           data_copy_size * sizeof(float),</span>
+<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">        8728 :           {1, 1, 1, data_copy_size, tensor_type});</span></span>
+<span id="L169"><span class="lineNum">     169</span>              :         const Tensor source_tensor =</span>
+<span id="L170"><span class="lineNum">     170</span>              :           Tensor::Map&lt;float&gt;(input.getAddress&lt;float&gt;(batch, 0, 0, 0),</span>
+<span id="L171"><span class="lineNum">     171</span>              :                              data_copy_size * sizeof(float),</span>
+<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">        8728 :                              {1, 1, 1, data_copy_size, tensor_type});</span></span>
+<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">        8728 :         dest_tensor.copy(source_tensor);</span></span>
+<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">        8728 :       }</span></span>
+<span id="L175"><span class="lineNum">     175</span> <span class="tlaUNC tlaBgUNC">           0 :     } else if (in_dim.getDataType() == TensorDim::DataType::FP16) {</span></span>
+<span id="L176"><span class="lineNum">     176</span>              : #ifdef ENABLE_FP16</span>
+<span id="L177"><span class="lineNum">     177</span>              :       /** copy continous tensor data (reshaped width) */</span>
+<span id="L178"><span class="lineNum">     178</span>              :       for (unsigned int batch = 0; batch &lt; output.batch(); batch++) {</span>
+<span id="L179"><span class="lineNum">     179</span>              :         Tensor dest_tensor = Tensor::Map&lt;_FP16&gt;(</span>
+<span id="L180"><span class="lineNum">     180</span>              :           output.getAddress&lt;_FP16&gt;(batch, 0, 0, output_width_offset),</span>
+<span id="L181"><span class="lineNum">     181</span>              :           data_copy_size * sizeof(_FP16),</span>
+<span id="L182"><span class="lineNum">     182</span>              :           {1, 1, 1, data_copy_size, tensor_type});</span>
+<span id="L183"><span class="lineNum">     183</span>              :         const Tensor source_tensor =</span>
+<span id="L184"><span class="lineNum">     184</span>              :           Tensor::Map&lt;_FP16&gt;(input.getAddress&lt;_FP16&gt;(batch, 0, 0, 0),</span>
+<span id="L185"><span class="lineNum">     185</span>              :                              data_copy_size * sizeof(_FP16),</span>
+<span id="L186"><span class="lineNum">     186</span>              :                              {1, 1, 1, data_copy_size, tensor_type});</span>
+<span id="L187"><span class="lineNum">     187</span>              :         dest_tensor.copy(source_tensor);</span>
+<span id="L188"><span class="lineNum">     188</span>              :       }</span>
+<span id="L189"><span class="lineNum">     189</span>              : #else</span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaUNC">           0 :       throw std::invalid_argument(&quot;Error: enable-fp16 is not enabled&quot;);</span></span>
+<span id="L191"><span class="lineNum">     191</span>              : #endif</span>
+<span id="L192"><span class="lineNum">     192</span>              :     }</span>
+<span id="L193"><span class="lineNum">     193</span>              : </span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC tlaBgGNC">         730 :     output_width_offset += irh.width();</span></span>
+<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">         730 :     input.reshape(in_dim);</span></span>
+<span id="L196"><span class="lineNum">     196</span>              :   }</span>
+<span id="L197"><span class="lineNum">     197</span>              : </span>
+<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">         365 :   output.reshape(out_dim);</span></span>
+<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">         365 : }</span></span>
+<span id="L200"><span class="lineNum">     200</span>              : </span>
+<span id="L201"><span class="lineNum">     201</span> <span class="tlaUNC tlaBgUNC">           0 : void ConcatLayer::incremental_forwarding(RunLayerContext &amp;context,</span></span>
+<span id="L202"><span class="lineNum">     202</span>              :                                          unsigned int from, unsigned int to,</span>
+<span id="L203"><span class="lineNum">     203</span>              :                                          bool training) {</span>
+<span id="L204"><span class="lineNum">     204</span>              :   /**</span>
+<span id="L205"><span class="lineNum">     205</span>              :    * @todo avoid copy by creating input here as a shared_tensor of the output</span>
+<span id="L206"><span class="lineNum">     206</span>              :    * here and then this layer can be in_place as well</span>
+<span id="L207"><span class="lineNum">     207</span>              :    */</span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaUNC">           0 :   Tensor &amp;output = context.getOutput(SINGLE_INOUT_IDX);</span></span>
+<span id="L209"><span class="lineNum">     209</span>              : </span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaUNC">           0 :   const TensorDim out_dim = output.getDim();</span></span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaUNC">           0 :   output.reshape(output_reshape_helper);</span></span>
+<span id="L212"><span class="lineNum">     212</span>              :   unsigned int output_height_offset = 0;</span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaUNC">           0 :   unsigned int data_copy_size = output_reshape_helper.width();</span></span>
+<span id="L214"><span class="lineNum">     214</span>              : </span>
+<span id="L215"><span class="lineNum">     215</span>              :   // @todo: this implementation is only works when axis is 3(width). Consider</span>
+<span id="L216"><span class="lineNum">     216</span>              :   // for other axes</span>
+<span id="L217"><span class="lineNum">     217</span> <span class="tlaUNC">           0 :   unsigned int batch_channel = out_dim.batch() * out_dim.channel();</span></span>
+<span id="L218"><span class="lineNum">     218</span>              : </span>
+<span id="L219"><span class="lineNum">     219</span> <span class="tlaUNC">           0 :   for (unsigned int idx = 0; idx &lt; context.getNumInputs(); idx++) {</span></span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaUNC">           0 :     Tensor &amp;input = context.getInput(idx);</span></span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaUNC">           0 :     const TensorDim in_dim = input.getDim();</span></span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaUNC">           0 :     auto const &amp;irh = input_reshape_helper[idx];</span></span>
+<span id="L223"><span class="lineNum">     223</span> <span class="tlaUNC">           0 :     input.reshape(irh);</span></span>
+<span id="L224"><span class="lineNum">     224</span>              : </span>
+<span id="L225"><span class="lineNum">     225</span>              :     /** loop over the dimensions before the concat dimension */</span>
+<span id="L226"><span class="lineNum">     226</span> <span class="tlaUNC">           0 :     for (unsigned int batch = batch_channel * from; batch &lt; batch_channel * to;</span></span>
+<span id="L227"><span class="lineNum">     227</span>              :          batch++) {</span>
+<span id="L228"><span class="lineNum">     228</span>              :       /** loop over the concat dimension itself */</span>
+<span id="L229"><span class="lineNum">     229</span> <span class="tlaUNC">           0 :       for (unsigned int count = 0; count &lt; irh.height(); count++) {</span></span>
+<span id="L230"><span class="lineNum">     230</span>              :         Tensor dest_tensor = Tensor::Map(</span>
+<span id="L231"><span class="lineNum">     231</span>              :           output.getAddress(batch, 0, output_height_offset + count, 0),</span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaUNC">           0 :           data_copy_size * sizeof(float), {1, 1, 1, data_copy_size});</span></span>
+<span id="L233"><span class="lineNum">     233</span>              :         const Tensor source_tensor = Tensor::Map(</span>
+<span id="L234"><span class="lineNum">     234</span>              :           input.getAddress(batch, 0, count, 0), data_copy_size * sizeof(float),</span>
+<span id="L235"><span class="lineNum">     235</span> <span class="tlaUNC">           0 :           {1, 1, 1, data_copy_size});</span></span>
+<span id="L236"><span class="lineNum">     236</span> <span class="tlaUNC">           0 :         dest_tensor.copy(source_tensor);</span></span>
+<span id="L237"><span class="lineNum">     237</span> <span class="tlaUNC">           0 :       }</span></span>
+<span id="L238"><span class="lineNum">     238</span>              :     }</span>
+<span id="L239"><span class="lineNum">     239</span>              : </span>
+<span id="L240"><span class="lineNum">     240</span> <span class="tlaUNC">           0 :     input.reshape(in_dim);</span></span>
+<span id="L241"><span class="lineNum">     241</span> <span class="tlaUNC">           0 :     output_height_offset += irh.height();</span></span>
+<span id="L242"><span class="lineNum">     242</span>              :   }</span>
+<span id="L243"><span class="lineNum">     243</span>              : </span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaUNC">           0 :   output.reshape(out_dim);</span></span>
+<span id="L245"><span class="lineNum">     245</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L246"><span class="lineNum">     246</span>              : </span>
+<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC tlaBgGNC">         178 : void ConcatLayer::calcDerivative(RunLayerContext &amp;context) {</span></span>
+<span id="L248"><span class="lineNum">     248</span>              :   /**</span>
+<span id="L249"><span class="lineNum">     249</span>              :    * calcDerivative in ConcatLayer works as follows</span>
+<span id="L250"><span class="lineNum">     250</span>              :    *</span>
+<span id="L251"><span class="lineNum">     251</span>              :    *           output                    in1        in2       in3</span>
+<span id="L252"><span class="lineNum">     252</span>              :    * |---0---||----3----||--6--|      |---0---| |----3----| |--6--|</span>
+<span id="L253"><span class="lineNum">     253</span>              :    * |---1---||----4----||--7--|  =&gt;  |---1---| |----4----| |--7--|</span>
+<span id="L254"><span class="lineNum">     254</span>              :    * |---2---||----5----||--8--|      |---2---| |----5----| |--8--|</span>
+<span id="L255"><span class="lineNum">     255</span>              :    *</span>
+<span id="L256"><span class="lineNum">     256</span>              :    * @note For each input tensor, it iterates batches and copies the entire</span>
+<span id="L257"><span class="lineNum">     257</span>              :    * input width size from the output tensor to the corresponding input. In the</span>
+<span id="L258"><span class="lineNum">     258</span>              :    * diagram above, the row would be a batch, and the column would be a width.</span>
+<span id="L259"><span class="lineNum">     259</span>              :    * The number of each block in the diagram indicates the order of copy to</span>
+<span id="L260"><span class="lineNum">     260</span>              :    * inputs.</span>
+<span id="L261"><span class="lineNum">     261</span>              :    *</span>
+<span id="L262"><span class="lineNum">     262</span>              :    * @todo avoid copy by creating input here as a shared_tensor of the output</span>
+<span id="L263"><span class="lineNum">     263</span>              :    * here and then this layer can be in_place as well</span>
+<span id="L264"><span class="lineNum">     264</span>              :    */</span>
+<span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">         178 :   Tensor output = context.getIncomingDerivative(SINGLE_INOUT_IDX);</span></span>
+<span id="L266"><span class="lineNum">     266</span>              : </span>
+<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">         178 :   output.reshape(output_reshape_helper);</span></span>
+<span id="L268"><span class="lineNum">     268</span>              :   unsigned int output_width_offset = 0;</span>
+<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">         178 :   TensorDim::TensorType tensor_type = output.getTensorType();</span></span>
+<span id="L270"><span class="lineNum">     270</span>              : </span>
+<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">         534 :   for (unsigned int idx = 0; idx &lt; context.getNumInputs(); idx++) {</span></span>
+<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">         356 :     Tensor &amp;input = context.getOutgoingDerivative(idx);</span></span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">         356 :     const TensorDim in_dim = input.getDim();</span></span>
+<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">         356 :     auto const &amp;irh = input_reshape_helper[idx];</span></span>
+<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">         356 :     input.reshape(irh);</span></span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">         356 :     unsigned int data_copy_size = irh.width();</span></span>
+<span id="L277"><span class="lineNum">     277</span>              : </span>
+<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">         356 :     if (in_dim.getDataType() == TensorDim::DataType::FP32) {</span></span>
+<span id="L279"><span class="lineNum">     279</span>              :       /** loop over the dimensions before the concat dimension */</span>
+<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">        4642 :       for (unsigned int batch = 0; batch &lt; output.batch(); batch++) {</span></span>
+<span id="L281"><span class="lineNum">     281</span>              :         /** copy continous data (reshaped width size) in a tensor */</span>
+<span id="L282"><span class="lineNum">     282</span>              :         const Tensor source_tensor = Tensor::Map&lt;float&gt;(</span>
+<span id="L283"><span class="lineNum">     283</span>              :           output.getAddress&lt;float&gt;(batch, 0, 0, output_width_offset),</span>
+<span id="L284"><span class="lineNum">     284</span>              :           data_copy_size * sizeof(float),</span>
+<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">        4286 :           {1, 1, 1, data_copy_size, tensor_type});</span></span>
+<span id="L286"><span class="lineNum">     286</span>              :         Tensor dest_tensor =</span>
+<span id="L287"><span class="lineNum">     287</span>              :           Tensor::Map&lt;float&gt;(input.getAddress&lt;float&gt;(batch, 0, 0, 0),</span>
+<span id="L288"><span class="lineNum">     288</span>              :                              data_copy_size * sizeof(float),</span>
+<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">        4286 :                              {1, 1, 1, data_copy_size, tensor_type});</span></span>
+<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC">        4286 :         dest_tensor.copy(source_tensor);</span></span>
+<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">        4286 :       }</span></span>
+<span id="L292"><span class="lineNum">     292</span> <span class="tlaUNC tlaBgUNC">           0 :     } else if (in_dim.getDataType() == TensorDim::DataType::FP16) {</span></span>
+<span id="L293"><span class="lineNum">     293</span>              : #ifdef ENABLE_FP16</span>
+<span id="L294"><span class="lineNum">     294</span>              :       /** loop over the dimensions before the concat dimension */</span>
+<span id="L295"><span class="lineNum">     295</span>              :       for (unsigned int batch = 0; batch &lt; output.batch(); batch++) {</span>
+<span id="L296"><span class="lineNum">     296</span>              :         /** copy continous data (reshaped width size) in a tensor */</span>
+<span id="L297"><span class="lineNum">     297</span>              :         const Tensor source_tensor = Tensor::Map&lt;_FP16&gt;(</span>
+<span id="L298"><span class="lineNum">     298</span>              :           output.getAddress&lt;_FP16&gt;(batch, 0, 0, output_width_offset),</span>
+<span id="L299"><span class="lineNum">     299</span>              :           data_copy_size * sizeof(_FP16),</span>
+<span id="L300"><span class="lineNum">     300</span>              :           {1, 1, 1, data_copy_size, tensor_type});</span>
+<span id="L301"><span class="lineNum">     301</span>              :         Tensor dest_tensor =</span>
+<span id="L302"><span class="lineNum">     302</span>              :           Tensor::Map&lt;_FP16&gt;(input.getAddress&lt;_FP16&gt;(batch, 0, 0, 0),</span>
+<span id="L303"><span class="lineNum">     303</span>              :                              data_copy_size * sizeof(_FP16),</span>
+<span id="L304"><span class="lineNum">     304</span>              :                              {1, 1, 1, data_copy_size, tensor_type});</span>
+<span id="L305"><span class="lineNum">     305</span>              :         dest_tensor.copy(source_tensor);</span>
+<span id="L306"><span class="lineNum">     306</span>              :       }</span>
+<span id="L307"><span class="lineNum">     307</span>              : #else</span>
+<span id="L308"><span class="lineNum">     308</span> <span class="tlaUNC">           0 :       throw std::invalid_argument(&quot;Error: enable-fp16 is not enabled&quot;);</span></span>
+<span id="L309"><span class="lineNum">     309</span>              : #endif</span>
+<span id="L310"><span class="lineNum">     310</span>              :     }</span>
+<span id="L311"><span class="lineNum">     311</span>              : </span>
+<span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC tlaBgGNC">         356 :     input.reshape(in_dim);</span></span>
+<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">         356 :     output_width_offset += irh.width();</span></span>
+<span id="L314"><span class="lineNum">     314</span>              :   }</span>
+<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">         178 : }</span></span>
+<span id="L316"><span class="lineNum">     316</span>              : </span>
+<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">         612 : void ConcatLayer::setProperty(const std::vector&lt;std::string&gt; &amp;values) {</span></span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">         612 :   auto remain_props = loadProperties(values, concat_props);</span></span>
+<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">         611 :   NNTR_THROW_IF(!remain_props.empty(), std::invalid_argument)</span></span>
+<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">           2 :     &lt;&lt; &quot;[ConcatLayer] Unknown Layer Properties count &quot; +</span></span>
+<span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC">           4 :          std::to_string(values.size());</span></span>
+<span id="L322"><span class="lineNum">     322</span> <span class="tlaGNC">         611 : }</span></span>
+<span id="L323"><span class="lineNum">     323</span>              : </span>
+<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">          58 : void ConcatLayer::exportTo(Exporter &amp;exporter,</span></span>
+<span id="L325"><span class="lineNum">     325</span>              :                            const ml::train::ExportMethods &amp;method) const {</span>
+<span id="L326"><span class="lineNum">     326</span>              :   Layer::exportTo(exporter, method);</span>
+<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">          58 :   exporter.saveResult(concat_props, method, this);</span></span>
+<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">          58 : }</span></span>
+<span id="L329"><span class="lineNum">     329</span>              : </span>
+<span id="L330"><span class="lineNum">     330</span>              : } /* namespace nntrainer */</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

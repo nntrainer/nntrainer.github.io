@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage_filtered.info - nntrainer/layers/input_layer.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">nntrainer/layers</a> - input_layer.cpp<span style="font-size: 80%;"> (source / <a href="input_layer.cpp.func-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage_filtered.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryMed">77.1&nbsp;%</td>
+            <td class="headerCovTableEntry">35</td>
+            <td class="headerCovTableEntry">27</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2025-12-11 07:50:56</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryLo">71.4&nbsp;%</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntry">5</td>
+          </tr>
+                  <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /**</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * Copyright (C) 2020 Samsung Electronics Co., Ltd. All Rights Reserved.</span>
+<span id="L3"><span class="lineNum">       3</span>              :  *</span>
+<span id="L4"><span class="lineNum">       4</span>              :  * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * you may not use this file except in compliance with the License.</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * You may obtain a copy of the License at</span>
+<span id="L7"><span class="lineNum">       7</span>              :  *   http://www.apache.org/licenses/LICENSE-2.0</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * Unless required by applicable law or agreed to in writing, software</span>
+<span id="L9"><span class="lineNum">       9</span>              :  * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * See the License for the specific language governing permissions and</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * limitations under the License.</span>
+<span id="L13"><span class="lineNum">      13</span>              :  *</span>
+<span id="L14"><span class="lineNum">      14</span>              :  *</span>
+<span id="L15"><span class="lineNum">      15</span>              :  * @file        input_layer.cpp</span>
+<span id="L16"><span class="lineNum">      16</span>              :  * @date        14 May 2020</span>
+<span id="L17"><span class="lineNum">      17</span>              :  * @brief       This is Input Layer Class for Neural Network</span>
+<span id="L18"><span class="lineNum">      18</span>              :  * @see         https://github.com/nnstreamer/nntrainer</span>
+<span id="L19"><span class="lineNum">      19</span>              :  * @author      Jijoong Moon &lt;jijoong.moon@samsung.com&gt;</span>
+<span id="L20"><span class="lineNum">      20</span>              :  * @bug         No known bugs except for NYI items</span>
+<span id="L21"><span class="lineNum">      21</span>              :  *</span>
+<span id="L22"><span class="lineNum">      22</span>              :  */</span>
+<span id="L23"><span class="lineNum">      23</span>              : </span>
+<span id="L24"><span class="lineNum">      24</span>              : #include &lt;input_layer.h&gt;</span>
+<span id="L25"><span class="lineNum">      25</span>              : #include &lt;layer_context.h&gt;</span>
+<span id="L26"><span class="lineNum">      26</span>              : #include &lt;nntrainer_error.h&gt;</span>
+<span id="L27"><span class="lineNum">      27</span>              : #include &lt;nntrainer_log.h&gt;</span>
+<span id="L28"><span class="lineNum">      28</span>              : #include &lt;node_exporter.h&gt;</span>
+<span id="L29"><span class="lineNum">      29</span>              : #include &lt;util_func.h&gt;</span>
+<span id="L30"><span class="lineNum">      30</span>              : </span>
+<span id="L31"><span class="lineNum">      31</span>              : namespace nntrainer {</span>
+<span id="L32"><span class="lineNum">      32</span>              : </span>
+<span id="L33"><span class="lineNum">      33</span>              : static constexpr size_t SINGLE_INOUT_IDX = 0;</span>
+<span id="L34"><span class="lineNum">      34</span>              : </span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC tlaBgGNC">        1432 : InputLayer::InputLayer() :</span></span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">        1432 :   Layer(), input_props(props::Normalization(), props::Standardization()) {}</span></span>
+<span id="L37"><span class="lineNum">      37</span>              : </span>
+<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC">        6240 : void InputLayer::setProperty(const std::vector&lt;std::string&gt; &amp;values) {</span></span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">        6240 :   auto remain_props = loadProperties(values, input_props);</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">        6239 :   NNTR_THROW_IF(!remain_props.empty(), std::invalid_argument)</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">           5 :     &lt;&lt; &quot;[InputLayer] Unknown Layer Properties count &quot; +</span></span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">          10 :          std::to_string(values.size());</span></span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">        6239 : }</span></span>
+<span id="L44"><span class="lineNum">      44</span>              : </span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">        7113 : void InputLayer::forwarding(RunLayerContext &amp;context, bool training) {</span></span>
+<span id="L46"><span class="lineNum">      46</span>              : </span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">        7113 :   Tensor &amp;hidden_ = context.getOutput(SINGLE_INOUT_IDX);</span></span>
+<span id="L48"><span class="lineNum">      48</span>              :   std::unique_ptr&lt;nntrainer::Quantizer&gt; quantizer;</span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">        7113 :   if (!context.getInPlace()) {</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">        1609 :     Tensor &amp;input_ = context.getInput(SINGLE_INOUT_IDX);</span></span>
+<span id="L51"><span class="lineNum">      51</span>              :     ///@note: The following code simply copies incoming values (fp32) to the</span>
+<span id="L52"><span class="lineNum">      52</span>              :     // input tensor. Supported types include QINT4, QINT8, UINT8, UINT16,</span>
+<span id="L53"><span class="lineNum">      53</span>              :     // UINT32, FP16, and FP32.</span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">        1609 :     hidden_.copyData(input_);</span></span>
+<span id="L55"><span class="lineNum">      55</span>              :   }</span>
+<span id="L56"><span class="lineNum">      56</span>              : </span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">        7113 :   if (std::get&lt;props::Normalization&gt;(input_props))</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">         167 :     hidden_.normalization_i();</span></span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">        7113 :   if (std::get&lt;props::Standardization&gt;(input_props))</span></span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaUNC tlaBgUNC">           0 :     hidden_.standardization_i();</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC tlaBgGNC">        7113 : }</span></span>
+<span id="L62"><span class="lineNum">      62</span>              : </span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaUNC tlaBgUNC">           0 : void InputLayer::calcDerivative(RunLayerContext &amp;context) {</span></span>
+<span id="L64"><span class="lineNum">      64</span>              :   throw exception::not_supported(</span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaUNC">           0 :     &quot;calcDerivative for input layer is not supported&quot;);</span></span>
+<span id="L66"><span class="lineNum">      66</span>              : }</span>
+<span id="L67"><span class="lineNum">      67</span>              : </span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC tlaBgGNC">         590 : void InputLayer::exportTo(Exporter &amp;exporter,</span></span>
+<span id="L69"><span class="lineNum">      69</span>              :                           const ml::train::ExportMethods &amp;method) const {</span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">         590 :   exporter.saveResult(input_props, method, this);</span></span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">         590 : }</span></span>
+<span id="L72"><span class="lineNum">      72</span>              : </span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">         934 : void InputLayer::finalize(InitLayerContext &amp;context) {</span></span>
+<span id="L74"><span class="lineNum">      74</span>              : </span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">         934 :   std::vector&lt;TensorDim&gt; output_dims = context.getInputDimensions();</span></span>
+<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">        1868 :   for (auto &amp;d : output_dims) {</span></span>
+<span id="L77"><span class="lineNum">      77</span>              :     d.setDataType(context.getActivationDataType());</span>
+<span id="L78"><span class="lineNum">      78</span>              :   }</span>
+<span id="L79"><span class="lineNum">      79</span>              : </span>
+<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">         934 :   context.setOutputDimensions(output_dims);</span></span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">         934 :   is_inplace = true;</span></span>
+<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">         934 :   if (context.getActivationDataType() != ml::train::TensorDim::DataType::FP32)</span></span>
+<span id="L83"><span class="lineNum">      83</span> <span class="tlaUNC tlaBgUNC">           0 :     is_inplace = false;</span></span>
+<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC tlaBgGNC">         934 : }</span></span>
+<span id="L85"><span class="lineNum">      85</span>              : </span>
+<span id="L86"><span class="lineNum">      86</span> <span class="tlaUNC tlaBgUNC">           0 : void InputLayer::updateTensorsByInputDimensions(</span></span>
+<span id="L87"><span class="lineNum">      87</span>              :   nntrainer::RunLayerContext &amp;context,</span>
+<span id="L88"><span class="lineNum">      88</span>              :   std::vector&lt;nntrainer::TensorDim&gt; input_dimensions) {</span>
+<span id="L89"><span class="lineNum">      89</span> <span class="tlaUNC">           0 :   context.updateInput(SINGLE_INOUT_IDX, input_dimensions[0]);</span></span>
+<span id="L90"><span class="lineNum">      90</span> <span class="tlaUNC">           0 :   context.updateOutput(SINGLE_INOUT_IDX, input_dimensions[0]);</span></span>
+<span id="L91"><span class="lineNum">      91</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L92"><span class="lineNum">      92</span>              : </span>
+<span id="L93"><span class="lineNum">      93</span>              : } /* namespace nntrainer */</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>
