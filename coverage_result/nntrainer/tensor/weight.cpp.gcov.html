@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-11 20:41:12</td>
+            <td class="headerValue">2025-12-12 20:39:18</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryMed">83.3&nbsp;%</td>
@@ -80,25 +80,25 @@
 <span id="L18"><span class="lineNum">      18</span>              : </span>
 <span id="L19"><span class="lineNum">      19</span>              : namespace nntrainer {</span>
 <span id="L20"><span class="lineNum">      20</span>              : </span>
-<span id="L21"><span class="lineNum">      21</span> <span class="tlaGNC tlaBgGNC">           1 : Weight::Weight(const TensorDim &amp;dim, const Initializer init,</span></span>
+<span id="L21"><span class="lineNum">      21</span> <span class="tlaGNC tlaBgGNC">           2 : Weight::Weight(const TensorDim &amp;dim, const Initializer init,</span></span>
 <span id="L22"><span class="lineNum">      22</span>              :                const WeightRegularizer reg, const float reg_const,</span>
 <span id="L23"><span class="lineNum">      23</span>              :                const float decay_const, const float max_norm, bool train,</span>
 <span id="L24"><span class="lineNum">      24</span>              :                bool alloc_now_, std::string name, unsigned int axis,</span>
-<span id="L25"><span class="lineNum">      25</span> <span class="tlaGNC">           1 :                float loss_scale_, bool is_mixed_) :</span></span>
+<span id="L25"><span class="lineNum">      25</span> <span class="tlaGNC">           2 :                float loss_scale_, bool is_mixed_) :</span></span>
 <span id="L26"><span class="lineNum">      26</span>              :   Var_Grad(dim, init, train, alloc_now_, name),</span>
-<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">           1 :   regularizer(reg),</span></span>
-<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC">           1 :   regularizer_constant(reg_const),</span></span>
-<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">           1 :   decay(decay_const),</span></span>
-<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">           1 :   clip_by_global_norm(max_norm),</span></span>
-<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC">           1 :   output_axis(axis),</span></span>
-<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">           1 :   loss_scale(loss_scale_),</span></span>
-<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">           1 :   is_mixed(is_mixed_) {</span></span>
-<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">           1 :   if (init == Initializer::NONE)</span></span>
+<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">           2 :   regularizer(reg),</span></span>
+<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC">           2 :   regularizer_constant(reg_const),</span></span>
+<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">           2 :   decay(decay_const),</span></span>
+<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">           2 :   clip_by_global_norm(max_norm),</span></span>
+<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC">           2 :   output_axis(axis),</span></span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">           2 :   loss_scale(loss_scale_),</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">           2 :   is_mixed(is_mixed_) {</span></span>
+<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">           2 :   if (init == Initializer::NONE)</span></span>
 <span id="L35"><span class="lineNum">      35</span> <span class="tlaUNC tlaBgUNC">           0 :     throw std::invalid_argument(&quot;Weight initializer cannot be none&quot;);</span></span>
-<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC tlaBgGNC">           1 :   if (regularizer == WeightRegularizer::UNKNOWN)</span></span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC tlaBgGNC">           2 :   if (regularizer == WeightRegularizer::UNKNOWN)</span></span>
 <span id="L37"><span class="lineNum">      37</span> <span class="tlaUNC tlaBgUNC">           0 :     throw std::invalid_argument(&quot;Weight regularizer unknown&quot;);</span></span>
 <span id="L38"><span class="lineNum">      38</span>              : </span>
-<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC tlaBgGNC">           1 :   std::string var32_suffix = &quot;:fp32&quot;;</span></span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC tlaBgGNC">           2 :   std::string var32_suffix = &quot;:fp32&quot;;</span></span>
 <span id="L40"><span class="lineNum">      40</span>              :   std::string var32_name = name + var32_suffix;</span>
 <span id="L41"><span class="lineNum">      41</span>              : </span>
 <span id="L42"><span class="lineNum">      42</span>              :   /**</span>
@@ -111,15 +111,15 @@
 <span id="L49"><span class="lineNum">      49</span>              :    * usage.</span>
 <span id="L50"><span class="lineNum">      50</span>              :    */</span>
 <span id="L51"><span class="lineNum">      51</span>              : </span>
-<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">           1 :   if (train &amp;&amp; dim.getDataType() != ml::train::TensorDim::DataType::FP32) {</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">           2 :   if (train &amp;&amp; dim.getDataType() != ml::train::TensorDim::DataType::FP32) {</span></span>
 <span id="L53"><span class="lineNum">      53</span> <span class="tlaUNC tlaBgUNC">           0 :     TensorDim var32_dim(dim);</span></span>
 <span id="L54"><span class="lineNum">      54</span>              :     var32_dim.setDataType(ml::train::TensorDim::DataType::FP32);</span>
 <span id="L55"><span class="lineNum">      55</span>              : </span>
 <span id="L56"><span class="lineNum">      56</span> <span class="tlaUNC">           0 :     var32 = std::make_shared&lt;Tensor&gt;(var32_dim, alloc_now_, init, var32_name);</span></span>
 <span id="L57"><span class="lineNum">      57</span>              :   } else {</span>
-<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC tlaBgGNC">           1 :     var32 = std::make_shared&lt;Tensor&gt;(var32_name);</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC tlaBgGNC">           2 :     var32 = std::make_shared&lt;Tensor&gt;(var32_name);</span></span>
 <span id="L59"><span class="lineNum">      59</span>              :   }</span>
-<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">           2 : }</span></span>
 <span id="L61"><span class="lineNum">      61</span>              : </span>
 <span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">         258 : Weight::Weight(const TensorDim &amp;dim_v, const TensorDim &amp;dim_g,</span></span>
 <span id="L63"><span class="lineNum">      63</span>              :                const Initializer init, const WeightRegularizer reg,</span>

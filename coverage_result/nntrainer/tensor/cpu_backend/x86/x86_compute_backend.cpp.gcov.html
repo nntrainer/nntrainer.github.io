@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-11 20:41:12</td>
+            <td class="headerValue">2025-12-12 20:39:18</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">65.8&nbsp;%</td>
@@ -210,17 +210,17 @@
 <span id="L148"><span class="lineNum">     148</span> <span class="tlaUNC">           0 :   __fallback_inv_sqrt_inplace(N, X);</span></span>
 <span id="L149"><span class="lineNum">     149</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L150"><span class="lineNum">     150</span>              : </span>
-<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC tlaBgGNC">       29925 : void ele_mul(const unsigned int N, const float *X, const float *Y, float *Z,</span></span>
+<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC tlaBgGNC">       29926 : void ele_mul(const unsigned int N, const float *X, const float *Y, float *Z,</span></span>
 <span id="L152"><span class="lineNum">     152</span>              :              float alpha, float beta, unsigned int i_stride,</span>
 <span id="L153"><span class="lineNum">     153</span>              :              unsigned int o_stride) {</span>
-<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">       29925 :   nntrainer::avx2::ele_mul(N, X, Y, Z, alpha, beta, i_stride, o_stride);</span></span>
-<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">       29925 : }</span></span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">       29926 :   nntrainer::avx2::ele_mul(N, X, Y, Z, alpha, beta, i_stride, o_stride);</span></span>
+<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">       29926 : }</span></span>
 <span id="L156"><span class="lineNum">     156</span>              : </span>
-<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">      113031 : void ele_add(const unsigned int N, const float *X, const float *Y, float *Z,</span></span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">      113033 : void ele_add(const unsigned int N, const float *X, const float *Y, float *Z,</span></span>
 <span id="L158"><span class="lineNum">     158</span>              :              float alpha, float beta, unsigned int i_stride,</span>
 <span id="L159"><span class="lineNum">     159</span>              :              unsigned int o_stride) {</span>
-<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">      113031 :   nntrainer::avx2::ele_add(N, X, Y, Z, alpha, beta, i_stride, o_stride);</span></span>
-<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">      113031 : }</span></span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">      113033 :   nntrainer::avx2::ele_add(N, X, Y, Z, alpha, beta, i_stride, o_stride);</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">      113033 : }</span></span>
 <span id="L162"><span class="lineNum">     162</span>              : </span>
 <span id="L163"><span class="lineNum">     163</span> <span class="tlaUNC tlaBgUNC">           0 : void ele_sub(const unsigned N, const float *X, const float *Y, float *Z,</span></span>
 <span id="L164"><span class="lineNum">     164</span>              :              float alpha, float beta, unsigned int i_stride,</span>
@@ -228,11 +228,11 @@
 <span id="L166"><span class="lineNum">     166</span> <span class="tlaUNC">           0 :   __fallback_ele_sub(N, X, Y, Z, alpha, beta, i_stride, o_stride);</span></span>
 <span id="L167"><span class="lineNum">     167</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L168"><span class="lineNum">     168</span>              : </span>
-<span id="L169"><span class="lineNum">     169</span> <span class="tlaGNC tlaBgGNC">         332 : void ele_div(const unsigned N, const float *X, const float *Y, float *Z,</span></span>
+<span id="L169"><span class="lineNum">     169</span> <span class="tlaGNC tlaBgGNC">         333 : void ele_div(const unsigned N, const float *X, const float *Y, float *Z,</span></span>
 <span id="L170"><span class="lineNum">     170</span>              :              float alpha, float beta, unsigned int i_stride,</span>
 <span id="L171"><span class="lineNum">     171</span>              :              unsigned int o_stride) {</span>
-<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">         332 :   __fallback_ele_div(N, X, Y, Z, alpha, beta, i_stride, o_stride);</span></span>
-<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">         332 : }</span></span>
+<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">         333 :   __fallback_ele_div(N, X, Y, Z, alpha, beta, i_stride, o_stride);</span></span>
+<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">         333 : }</span></span>
 <span id="L174"><span class="lineNum">     174</span>              : </span>
 <span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">       15254 : void saxpy(const unsigned int N, const float alpha, const float *X,</span></span>
 <span id="L176"><span class="lineNum">     176</span>              :            const unsigned int incX, float *Y, const unsigned int incY) {</span>
@@ -243,18 +243,18 @@
 <span id="L181"><span class="lineNum">     181</span>              : #endif</span>
 <span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">       15254 : }</span></span>
 <span id="L183"><span class="lineNum">     183</span>              : </span>
-<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">       88184 : void sgemv(const unsigned int TStorageOrder, bool TransA, const unsigned int M,</span></span>
+<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">       88188 : void sgemv(const unsigned int TStorageOrder, bool TransA, const unsigned int M,</span></span>
 <span id="L185"><span class="lineNum">     185</span>              :            const unsigned int N, const float alpha, const float *A,</span>
 <span id="L186"><span class="lineNum">     186</span>              :            const unsigned int lda, const float *X, const unsigned int incX,</span>
 <span id="L187"><span class="lineNum">     187</span>              :            const float beta, float *Y, const unsigned int incY) {</span>
 <span id="L188"><span class="lineNum">     188</span>              : #ifdef USE_BLAS</span>
-<span id="L189"><span class="lineNum">     189</span> <span class="tlaGNC">       88184 :   __cblas_sgemv(TStorageOrder, TransA, M, N, alpha, A, lda, X, incX, beta, Y,</span></span>
+<span id="L189"><span class="lineNum">     189</span> <span class="tlaGNC">       88188 :   __cblas_sgemv(TStorageOrder, TransA, M, N, alpha, A, lda, X, incX, beta, Y,</span></span>
 <span id="L190"><span class="lineNum">     190</span>              :                 incY);</span>
 <span id="L191"><span class="lineNum">     191</span>              : #else</span>
 <span id="L192"><span class="lineNum">     192</span>              :   __fallback_sgemv(TStorageOrder, TransA, M, N, alpha, A, lda, X, incX, beta, Y,</span>
 <span id="L193"><span class="lineNum">     193</span>              :                    incY);</span>
 <span id="L194"><span class="lineNum">     194</span>              : #endif</span>
-<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">       88184 : }</span></span>
+<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">       88188 : }</span></span>
 <span id="L196"><span class="lineNum">     196</span>              : </span>
 <span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">         245 : float sdot(const unsigned int N, const float *X, const unsigned int incX,</span></span>
 <span id="L198"><span class="lineNum">     198</span>              :            const float *Y, const unsigned int incY) {</span>
@@ -275,44 +275,44 @@
 <span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">           9 :   __fallback_scopy(N, X, incX, Y, incY);</span></span>
 <span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">           9 : }</span></span>
 <span id="L215"><span class="lineNum">     215</span>              : </span>
-<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">      173978 : void scopy(const unsigned int N, const float *X, const unsigned int incX,</span></span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">      173980 : void scopy(const unsigned int N, const float *X, const unsigned int incX,</span></span>
 <span id="L217"><span class="lineNum">     217</span>              :            float *Y, const unsigned int incY) {</span>
 <span id="L218"><span class="lineNum">     218</span>              :   /// @note cblas_scopy is evoking SIGSEGV for some reason. Use custom</span>
 <span id="L219"><span class="lineNum">     219</span>              :   /// implementation instead.</span>
 <span id="L220"><span class="lineNum">     220</span>              :   // __cblas_scopy(N, X, incX, Y, incY);</span>
-<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">      173978 :   nntrainer::avx2::custom_scopy(N, X, incX, Y, incY);</span></span>
-<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">      173978 : }</span></span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">      173980 :   nntrainer::avx2::custom_scopy(N, X, incX, Y, incY);</span></span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">      173980 : }</span></span>
 <span id="L223"><span class="lineNum">     223</span>              : </span>
-<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">        2607 : void sscal(const unsigned int N, const float alpha, float *X,</span></span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">        2609 : void sscal(const unsigned int N, const float alpha, float *X,</span></span>
 <span id="L225"><span class="lineNum">     225</span>              :            const unsigned int incX) {</span>
 <span id="L226"><span class="lineNum">     226</span>              : #ifdef USE_BLAS</span>
-<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">        2607 :   __cblas_sscal(N, alpha, X, incX);</span></span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">        2609 :   __cblas_sscal(N, alpha, X, incX);</span></span>
 <span id="L228"><span class="lineNum">     228</span>              : #else</span>
 <span id="L229"><span class="lineNum">     229</span>              :   __fallback_sscal(N, alpha, X, incX);</span>
 <span id="L230"><span class="lineNum">     230</span>              : #endif</span>
-<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">        2607 : }</span></span>
+<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">        2609 : }</span></span>
 <span id="L232"><span class="lineNum">     232</span>              : </span>
-<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">        1930 : float snrm2(const unsigned int N, const float *X, const unsigned int incX) {</span></span>
+<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">        1931 : float snrm2(const unsigned int N, const float *X, const unsigned int incX) {</span></span>
 <span id="L234"><span class="lineNum">     234</span>              : #ifdef USE_BLAS</span>
-<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">        1930 :   return __cblas_snrm2(N, X, incX);</span></span>
+<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">        1931 :   return __cblas_snrm2(N, X, incX);</span></span>
 <span id="L236"><span class="lineNum">     236</span>              : #else</span>
 <span id="L237"><span class="lineNum">     237</span>              :   return __fallback_snrm2(N, X, incX);</span>
 <span id="L238"><span class="lineNum">     238</span>              : #endif</span>
 <span id="L239"><span class="lineNum">     239</span>              : }</span>
 <span id="L240"><span class="lineNum">     240</span>              : </span>
-<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">       16976 : void sgemm(const unsigned int TStorageOrder, bool TransA, bool TransB,</span></span>
+<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">       16977 : void sgemm(const unsigned int TStorageOrder, bool TransA, bool TransB,</span></span>
 <span id="L242"><span class="lineNum">     242</span>              :            const unsigned int M, const unsigned int N, const unsigned int K,</span>
 <span id="L243"><span class="lineNum">     243</span>              :            const float alpha, const float *A, const unsigned int lda,</span>
 <span id="L244"><span class="lineNum">     244</span>              :            const float *B, const unsigned int ldb, const float beta, float *C,</span>
 <span id="L245"><span class="lineNum">     245</span>              :            const unsigned int ldc) {</span>
 <span id="L246"><span class="lineNum">     246</span>              : #ifdef USE_BLAS</span>
-<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">       16976 :   __cblas_sgemm(TStorageOrder, TransA, TransB, M, N, K, alpha, A, lda, B, ldb,</span></span>
+<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">       16977 :   __cblas_sgemm(TStorageOrder, TransA, TransB, M, N, K, alpha, A, lda, B, ldb,</span></span>
 <span id="L248"><span class="lineNum">     248</span>              :                 beta, C, ldc);</span>
 <span id="L249"><span class="lineNum">     249</span>              : #else</span>
 <span id="L250"><span class="lineNum">     250</span>              :   __fallback_sgemm(TStorageOrder, TransA, TransB, M, N, K, alpha, A, lda, B,</span>
 <span id="L251"><span class="lineNum">     251</span>              :                    ldb, beta, C, ldc);</span>
 <span id="L252"><span class="lineNum">     252</span>              : #endif</span>
-<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">       16976 : }</span></span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">       16977 : }</span></span>
 <span id="L254"><span class="lineNum">     254</span>              : </span>
 <span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">           3 : unsigned int isamax(const unsigned int N, const float *X,</span></span>
 <span id="L256"><span class="lineNum">     256</span>              :                     const unsigned int incX) {</span>
@@ -322,11 +322,11 @@
 <span id="L260"><span class="lineNum">     260</span>              :   return __fallback_isamax(N, X, incX);</span>
 <span id="L261"><span class="lineNum">     261</span>              : #endif</span>
 <span id="L262"><span class="lineNum">     262</span>              : }</span>
-<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">          24 : void transpose_matrix(const unsigned int M, const unsigned int N,</span></span>
+<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">          25 : void transpose_matrix(const unsigned int M, const unsigned int N,</span></span>
 <span id="L264"><span class="lineNum">     264</span>              :                       const float *src, unsigned int ld_src, float *dst,</span>
 <span id="L265"><span class="lineNum">     265</span>              :                       unsigned int ld_dst) {</span>
-<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">          24 :   nntrainer::avx2::transpose_matrix(M, N, src, ld_src, dst, ld_dst);</span></span>
-<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">          24 : }</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">          25 :   nntrainer::avx2::transpose_matrix(M, N, src, ld_src, dst, ld_dst);</span></span>
+<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">          25 : }</span></span>
 <span id="L268"><span class="lineNum">     268</span>              : </span>
 <span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">          12 : bool is_valid(const unsigned int N, const float *input) {</span></span>
 <span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">          12 :   return nntrainer::avx2::is_valid(N, input);</span></span>

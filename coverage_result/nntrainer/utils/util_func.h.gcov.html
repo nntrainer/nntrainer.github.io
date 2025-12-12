@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-11 20:41:12</td>
+            <td class="headerValue">2025-12-12 20:39:18</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">39.5&nbsp;%</td>
@@ -134,11 +134,11 @@
 <span id="L72"><span class="lineNum">      72</span>              :   }</span>
 <span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">         343 : }</span></span>
 <span id="L74"><span class="lineNum">      74</span>              : </span>
-<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">        5496 : static auto rng = [] {</span></span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">        6047 : static auto rng = [] {</span></span>
 <span id="L76"><span class="lineNum">      76</span>              :   std::mt19937 rng;</span>
 <span id="L77"><span class="lineNum">      77</span>              :   // rng.seed(getSeed());</span>
 <span id="L78"><span class="lineNum">      78</span>              :   rng.seed(0);</span>
-<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">        5496 :   return rng;</span></span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">        6047 :   return rng;</span></span>
 <span id="L80"><span class="lineNum">      80</span>              : }();</span>
 <span id="L81"><span class="lineNum">      81</span>              : </span>
 <span id="L82"><span class="lineNum">      82</span>              : /**</span>
@@ -198,8 +198,8 @@
 <span id="L136"><span class="lineNum">     136</span>              :  floats</span>
 <span id="L137"><span class="lineNum">     137</span>              :  */</span>
 <span id="L138"><span class="lineNum">     138</span>              : template &lt;typename T&gt; bool isFloatValid(const T value) {</span>
-<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">           7 :   return !((value != value) ||</span></span>
-<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">          14 :            (value == std::numeric_limits&lt;float&gt;::infinity()) ||</span></span>
+<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">          14 :   return !((value != value) ||</span></span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">          28 :            (value == std::numeric_limits&lt;float&gt;::infinity()) ||</span></span>
 <span id="L141"><span class="lineNum">     141</span>              :            (value == -std::numeric_limits&lt;float&gt;::infinity()));</span>
 <span id="L142"><span class="lineNum">     142</span>              : }</span>
 <span id="L143"><span class="lineNum">     143</span>              : </span>
@@ -285,9 +285,9 @@
 <span id="L223"><span class="lineNum">     223</span>              :  */</span>
 <span id="L224"><span class="lineNum">     224</span>              : template &lt;typename T,</span>
 <span id="L225"><span class="lineNum">     225</span>              :           typename std::enable_if_t&lt;std::is_pointer&lt;T&gt;::value, T&gt; * = nullptr&gt;</span>
-<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">          10 : void printInstance(std::ostream &amp;out, const T &amp;t) {</span></span>
-<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">          20 :   out &lt;&lt; '&lt;' &lt;&lt; typeid(*t).name() &lt;&lt; &quot; at &quot; &lt;&lt; t &lt;&lt; '&gt;' &lt;&lt; std::endl;</span></span>
-<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">          10 : }</span></span>
+<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">          11 : void printInstance(std::ostream &amp;out, const T &amp;t) {</span></span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">          22 :   out &lt;&lt; '&lt;' &lt;&lt; typeid(*t).name() &lt;&lt; &quot; at &quot; &lt;&lt; t &lt;&lt; '&gt;' &lt;&lt; std::endl;</span></span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">          11 : }</span></span>
 <span id="L229"><span class="lineNum">     229</span>              : </span>
 <span id="L230"><span class="lineNum">     230</span>              : /**</span>
 <span id="L231"><span class="lineNum">     231</span>              :  * @brief make &quot;key=value&quot; from key and value</span>

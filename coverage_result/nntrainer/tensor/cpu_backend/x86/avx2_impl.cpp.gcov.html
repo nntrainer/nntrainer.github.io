@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-11 20:41:12</td>
+            <td class="headerValue">2025-12-12 20:39:18</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">44.7&nbsp;%</td>
@@ -896,10 +896,10 @@
 <span id="L834"><span class="lineNum">     834</span>              :   return true;</span>
 <span id="L835"><span class="lineNum">     835</span>              : }</span>
 <span id="L836"><span class="lineNum">     836</span>              : </span>
-<span id="L837"><span class="lineNum">     837</span> <span class="tlaGNC">      173978 : void custom_scopy(const unsigned int N, const float *X, const int incX,</span></span>
+<span id="L837"><span class="lineNum">     837</span> <span class="tlaGNC">      173980 : void custom_scopy(const unsigned int N, const float *X, const int incX,</span></span>
 <span id="L838"><span class="lineNum">     838</span>              :                   float *Y, const int incY) {</span>
-<span id="L839"><span class="lineNum">     839</span> <span class="tlaGNC">      173978 :   unsigned int N8 = (N &gt;&gt; 3) &lt;&lt; 3;</span></span>
-<span id="L840"><span class="lineNum">     840</span> <span class="tlaGNC">      957463 :   for (unsigned int i = 0; i &lt; N8; i += 8) {</span></span>
+<span id="L839"><span class="lineNum">     839</span> <span class="tlaGNC">      173980 :   unsigned int N8 = (N &gt;&gt; 3) &lt;&lt; 3;</span></span>
+<span id="L840"><span class="lineNum">     840</span> <span class="tlaGNC">      957465 :   for (unsigned int i = 0; i &lt; N8; i += 8) {</span></span>
 <span id="L841"><span class="lineNum">     841</span>              : #if defined(_WIN32)</span>
 <span id="L842"><span class="lineNum">     842</span>              :     __m256 temp = _mm256_loadu_ps(&amp;X[i]);</span>
 <span id="L843"><span class="lineNum">     843</span>              :     _mm256_storeu_ps(&amp;Y[i], temp);</span>
@@ -911,22 +911,22 @@
 <span id="L849"><span class="lineNum">     849</span>              :                          : &quot;ymm0&quot;, &quot;memory&quot;);</span>
 <span id="L850"><span class="lineNum">     850</span>              : #endif</span>
 <span id="L851"><span class="lineNum">     851</span>              :   }</span>
-<span id="L852"><span class="lineNum">     852</span> <span class="tlaGNC">      499405 :   for (unsigned int i = N8; i &lt; N; ++i) {</span></span>
-<span id="L853"><span class="lineNum">     853</span> <span class="tlaGNC">      325427 :     Y[i] = X[i];</span></span>
+<span id="L852"><span class="lineNum">     852</span> <span class="tlaGNC">      499415 :   for (unsigned int i = N8; i &lt; N; ++i) {</span></span>
+<span id="L853"><span class="lineNum">     853</span> <span class="tlaGNC">      325435 :     Y[i] = X[i];</span></span>
 <span id="L854"><span class="lineNum">     854</span>              :   }</span>
-<span id="L855"><span class="lineNum">     855</span> <span class="tlaGNC">      173978 : }</span></span>
+<span id="L855"><span class="lineNum">     855</span> <span class="tlaGNC">      173980 : }</span></span>
 <span id="L856"><span class="lineNum">     856</span>              : </span>
-<span id="L857"><span class="lineNum">     857</span> <span class="tlaGNC">          24 : void transpose_matrix(const unsigned int M, const unsigned int N,</span></span>
+<span id="L857"><span class="lineNum">     857</span> <span class="tlaGNC">          25 : void transpose_matrix(const unsigned int M, const unsigned int N,</span></span>
 <span id="L858"><span class="lineNum">     858</span>              :                       const float *src, unsigned int ld_src, float *dst,</span>
 <span id="L859"><span class="lineNum">     859</span>              :                       unsigned int ld_dst) {</span>
-<span id="L860"><span class="lineNum">     860</span> <span class="tlaGNC">          24 :   unsigned int vindexm[8] = {0,          ld_src,     ld_src * 2, ld_src * 3,</span></span>
-<span id="L861"><span class="lineNum">     861</span> <span class="tlaGNC">          24 :                              ld_src * 4, ld_src * 5, ld_src * 6, ld_src * 7};</span></span>
+<span id="L860"><span class="lineNum">     860</span> <span class="tlaGNC">          25 :   unsigned int vindexm[8] = {0,          ld_src,     ld_src * 2, ld_src * 3,</span></span>
+<span id="L861"><span class="lineNum">     861</span> <span class="tlaGNC">          25 :                              ld_src * 4, ld_src * 5, ld_src * 6, ld_src * 7};</span></span>
 <span id="L862"><span class="lineNum">     862</span>              :   __m256i vindex = _mm256_loadu_si256((__m256i *)&amp;vindexm[0]);</span>
 <span id="L863"><span class="lineNum">     863</span>              :   __m256 vec1, vec2, vec3, vec4, vec5, vec6, vec7, vec8;</span>
 <span id="L864"><span class="lineNum">     864</span>              : </span>
-<span id="L865"><span class="lineNum">     865</span> <span class="tlaGNC">          24 :   unsigned int M8 = (M &amp; ~(7));</span></span>
-<span id="L866"><span class="lineNum">     866</span> <span class="tlaGNC">          24 :   unsigned int N8 = (N &amp; ~(7));</span></span>
-<span id="L867"><span class="lineNum">     867</span> <span class="tlaGNC">        1377 :   for (unsigned int i = 0; i &lt; M8; i += 8) {</span></span>
+<span id="L865"><span class="lineNum">     865</span> <span class="tlaGNC">          25 :   unsigned int M8 = (M &amp; ~(7));</span></span>
+<span id="L866"><span class="lineNum">     866</span> <span class="tlaGNC">          25 :   unsigned int N8 = (N &amp; ~(7));</span></span>
+<span id="L867"><span class="lineNum">     867</span> <span class="tlaGNC">        1378 :   for (unsigned int i = 0; i &lt; M8; i += 8) {</span></span>
 <span id="L868"><span class="lineNum">     868</span> <span class="tlaGNC">      308626 :     for (unsigned int j = 0; j &lt; N8; j += 8) {</span></span>
 <span id="L869"><span class="lineNum">     869</span>              :       // loading from columns</span>
 <span id="L870"><span class="lineNum">     870</span> <span class="tlaGNC">      307273 :       vec1 = _mm256_i32gather_ps(&amp;src[ld_src * i + j + 0], vindex, 4);</span></span>
@@ -951,19 +951,19 @@
 <span id="L889"><span class="lineNum">     889</span>              :   }</span>
 <span id="L890"><span class="lineNum">     890</span>              : </span>
 <span id="L891"><span class="lineNum">     891</span>              :   // tailing right</span>
-<span id="L892"><span class="lineNum">     892</span> <span class="tlaGNC">       10907 :   for (unsigned int i = 0; i &lt; M; i++) {</span></span>
-<span id="L893"><span class="lineNum">     893</span> <span class="tlaGNC">       12308 :     for (unsigned int j = N8; j &lt; N; j++) {</span></span>
-<span id="L894"><span class="lineNum">     894</span> <span class="tlaGNC">        1425 :       dst[i + j * ld_dst] = src[i * ld_src + j];</span></span>
+<span id="L892"><span class="lineNum">     892</span> <span class="tlaGNC">       10910 :   for (unsigned int i = 0; i &lt; M; i++) {</span></span>
+<span id="L893"><span class="lineNum">     893</span> <span class="tlaGNC">       12316 :     for (unsigned int j = N8; j &lt; N; j++) {</span></span>
+<span id="L894"><span class="lineNum">     894</span> <span class="tlaGNC">        1431 :       dst[i + j * ld_dst] = src[i * ld_src + j];</span></span>
 <span id="L895"><span class="lineNum">     895</span>              :     }</span>
 <span id="L896"><span class="lineNum">     896</span>              :   }</span>
 <span id="L897"><span class="lineNum">     897</span>              : </span>
 <span id="L898"><span class="lineNum">     898</span>              :   // tailing bottom</span>
-<span id="L899"><span class="lineNum">     899</span> <span class="tlaGNC">          83 :   for (unsigned int i = M8; i &lt; M; i++) {</span></span>
-<span id="L900"><span class="lineNum">     900</span> <span class="tlaGNC">         348 :     for (unsigned int j = 0; j &lt; N; j++) {</span></span>
-<span id="L901"><span class="lineNum">     901</span> <span class="tlaGNC">         289 :       dst[i + j * ld_dst] = src[i * ld_src + j];</span></span>
+<span id="L899"><span class="lineNum">     899</span> <span class="tlaGNC">          86 :   for (unsigned int i = M8; i &lt; M; i++) {</span></span>
+<span id="L900"><span class="lineNum">     900</span> <span class="tlaGNC">         356 :     for (unsigned int j = 0; j &lt; N; j++) {</span></span>
+<span id="L901"><span class="lineNum">     901</span> <span class="tlaGNC">         295 :       dst[i + j * ld_dst] = src[i * ld_src + j];</span></span>
 <span id="L902"><span class="lineNum">     902</span>              :     }</span>
 <span id="L903"><span class="lineNum">     903</span>              :   }</span>
-<span id="L904"><span class="lineNum">     904</span> <span class="tlaGNC">          24 : }</span></span>
+<span id="L904"><span class="lineNum">     904</span> <span class="tlaGNC">          25 : }</span></span>
 <span id="L905"><span class="lineNum">     905</span>              : </span>
 <span id="L906"><span class="lineNum">     906</span> <span class="tlaUNC tlaBgUNC">           0 : void swiglu(const unsigned int N, float *X, const float *Y, const float *Z) {</span></span>
 <span id="L907"><span class="lineNum">     907</span>              :   size_t i = 0;</span>
@@ -1057,12 +1057,12 @@
 <span id="L995"><span class="lineNum">     995</span>              :   _mm_setcsr(oldcsr);</span>
 <span id="L996"><span class="lineNum">     996</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L997"><span class="lineNum">     997</span>              : </span>
-<span id="L998"><span class="lineNum">     998</span> <span class="tlaGNC tlaBgGNC">       29925 : void ele_mul(const unsigned int N, const float *X, const float *Y, float *Z,</span></span>
+<span id="L998"><span class="lineNum">     998</span> <span class="tlaGNC tlaBgGNC">       29926 : void ele_mul(const unsigned int N, const float *X, const float *Y, float *Z,</span></span>
 <span id="L999"><span class="lineNum">     999</span>              :              float alpha, float beta, unsigned int i_stride,</span>
 <span id="L1000"><span class="lineNum">    1000</span>              :              unsigned int o_stride) {</span>
-<span id="L1001"><span class="lineNum">    1001</span> <span class="tlaGNC">       29925 :   if (alpha == 1.0f &amp;&amp; beta == 0.0f &amp;&amp; o_stride == 1) {</span></span>
-<span id="L1002"><span class="lineNum">    1002</span> <span class="tlaGNC">       29580 :     unsigned int N8 = (N &amp; ~(7));</span></span>
-<span id="L1003"><span class="lineNum">    1003</span> <span class="tlaGNC">       29580 :     if (i_stride == 0) {</span></span>
+<span id="L1001"><span class="lineNum">    1001</span> <span class="tlaGNC">       29926 :   if (alpha == 1.0f &amp;&amp; beta == 0.0f &amp;&amp; o_stride == 1) {</span></span>
+<span id="L1002"><span class="lineNum">    1002</span> <span class="tlaGNC">       29581 :     unsigned int N8 = (N &amp; ~(7));</span></span>
+<span id="L1003"><span class="lineNum">    1003</span> <span class="tlaGNC">       29581 :     if (i_stride == 0) {</span></span>
 <span id="L1004"><span class="lineNum">    1004</span> <span class="tlaGNC">        9591 :       float vy8[8] = {Y[0], Y[0], Y[0], Y[0], Y[0], Y[0], Y[0], Y[0]};</span></span>
 <span id="L1005"><span class="lineNum">    1005</span>              :       auto y = _mm256_loadu_ps(&amp;vy8[0]);</span>
 <span id="L1006"><span class="lineNum">    1006</span> <span class="tlaGNC">       18108 :       for (unsigned int i = 0; i &lt; N8; i += 8) {</span></span>
@@ -1074,7 +1074,7 @@
 <span id="L1012"><span class="lineNum">    1012</span> <span class="tlaGNC">        8517 :         Z += 8;</span></span>
 <span id="L1013"><span class="lineNum">    1013</span>              :       }</span>
 <span id="L1014"><span class="lineNum">    1014</span>              :     } else {</span>
-<span id="L1015"><span class="lineNum">    1015</span> <span class="tlaGNC">    13214694 :       for (unsigned int i = 0; i &lt; N8; i += 8) {</span></span>
+<span id="L1015"><span class="lineNum">    1015</span> <span class="tlaGNC">    13214695 :       for (unsigned int i = 0; i &lt; N8; i += 8) {</span></span>
 <span id="L1016"><span class="lineNum">    1016</span>              :         auto x = _mm256_loadu_ps(X);</span>
 <span id="L1017"><span class="lineNum">    1017</span>              :         auto y = _mm256_loadu_ps(Y);</span>
 <span id="L1018"><span class="lineNum">    1018</span>              :         auto z = _mm256_mul_ps(x, y);</span>
@@ -1084,11 +1084,11 @@
 <span id="L1022"><span class="lineNum">    1022</span> <span class="tlaGNC">    13194705 :         Z += 8;</span></span>
 <span id="L1023"><span class="lineNum">    1023</span>              :       }</span>
 <span id="L1024"><span class="lineNum">    1024</span>              :     }</span>
-<span id="L1025"><span class="lineNum">    1025</span> <span class="tlaGNC">      138981 :     for (unsigned int i = N8; i &lt; N; ++i) {</span></span>
-<span id="L1026"><span class="lineNum">    1026</span> <span class="tlaGNC">      109401 :       *Z = *X * *Y;</span></span>
-<span id="L1027"><span class="lineNum">    1027</span> <span class="tlaGNC">      109401 :       X++;</span></span>
-<span id="L1028"><span class="lineNum">    1028</span> <span class="tlaGNC">      109401 :       Y += i_stride;</span></span>
-<span id="L1029"><span class="lineNum">    1029</span> <span class="tlaGNC">      109401 :       Z++;</span></span>
+<span id="L1025"><span class="lineNum">    1025</span> <span class="tlaGNC">      138986 :     for (unsigned int i = N8; i &lt; N; ++i) {</span></span>
+<span id="L1026"><span class="lineNum">    1026</span> <span class="tlaGNC">      109405 :       *Z = *X * *Y;</span></span>
+<span id="L1027"><span class="lineNum">    1027</span> <span class="tlaGNC">      109405 :       X++;</span></span>
+<span id="L1028"><span class="lineNum">    1028</span> <span class="tlaGNC">      109405 :       Y += i_stride;</span></span>
+<span id="L1029"><span class="lineNum">    1029</span> <span class="tlaGNC">      109405 :       Z++;</span></span>
 <span id="L1030"><span class="lineNum">    1030</span>              :     }</span>
 <span id="L1031"><span class="lineNum">    1031</span>              :   } else {</span>
 <span id="L1032"><span class="lineNum">    1032</span>              :     // TODO: AVX2 implementation if used</span>
@@ -1099,14 +1099,14 @@
 <span id="L1037"><span class="lineNum">    1037</span> <span class="tlaGNC">       65160 :       Z += o_stride;</span></span>
 <span id="L1038"><span class="lineNum">    1038</span>              :     }</span>
 <span id="L1039"><span class="lineNum">    1039</span>              :   }</span>
-<span id="L1040"><span class="lineNum">    1040</span> <span class="tlaGNC">       29925 : }</span></span>
+<span id="L1040"><span class="lineNum">    1040</span> <span class="tlaGNC">       29926 : }</span></span>
 <span id="L1041"><span class="lineNum">    1041</span>              : </span>
-<span id="L1042"><span class="lineNum">    1042</span> <span class="tlaGNC">      113031 : void ele_add(const unsigned int N, const float *X, const float *Y, float *Z,</span></span>
+<span id="L1042"><span class="lineNum">    1042</span> <span class="tlaGNC">      113033 : void ele_add(const unsigned int N, const float *X, const float *Y, float *Z,</span></span>
 <span id="L1043"><span class="lineNum">    1043</span>              :              float alpha, float beta, unsigned int i_stride,</span>
 <span id="L1044"><span class="lineNum">    1044</span>              :              unsigned int o_stride) {</span>
-<span id="L1045"><span class="lineNum">    1045</span> <span class="tlaGNC">      113031 :   if (alpha == 1.0f &amp;&amp; beta == 0.0f &amp;&amp; o_stride == 1) {</span></span>
-<span id="L1046"><span class="lineNum">    1046</span> <span class="tlaGNC">       75819 :     unsigned int N8 = (N &amp; ~(7));</span></span>
-<span id="L1047"><span class="lineNum">    1047</span> <span class="tlaGNC">       75819 :     if (i_stride == 0) {</span></span>
+<span id="L1045"><span class="lineNum">    1045</span> <span class="tlaGNC">      113033 :   if (alpha == 1.0f &amp;&amp; beta == 0.0f &amp;&amp; o_stride == 1) {</span></span>
+<span id="L1046"><span class="lineNum">    1046</span> <span class="tlaGNC">       75820 :     unsigned int N8 = (N &amp; ~(7));</span></span>
+<span id="L1047"><span class="lineNum">    1047</span> <span class="tlaGNC">       75820 :     if (i_stride == 0) {</span></span>
 <span id="L1048"><span class="lineNum">    1048</span> <span class="tlaGNC">       26375 :       float vy8[8] = {Y[0], Y[0], Y[0], Y[0], Y[0], Y[0], Y[0], Y[0]};</span></span>
 <span id="L1049"><span class="lineNum">    1049</span>              :       auto y = _mm256_loadu_ps(&amp;vy8[0]);</span>
 <span id="L1050"><span class="lineNum">    1050</span> <span class="tlaGNC">      580391 :       for (unsigned int i = 0; i &lt; N8; i += 8) {</span></span>
@@ -1118,7 +1118,7 @@
 <span id="L1056"><span class="lineNum">    1056</span> <span class="tlaGNC">      554016 :         Z += 8;</span></span>
 <span id="L1057"><span class="lineNum">    1057</span>              :       }</span>
 <span id="L1058"><span class="lineNum">    1058</span>              :     } else {</span>
-<span id="L1059"><span class="lineNum">    1059</span> <span class="tlaGNC">      169477 :       for (unsigned int i = 0; i &lt; N8; i += 8) {</span></span>
+<span id="L1059"><span class="lineNum">    1059</span> <span class="tlaGNC">      169478 :       for (unsigned int i = 0; i &lt; N8; i += 8) {</span></span>
 <span id="L1060"><span class="lineNum">    1060</span>              :         auto x = _mm256_loadu_ps(X);</span>
 <span id="L1061"><span class="lineNum">    1061</span>              :         auto y = _mm256_loadu_ps(Y);</span>
 <span id="L1062"><span class="lineNum">    1062</span>              :         auto z = _mm256_add_ps(x, y);</span>
@@ -1128,22 +1128,22 @@
 <span id="L1066"><span class="lineNum">    1066</span> <span class="tlaGNC">      120033 :         Z += 8;</span></span>
 <span id="L1067"><span class="lineNum">    1067</span>              :       }</span>
 <span id="L1068"><span class="lineNum">    1068</span>              :     }</span>
-<span id="L1069"><span class="lineNum">    1069</span> <span class="tlaGNC">      234627 :     for (unsigned int i = N8; i &lt; N; ++i) {</span></span>
-<span id="L1070"><span class="lineNum">    1070</span> <span class="tlaGNC">      158808 :       *Z = *X + *Y;</span></span>
-<span id="L1071"><span class="lineNum">    1071</span> <span class="tlaGNC">      158808 :       X++;</span></span>
-<span id="L1072"><span class="lineNum">    1072</span> <span class="tlaGNC">      158808 :       Y += i_stride;</span></span>
-<span id="L1073"><span class="lineNum">    1073</span> <span class="tlaGNC">      158808 :       Z++;</span></span>
+<span id="L1069"><span class="lineNum">    1069</span> <span class="tlaGNC">      234632 :     for (unsigned int i = N8; i &lt; N; ++i) {</span></span>
+<span id="L1070"><span class="lineNum">    1070</span> <span class="tlaGNC">      158812 :       *Z = *X + *Y;</span></span>
+<span id="L1071"><span class="lineNum">    1071</span> <span class="tlaGNC">      158812 :       X++;</span></span>
+<span id="L1072"><span class="lineNum">    1072</span> <span class="tlaGNC">      158812 :       Y += i_stride;</span></span>
+<span id="L1073"><span class="lineNum">    1073</span> <span class="tlaGNC">      158812 :       Z++;</span></span>
 <span id="L1074"><span class="lineNum">    1074</span>              :     }</span>
 <span id="L1075"><span class="lineNum">    1075</span>              :   } else {</span>
 <span id="L1076"><span class="lineNum">    1076</span>              :     // TODO: AVX2 implementation if used</span>
-<span id="L1077"><span class="lineNum">    1077</span> <span class="tlaGNC">   203432838 :     for (unsigned int i = 0; i &lt; N; ++i) {</span></span>
-<span id="L1078"><span class="lineNum">    1078</span> <span class="tlaGNC">   203395626 :       *Z = *X + alpha * *Y + ((0.0f == beta) ? 0.0f : beta * *Z);</span></span>
-<span id="L1079"><span class="lineNum">    1079</span> <span class="tlaGNC">   203395626 :       X += o_stride;</span></span>
-<span id="L1080"><span class="lineNum">    1080</span> <span class="tlaGNC">   203395626 :       Y += i_stride;</span></span>
-<span id="L1081"><span class="lineNum">    1081</span> <span class="tlaGNC">   203395626 :       Z += o_stride;</span></span>
+<span id="L1077"><span class="lineNum">    1077</span> <span class="tlaGNC">   203432843 :     for (unsigned int i = 0; i &lt; N; ++i) {</span></span>
+<span id="L1078"><span class="lineNum">    1078</span> <span class="tlaGNC">   203395630 :       *Z = *X + alpha * *Y + ((0.0f == beta) ? 0.0f : beta * *Z);</span></span>
+<span id="L1079"><span class="lineNum">    1079</span> <span class="tlaGNC">   203395630 :       X += o_stride;</span></span>
+<span id="L1080"><span class="lineNum">    1080</span> <span class="tlaGNC">   203395630 :       Y += i_stride;</span></span>
+<span id="L1081"><span class="lineNum">    1081</span> <span class="tlaGNC">   203395630 :       Z += o_stride;</span></span>
 <span id="L1082"><span class="lineNum">    1082</span>              :     }</span>
 <span id="L1083"><span class="lineNum">    1083</span>              :   }</span>
-<span id="L1084"><span class="lineNum">    1084</span> <span class="tlaGNC">      113031 : }</span></span>
+<span id="L1084"><span class="lineNum">    1084</span> <span class="tlaGNC">      113033 : }</span></span>
 <span id="L1085"><span class="lineNum">    1085</span>              : </span>
 <span id="L1086"><span class="lineNum">    1086</span> <span class="tlaGNC">           9 : static inline __m256 exp256_ps(__m256 x) {</span></span>
 <span id="L1087"><span class="lineNum">    1087</span>              :   /*  Low-Precision Version I*/</span>

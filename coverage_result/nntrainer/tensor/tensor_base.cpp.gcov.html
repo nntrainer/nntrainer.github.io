@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-11 20:41:12</td>
+            <td class="headerValue">2025-12-12 20:39:18</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">31.7&nbsp;%</td>
@@ -76,15 +76,15 @@
 <span id="L14"><span class="lineNum">      14</span>              : </span>
 <span id="L15"><span class="lineNum">      15</span>              : namespace nntrainer {</span>
 <span id="L16"><span class="lineNum">      16</span>              : </span>
-<span id="L17"><span class="lineNum">      17</span> <span class="tlaGNC tlaBgGNC">      375601 : TensorBase::TensorBase(const TensorDim &amp;d, bool alloc_now, Initializer init,</span></span>
-<span id="L18"><span class="lineNum">      18</span> <span class="tlaGNC">      375601 :                        std::string name_) :</span></span>
-<span id="L19"><span class="lineNum">      19</span> <span class="tlaGNC">      375601 :   TensorBase(name_, d.getFormat()) {</span></span>
-<span id="L20"><span class="lineNum">      20</span> <span class="tlaGNC">      375601 :   if (d.getDataLen() != 0) {</span></span>
-<span id="L21"><span class="lineNum">      21</span> <span class="tlaGNC">      375597 :     dim = d;</span></span>
-<span id="L22"><span class="lineNum">      22</span> <span class="tlaGNC">      375597 :     strides = d.computeStrides();</span></span>
-<span id="L23"><span class="lineNum">      23</span> <span class="tlaGNC">      375597 :     initializer = init;</span></span>
+<span id="L17"><span class="lineNum">      17</span> <span class="tlaGNC tlaBgGNC">      375714 : TensorBase::TensorBase(const TensorDim &amp;d, bool alloc_now, Initializer init,</span></span>
+<span id="L18"><span class="lineNum">      18</span> <span class="tlaGNC">      375714 :                        std::string name_) :</span></span>
+<span id="L19"><span class="lineNum">      19</span> <span class="tlaGNC">      375714 :   TensorBase(name_, d.getFormat()) {</span></span>
+<span id="L20"><span class="lineNum">      20</span> <span class="tlaGNC">      375714 :   if (d.getDataLen() != 0) {</span></span>
+<span id="L21"><span class="lineNum">      21</span> <span class="tlaGNC">      375710 :     dim = d;</span></span>
+<span id="L22"><span class="lineNum">      22</span> <span class="tlaGNC">      375710 :     strides = d.computeStrides();</span></span>
+<span id="L23"><span class="lineNum">      23</span> <span class="tlaGNC">      375710 :     initializer = init;</span></span>
 <span id="L24"><span class="lineNum">      24</span>              :   }</span>
-<span id="L25"><span class="lineNum">      25</span> <span class="tlaGNC">      375601 : }</span></span>
+<span id="L25"><span class="lineNum">      25</span> <span class="tlaGNC">      375714 : }</span></span>
 <span id="L26"><span class="lineNum">      26</span>              : </span>
 <span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">       10826 : bool TensorBase::operator==(const TensorBase &amp;rhs) const {</span></span>
 <span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC">       10826 :   if (this-&gt;dim != rhs.dim)</span></span>
@@ -154,8 +154,8 @@
 <span id="L92"><span class="lineNum">      92</span>              : </span>
 <span id="L93"><span class="lineNum">      93</span> <span class="tlaUNC">           0 : void TensorBase::readFSU() {}</span></span>
 <span id="L94"><span class="lineNum">      94</span>              : </span>
-<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC tlaBgGNC">      385956 : void TensorBase::putData() const {</span></span>
-<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">      385956 :   if (!data)</span></span>
+<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC tlaBgGNC">      386074 : void TensorBase::putData() const {</span></span>
+<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">      386074 :   if (!data)</span></span>
 <span id="L97"><span class="lineNum">      97</span>              :     return;</span>
 <span id="L98"><span class="lineNum">      98</span>              : </span>
 <span id="L99"><span class="lineNum">      99</span>              :   data-&gt;invalidate();</span>
@@ -182,22 +182,22 @@
 <span id="L120"><span class="lineNum">     120</span>              : </span>
 <span id="L121"><span class="lineNum">     121</span> <span class="tlaUNC">           0 : void TensorBase::setFileOffset(size_t off) { file_offset = off; }</span></span>
 <span id="L122"><span class="lineNum">     122</span>              : </span>
-<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC tlaBgGNC">      113687 : void TensorBase::reshape(const TensorDim &amp;d) {</span></span>
-<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">      113687 :   NNTR_THROW_IF(!contiguous, std::invalid_argument)</span></span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC tlaBgGNC">      113691 : void TensorBase::reshape(const TensorDim &amp;d) {</span></span>
+<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">      113691 :   NNTR_THROW_IF(!contiguous, std::invalid_argument)</span></span>
 <span id="L125"><span class="lineNum">     125</span>              :     &lt;&lt; getName() &lt;&lt; &quot; is not contiguous, cannot reshape.&quot;;</span>
 <span id="L126"><span class="lineNum">     126</span>              : </span>
-<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">      113687 :   NNTR_THROW_IF(d.getDataLen() != dim.getDataLen(), std::invalid_argument)</span></span>
+<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">      113691 :   NNTR_THROW_IF(d.getDataLen() != dim.getDataLen(), std::invalid_argument)</span></span>
 <span id="L128"><span class="lineNum">     128</span>              :     &lt;&lt; &quot;[Tensor]: reshape cannot change the buffer size, trying reshaping &quot;</span>
 <span id="L129"><span class="lineNum">     129</span>              :        &quot;\nfrom &quot;</span>
 <span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">           3 :     &lt;&lt; getDim() &lt;&lt; &quot; to &quot; &lt;&lt; d;</span></span>
 <span id="L131"><span class="lineNum">     131</span>              : </span>
-<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">      113684 :   dim.batch(d.batch());</span></span>
-<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">      113684 :   dim.channel(d.channel());</span></span>
-<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">      113684 :   dim.height(d.height());</span></span>
-<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">      113684 :   dim.width(d.width());</span></span>
+<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">      113688 :   dim.batch(d.batch());</span></span>
+<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">      113688 :   dim.channel(d.channel());</span></span>
+<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">      113688 :   dim.height(d.height());</span></span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">      113688 :   dim.width(d.width());</span></span>
 <span id="L136"><span class="lineNum">     136</span>              : </span>
-<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">      113684 :   strides = d.computeStrides();</span></span>
-<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">      113684 : }</span></span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">      113688 :   strides = d.computeStrides();</span></span>
+<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">      113688 : }</span></span>
 <span id="L139"><span class="lineNum">     139</span>              : </span>
 <span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">       20419 : void TensorBase::updateBatch(unsigned int batch) {</span></span>
 <span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">       20419 :   if (dim.batch() == batch) {</span></span>
@@ -221,10 +221,10 @@
 <span id="L159"><span class="lineNum">     159</span> <span class="tlaUNC">           0 :   dim = dimension;</span></span>
 <span id="L160"><span class="lineNum">     160</span>              : }</span>
 <span id="L161"><span class="lineNum">     161</span>              : </span>
-<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC tlaBgGNC">   102898628 : size_t TensorBase::getIndex(unsigned int b, unsigned int c, unsigned int h,</span></span>
+<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC tlaBgGNC">   102898898 : size_t TensorBase::getIndex(unsigned int b, unsigned int c, unsigned int h,</span></span>
 <span id="L163"><span class="lineNum">     163</span>              :                             unsigned int w) const noexcept {</span>
-<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">   102898628 :   if (getFormat() == Tformat::NCHW) {</span></span>
-<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">   102898622 :     return (b * strides[0] + c * strides[1] + h * strides[2] + w * strides[3]);</span></span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">   102898898 :   if (getFormat() == Tformat::NCHW) {</span></span>
+<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">   102898892 :     return (b * strides[0] + c * strides[1] + h * strides[2] + w * strides[3]);</span></span>
 <span id="L166"><span class="lineNum">     166</span>              :   } else {</span>
 <span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">           6 :     return (b * strides[0] + h * strides[1] + w * strides[2] + c * strides[3]);</span></span>
 <span id="L168"><span class="lineNum">     168</span>              :   }</span>
@@ -235,14 +235,14 @@
 <span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">      169889 :   dim.setTensorDim(axis1, 1);</span></span>
 <span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">      169889 : }</span></span>
 <span id="L175"><span class="lineNum">     175</span>              : </span>
-<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">      301853 : void TensorBase::allocateSrcTensor() {</span></span>
-<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">      301853 :   if (src_tensor) {</span></span>
-<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">      301853 :     data = src_tensor-&gt;tensor()-&gt;data;</span></span>
-<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">      301853 :     offset = src_tensor-&gt;tensor()-&gt;offset + src_tensor-&gt;offset();</span></span>
+<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">      301854 : void TensorBase::allocateSrcTensor() {</span></span>
+<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">      301854 :   if (src_tensor) {</span></span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">      301854 :     data = src_tensor-&gt;tensor()-&gt;data;</span></span>
+<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">      301854 :     offset = src_tensor-&gt;tensor()-&gt;offset + src_tensor-&gt;offset();</span></span>
 <span id="L180"><span class="lineNum">     180</span>              :   }</span>
-<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">      301853 : }</span></span>
+<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">      301854 : }</span></span>
 <span id="L182"><span class="lineNum">     182</span>              : </span>
-<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">      301853 : void TensorBase::createSharedDataTensor(const TensorBase *src, TensorBase *dest,</span></span>
+<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">      301854 : void TensorBase::createSharedDataTensor(const TensorBase *src, TensorBase *dest,</span></span>
 <span id="L184"><span class="lineNum">     184</span>              :                                         size_t offset) const {</span>
 <span id="L185"><span class="lineNum">     185</span>              :   /**</span>
 <span id="L186"><span class="lineNum">     186</span>              :    * - If src already has data allocated, then directly make dest tensor based</span>
@@ -257,45 +257,45 @@
 <span id="L195"><span class="lineNum">     195</span>              :    * if the batch size of src is updated and needs reallocation.</span>
 <span id="L196"><span class="lineNum">     196</span>              :    */</span>
 <span id="L197"><span class="lineNum">     197</span>              :   dest-&gt;data = nullptr;</span>
-<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">      301853 :   if (src-&gt;data) {</span></span>
-<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">      301853 :     dest-&gt;src_tensor = std::make_shared&lt;SrcSharedTensorBase&gt;(src, offset);</span></span>
-<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">      301853 :     dest-&gt;allocate();</span></span>
+<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">      301854 :   if (src-&gt;data) {</span></span>
+<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">      301854 :     dest-&gt;src_tensor = std::make_shared&lt;SrcSharedTensorBase&gt;(src, offset);</span></span>
+<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">      301854 :     dest-&gt;allocate();</span></span>
 <span id="L201"><span class="lineNum">     201</span> <span class="tlaUNC tlaBgUNC">           0 :   } else if (!src-&gt;src_tensor)</span></span>
 <span id="L202"><span class="lineNum">     202</span> <span class="tlaUNC">           0 :     dest-&gt;src_tensor = std::make_shared&lt;SrcSharedTensorBase&gt;(src, offset);</span></span>
 <span id="L203"><span class="lineNum">     203</span>              :   else</span>
 <span id="L204"><span class="lineNum">     204</span> <span class="tlaUNC">           0 :     dest-&gt;src_tensor = std::make_shared&lt;SrcSharedTensorBase&gt;(</span></span>
 <span id="L205"><span class="lineNum">     205</span> <span class="tlaUNC">           0 :       src-&gt;src_tensor-&gt;tensor(), offset + src-&gt;src_tensor-&gt;offset());</span></span>
-<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC tlaBgGNC">      301853 : }</span></span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC tlaBgGNC">      301854 : }</span></span>
 <span id="L207"><span class="lineNum">     207</span>              : </span>
-<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">      301855 : void TensorBase::getSharedDataTensor(const TensorDim dim_, size_t offset,</span></span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">      301856 : void TensorBase::getSharedDataTensor(const TensorDim dim_, size_t offset,</span></span>
 <span id="L209"><span class="lineNum">     209</span>              :                                      bool reset_stride,</span>
 <span id="L210"><span class="lineNum">     210</span>              :                                      const std::string &amp;name_,</span>
 <span id="L211"><span class="lineNum">     211</span>              :                                      TensorBase *ret) {</span>
-<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">      301855 :   if (dim_.getFormat() != ret-&gt;dim.getFormat())</span></span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">      301856 :   if (dim_.getFormat() != ret-&gt;dim.getFormat())</span></span>
 <span id="L213"><span class="lineNum">     213</span> <span class="tlaUNC tlaBgUNC">           0 :     throw std::invalid_argument(&quot;Tensor format does not match&quot;);</span></span>
 <span id="L214"><span class="lineNum">     214</span>              : </span>
-<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC tlaBgGNC">      301855 :   ret-&gt;dim = dim_;</span></span>
-<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">      301855 :   if (!name_.empty())</span></span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC tlaBgGNC">      301856 :   ret-&gt;dim = dim_;</span></span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">      301856 :   if (!name_.empty())</span></span>
 <span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">        8176 :     ret-&gt;name = name_;</span></span>
 <span id="L218"><span class="lineNum">     218</span>              : </span>
-<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">      301855 :   if (dim_.getDataLen() + offset &gt; dim.getDataLen())</span></span>
+<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">      301856 :   if (dim_.getDataLen() + offset &gt; dim.getDataLen())</span></span>
 <span id="L220"><span class="lineNum">     220</span>              :     throw std::invalid_argument(</span>
 <span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">           2 :       &quot;Creating shared tensor of size bigger than tensor memory.&quot;);</span></span>
 <span id="L222"><span class="lineNum">     222</span>              : </span>
-<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">      301853 :   if (reset_stride)</span></span>
-<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">      277432 :     ret-&gt;strides = ret-&gt;dim.computeStrides();</span></span>
+<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">      301854 :   if (reset_stride)</span></span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">      277433 :     ret-&gt;strides = ret-&gt;dim.computeStrides();</span></span>
 <span id="L225"><span class="lineNum">     225</span>              : </span>
-<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">      301853 :   TensorDim new_match_dim = dim_;</span></span>
-<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">      301853 :   new_match_dim.batch(dim.batch());</span></span>
-<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">      301853 :   if (new_match_dim != dim &amp;&amp; !reset_stride)</span></span>
+<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">      301854 :   TensorDim new_match_dim = dim_;</span></span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">      301854 :   new_match_dim.batch(dim.batch());</span></span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">      301854 :   if (new_match_dim != dim &amp;&amp; !reset_stride)</span></span>
 <span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">       16245 :     ret-&gt;contiguous = false;</span></span>
 <span id="L230"><span class="lineNum">     230</span>              : </span>
 <span id="L231"><span class="lineNum">     231</span>              :   /**</span>
 <span id="L232"><span class="lineNum">     232</span>              :    * In this case, its the caller's responsibility to ensure that allocate() is</span>
 <span id="L233"><span class="lineNum">     233</span>              :    * called for the output tensor before operating on the output tensor.</span>
 <span id="L234"><span class="lineNum">     234</span>              :    */</span>
-<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">      301853 :   createSharedDataTensor(this, ret, offset);</span></span>
-<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">      301853 : }</span></span>
+<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">      301854 :   createSharedDataTensor(this, ret, offset);</span></span>
+<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">      301854 : }</span></span>
 <span id="L237"><span class="lineNum">     237</span>              : </span>
 <span id="L238"><span class="lineNum">     238</span>              : TensorBase::BroadcastInfo</span>
 <span id="L239"><span class="lineNum">     239</span> <span class="tlaGNC">       10829 : TensorBase::computeBroadcastInfo(const Tensor &amp;m) const {</span></span>
@@ -375,41 +375,41 @@
 <span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">       10663 :   return e;</span></span>
 <span id="L314"><span class="lineNum">     314</span>              : }</span>
 <span id="L315"><span class="lineNum">     315</span>              : </span>
-<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">       36823 : void TensorBase::calculateFlattenDot(</span></span>
+<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">       36824 : void TensorBase::calculateFlattenDot(</span></span>
 <span id="L317"><span class="lineNum">     317</span>              :   Tensor const &amp;input, Tensor &amp;output, bool trans, bool trans_in,</span>
 <span id="L318"><span class="lineNum">     318</span>              :   unsigned int &amp;first_three_flat, unsigned int &amp;last_axis,</span>
 <span id="L319"><span class="lineNum">     319</span>              :   unsigned int &amp;input_first_three_flat, unsigned int &amp;input_last_axis,</span>
 <span id="L320"><span class="lineNum">     320</span>              :   unsigned int &amp;M, unsigned int &amp;N, unsigned int &amp;K, unsigned int &amp;lda,</span>
 <span id="L321"><span class="lineNum">     321</span>              :   unsigned int &amp;ldb, unsigned int &amp;ldc) const {</span>
 <span id="L322"><span class="lineNum">     322</span>              : </span>
-<span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC">       36823 :   if (trans &amp;&amp; dim.rank() &gt; 2) {</span></span>
+<span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC">       36824 :   if (trans &amp;&amp; dim.rank() &gt; 2) {</span></span>
 <span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">         932 :     ml_logw(&quot;Warning: support only for rank of dot matrix &lt;= 2 with trans&quot;);</span></span>
 <span id="L325"><span class="lineNum">     325</span>              :   }</span>
 <span id="L326"><span class="lineNum">     326</span>              : </span>
-<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">       36823 :   if (getFormat() == Tformat::NHWC) {</span></span>
+<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">       36824 :   if (getFormat() == Tformat::NHWC) {</span></span>
 <span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">          15 :     first_three_flat = batch() * height() * width();</span></span>
 <span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">          15 :     last_axis = channel();</span></span>
 <span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">          15 :     input_first_three_flat = input.batch() * input.height() * input.width();</span></span>
 <span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">          15 :     input_last_axis = input.channel();</span></span>
 <span id="L332"><span class="lineNum">     332</span>              :   } else {</span>
-<span id="L333"><span class="lineNum">     333</span> <span class="tlaGNC">       36808 :     first_three_flat = batch() * channel() * height();</span></span>
-<span id="L334"><span class="lineNum">     334</span> <span class="tlaGNC">       36808 :     last_axis = width();</span></span>
-<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC">       36808 :     input_first_three_flat = input.batch() * input.channel() * input.height();</span></span>
-<span id="L336"><span class="lineNum">     336</span> <span class="tlaGNC">       36808 :     input_last_axis = input.width();</span></span>
+<span id="L333"><span class="lineNum">     333</span> <span class="tlaGNC">       36809 :     first_three_flat = batch() * channel() * height();</span></span>
+<span id="L334"><span class="lineNum">     334</span> <span class="tlaGNC">       36809 :     last_axis = width();</span></span>
+<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC">       36809 :     input_first_three_flat = input.batch() * input.channel() * input.height();</span></span>
+<span id="L336"><span class="lineNum">     336</span> <span class="tlaGNC">       36809 :     input_last_axis = input.width();</span></span>
 <span id="L337"><span class="lineNum">     337</span>              :   }</span>
 <span id="L338"><span class="lineNum">     338</span>              : </span>
-<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">       36823 :   if (!trans &amp;&amp; !trans_in) {</span></span>
-<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC">       17793 :     if (last_axis != input_first_three_flat)</span></span>
+<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">       36824 :   if (!trans &amp;&amp; !trans_in) {</span></span>
+<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC">       17794 :     if (last_axis != input_first_three_flat)</span></span>
 <span id="L341"><span class="lineNum">     341</span>              :       throw std::runtime_error(</span>
 <span id="L342"><span class="lineNum">     342</span> <span class="tlaGNC">           2 :         &quot;Error: incompatible dimensions for dot product&quot;);</span></span>
-<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">       17791 :     K = input_first_three_flat; /** == last_axis */</span></span>
-<span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC">       17791 :     N = input_last_axis;</span></span>
-<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">       17791 :     M = first_three_flat;</span></span>
-<span id="L346"><span class="lineNum">     346</span> <span class="tlaGNC">       17791 :     if (getFormat() == Tformat::NHWC) {</span></span>
+<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">       17792 :     K = input_first_three_flat; /** == last_axis */</span></span>
+<span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC">       17792 :     N = input_last_axis;</span></span>
+<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">       17792 :     M = first_three_flat;</span></span>
+<span id="L346"><span class="lineNum">     346</span> <span class="tlaGNC">       17792 :     if (getFormat() == Tformat::NHWC) {</span></span>
 <span id="L347"><span class="lineNum">     347</span> <span class="tlaGNC">          15 :       CREATE_IF_EMPTY_DIMS(output, batch(), N, height(), width(),</span></span>
 <span id="L348"><span class="lineNum">     348</span>              :                            getTensorType()); //  NHWC Result Tensor</span>
 <span id="L349"><span class="lineNum">     349</span>              :     } else {</span>
-<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">       21388 :       CREATE_IF_EMPTY_DIMS(output, batch(), channel(), height(), N,</span></span>
+<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">       21391 :       CREATE_IF_EMPTY_DIMS(output, batch(), channel(), height(), N,</span></span>
 <span id="L351"><span class="lineNum">     351</span>              :                            getTensorType());</span>
 <span id="L352"><span class="lineNum">     352</span>              :     }</span>
 <span id="L353"><span class="lineNum">     353</span>              : </span>
@@ -458,10 +458,10 @@
 <span id="L396"><span class="lineNum">     396</span>              :     }</span>
 <span id="L397"><span class="lineNum">     397</span>              :   }</span>
 <span id="L398"><span class="lineNum">     398</span>              : </span>
-<span id="L399"><span class="lineNum">     399</span> <span class="tlaGNC">       36820 :   lda = last_axis;</span></span>
-<span id="L400"><span class="lineNum">     400</span> <span class="tlaGNC">       36820 :   ldb = input_last_axis;</span></span>
-<span id="L401"><span class="lineNum">     401</span> <span class="tlaGNC">       36820 :   ldc = (getFormat() == Tformat::NHWC) ? output.channel() : output.width();</span></span>
-<span id="L402"><span class="lineNum">     402</span> <span class="tlaGNC">       36820 : }</span></span>
+<span id="L399"><span class="lineNum">     399</span> <span class="tlaGNC">       36821 :   lda = last_axis;</span></span>
+<span id="L400"><span class="lineNum">     400</span> <span class="tlaGNC">       36821 :   ldb = input_last_axis;</span></span>
+<span id="L401"><span class="lineNum">     401</span> <span class="tlaGNC">       36821 :   ldc = (getFormat() == Tformat::NHWC) ? output.channel() : output.width();</span></span>
+<span id="L402"><span class="lineNum">     402</span> <span class="tlaGNC">       36821 : }</span></span>
 <span id="L403"><span class="lineNum">     403</span>              : </span>
 <span id="L404"><span class="lineNum">     404</span>              : /**</span>
 <span id="L405"><span class="lineNum">     405</span>              :  * Please note that the following functions need to be implemented in a child</span>
