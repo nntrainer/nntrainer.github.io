@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - coverage_filtered.info - nntrainer/tensor/cpu_backend/ggml_interface/nntr_ggml_impl/nntr_ggml_impl.cpp - functions</title>
+  <title>LCOV - coverage_filtered.info - nntrainer/tensor/cpu_backend/ggml_interface/nntr_ggml_impl/nntr_ggml_impl_avx.cpp - functions</title>
   <link rel="stylesheet" type="text/css" href="../../../../../gcov.css">
 </head>
 
@@ -19,7 +19,7 @@
                 <table cellpadding=1 border=0 width="100%">
           <tr>
             <td width="10%" class="headerItem">Current view:</td>
-            <td width="10%" class="headerValue"><a href="../../../../../index.html">top level</a> - <a href="index.html">nntrainer/tensor/cpu_backend/ggml_interface/nntr_ggml_impl</a> - nntr_ggml_impl.cpp<span style="font-size: 80%;"> (<a href="nntr_ggml_impl.cpp.gcov.html">source</a> / functions)</span></td>
+            <td width="10%" class="headerValue"><a href="../../../../../index.html">top level</a> - <a href="index.html">nntrainer/tensor/cpu_backend/ggml_interface/nntr_ggml_impl</a> - nntr_ggml_impl_avx.cpp<span style="font-size: 80%;"> (<a href="nntr_ggml_impl_avx.cpp.gcov.html">source</a> / functions)</span></td>
             <td width="5%"></td>
             <td width="5%"></td>
             <td width="5%" class="headerCovTableHead">Coverage</td>
@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryMed">82.0&nbsp;%</td>
-            <td class="headerCovTableEntry">488</td>
-            <td class="headerCovTableEntry">400</td>
+            <td class="headerCovTableEntry">489</td>
+            <td class="headerCovTableEntry">401</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-22 20:39:29</td>
+            <td class="headerValue">2025-12-23 20:39:19</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">73.3&nbsp;%</td>
@@ -56,114 +56,114 @@
           <table cellpadding=1 cellspacing=1 border=0>
             <tr><td><br></td></tr>
             <tr>
-              <td class="tableHead">Function Name <span  title="Click to sort table by function name" class="tableHeadSort"><a href="nntr_ggml_impl.cpp.func.html"><img src="../../../../../updown.png" width=10 height=14 alt="Sort by function name" title="Click to sort table by function name" border=0></a></span></td>
+              <td class="tableHead">Function Name <span  title="Click to sort table by function name" class="tableHeadSort"><img src="../../../../../glass.png" width=10 height=14 alt="Sort by function name" title="Click to sort table by function name" border=0></span></td>
               
-              <td class="tableHead">Hit count <span  title="Click to sort table by function hit count" class="tableHeadSort"><img src="../../../../../glass.png" width=10 height=14 alt="Sort by function hit count" title="Click to sort table by function hit count" border=0></span></td>
+              <td class="tableHead">Hit count <span  title="Click to sort table by function hit count" class="tableHeadSort"><a href="nntr_ggml_impl_avx.cpp.func-c.html"><img src="../../../../../updown.png" width=10 height=14 alt="Sort by function hit count" title="Click to sort table by function hit count" border=0></a></span></td>
               
               
             </tr>
             <tr>
-              <td class="coverFn"><a href="nntr_ggml_impl.cpp.gcov.html#L187">_Z23nntr_gemm_q4_0_4x8_q8_0iPfmPKvS1_ii</a></td>
+              <td class="coverFn"><a href="nntr_ggml_impl_avx.cpp.gcov.html#L3407">_Z22nntr_vec_dot_q6_K_q8_KiPfmPKvmS1_mi</a></td>
+              
+              <td class="coverFnHi">970303</td>
+              
+              
+            </tr>
+            <tr>
+              <td class="coverFn"><a href="nntr_ggml_impl_avx.cpp.gcov.html#L76">_Z23nntr_gemm_q4_0_4x8_q8_0iPfmPKvS1_ii</a></td>
               
               <td class="coverFnLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFn"><a href="nntr_ggml_impl.cpp.gcov.html#L29">_Z23nntr_gemv_q4_0_4x8_q8_0iPfmPKvS1_ii</a></td>
-              
-              <td class="coverFnLo">0</td>
-              
-              
-            </tr>
-            <tr>
-              <td class="coverFn"><a href="nntr_ggml_impl.cpp.gcov.html#L8158">_Z29nntr_repack_q4_0_to_q4_0_4_blPviPKvmmm</a></td>
-              
-              <td class="coverFnLo">0</td>
-              
-              
-            </tr>
-            <tr>
-              <td class="coverFn"><a href="nntr_ggml_impl.cpp.gcov.html#L8012">_ZL22nntr_make_block_q4_0x4P10block_q4_0j</a></td>
-              
-              <td class="coverFnLo">0</td>
-              
-              
-            </tr>
-            <tr>
-              <td class="coverFn"><a href="nntr_ggml_impl.cpp.gcov.html#L8216">_Z29nntr_repack_q4_K_to_q4_K_8_blPviPKvmmm</a></td>
-              
-              <td class="coverFnHi">7</td>
-              
-              
-            </tr>
-            <tr>
-              <td class="coverFn"><a href="nntr_ggml_impl.cpp.gcov.html#L3259">_Z23nntr_gemm_q4_K_8x8_q8_KiPfmPKvS1_ii</a></td>
-              
-              <td class="coverFnHi">16</td>
-              
-              
-            </tr>
-            <tr>
-              <td class="coverFn"><a href="nntr_ggml_impl.cpp.gcov.html#L8187">_Z29nntr_repack_q4_0_to_q4_0_8_blPviPKvmmm</a></td>
-              
-              <td class="coverFnHi">30</td>
-              
-              
-            </tr>
-            <tr>
-              <td class="coverFn"><a href="nntr_ggml_impl.cpp.gcov.html#L9514">_Z23nntr_gemv_q4_0_8x8_q8_0iPfmPKvS1_ii</a></td>
-              
-              <td class="coverFnHi">36</td>
-              
-              
-            </tr>
-            <tr>
-              <td class="coverFn"><a href="nntr_ggml_impl.cpp.gcov.html#L7078">_Z23nntr_gemv_q4_K_8x8_q8_KiPfmPKvS1_ii</a></td>
-              
-              <td class="coverFnHi">44</td>
-              
-              
-            </tr>
-            <tr>
-              <td class="coverFn"><a href="nntr_ggml_impl.cpp.gcov.html#L648">_Z23nntr_gemm_q4_0_8x8_q8_0iPfmPKvS1_ii</a></td>
+              <td class="coverFn"><a href="nntr_ggml_impl_avx.cpp.gcov.html#L133">_Z23nntr_gemm_q4_0_8x8_q8_0iPfmPKvS1_ii</a></td>
               
               <td class="coverFnHi">208</td>
               
               
             </tr>
             <tr>
-              <td class="coverFn"><a href="nntr_ggml_impl.cpp.gcov.html#L7494">_Z26nntr_quantize_mat_q8_K_4x8PKfPvl</a></td>
+              <td class="coverFn"><a href="nntr_ggml_impl_avx.cpp.gcov.html#L940">_Z23nntr_gemm_q4_K_8x8_q8_KiPfmPKvS1_ii</a></td>
               
-              <td class="coverFnHi">470</td>
+              <td class="coverFnHi">16</td>
               
               
             </tr>
             <tr>
-              <td class="coverFn"><a href="nntr_ggml_impl.cpp.gcov.html#L7786">_Z26nntr_quantize_mat_q8_0_4x8PKfPvl</a></td>
+              <td class="coverFn"><a href="nntr_ggml_impl_avx.cpp.gcov.html#L29">_Z23nntr_gemv_q4_0_4x8_q8_0iPfmPKvS1_ii</a></td>
+              
+              <td class="coverFnLo">0</td>
+              
+              
+            </tr>
+            <tr>
+              <td class="coverFn"><a href="nntr_ggml_impl_avx.cpp.gcov.html#L3514">_Z23nntr_gemv_q4_0_8x8_q8_0iPfmPKvS1_ii</a></td>
+              
+              <td class="coverFnHi">36</td>
+              
+              
+            </tr>
+            <tr>
+              <td class="coverFn"><a href="nntr_ggml_impl_avx.cpp.gcov.html#L2480">_Z23nntr_gemv_q4_K_8x8_q8_KiPfmPKvS1_ii</a></td>
+              
+              <td class="coverFnHi">44</td>
+              
+              
+            </tr>
+            <tr>
+              <td class="coverFn"><a href="nntr_ggml_impl_avx.cpp.gcov.html#L3069">_Z26nntr_quantize_mat_q8_0_4x8PKfPvl</a></td>
               
               <td class="coverFnHi">518</td>
               
               
             </tr>
             <tr>
-              <td class="coverFn"><a href="nntr_ggml_impl.cpp.gcov.html#L8079">_ZL17make_block_q4_Kx8P10block_q4_Kj</a></td>
+              <td class="coverFn"><a href="nntr_ggml_impl_avx.cpp.gcov.html#L2826">_Z26nntr_quantize_mat_q8_K_4x8PKfPvl</a></td>
+              
+              <td class="coverFnHi">470</td>
+              
+              
+            </tr>
+            <tr>
+              <td class="coverFn"><a href="nntr_ggml_impl_avx.cpp.gcov.html#L3301">_Z29nntr_repack_q4_0_to_q4_0_4_blPviPKvmmm</a></td>
+              
+              <td class="coverFnLo">0</td>
+              
+              
+            </tr>
+            <tr>
+              <td class="coverFn"><a href="nntr_ggml_impl_avx.cpp.gcov.html#L3330">_Z29nntr_repack_q4_0_to_q4_0_8_blPviPKvmmm</a></td>
+              
+              <td class="coverFnHi">30</td>
+              
+              
+            </tr>
+            <tr>
+              <td class="coverFn"><a href="nntr_ggml_impl_avx.cpp.gcov.html#L3359">_Z29nntr_repack_q4_K_to_q4_K_8_blPviPKvmmm</a></td>
+              
+              <td class="coverFnHi">7</td>
+              
+              
+            </tr>
+            <tr>
+              <td class="coverFn"><a href="nntr_ggml_impl_avx.cpp.gcov.html#L3222">_ZL17make_block_q4_Kx8P10block_q4_Kj</a></td>
               
               <td class="coverFnHi">1344</td>
               
               
             </tr>
             <tr>
-              <td class="coverFn"><a href="nntr_ggml_impl.cpp.gcov.html#L8054">_ZL22nntr_make_block_q4_0x8P10block_q4_0j</a></td>
+              <td class="coverFn"><a href="nntr_ggml_impl_avx.cpp.gcov.html#L3155">_ZL22nntr_make_block_q4_0x4P10block_q4_0j</a></td>
               
-              <td class="coverFnHi">225738</td>
+              <td class="coverFnLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFn"><a href="nntr_ggml_impl.cpp.gcov.html#L8278">_Z22nntr_vec_dot_q6_K_q8_KiPfmPKvmS1_mi</a></td>
+              <td class="coverFn"><a href="nntr_ggml_impl_avx.cpp.gcov.html#L3197">_ZL22nntr_make_block_q4_0x8P10block_q4_0j</a></td>
               
-              <td class="coverFnHi">970303</td>
+              <td class="coverFnHi">225738</td>
               
               
             </tr>
