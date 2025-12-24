@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-23 20:39:19</td>
+            <td class="headerValue">2025-12-24 20:39:19</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryMed">75.0&nbsp;%</td>
@@ -106,8 +106,8 @@
 <span id="L44"><span class="lineNum">      44</span>              : </span>
 <span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC tlaBgGNC">         168 : uint32_t ceilDiv(uint32_t a, uint32_t b) { return (a + b - 1) / b; };</span></span>
 <span id="L46"><span class="lineNum">      46</span>              : </span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">    56085160 : uint32_t align(uint32_t a, uint32_t b) {</span></span>
-<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">    56085160 :   return (a % b == 0) ? a : a - a % b + b;</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">    56089912 : uint32_t align(uint32_t a, uint32_t b) {</span></span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">    56089912 :   return (a % b == 0) ? a : a - a % b + b;</span></span>
 <span id="L49"><span class="lineNum">      49</span>              : };</span>
 <span id="L50"><span class="lineNum">      50</span>              : </span>
 <span id="L51"><span class="lineNum">      51</span> <span class="tlaUNC tlaBgUNC">           0 : Tensor rotate_180(Tensor in) {</span></span>
@@ -306,13 +306,13 @@
 <span id="L244"><span class="lineNum">     244</span>              : #endif</span>
 <span id="L245"><span class="lineNum">     245</span>              : }</span>
 <span id="L246"><span class="lineNum">     246</span>              : </span>
-<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">       56764 : tm *getLocaltime(tm *tp) {</span></span>
-<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">       56764 :   time_t t = time(0);</span></span>
+<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">       56791 : tm *getLocaltime(tm *tp) {</span></span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">       56791 :   time_t t = time(0);</span></span>
 <span id="L249"><span class="lineNum">     249</span>              : #ifdef _WIN32</span>
 <span id="L250"><span class="lineNum">     250</span>              :   localtime_s(tp, &amp;t);</span>
 <span id="L251"><span class="lineNum">     251</span>              :   return tp;</span>
 <span id="L252"><span class="lineNum">     252</span>              : #else</span>
-<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">       56764 :   return localtime_r(&amp;t, tp);</span></span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">       56791 :   return localtime_r(&amp;t, tp);</span></span>
 <span id="L254"><span class="lineNum">     254</span>              : #endif</span>
 <span id="L255"><span class="lineNum">     255</span>              : }</span>
 <span id="L256"><span class="lineNum">     256</span>              : </span>

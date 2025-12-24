@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-23 20:39:19</td>
+            <td class="headerValue">2025-12-24 20:39:19</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">73.3&nbsp;%</td>
@@ -194,22 +194,22 @@
 <span id="L132"><span class="lineNum">     132</span>              :   }</span>
 <span id="L133"><span class="lineNum">     133</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L134"><span class="lineNum">     134</span>              : </span>
-<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC tlaBgGNC">         208 : void nntr_gemm_q4_0_8x8_q8_0(int n, float *__restrict s, size_t bs,</span></span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC tlaBgGNC">         104 : void nntr_gemm_q4_0_8x8_q8_0(int n, float *__restrict s, size_t bs,</span></span>
 <span id="L136"><span class="lineNum">     136</span>              :                              const void *__restrict vx,</span>
 <span id="L137"><span class="lineNum">     137</span>              :                              const void *__restrict vy, int nr, int nc) {</span>
 <span id="L138"><span class="lineNum">     138</span>              :   const int qk = QK8_0;</span>
-<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">         208 :   const int nb = n / qk;</span></span>
+<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">         104 :   const int nb = n / qk;</span></span>
 <span id="L140"><span class="lineNum">     140</span>              :   const int ncols_interleaved = 8;</span>
 <span id="L141"><span class="lineNum">     141</span>              :   const int blocklen = 8;</span>
 <span id="L142"><span class="lineNum">     142</span>              : </span>
-<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">         208 :   assert(n % qk == 0);</span></span>
-<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">         208 :   assert(nr % 4 == 0);</span></span>
-<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">         208 :   assert(nc % ncols_interleaved == 0);</span></span>
+<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">         104 :   assert(n % qk == 0);</span></span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">         104 :   assert(nr % 4 == 0);</span></span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">         104 :   assert(nc % ncols_interleaved == 0);</span></span>
 <span id="L146"><span class="lineNum">     146</span>              : </span>
 <span id="L147"><span class="lineNum">     147</span>              :   {</span>
 <span id="L148"><span class="lineNum">     148</span>              :     const block_q4_0x8 *b_ptr_start = (const block_q4_0x8 *)vx;</span>
 <span id="L149"><span class="lineNum">     149</span>              :     const block_q8_0x4 *a_ptr_start = (const block_q8_0x4 *)vy;</span>
-<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">         208 :     int64_t b_nb = n / QK4_0;</span></span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">         104 :     int64_t b_nb = n / QK4_0;</span></span>
 <span id="L151"><span class="lineNum">     151</span>              :     int64_t y = 0;</span>
 <span id="L152"><span class="lineNum">     152</span>              :     // Mask to mask out nibbles from packed bytes</span>
 <span id="L153"><span class="lineNum">     153</span>              :     const __m256i m4b = _mm256_set1_epi8(0x0F);</span>
@@ -222,22 +222,22 @@
 <span id="L160"><span class="lineNum">     160</span>              :     // Permute mask used for easier vector processing at later stages</span>
 <span id="L161"><span class="lineNum">     161</span>              :     __m256i requiredOrder = _mm256_set_epi32(3, 2, 1, 0, 7, 6, 5, 4);</span>
 <span id="L162"><span class="lineNum">     162</span>              :     int64_t xstart = 0;</span>
-<span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">         208 :     int anr = nr - nr % 16; // Used to align nr with boundary of 16</span></span>
+<span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">         104 :     int anr = nr - nr % 16; // Used to align nr with boundary of 16</span></span>
 <span id="L164"><span class="lineNum">     164</span>              : </span>
 <span id="L165"><span class="lineNum">     165</span>              :     // Take group of four block_q8_0x4 structures at each pass of the loop and</span>
 <span id="L166"><span class="lineNum">     166</span>              :     // perform dot product operation</span>
 <span id="L167"><span class="lineNum">     167</span>              : </span>
-<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">         672 :     for (; y &lt; anr / 4; y += 4) {</span></span>
+<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">         336 :     for (; y &lt; anr / 4; y += 4) {</span></span>
 <span id="L169"><span class="lineNum">     169</span>              :       const block_q8_0x4 *a_ptrs[4];</span>
 <span id="L170"><span class="lineNum">     170</span>              : </span>
-<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">         464 :       a_ptrs[0] = a_ptr_start + (y * nb);</span></span>
-<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">        1856 :       for (int i = 0; i &lt; 3; ++i) {</span></span>
-<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">        1392 :         a_ptrs[i + 1] = a_ptrs[i] + nb;</span></span>
+<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">         232 :       a_ptrs[0] = a_ptr_start + (y * nb);</span></span>
+<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">         928 :       for (int i = 0; i &lt; 3; ++i) {</span></span>
+<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">         696 :         a_ptrs[i + 1] = a_ptrs[i] + nb;</span></span>
 <span id="L174"><span class="lineNum">     174</span>              :       }</span>
 <span id="L175"><span class="lineNum">     175</span>              : </span>
 <span id="L176"><span class="lineNum">     176</span>              :       // Take group of eight block_q4_0x8 structures at each pass of the loop</span>
 <span id="L177"><span class="lineNum">     177</span>              :       // and perform dot product operation</span>
-<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">        7888 :       for (int64_t x = xstart; x &lt; nc / 8; x++) {</span></span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">        7656 :       for (int64_t x = xstart; x &lt; nc / 8; x++) {</span></span>
 <span id="L179"><span class="lineNum">     179</span>              : </span>
 <span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">        7424 :         const block_q4_0x8 *b_ptr = b_ptr_start + (x * b_nb);</span></span>
 <span id="L181"><span class="lineNum">     181</span>              : </span>
@@ -595,13 +595,13 @@
 <span id="L533"><span class="lineNum">     533</span>              : </span>
 <span id="L534"><span class="lineNum">     534</span>              :     // Take a block_q8_0x4 structures at each pass of the loop and perform dot</span>
 <span id="L535"><span class="lineNum">     535</span>              :     // product operation</span>
-<span id="L536"><span class="lineNum">     536</span> <span class="tlaGNC">         424 :     for (; y &lt; nr / 4; y++) {</span></span>
+<span id="L536"><span class="lineNum">     536</span> <span class="tlaGNC">         212 :     for (; y &lt; nr / 4; y++) {</span></span>
 <span id="L537"><span class="lineNum">     537</span>              : </span>
-<span id="L538"><span class="lineNum">     538</span> <span class="tlaGNC">         216 :       const block_q8_0x4 *a_ptr = a_ptr_start + (y * nb);</span></span>
+<span id="L538"><span class="lineNum">     538</span> <span class="tlaGNC">         108 :       const block_q8_0x4 *a_ptr = a_ptr_start + (y * nb);</span></span>
 <span id="L539"><span class="lineNum">     539</span>              : </span>
 <span id="L540"><span class="lineNum">     540</span>              :       // Load the eight block_q4_0 quantized values interleaved with each other</span>
 <span id="L541"><span class="lineNum">     541</span>              :       // in chunks of eight - B0,B1 ....B6,B7</span>
-<span id="L542"><span class="lineNum">     542</span> <span class="tlaGNC">        6432 :       for (int64_t x = xstart; x &lt; nc / 8; x++) {</span></span>
+<span id="L542"><span class="lineNum">     542</span> <span class="tlaGNC">        6324 :       for (int64_t x = xstart; x &lt; nc / 8; x++) {</span></span>
 <span id="L543"><span class="lineNum">     543</span>              : </span>
 <span id="L544"><span class="lineNum">     544</span> <span class="tlaGNC">        6216 :         const block_q4_0x8 *b_ptr = b_ptr_start + (x * b_nb);</span></span>
 <span id="L545"><span class="lineNum">     545</span>              : </span>
@@ -1001,24 +1001,24 @@
 <span id="L939"><span class="lineNum">     939</span>              :   }</span>
 <span id="L940"><span class="lineNum">     940</span>              : }</span>
 <span id="L941"><span class="lineNum">     941</span>              : </span>
-<span id="L942"><span class="lineNum">     942</span> <span class="tlaGNC">          16 : void nntr_gemm_q4_K_8x8_q8_K(int n, float *__restrict s, size_t bs,</span></span>
+<span id="L942"><span class="lineNum">     942</span> <span class="tlaGNC">           8 : void nntr_gemm_q4_K_8x8_q8_K(int n, float *__restrict s, size_t bs,</span></span>
 <span id="L943"><span class="lineNum">     943</span>              :                              const void *__restrict vx,</span>
 <span id="L944"><span class="lineNum">     944</span>              :                              const void *__restrict vy, int nr, int nc) {</span>
 <span id="L945"><span class="lineNum">     945</span>              :   const int qk = QK_K;</span>
-<span id="L946"><span class="lineNum">     946</span> <span class="tlaGNC">          16 :   const int nb = n / qk;</span></span>
+<span id="L946"><span class="lineNum">     946</span> <span class="tlaGNC">           8 :   const int nb = n / qk;</span></span>
 <span id="L947"><span class="lineNum">     947</span>              :   const int ncols_interleaved = 8;</span>
 <span id="L948"><span class="lineNum">     948</span>              :   const int blocklen = 8;</span>
 <span id="L949"><span class="lineNum">     949</span>              :   static const uint32_t kmask1 = 0x3f3f3f3f;</span>
 <span id="L950"><span class="lineNum">     950</span>              :   static const uint32_t kmask2 = 0x0f0f0f0f;</span>
 <span id="L951"><span class="lineNum">     951</span>              :   static const uint32_t kmask3 = 0x03030303;</span>
 <span id="L952"><span class="lineNum">     952</span>              : </span>
-<span id="L953"><span class="lineNum">     953</span> <span class="tlaGNC">          16 :   assert(n % qk == 0);</span></span>
-<span id="L954"><span class="lineNum">     954</span> <span class="tlaGNC">          16 :   assert(nr % 4 == 0);</span></span>
-<span id="L955"><span class="lineNum">     955</span> <span class="tlaGNC">          16 :   assert(nc % ncols_interleaved == 0);</span></span>
+<span id="L953"><span class="lineNum">     953</span> <span class="tlaGNC">           8 :   assert(n % qk == 0);</span></span>
+<span id="L954"><span class="lineNum">     954</span> <span class="tlaGNC">           8 :   assert(nr % 4 == 0);</span></span>
+<span id="L955"><span class="lineNum">     955</span> <span class="tlaGNC">           8 :   assert(nc % ncols_interleaved == 0);</span></span>
 <span id="L956"><span class="lineNum">     956</span>              : </span>
 <span id="L957"><span class="lineNum">     957</span>              :   const block_q4_Kx8 *b_ptr_start = (const block_q4_Kx8 *)vx;</span>
 <span id="L958"><span class="lineNum">     958</span>              :   const block_q8_Kx4 *a_ptr_start = (const block_q8_Kx4 *)vy;</span>
-<span id="L959"><span class="lineNum">     959</span> <span class="tlaGNC">          16 :   int64_t b_nb = n / QK_K;</span></span>
+<span id="L959"><span class="lineNum">     959</span> <span class="tlaGNC">           8 :   int64_t b_nb = n / QK_K;</span></span>
 <span id="L960"><span class="lineNum">     960</span>              :   int64_t y = 0;</span>
 <span id="L961"><span class="lineNum">     961</span>              : </span>
 <span id="L962"><span class="lineNum">     962</span>              :   // Mask to mask out nibbles from packed bytes</span>
@@ -1026,23 +1026,23 @@
 <span id="L964"><span class="lineNum">     964</span>              :   // Permute mask used for easier vector processing at later stages</span>
 <span id="L965"><span class="lineNum">     965</span>              :   __m256i requiredOrder = _mm256_set_epi32(3, 2, 1, 0, 7, 6, 5, 4);</span>
 <span id="L966"><span class="lineNum">     966</span>              :   int64_t xstart = 0;</span>
-<span id="L967"><span class="lineNum">     967</span> <span class="tlaGNC">          16 :   int anr = nr - nr % 16;</span></span>
+<span id="L967"><span class="lineNum">     967</span> <span class="tlaGNC">           8 :   int anr = nr - nr % 16;</span></span>
 <span id="L968"><span class="lineNum">     968</span>              :   ; // Used to align nr with boundary of 16</span>
 <span id="L969"><span class="lineNum">     969</span>              : </span>
 <span id="L970"><span class="lineNum">     970</span>              :   // Take group of four block_q8_Kx4 structures at each pass of the loop and</span>
 <span id="L971"><span class="lineNum">     971</span>              :   // perform dot product operation</span>
-<span id="L972"><span class="lineNum">     972</span> <span class="tlaGNC">         480 :   for (; y &lt; anr / 4; y += 4) {</span></span>
+<span id="L972"><span class="lineNum">     972</span> <span class="tlaGNC">         240 :   for (; y &lt; anr / 4; y += 4) {</span></span>
 <span id="L973"><span class="lineNum">     973</span>              : </span>
 <span id="L974"><span class="lineNum">     974</span>              :     const block_q8_Kx4 *a_ptrs[4];</span>
 <span id="L975"><span class="lineNum">     975</span>              : </span>
-<span id="L976"><span class="lineNum">     976</span> <span class="tlaGNC">         464 :     a_ptrs[0] = a_ptr_start + (y * nb);</span></span>
-<span id="L977"><span class="lineNum">     977</span> <span class="tlaGNC">        1856 :     for (int i = 0; i &lt; 3; ++i) {</span></span>
-<span id="L978"><span class="lineNum">     978</span> <span class="tlaGNC">        1392 :       a_ptrs[i + 1] = a_ptrs[i] + nb;</span></span>
+<span id="L976"><span class="lineNum">     976</span> <span class="tlaGNC">         232 :     a_ptrs[0] = a_ptr_start + (y * nb);</span></span>
+<span id="L977"><span class="lineNum">     977</span> <span class="tlaGNC">         928 :     for (int i = 0; i &lt; 3; ++i) {</span></span>
+<span id="L978"><span class="lineNum">     978</span> <span class="tlaGNC">         696 :       a_ptrs[i + 1] = a_ptrs[i] + nb;</span></span>
 <span id="L979"><span class="lineNum">     979</span>              :     }</span>
 <span id="L980"><span class="lineNum">     980</span>              : </span>
 <span id="L981"><span class="lineNum">     981</span>              :     // Take group of eight block_q4_kx8 structures at each pass of the loop and</span>
 <span id="L982"><span class="lineNum">     982</span>              :     // perform dot product operation</span>
-<span id="L983"><span class="lineNum">     983</span> <span class="tlaGNC">        7888 :     for (int64_t x = xstart; x &lt; nc / 8; x++) {</span></span>
+<span id="L983"><span class="lineNum">     983</span> <span class="tlaGNC">        7656 :     for (int64_t x = xstart; x &lt; nc / 8; x++) {</span></span>
 <span id="L984"><span class="lineNum">     984</span>              : </span>
 <span id="L985"><span class="lineNum">     985</span> <span class="tlaGNC">        7424 :       const block_q4_Kx8 *b_ptr = b_ptr_start + (x * b_nb);</span></span>
 <span id="L986"><span class="lineNum">     986</span>              : </span>
@@ -1801,11 +1801,11 @@
 <span id="L1739"><span class="lineNum">    1739</span>              :       }</span>
 <span id="L1740"><span class="lineNum">    1740</span>              :     }</span>
 <span id="L1741"><span class="lineNum">    1741</span>              :   }</span>
-<span id="L1742"><span class="lineNum">    1742</span> <span class="tlaGNC">          40 :   for (; y &lt; nr / 4; y++) {</span></span>
+<span id="L1742"><span class="lineNum">    1742</span> <span class="tlaGNC">          20 :   for (; y &lt; nr / 4; y++) {</span></span>
 <span id="L1743"><span class="lineNum">    1743</span>              : </span>
-<span id="L1744"><span class="lineNum">    1744</span> <span class="tlaGNC">          24 :     const block_q8_Kx4 *a_ptr = a_ptr_start + (y * nb);</span></span>
+<span id="L1744"><span class="lineNum">    1744</span> <span class="tlaGNC">          12 :     const block_q8_Kx4 *a_ptr = a_ptr_start + (y * nb);</span></span>
 <span id="L1745"><span class="lineNum">    1745</span>              : </span>
-<span id="L1746"><span class="lineNum">    1746</span> <span class="tlaGNC">         408 :     for (int64_t x = xstart; x &lt; nc / 8; x++) {</span></span>
+<span id="L1746"><span class="lineNum">    1746</span> <span class="tlaGNC">         396 :     for (int64_t x = xstart; x &lt; nc / 8; x++) {</span></span>
 <span id="L1747"><span class="lineNum">    1747</span>              : </span>
 <span id="L1748"><span class="lineNum">    1748</span> <span class="tlaGNC">         384 :       const block_q4_Kx8 *b_ptr = b_ptr_start + (x * b_nb);</span></span>
 <span id="L1749"><span class="lineNum">    1749</span>              : </span>
@@ -2539,7 +2539,7 @@
 <span id="L2477"><span class="lineNum">    2477</span>              :       }</span>
 <span id="L2478"><span class="lineNum">    2478</span>              :     }</span>
 <span id="L2479"><span class="lineNum">    2479</span>              :   }</span>
-<span id="L2480"><span class="lineNum">    2480</span> <span class="tlaGNC">          16 : }</span></span>
+<span id="L2480"><span class="lineNum">    2480</span> <span class="tlaGNC">           8 : }</span></span>
 <span id="L2481"><span class="lineNum">    2481</span>              : </span>
 <span id="L2482"><span class="lineNum">    2482</span> <span class="tlaGNC">          44 : void nntr_gemv_q4_K_8x8_q8_K(int n, float *__restrict s, size_t bs,</span></span>
 <span id="L2483"><span class="lineNum">    2483</span>              :                              const void *__restrict vx,</span>

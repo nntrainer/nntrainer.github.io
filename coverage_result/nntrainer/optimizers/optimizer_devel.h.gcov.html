@@ -37,12 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-23 20:39:19</td>
+            <td class="headerValue">2025-12-24 20:39:19</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">6</td>
-            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntry">7</td>
           </tr>
                   <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -172,10 +172,10 @@
 <span id="L110"><span class="lineNum">     110</span>              : template &lt;typename T,</span>
 <span id="L111"><span class="lineNum">     111</span>              :           std::enable_if_t&lt;std::is_base_of&lt;Optimizer, T&gt;::value, T&gt; * = nullptr&gt;</span>
 <span id="L112"><span class="lineNum">     112</span>              : std::unique_ptr&lt;Optimizer&gt;</span>
-<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">         778 : createOptimizer(const std::vector&lt;std::string&gt; &amp;props = {}) {</span></span>
-<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">         229 :   std::unique_ptr&lt;Optimizer&gt; ptr = std::make_unique&lt;T&gt;();</span></span>
-<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">         778 :   ptr-&gt;setProperty(props);</span></span>
-<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">         770 :   return ptr;</span></span>
+<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">         779 : createOptimizer(const std::vector&lt;std::string&gt; &amp;props = {}) {</span></span>
+<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">         230 :   std::unique_ptr&lt;Optimizer&gt; ptr = std::make_unique&lt;T&gt;();</span></span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">         779 :   ptr-&gt;setProperty(props);</span></span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">         771 :   return ptr;</span></span>
 <span id="L117"><span class="lineNum">     117</span>              : }</span>
 <span id="L118"><span class="lineNum">     118</span>              : </span>
 <span id="L119"><span class="lineNum">     119</span>              : /**</span>

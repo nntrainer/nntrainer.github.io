@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-23 20:39:19</td>
+            <td class="headerValue">2025-12-24 20:39:19</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">90.5&nbsp;%</td>
@@ -829,8 +829,8 @@
 <span id="L767"><span class="lineNum">     767</span>              :         gemv_int4_async_cl(mdatas, scales, data, rdatas, K, Ns,</span>
 <span id="L768"><span class="lineNum">     768</span>              :                            Int4QTensor::getGroupSize());</span>
 <span id="L769"><span class="lineNum">     769</span>              :       } else {</span>
-<span id="L770"><span class="lineNum">     770</span>              :         openvino_gemm_async_cl(data, mdatas, scales, rdatas, M, Ns, K,</span>
-<span id="L771"><span class="lineNum">     771</span>              :                                Int4QTensor::getGroupSize());</span>
+<span id="L770"><span class="lineNum">     770</span>              :         gemm_int4_async_cl(data, mdatas, scales, rdatas, M, Ns, K,</span>
+<span id="L771"><span class="lineNum">     771</span>              :                            Int4QTensor::getGroupSize());</span>
 <span id="L772"><span class="lineNum">     772</span>              :       }</span>
 <span id="L773"><span class="lineNum">     773</span>              :     } else {</span>
 <span id="L774"><span class="lineNum">     774</span>              :       /// @todo This should be replaced with standard CPU INT4 computation</span>
@@ -1066,8 +1066,8 @@
 <span id="L1004"><span class="lineNum">    1004</span>              :       gemv_int4_cl(mdata, input.getScale&lt;uint16_t&gt;(), data, rdata, K, N,</span>
 <span id="L1005"><span class="lineNum">    1005</span>              :                    Int4QTensor::getGroupSize());</span>
 <span id="L1006"><span class="lineNum">    1006</span>              :     } else {</span>
-<span id="L1007"><span class="lineNum">    1007</span>              :       openvino_sgemm_cl(data, mdata, input.getScale&lt;uint16_t&gt;(), rdata, M, N, K,</span>
-<span id="L1008"><span class="lineNum">    1008</span>              :                         Int4QTensor::getGroupSize());</span>
+<span id="L1007"><span class="lineNum">    1007</span>              :       sgemm_int4_cl(data, mdata, input.getScale&lt;uint16_t&gt;(), rdata, M, N, K,</span>
+<span id="L1008"><span class="lineNum">    1008</span>              :                     Int4QTensor::getGroupSize());</span>
 <span id="L1009"><span class="lineNum">    1009</span>              :     }</span>
 <span id="L1010"><span class="lineNum">    1010</span>              :   } else {</span>
 <span id="L1011"><span class="lineNum">    1011</span>              :     /// @todo This should be replaced with standard CPU INT4 computation</span>

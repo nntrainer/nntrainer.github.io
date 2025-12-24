@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-23 20:39:19</td>
+            <td class="headerValue">2025-12-24 20:39:19</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryMed">88.9&nbsp;%</td>
@@ -83,8 +83,8 @@
 <span id="L21"><span class="lineNum">      21</span>              :  * @param [in] num_threads Use BLAS_NUM_THREADS if &lt; 0.</span>
 <span id="L22"><span class="lineNum">      22</span>              :  *                         Otherwise, directly call openblas API.</span>
 <span id="L23"><span class="lineNum">      23</span>              :  */</span>
-<span id="L24"><span class="lineNum">      24</span> <span class="tlaGNC tlaBgGNC">          37 : void __openblas_set_num_threads(int num_threads) {</span></span>
-<span id="L25"><span class="lineNum">      25</span> <span class="tlaGNC">          37 :   if (num_threads &lt; 0) {</span></span>
+<span id="L24"><span class="lineNum">      24</span> <span class="tlaGNC tlaBgGNC">          61 : void __openblas_set_num_threads(int num_threads) {</span></span>
+<span id="L25"><span class="lineNum">      25</span> <span class="tlaGNC">          61 :   if (num_threads &lt; 0) {</span></span>
 <span id="L26"><span class="lineNum">      26</span>              :   #ifdef BLAS_NUM_THREADS</span>
 <span id="L27"><span class="lineNum">      27</span>              :     openblas_set_num_threads(BLAS_NUM_THREADS);</span>
 <span id="L28"><span class="lineNum">      28</span>              :   #else</span>
@@ -98,7 +98,7 @@
 <span id="L36"><span class="lineNum">      36</span>              :   } else {</span>
 <span id="L37"><span class="lineNum">      37</span> <span class="tlaUNC tlaBgUNC">           0 :     openblas_set_num_threads(num_threads);</span></span>
 <span id="L38"><span class="lineNum">      38</span>              :   }</span>
-<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC tlaBgGNC">          37 : }</span></span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC tlaBgGNC">          61 : }</span></span>
 <span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">       15254 : void __cblas_saxpy(const unsigned int N, const float alpha, const float *X,</span></span>
 <span id="L41"><span class="lineNum">      41</span>              :                    const unsigned int incX, float *Y, const unsigned int incY) {</span>
 <span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">       15254 :   cblas_saxpy(N, alpha, X, incX, Y, incY);</span></span>

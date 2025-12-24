@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-23 20:39:19</td>
+            <td class="headerValue">2025-12-24 20:39:19</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">53.8&nbsp;%</td>
@@ -687,16 +687,18 @@
 <span id="L625"><span class="lineNum">     625</span>              :   }</span>
 <span id="L626"><span class="lineNum">     626</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L627"><span class="lineNum">     627</span>              : </span>
-<span id="L628"><span class="lineNum">     628</span> <span class="tlaUNC">           0 : void __fallback_transform_q4_0x_from_int4(size_t N, size_t K,</span></span>
-<span id="L629"><span class="lineNum">     629</span>              :                                           const uint8_t *osv32_weights,</span>
-<span id="L630"><span class="lineNum">     630</span>              :                                           const uint16_t *osv32_scales,</span>
-<span id="L631"><span class="lineNum">     631</span>              :                                           size_t scale_group_size,</span>
-<span id="L632"><span class="lineNum">     632</span>              :                                           void *dst_q4_0x) {</span>
-<span id="L633"><span class="lineNum">     633</span> <span class="tlaUNC">           0 :   Q4_0Utils::transformQ4_0x_FromInt4(N, K, osv32_weights, osv32_scales,</span></span>
-<span id="L634"><span class="lineNum">     634</span>              :                                      scale_group_size, 8, dst_q4_0x);</span>
-<span id="L635"><span class="lineNum">     635</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L636"><span class="lineNum">     636</span>              : </span>
-<span id="L637"><span class="lineNum">     637</span>              : } // namespace nntrainer</span>
+<span id="L628"><span class="lineNum">     628</span> <span class="tlaUNC">           0 : void __fallback_transform_int4_osv32_isv2_to_q4_0(size_t N, size_t K,</span></span>
+<span id="L629"><span class="lineNum">     629</span>              :                                                   const uint8_t *osv32_weights,</span>
+<span id="L630"><span class="lineNum">     630</span>              :                                                   const uint16_t *osv32_scales,</span>
+<span id="L631"><span class="lineNum">     631</span>              :                                                   size_t scale_group_size,</span>
+<span id="L632"><span class="lineNum">     632</span>              :                                                   int q4_0x_block_size,</span>
+<span id="L633"><span class="lineNum">     633</span>              :                                                   void *dst_q4_0x) {</span>
+<span id="L634"><span class="lineNum">     634</span> <span class="tlaUNC">           0 :   Q4_0Utils::transformQ4_0x_FromInt4(N, K, osv32_weights, osv32_scales,</span></span>
+<span id="L635"><span class="lineNum">     635</span>              :                                      scale_group_size, q4_0x_block_size,</span>
+<span id="L636"><span class="lineNum">     636</span>              :                                      dst_q4_0x);</span>
+<span id="L637"><span class="lineNum">     637</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L638"><span class="lineNum">     638</span>              : </span>
+<span id="L639"><span class="lineNum">     639</span>              : } // namespace nntrainer</span>
         </pre>
               </td>
             </tr>

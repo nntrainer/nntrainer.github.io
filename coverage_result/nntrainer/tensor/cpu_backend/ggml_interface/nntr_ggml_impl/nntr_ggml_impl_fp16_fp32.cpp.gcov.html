@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-23 20:39:19</td>
+            <td class="headerValue">2025-12-24 20:39:19</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryMed">76.9&nbsp;%</td>
@@ -386,9 +386,9 @@
 <span id="L324"><span class="lineNum">     324</span>              : </span>
 <span id="L325"><span class="lineNum">     325</span>              : std::mutex ggml_critical_section_mutex;</span>
 <span id="L326"><span class="lineNum">     326</span>              : </span>
-<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">          37 : void ggml_critical_section_start() { ggml_critical_section_mutex.lock(); }</span></span>
+<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">          61 : void ggml_critical_section_start() { ggml_critical_section_mutex.lock(); }</span></span>
 <span id="L328"><span class="lineNum">     328</span>              : </span>
-<span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">          37 : void ggml_critical_section_end(void) { ggml_critical_section_mutex.unlock(); }</span></span>
+<span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">          61 : void ggml_critical_section_end(void) { ggml_critical_section_mutex.unlock(); }</span></span>
 <span id="L330"><span class="lineNum">     330</span>              : </span>
 <span id="L331"><span class="lineNum">     331</span>              : // ---------------------</span>
 <span id="L332"><span class="lineNum">     332</span>              : </span>
@@ -447,12 +447,12 @@
 <span id="L385"><span class="lineNum">     385</span>              : }</span>
 <span id="L386"><span class="lineNum">     386</span>              : #endif</span>
 <span id="L387"><span class="lineNum">     387</span>              : </span>
-<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC tlaBgGNC">          37 : struct ggml_context *ggml_init(struct ggml_init_params params) {</span></span>
+<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC tlaBgGNC">          61 : struct ggml_context *ggml_init(struct ggml_init_params params) {</span></span>
 <span id="L389"><span class="lineNum">     389</span>              :   static bool is_first_call = true;</span>
 <span id="L390"><span class="lineNum">     390</span>              : </span>
-<span id="L391"><span class="lineNum">     391</span> <span class="tlaGNC">          37 :   ggml_critical_section_start();</span></span>
+<span id="L391"><span class="lineNum">     391</span> <span class="tlaGNC">          61 :   ggml_critical_section_start();</span></span>
 <span id="L392"><span class="lineNum">     392</span>              : </span>
-<span id="L393"><span class="lineNum">     393</span> <span class="tlaGNC">          37 :   if (is_first_call) {</span></span>
+<span id="L393"><span class="lineNum">     393</span> <span class="tlaGNC">          61 :   if (is_first_call) {</span></span>
 <span id="L394"><span class="lineNum">     394</span>              :     // initialize time system (required on Windows)</span>
 <span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">          29 :     ggml_time_init();</span></span>
 <span id="L396"><span class="lineNum">     396</span>              : </span>
@@ -464,15 +464,15 @@
 <span id="L402"><span class="lineNum">     402</span> <span class="tlaGNC">          29 :     is_first_call = false;</span></span>
 <span id="L403"><span class="lineNum">     403</span>              :   }</span>
 <span id="L404"><span class="lineNum">     404</span>              : </span>
-<span id="L405"><span class="lineNum">     405</span> <span class="tlaGNC">          37 :   ggml_critical_section_end();</span></span>
+<span id="L405"><span class="lineNum">     405</span> <span class="tlaGNC">          61 :   ggml_critical_section_end();</span></span>
 <span id="L406"><span class="lineNum">     406</span>              : </span>
 <span id="L407"><span class="lineNum">     407</span>              :   struct ggml_context *ctx = nullptr;</span>
 <span id="L408"><span class="lineNum">     408</span>              : </span>
-<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">          37 :   return ctx;</span></span>
+<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">          61 :   return ctx;</span></span>
 <span id="L410"><span class="lineNum">     410</span>              : }</span>
 <span id="L411"><span class="lineNum">     411</span>              : </span>
-<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC">          37 : void ggml_free(struct ggml_context *ctx) {</span></span>
-<span id="L413"><span class="lineNum">     413</span> <span class="tlaGNC">          37 :   if (ctx == NULL) {</span></span>
+<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC">          61 : void ggml_free(struct ggml_context *ctx) {</span></span>
+<span id="L413"><span class="lineNum">     413</span> <span class="tlaGNC">          61 :   if (ctx == NULL) {</span></span>
 <span id="L414"><span class="lineNum">     414</span>              :     return;</span>
 <span id="L415"><span class="lineNum">     415</span>              :   }</span>
 <span id="L416"><span class="lineNum">     416</span>              : </span>
@@ -483,12 +483,12 @@
 <span id="L421"><span class="lineNum">     421</span> <span class="tlaUNC">           0 :   free(ctx);</span></span>
 <span id="L422"><span class="lineNum">     422</span>              : }</span>
 <span id="L423"><span class="lineNum">     423</span>              : </span>
-<span id="L424"><span class="lineNum">     424</span> <span class="tlaGNC tlaBgGNC">          37 : void nntr_ggml_init() {</span></span>
+<span id="L424"><span class="lineNum">     424</span> <span class="tlaGNC tlaBgGNC">          61 : void nntr_ggml_init() {</span></span>
 <span id="L425"><span class="lineNum">     425</span>              :   // needed to initialize f16 tables</span>
-<span id="L426"><span class="lineNum">     426</span> <span class="tlaGNC">          37 :   struct ggml_init_params params = {0, NULL, false};</span></span>
-<span id="L427"><span class="lineNum">     427</span> <span class="tlaGNC">          37 :   struct ggml_context *ctx = ggml_init(params);</span></span>
-<span id="L428"><span class="lineNum">     428</span> <span class="tlaGNC">          37 :   ggml_free(ctx);</span></span>
-<span id="L429"><span class="lineNum">     429</span> <span class="tlaGNC">          37 : }</span></span>
+<span id="L426"><span class="lineNum">     426</span> <span class="tlaGNC">          61 :   struct ggml_init_params params = {0, NULL, false};</span></span>
+<span id="L427"><span class="lineNum">     427</span> <span class="tlaGNC">          61 :   struct ggml_context *ctx = ggml_init(params);</span></span>
+<span id="L428"><span class="lineNum">     428</span> <span class="tlaGNC">          61 :   ggml_free(ctx);</span></span>
+<span id="L429"><span class="lineNum">     429</span> <span class="tlaGNC">          61 : }</span></span>
         </pre>
               </td>
             </tr>

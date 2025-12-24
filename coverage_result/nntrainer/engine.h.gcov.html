@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-23 20:39:19</td>
+            <td class="headerValue">2025-12-24 20:39:19</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -178,16 +178,16 @@
 <span id="L116"><span class="lineNum">     116</span>              :    * @return Context Pointer : for register Object factory, casting might be</span>
 <span id="L117"><span class="lineNum">     117</span>              :    * needed.</span>
 <span id="L118"><span class="lineNum">     118</span>              :    */</span>
-<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">       11594 :   nntrainer::Context *getRegisteredContext(std::string name) const {</span></span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">       11595 :   nntrainer::Context *getRegisteredContext(std::string name) const {</span></span>
 <span id="L120"><span class="lineNum">     120</span>              : </span>
 <span id="L121"><span class="lineNum">     121</span>              :     std::transform(name.begin(), name.end(), name.begin(),</span>
-<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">       34782 :                    [](unsigned char c) { return std::tolower(c); });</span></span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">       34785 :                    [](unsigned char c) { return std::tolower(c); });</span></span>
 <span id="L123"><span class="lineNum">     123</span>              : </span>
-<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">       11594 :     if (engines.find(name) == engines.end()) {</span></span>
+<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">       11595 :     if (engines.find(name) == engines.end()) {</span></span>
 <span id="L125"><span class="lineNum">     125</span> <span class="tlaUNC tlaBgUNC">           0 :       throw std::invalid_argument(&quot;[Engine] &quot; + name +</span></span>
 <span id="L126"><span class="lineNum">     126</span> <span class="tlaUNC">           0 :                                   &quot; Context is not registered&quot;);</span></span>
 <span id="L127"><span class="lineNum">     127</span>              :     }</span>
-<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC tlaBgGNC">       11594 :     return engines.at(name);</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC tlaBgGNC">       11595 :     return engines.at(name);</span></span>
 <span id="L129"><span class="lineNum">     129</span>              :   }</span>
 <span id="L130"><span class="lineNum">     130</span>              : </span>
 <span id="L131"><span class="lineNum">     131</span>              :   std::unordered_map&lt;std::string, std::shared_ptr&lt;nntrainer::MemAllocator&gt;&gt;</span>
@@ -253,10 +253,10 @@
 <span id="L191"><span class="lineNum">     191</span>              :    * @return unitque_ptr&lt;T&gt; unique pointer to the Optimizer object</span>
 <span id="L192"><span class="lineNum">     192</span>              :    */</span>
 <span id="L193"><span class="lineNum">     193</span>              :   std::unique_ptr&lt;nntrainer::Optimizer&gt;</span>
-<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">          29 :   createOptimizerObject(const int int_key,</span></span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">          30 :   createOptimizerObject(const int int_key,</span></span>
 <span id="L195"><span class="lineNum">     195</span>              :                         const std::vector&lt;std::string&gt; &amp;properties = {}) const {</span>
-<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">          29 :     auto ct = getRegisteredContext(parseComputeEngine(properties));</span></span>
-<span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">          29 :     return ct-&gt;createOptimizerObject(int_key);</span></span>
+<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">          30 :     auto ct = getRegisteredContext(parseComputeEngine(properties));</span></span>
+<span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">          30 :     return ct-&gt;createOptimizerObject(int_key);</span></span>
 <span id="L198"><span class="lineNum">     198</span>              :   }</span>
 <span id="L199"><span class="lineNum">     199</span>              : </span>
 <span id="L200"><span class="lineNum">     200</span>              :   /**</span>

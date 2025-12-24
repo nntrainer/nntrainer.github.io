@@ -37,11 +37,11 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-23 20:39:19</td>
+            <td class="headerValue">2025-12-24 20:39:19</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryLo">73.6&nbsp;%</td>
-            <td class="headerCovTableEntry">367</td>
+            <td class="headerCovTableEntryLo">73.4&nbsp;%</td>
+            <td class="headerCovTableEntry">368</td>
             <td class="headerCovTableEntry">270</td>
           </tr>
                   <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -209,7 +209,7 @@
 <span id="L147"><span class="lineNum">     147</span>              :    * @brief Construct a new Property object</span>
 <span id="L148"><span class="lineNum">     148</span>              :    *</span>
 <span id="L149"><span class="lineNum">     149</span>              :    */</span>
-<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC tlaBgGNC">       69690 :   Property() : value(nullptr){};</span></span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC tlaBgGNC">       69691 :   Property() : value(nullptr){};</span></span>
 <span id="L151"><span class="lineNum">     151</span>              : </span>
 <span id="L152"><span class="lineNum">     152</span>              :   /**</span>
 <span id="L153"><span class="lineNum">     153</span>              :    * @brief Construct a new Property object</span>
@@ -223,11 +223,11 @@
 <span id="L161"><span class="lineNum">     161</span>              :    *</span>
 <span id="L162"><span class="lineNum">     162</span>              :    * @param rhs right side to copy from</span>
 <span id="L163"><span class="lineNum">     163</span>              :    */</span>
-<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">       82389 :   Property(const Property &amp;rhs) {</span></span>
-<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">       82389 :     if (this != &amp;rhs &amp;&amp; rhs.value) {</span></span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">       82390 :   Property(const Property &amp;rhs) {</span></span>
+<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">       82390 :     if (this != &amp;rhs &amp;&amp; rhs.value) {</span></span>
 <span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">        1706 :       value = std::make_unique&lt;T&gt;(*rhs.value);</span></span>
 <span id="L167"><span class="lineNum">     167</span>              :     }</span>
-<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">       82389 :   }</span></span>
+<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">       82390 :   }</span></span>
 <span id="L169"><span class="lineNum">     169</span>              : </span>
 <span id="L170"><span class="lineNum">     170</span>              :   /**</span>
 <span id="L171"><span class="lineNum">     171</span>              :    * @brief Copy assignment operator of a new property</span>
@@ -242,7 +242,7 @@
 <span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">        3218 :     return *this;</span></span>
 <span id="L181"><span class="lineNum">     181</span>              :   };</span>
 <span id="L182"><span class="lineNum">     182</span>              : </span>
-<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">       25067 :   Property(Property &amp;&amp;rhs) noexcept = default;</span></span>
+<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">       25069 :   Property(Property &amp;&amp;rhs) noexcept = default;</span></span>
 <span id="L184"><span class="lineNum">     184</span>              :   Property &amp;operator=(Property &amp;&amp;rhs) noexcept = default;</span>
 <span id="L185"><span class="lineNum">     185</span>              : </span>
 <span id="L186"><span class="lineNum">     186</span>              :   /**</span>
@@ -301,11 +301,11 @@
 <span id="L239"><span class="lineNum">     239</span>              :    * @param v value to set</span>
 <span id="L240"><span class="lineNum">     240</span>              :    * @throw std::invalid_argument if argument is not valid</span>
 <span id="L241"><span class="lineNum">     241</span>              :    */</span>
-<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">      189210 :   virtual void set(const T &amp;v) {</span></span>
-<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">      189254 :     NNTR_THROW_IF(isValid(v) == false, std::invalid_argument)</span></span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">      189214 :   virtual void set(const T &amp;v) {</span></span>
+<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">      189258 :     NNTR_THROW_IF(isValid(v) == false, std::invalid_argument)</span></span>
 <span id="L244"><span class="lineNum">     244</span>              :       &lt;&lt; &quot;argument is not valid&quot;;</span>
 <span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">       93626 :     value = std::make_unique&lt;T&gt;(v);</span></span>
-<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">      189158 :   }</span></span>
+<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">      189162 :   }</span></span>
 <span id="L247"><span class="lineNum">     247</span>              : </span>
 <span id="L248"><span class="lineNum">     248</span>              :   /**</span>
 <span id="L249"><span class="lineNum">     249</span>              :    * @brief check if given value is valid</span>
@@ -314,7 +314,7 @@
 <span id="L252"><span class="lineNum">     252</span>              :    * @retval true if valid</span>
 <span id="L253"><span class="lineNum">     253</span>              :    * @retval false if not valid</span>
 <span id="L254"><span class="lineNum">     254</span>              :    */</span>
-<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">       86526 :   virtual bool isValid(const T &amp;v) const { return true; }</span></span>
+<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">       86530 :   virtual bool isValid(const T &amp;v) const { return true; }</span></span>
 <span id="L256"><span class="lineNum">     256</span>              : </span>
 <span id="L257"><span class="lineNum">     257</span>              :   /**</span>
 <span id="L258"><span class="lineNum">     258</span>              :    * @brief operator==</span>
@@ -357,7 +357,7 @@
 <span id="L295"><span class="lineNum">     295</span>              :  * @brief abstract class for positive integer</span>
 <span id="L296"><span class="lineNum">     296</span>              :  *</span>
 <span id="L297"><span class="lineNum">     297</span>              :  */</span>
-<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">       12920 : class PositiveIntegerProperty : public Property&lt;unsigned int&gt; {</span></span>
+<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">       12921 : class PositiveIntegerProperty : public Property&lt;unsigned int&gt; {</span></span>
 <span id="L299"><span class="lineNum">     299</span>              : public:</span>
 <span id="L300"><span class="lineNum">     300</span>              :   /**</span>
 <span id="L301"><span class="lineNum">     301</span>              :    * @brief Destroy the Positive Integer Property object</span>
