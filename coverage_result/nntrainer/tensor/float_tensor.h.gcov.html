@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-01-06 20:41:07</td>
+            <td class="headerValue">2026-01-07 20:42:51</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryMed">85.7&nbsp;%</td>
@@ -65,7 +65,7 @@
 <span id="L3"><span class="lineNum">       3</span>              :  * @file        float_tensor.h</span>
 <span id="L4"><span class="lineNum">       4</span>              :  * @date        01 December 2023</span>
 <span id="L5"><span class="lineNum">       5</span>              :  * @brief       This is FloatTensor class for 32-bit floating point calculation</span>
-<span id="L6"><span class="lineNum">       6</span>              :  * @see         https://github.com/nnstreamer/nntrainer</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * @see         https://github.com/nntrainer/nntrainer</span>
 <span id="L7"><span class="lineNum">       7</span>              :  * @author      Jijoong Moon &lt;jijoong.moon@samsung.com&gt;</span>
 <span id="L8"><span class="lineNum">       8</span>              :  * @author      Donghyeon Jeong &lt;dhyeon.jeong@samsung.com&gt;</span>
 <span id="L9"><span class="lineNum">       9</span>              :  * @bug         No known bugs except for NYI items</span>
@@ -182,7 +182,7 @@
 <span id="L120"><span class="lineNum">     120</span>              :   /**</span>
 <span id="L121"><span class="lineNum">     121</span>              :    * @brief Basic Destructor</span>
 <span id="L122"><span class="lineNum">     122</span>              :    */</span>
-<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">     1198342 :   ~FloatTensor() {}</span></span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">     1198347 :   ~FloatTensor() {}</span></span>
 <span id="L124"><span class="lineNum">     124</span>              : </span>
 <span id="L125"><span class="lineNum">     125</span>              :   /**</span>
 <span id="L126"><span class="lineNum">     126</span>              :    * @brief     Comparison operator overload</span>
@@ -418,220 +418,226 @@
 <span id="L356"><span class="lineNum">     356</span>              :   float l2norm() const override;</span>
 <span id="L357"><span class="lineNum">     357</span>              : </span>
 <span id="L358"><span class="lineNum">     358</span>              :   /**</span>
-<span id="L359"><span class="lineNum">     359</span>              :    * @copydoc Tensor::pow(float exponent, Tensor &amp;output)</span>
+<span id="L359"><span class="lineNum">     359</span>              :    * @copydoc Tensor::normalization_i</span>
 <span id="L360"><span class="lineNum">     360</span>              :    */</span>
-<span id="L361"><span class="lineNum">     361</span>              :   Tensor &amp;pow(float exponent, Tensor &amp;output) const override;</span>
-<span id="L362"><span class="lineNum">     362</span>              : </span>
-<span id="L363"><span class="lineNum">     363</span>              :   /**</span>
-<span id="L364"><span class="lineNum">     364</span>              :    * @copydoc Tensor::sqrt(&amp;output)</span>
-<span id="L365"><span class="lineNum">     365</span>              :    */</span>
-<span id="L366"><span class="lineNum">     366</span>              :   Tensor &amp;sqrt(Tensor &amp;output) const override;</span>
-<span id="L367"><span class="lineNum">     367</span>              : </span>
-<span id="L368"><span class="lineNum">     368</span>              :   /**</span>
-<span id="L369"><span class="lineNum">     369</span>              :    * @copydoc Tensor::erf(Tensor &amp;output)</span>
-<span id="L370"><span class="lineNum">     370</span>              :    */</span>
-<span id="L371"><span class="lineNum">     371</span>              :   Tensor &amp;erf(Tensor &amp;output) const override;</span>
-<span id="L372"><span class="lineNum">     372</span>              : </span>
-<span id="L373"><span class="lineNum">     373</span>              :   /**</span>
-<span id="L374"><span class="lineNum">     374</span>              :    * @copydoc Tensor::sin(Tensor &amp;out, float alpha)</span>
-<span id="L375"><span class="lineNum">     375</span>              :    */</span>
-<span id="L376"><span class="lineNum">     376</span>              :   void sin(Tensor &amp;out, float alpha) override;</span>
-<span id="L377"><span class="lineNum">     377</span>              : </span>
-<span id="L378"><span class="lineNum">     378</span>              :   /**</span>
-<span id="L379"><span class="lineNum">     379</span>              :    * @copydoc Tensor::cos(Tensor &amp;out, float alpha)</span>
-<span id="L380"><span class="lineNum">     380</span>              :    */</span>
-<span id="L381"><span class="lineNum">     381</span>              :   void cos(Tensor &amp;out, float alpha) override;</span>
-<span id="L382"><span class="lineNum">     382</span>              : </span>
-<span id="L383"><span class="lineNum">     383</span>              :   /**</span>
-<span id="L384"><span class="lineNum">     384</span>              :    * @copydoc Tensor::tan(Tensor &amp;output, float alpha)</span>
-<span id="L385"><span class="lineNum">     385</span>              :    */</span>
-<span id="L386"><span class="lineNum">     386</span>              :   void tan(Tensor &amp;output, float alpha) override;</span>
-<span id="L387"><span class="lineNum">     387</span>              : </span>
-<span id="L388"><span class="lineNum">     388</span>              :   /**</span>
-<span id="L389"><span class="lineNum">     389</span>              :    * @copydoc TensorBase::inv_sqrt(Tensor &amp;out)</span>
-<span id="L390"><span class="lineNum">     390</span>              :    */</span>
-<span id="L391"><span class="lineNum">     391</span>              :   void inv_sqrt(Tensor &amp;out) override;</span>
-<span id="L392"><span class="lineNum">     392</span>              : </span>
-<span id="L393"><span class="lineNum">     393</span>              :   /**</span>
-<span id="L394"><span class="lineNum">     394</span>              :    *  @copydoc Tensor::dot(Tensor const &amp;input, Tensor &amp;output, bool</span>
-<span id="L395"><span class="lineNum">     395</span>              :    * trans, bool trans_in, float beta)</span>
+<span id="L361"><span class="lineNum">     361</span>              :   void normalization_i(unsigned int dim, float p = 2.0,</span>
+<span id="L362"><span class="lineNum">     362</span>              :                        float epsilon = 1e-12) override;</span>
+<span id="L363"><span class="lineNum">     363</span>              : </span>
+<span id="L364"><span class="lineNum">     364</span>              :   /**</span>
+<span id="L365"><span class="lineNum">     365</span>              :    * @copydoc Tensor::pow(float exponent, Tensor &amp;output)</span>
+<span id="L366"><span class="lineNum">     366</span>              :    */</span>
+<span id="L367"><span class="lineNum">     367</span>              :   Tensor &amp;pow(float exponent, Tensor &amp;output) const override;</span>
+<span id="L368"><span class="lineNum">     368</span>              : </span>
+<span id="L369"><span class="lineNum">     369</span>              :   /**</span>
+<span id="L370"><span class="lineNum">     370</span>              :    * @copydoc Tensor::sqrt(&amp;output)</span>
+<span id="L371"><span class="lineNum">     371</span>              :    */</span>
+<span id="L372"><span class="lineNum">     372</span>              :   Tensor &amp;sqrt(Tensor &amp;output) const override;</span>
+<span id="L373"><span class="lineNum">     373</span>              : </span>
+<span id="L374"><span class="lineNum">     374</span>              :   /**</span>
+<span id="L375"><span class="lineNum">     375</span>              :    * @copydoc Tensor::erf(Tensor &amp;output)</span>
+<span id="L376"><span class="lineNum">     376</span>              :    */</span>
+<span id="L377"><span class="lineNum">     377</span>              :   Tensor &amp;erf(Tensor &amp;output) const override;</span>
+<span id="L378"><span class="lineNum">     378</span>              : </span>
+<span id="L379"><span class="lineNum">     379</span>              :   /**</span>
+<span id="L380"><span class="lineNum">     380</span>              :    * @copydoc Tensor::sin(Tensor &amp;out, float alpha)</span>
+<span id="L381"><span class="lineNum">     381</span>              :    */</span>
+<span id="L382"><span class="lineNum">     382</span>              :   void sin(Tensor &amp;out, float alpha) override;</span>
+<span id="L383"><span class="lineNum">     383</span>              : </span>
+<span id="L384"><span class="lineNum">     384</span>              :   /**</span>
+<span id="L385"><span class="lineNum">     385</span>              :    * @copydoc Tensor::cos(Tensor &amp;out, float alpha)</span>
+<span id="L386"><span class="lineNum">     386</span>              :    */</span>
+<span id="L387"><span class="lineNum">     387</span>              :   void cos(Tensor &amp;out, float alpha) override;</span>
+<span id="L388"><span class="lineNum">     388</span>              : </span>
+<span id="L389"><span class="lineNum">     389</span>              :   /**</span>
+<span id="L390"><span class="lineNum">     390</span>              :    * @copydoc Tensor::tan(Tensor &amp;output, float alpha)</span>
+<span id="L391"><span class="lineNum">     391</span>              :    */</span>
+<span id="L392"><span class="lineNum">     392</span>              :   void tan(Tensor &amp;output, float alpha) override;</span>
+<span id="L393"><span class="lineNum">     393</span>              : </span>
+<span id="L394"><span class="lineNum">     394</span>              :   /**</span>
+<span id="L395"><span class="lineNum">     395</span>              :    * @copydoc TensorBase::inv_sqrt(Tensor &amp;out)</span>
 <span id="L396"><span class="lineNum">     396</span>              :    */</span>
-<span id="L397"><span class="lineNum">     397</span>              :   Tensor &amp;dot(Tensor const &amp;input, Tensor &amp;output, bool trans, bool trans_in,</span>
-<span id="L398"><span class="lineNum">     398</span>              :               float beta) const override;</span>
-<span id="L399"><span class="lineNum">     399</span>              : </span>
-<span id="L400"><span class="lineNum">     400</span>              :   void dot(std::vector&lt;Tensor *&gt; input, std::vector&lt;Tensor *&gt; output,</span>
-<span id="L401"><span class="lineNum">     401</span>              :            bool trans, bool trans_in, float beta) const override;</span>
-<span id="L402"><span class="lineNum">     402</span>              : </span>
-<span id="L403"><span class="lineNum">     403</span>              :   /**</span>
-<span id="L404"><span class="lineNum">     404</span>              :    * @copydoc Tensor::dropout_mask(float dropout)</span>
-<span id="L405"><span class="lineNum">     405</span>              :    */</span>
-<span id="L406"><span class="lineNum">     406</span>              :   void dropout_mask(float dropout) override;</span>
-<span id="L407"><span class="lineNum">     407</span>              : </span>
-<span id="L408"><span class="lineNum">     408</span>              :   /**</span>
-<span id="L409"><span class="lineNum">     409</span>              :    * @copydoc Tensor::filter_mask(const Tensor &amp;mask_len, bool reverse)</span>
-<span id="L410"><span class="lineNum">     410</span>              :    */</span>
-<span id="L411"><span class="lineNum">     411</span>              :   void filter_mask(const Tensor &amp;mask_len, bool reverse) override;</span>
-<span id="L412"><span class="lineNum">     412</span>              : </span>
-<span id="L413"><span class="lineNum">     413</span>              :   /**</span>
-<span id="L414"><span class="lineNum">     414</span>              :    * @copydoc Tensor::zoneout_mask(Tensor &amp;opposite, float zoneout)</span>
-<span id="L415"><span class="lineNum">     415</span>              :    */</span>
-<span id="L416"><span class="lineNum">     416</span>              :   void zoneout_mask(Tensor &amp;opposite, float zoneout) override;</span>
-<span id="L417"><span class="lineNum">     417</span>              : </span>
-<span id="L418"><span class="lineNum">     418</span>              :   /**</span>
-<span id="L419"><span class="lineNum">     419</span>              :    * @copydoc Tensor::split(std::vector&lt;size_t&gt; sizes, int axis)</span>
-<span id="L420"><span class="lineNum">     420</span>              :    */</span>
-<span id="L421"><span class="lineNum">     421</span>              :   std::vector&lt;Tensor&gt; split(std::vector&lt;size_t&gt; sizes, int axis) override;</span>
-<span id="L422"><span class="lineNum">     422</span>              : </span>
-<span id="L423"><span class="lineNum">     423</span>              :   /**</span>
-<span id="L424"><span class="lineNum">     424</span>              :    * @copydoc Tensor::concat()</span>
-<span id="L425"><span class="lineNum">     425</span>              :    */</span>
-<span id="L426"><span class="lineNum">     426</span>              :   Tensor concat(const std::vector&lt;Tensor&gt; &amp;tensors, int axis,</span>
-<span id="L427"><span class="lineNum">     427</span>              :                 Tensor &amp;output) override;</span>
+<span id="L397"><span class="lineNum">     397</span>              :   void inv_sqrt(Tensor &amp;out) override;</span>
+<span id="L398"><span class="lineNum">     398</span>              : </span>
+<span id="L399"><span class="lineNum">     399</span>              :   /**</span>
+<span id="L400"><span class="lineNum">     400</span>              :    *  @copydoc Tensor::dot(Tensor const &amp;input, Tensor &amp;output, bool</span>
+<span id="L401"><span class="lineNum">     401</span>              :    * trans, bool trans_in, float beta)</span>
+<span id="L402"><span class="lineNum">     402</span>              :    */</span>
+<span id="L403"><span class="lineNum">     403</span>              :   Tensor &amp;dot(Tensor const &amp;input, Tensor &amp;output, bool trans, bool trans_in,</span>
+<span id="L404"><span class="lineNum">     404</span>              :               float beta) const override;</span>
+<span id="L405"><span class="lineNum">     405</span>              : </span>
+<span id="L406"><span class="lineNum">     406</span>              :   void dot(std::vector&lt;Tensor *&gt; input, std::vector&lt;Tensor *&gt; output,</span>
+<span id="L407"><span class="lineNum">     407</span>              :            bool trans, bool trans_in, float beta) const override;</span>
+<span id="L408"><span class="lineNum">     408</span>              : </span>
+<span id="L409"><span class="lineNum">     409</span>              :   /**</span>
+<span id="L410"><span class="lineNum">     410</span>              :    * @copydoc Tensor::dropout_mask(float dropout)</span>
+<span id="L411"><span class="lineNum">     411</span>              :    */</span>
+<span id="L412"><span class="lineNum">     412</span>              :   void dropout_mask(float dropout) override;</span>
+<span id="L413"><span class="lineNum">     413</span>              : </span>
+<span id="L414"><span class="lineNum">     414</span>              :   /**</span>
+<span id="L415"><span class="lineNum">     415</span>              :    * @copydoc Tensor::filter_mask(const Tensor &amp;mask_len, bool reverse)</span>
+<span id="L416"><span class="lineNum">     416</span>              :    */</span>
+<span id="L417"><span class="lineNum">     417</span>              :   void filter_mask(const Tensor &amp;mask_len, bool reverse) override;</span>
+<span id="L418"><span class="lineNum">     418</span>              : </span>
+<span id="L419"><span class="lineNum">     419</span>              :   /**</span>
+<span id="L420"><span class="lineNum">     420</span>              :    * @copydoc Tensor::zoneout_mask(Tensor &amp;opposite, float zoneout)</span>
+<span id="L421"><span class="lineNum">     421</span>              :    */</span>
+<span id="L422"><span class="lineNum">     422</span>              :   void zoneout_mask(Tensor &amp;opposite, float zoneout) override;</span>
+<span id="L423"><span class="lineNum">     423</span>              : </span>
+<span id="L424"><span class="lineNum">     424</span>              :   /**</span>
+<span id="L425"><span class="lineNum">     425</span>              :    * @copydoc Tensor::split(std::vector&lt;size_t&gt; sizes, int axis)</span>
+<span id="L426"><span class="lineNum">     426</span>              :    */</span>
+<span id="L427"><span class="lineNum">     427</span>              :   std::vector&lt;Tensor&gt; split(std::vector&lt;size_t&gt; sizes, int axis) override;</span>
 <span id="L428"><span class="lineNum">     428</span>              : </span>
 <span id="L429"><span class="lineNum">     429</span>              :   /**</span>
-<span id="L430"><span class="lineNum">     430</span>              :    * @copydoc Tensor::copy(const Tensor &amp;from)</span>
+<span id="L430"><span class="lineNum">     430</span>              :    * @copydoc Tensor::concat()</span>
 <span id="L431"><span class="lineNum">     431</span>              :    */</span>
-<span id="L432"><span class="lineNum">     432</span>              :   void copy(const Tensor &amp;from) override;</span>
-<span id="L433"><span class="lineNum">     433</span>              : </span>
-<span id="L434"><span class="lineNum">     434</span>              :   /**</span>
-<span id="L435"><span class="lineNum">     435</span>              :    * @copydoc Tensor::copyData(const Tensor &amp;from)</span>
-<span id="L436"><span class="lineNum">     436</span>              :    */</span>
-<span id="L437"><span class="lineNum">     437</span>              :   void copyData(const Tensor &amp;from) override;</span>
-<span id="L438"><span class="lineNum">     438</span>              : </span>
-<span id="L439"><span class="lineNum">     439</span>              :   /**</span>
-<span id="L440"><span class="lineNum">     440</span>              :    * @brief      Copy the Tensor</span>
-<span id="L441"><span class="lineNum">     441</span>              :    * @param[in]  input Tensor to be copied</span>
-<span id="L442"><span class="lineNum">     442</span>              :    * @param[out] output output Tensor</span>
-<span id="L443"><span class="lineNum">     443</span>              :    */</span>
-<span id="L444"><span class="lineNum">     444</span>              :   void copy_with_stride(const Tensor &amp;input, Tensor &amp;output) override;</span>
-<span id="L445"><span class="lineNum">     445</span>              : </span>
-<span id="L446"><span class="lineNum">     446</span>              :   /**</span>
-<span id="L447"><span class="lineNum">     447</span>              :    * @copydoc Tensor::argmax()</span>
-<span id="L448"><span class="lineNum">     448</span>              :    */</span>
-<span id="L449"><span class="lineNum">     449</span>              :   std::vector&lt;unsigned int&gt; argmax() const override;</span>
-<span id="L450"><span class="lineNum">     450</span>              : </span>
-<span id="L451"><span class="lineNum">     451</span>              :   /**</span>
-<span id="L452"><span class="lineNum">     452</span>              :    * @copydoc Tensor::argmin()</span>
-<span id="L453"><span class="lineNum">     453</span>              :    */</span>
-<span id="L454"><span class="lineNum">     454</span>              :   std::vector&lt;unsigned int&gt; argmin() const override;</span>
-<span id="L455"><span class="lineNum">     455</span>              : </span>
-<span id="L456"><span class="lineNum">     456</span>              :   /**</span>
-<span id="L457"><span class="lineNum">     457</span>              :    * @copydoc TensorBase::top_k()</span>
-<span id="L458"><span class="lineNum">     458</span>              :    */</span>
-<span id="L459"><span class="lineNum">     459</span>              :   void topK(unsigned int k, void *output_data, uint32_t *indices) override;</span>
-<span id="L460"><span class="lineNum">     460</span>              : </span>
-<span id="L461"><span class="lineNum">     461</span>              :   /**</span>
-<span id="L462"><span class="lineNum">     462</span>              :    * @copydoc Tensor::max_abs()</span>
-<span id="L463"><span class="lineNum">     463</span>              :    */</span>
-<span id="L464"><span class="lineNum">     464</span>              :   float max_abs() const override;</span>
-<span id="L465"><span class="lineNum">     465</span>              :   /**</span>
-<span id="L466"><span class="lineNum">     466</span>              :    * @copydoc Tensor::maxValue()</span>
-<span id="L467"><span class="lineNum">     467</span>              :    */</span>
-<span id="L468"><span class="lineNum">     468</span>              :   float maxValue() const override;</span>
-<span id="L469"><span class="lineNum">     469</span>              : </span>
-<span id="L470"><span class="lineNum">     470</span>              :   /**</span>
-<span id="L471"><span class="lineNum">     471</span>              :    * @copydoc Tensor::minValue()</span>
-<span id="L472"><span class="lineNum">     472</span>              :    */</span>
-<span id="L473"><span class="lineNum">     473</span>              :   float minValue() const override;</span>
-<span id="L474"><span class="lineNum">     474</span>              : </span>
-<span id="L475"><span class="lineNum">     475</span>              :   /**</span>
-<span id="L476"><span class="lineNum">     476</span>              :    * @copydoc Tensor::transpose(const std::string &amp;direction, Tensor &amp;out)</span>
-<span id="L477"><span class="lineNum">     477</span>              :    */</span>
-<span id="L478"><span class="lineNum">     478</span>              :   Tensor &amp;transpose(const std::string &amp;direction,</span>
-<span id="L479"><span class="lineNum">     479</span>              :                     Tensor &amp;output) const override;</span>
+<span id="L432"><span class="lineNum">     432</span>              :   Tensor concat(const std::vector&lt;Tensor&gt; &amp;tensors, int axis,</span>
+<span id="L433"><span class="lineNum">     433</span>              :                 Tensor &amp;output) override;</span>
+<span id="L434"><span class="lineNum">     434</span>              : </span>
+<span id="L435"><span class="lineNum">     435</span>              :   /**</span>
+<span id="L436"><span class="lineNum">     436</span>              :    * @copydoc Tensor::copy(const Tensor &amp;from)</span>
+<span id="L437"><span class="lineNum">     437</span>              :    */</span>
+<span id="L438"><span class="lineNum">     438</span>              :   void copy(const Tensor &amp;from) override;</span>
+<span id="L439"><span class="lineNum">     439</span>              : </span>
+<span id="L440"><span class="lineNum">     440</span>              :   /**</span>
+<span id="L441"><span class="lineNum">     441</span>              :    * @copydoc Tensor::copyData(const Tensor &amp;from)</span>
+<span id="L442"><span class="lineNum">     442</span>              :    */</span>
+<span id="L443"><span class="lineNum">     443</span>              :   void copyData(const Tensor &amp;from) override;</span>
+<span id="L444"><span class="lineNum">     444</span>              : </span>
+<span id="L445"><span class="lineNum">     445</span>              :   /**</span>
+<span id="L446"><span class="lineNum">     446</span>              :    * @brief      Copy the Tensor</span>
+<span id="L447"><span class="lineNum">     447</span>              :    * @param[in]  input Tensor to be copied</span>
+<span id="L448"><span class="lineNum">     448</span>              :    * @param[out] output output Tensor</span>
+<span id="L449"><span class="lineNum">     449</span>              :    */</span>
+<span id="L450"><span class="lineNum">     450</span>              :   void copy_with_stride(const Tensor &amp;input, Tensor &amp;output) override;</span>
+<span id="L451"><span class="lineNum">     451</span>              : </span>
+<span id="L452"><span class="lineNum">     452</span>              :   /**</span>
+<span id="L453"><span class="lineNum">     453</span>              :    * @copydoc Tensor::argmax()</span>
+<span id="L454"><span class="lineNum">     454</span>              :    */</span>
+<span id="L455"><span class="lineNum">     455</span>              :   std::vector&lt;unsigned int&gt; argmax() const override;</span>
+<span id="L456"><span class="lineNum">     456</span>              : </span>
+<span id="L457"><span class="lineNum">     457</span>              :   /**</span>
+<span id="L458"><span class="lineNum">     458</span>              :    * @copydoc Tensor::argmin()</span>
+<span id="L459"><span class="lineNum">     459</span>              :    */</span>
+<span id="L460"><span class="lineNum">     460</span>              :   std::vector&lt;unsigned int&gt; argmin() const override;</span>
+<span id="L461"><span class="lineNum">     461</span>              : </span>
+<span id="L462"><span class="lineNum">     462</span>              :   /**</span>
+<span id="L463"><span class="lineNum">     463</span>              :    * @copydoc TensorBase::top_k()</span>
+<span id="L464"><span class="lineNum">     464</span>              :    */</span>
+<span id="L465"><span class="lineNum">     465</span>              :   void topK(unsigned int k, void *output_data, uint32_t *indices) override;</span>
+<span id="L466"><span class="lineNum">     466</span>              : </span>
+<span id="L467"><span class="lineNum">     467</span>              :   /**</span>
+<span id="L468"><span class="lineNum">     468</span>              :    * @copydoc Tensor::max_abs()</span>
+<span id="L469"><span class="lineNum">     469</span>              :    */</span>
+<span id="L470"><span class="lineNum">     470</span>              :   float max_abs() const override;</span>
+<span id="L471"><span class="lineNum">     471</span>              :   /**</span>
+<span id="L472"><span class="lineNum">     472</span>              :    * @copydoc Tensor::maxValue()</span>
+<span id="L473"><span class="lineNum">     473</span>              :    */</span>
+<span id="L474"><span class="lineNum">     474</span>              :   float maxValue() const override;</span>
+<span id="L475"><span class="lineNum">     475</span>              : </span>
+<span id="L476"><span class="lineNum">     476</span>              :   /**</span>
+<span id="L477"><span class="lineNum">     477</span>              :    * @copydoc Tensor::minValue()</span>
+<span id="L478"><span class="lineNum">     478</span>              :    */</span>
+<span id="L479"><span class="lineNum">     479</span>              :   float minValue() const override;</span>
 <span id="L480"><span class="lineNum">     480</span>              : </span>
 <span id="L481"><span class="lineNum">     481</span>              :   /**</span>
-<span id="L482"><span class="lineNum">     482</span>              :    * @copydoc Tensor::print(std::ostream &amp;out)</span>
+<span id="L482"><span class="lineNum">     482</span>              :    * @copydoc Tensor::transpose(const std::string &amp;direction, Tensor &amp;out)</span>
 <span id="L483"><span class="lineNum">     483</span>              :    */</span>
-<span id="L484"><span class="lineNum">     484</span>              :   void print(std::ostream &amp;out) const override;</span>
-<span id="L485"><span class="lineNum">     485</span>              : </span>
-<span id="L486"><span class="lineNum">     486</span>              : private:</span>
+<span id="L484"><span class="lineNum">     484</span>              :   Tensor &amp;transpose(const std::string &amp;direction,</span>
+<span id="L485"><span class="lineNum">     485</span>              :                     Tensor &amp;output) const override;</span>
+<span id="L486"><span class="lineNum">     486</span>              : </span>
 <span id="L487"><span class="lineNum">     487</span>              :   /**</span>
-<span id="L488"><span class="lineNum">     488</span>              :    * @brief copy a buffer to @a this, the caller has to ensure that @a this is</span>
-<span id="L489"><span class="lineNum">     489</span>              :    * initialized otherwise undefined behavior</span>
-<span id="L490"><span class="lineNum">     490</span>              :    *</span>
-<span id="L491"><span class="lineNum">     491</span>              :    * @param buf buffer to copy from</span>
-<span id="L492"><span class="lineNum">     492</span>              :    */</span>
-<span id="L493"><span class="lineNum">     493</span>              :   void copy(const void *buf);</span>
-<span id="L494"><span class="lineNum">     494</span>              : </span>
-<span id="L495"><span class="lineNum">     495</span>              :   /**</span>
-<span id="L496"><span class="lineNum">     496</span>              :    * @brief Applies the given operator to the tensor with the passed argument</span>
-<span id="L497"><span class="lineNum">     497</span>              :    * @param[in] m Tensor</span>
-<span id="L498"><span class="lineNum">     498</span>              :    * @param[in] v_func vectorized function to apply</span>
-<span id="L499"><span class="lineNum">     499</span>              :    * @param e broadcast info.</span>
-<span id="L500"><span class="lineNum">     500</span>              :    * @param cur_axis current axis. pass default when calling outside.</span>
-<span id="L501"><span class="lineNum">     501</span>              :    * @param offset offset for this.  pass default when calling outside.</span>
-<span id="L502"><span class="lineNum">     502</span>              :    * @param m_offset offset for m.  pass default when calling outside.</span>
-<span id="L503"><span class="lineNum">     503</span>              :    * @retval #ML_ERROR_NONE Successful</span>
-<span id="L504"><span class="lineNum">     504</span>              :    * @retval #ML_ERROR_INVALID_PARAMETER Invalid Parameter</span>
-<span id="L505"><span class="lineNum">     505</span>              :    */</span>
-<span id="L506"><span class="lineNum">     506</span>              :   void</span>
-<span id="L507"><span class="lineNum">     507</span>              :   apply_broadcast_util(Tensor const &amp;m,</span>
-<span id="L508"><span class="lineNum">     508</span>              :                        std::function&lt;void(const BroadcastInfo &amp;e, const float *,</span>
-<span id="L509"><span class="lineNum">     509</span>              :                                           const float *, float *)&gt;</span>
-<span id="L510"><span class="lineNum">     510</span>              :                          v_func,</span>
-<span id="L511"><span class="lineNum">     511</span>              :                        Tensor &amp;output, const BroadcastInfo &amp;e,</span>
-<span id="L512"><span class="lineNum">     512</span>              :                        int cur_axis = -1, size_t offset = 0,</span>
-<span id="L513"><span class="lineNum">     513</span>              :                        size_t m_offset = 0) const;</span>
-<span id="L514"><span class="lineNum">     514</span>              : </span>
-<span id="L515"><span class="lineNum">     515</span>              :   /**</span>
-<span id="L516"><span class="lineNum">     516</span>              :    * @brief Applies the given operator to the tensor with the passed argument</span>
-<span id="L517"><span class="lineNum">     517</span>              :    *</span>
-<span id="L518"><span class="lineNum">     518</span>              :    * @param[in] m Tensor</span>
-<span id="L519"><span class="lineNum">     519</span>              :    * @param[in] v_func vectorized function to apply</span>
-<span id="L520"><span class="lineNum">     520</span>              :    * @retval #ML_ERROR_NONE Successful</span>
-<span id="L521"><span class="lineNum">     521</span>              :    * @retval #ML_ERROR_INVALID_PARAMETER Invalid Parameter</span>
-<span id="L522"><span class="lineNum">     522</span>              :    */</span>
-<span id="L523"><span class="lineNum">     523</span>              :   void apply_broadcast(Tensor const &amp;m,</span>
-<span id="L524"><span class="lineNum">     524</span>              :                        std::function&lt;void(const BroadcastInfo &amp;e, const float *,</span>
-<span id="L525"><span class="lineNum">     525</span>              :                                           const float *, float *)&gt;</span>
-<span id="L526"><span class="lineNum">     526</span>              :                          v_func,</span>
-<span id="L527"><span class="lineNum">     527</span>              :                        Tensor &amp;output) const;</span>
-<span id="L528"><span class="lineNum">     528</span>              : </span>
-<span id="L529"><span class="lineNum">     529</span>              :   /**</span>
-<span id="L530"><span class="lineNum">     530</span>              :    * @brief  Get the Data Type String object</span>
-<span id="L531"><span class="lineNum">     531</span>              :    * @return std::string of tensor data type (FP32)</span>
-<span id="L532"><span class="lineNum">     532</span>              :    */</span>
-<span id="L533"><span class="lineNum">     533</span> <span class="tlaGNC">           1 :   std::string getStringDataType() const override { return &quot;FP32&quot;; }</span></span>
+<span id="L488"><span class="lineNum">     488</span>              :    * @copydoc Tensor::print(std::ostream &amp;out)</span>
+<span id="L489"><span class="lineNum">     489</span>              :    */</span>
+<span id="L490"><span class="lineNum">     490</span>              :   void print(std::ostream &amp;out) const override;</span>
+<span id="L491"><span class="lineNum">     491</span>              : </span>
+<span id="L492"><span class="lineNum">     492</span>              : private:</span>
+<span id="L493"><span class="lineNum">     493</span>              :   /**</span>
+<span id="L494"><span class="lineNum">     494</span>              :    * @brief copy a buffer to @a this, the caller has to ensure that @a this is</span>
+<span id="L495"><span class="lineNum">     495</span>              :    * initialized otherwise undefined behavior</span>
+<span id="L496"><span class="lineNum">     496</span>              :    *</span>
+<span id="L497"><span class="lineNum">     497</span>              :    * @param buf buffer to copy from</span>
+<span id="L498"><span class="lineNum">     498</span>              :    */</span>
+<span id="L499"><span class="lineNum">     499</span>              :   void copy(const void *buf);</span>
+<span id="L500"><span class="lineNum">     500</span>              : </span>
+<span id="L501"><span class="lineNum">     501</span>              :   /**</span>
+<span id="L502"><span class="lineNum">     502</span>              :    * @brief Applies the given operator to the tensor with the passed argument</span>
+<span id="L503"><span class="lineNum">     503</span>              :    * @param[in] m Tensor</span>
+<span id="L504"><span class="lineNum">     504</span>              :    * @param[in] v_func vectorized function to apply</span>
+<span id="L505"><span class="lineNum">     505</span>              :    * @param e broadcast info.</span>
+<span id="L506"><span class="lineNum">     506</span>              :    * @param cur_axis current axis. pass default when calling outside.</span>
+<span id="L507"><span class="lineNum">     507</span>              :    * @param offset offset for this.  pass default when calling outside.</span>
+<span id="L508"><span class="lineNum">     508</span>              :    * @param m_offset offset for m.  pass default when calling outside.</span>
+<span id="L509"><span class="lineNum">     509</span>              :    * @retval #ML_ERROR_NONE Successful</span>
+<span id="L510"><span class="lineNum">     510</span>              :    * @retval #ML_ERROR_INVALID_PARAMETER Invalid Parameter</span>
+<span id="L511"><span class="lineNum">     511</span>              :    */</span>
+<span id="L512"><span class="lineNum">     512</span>              :   void</span>
+<span id="L513"><span class="lineNum">     513</span>              :   apply_broadcast_util(Tensor const &amp;m,</span>
+<span id="L514"><span class="lineNum">     514</span>              :                        std::function&lt;void(const BroadcastInfo &amp;e, const float *,</span>
+<span id="L515"><span class="lineNum">     515</span>              :                                           const float *, float *)&gt;</span>
+<span id="L516"><span class="lineNum">     516</span>              :                          v_func,</span>
+<span id="L517"><span class="lineNum">     517</span>              :                        Tensor &amp;output, const BroadcastInfo &amp;e,</span>
+<span id="L518"><span class="lineNum">     518</span>              :                        int cur_axis = -1, size_t offset = 0,</span>
+<span id="L519"><span class="lineNum">     519</span>              :                        size_t m_offset = 0) const;</span>
+<span id="L520"><span class="lineNum">     520</span>              : </span>
+<span id="L521"><span class="lineNum">     521</span>              :   /**</span>
+<span id="L522"><span class="lineNum">     522</span>              :    * @brief Applies the given operator to the tensor with the passed argument</span>
+<span id="L523"><span class="lineNum">     523</span>              :    *</span>
+<span id="L524"><span class="lineNum">     524</span>              :    * @param[in] m Tensor</span>
+<span id="L525"><span class="lineNum">     525</span>              :    * @param[in] v_func vectorized function to apply</span>
+<span id="L526"><span class="lineNum">     526</span>              :    * @retval #ML_ERROR_NONE Successful</span>
+<span id="L527"><span class="lineNum">     527</span>              :    * @retval #ML_ERROR_INVALID_PARAMETER Invalid Parameter</span>
+<span id="L528"><span class="lineNum">     528</span>              :    */</span>
+<span id="L529"><span class="lineNum">     529</span>              :   void apply_broadcast(Tensor const &amp;m,</span>
+<span id="L530"><span class="lineNum">     530</span>              :                        std::function&lt;void(const BroadcastInfo &amp;e, const float *,</span>
+<span id="L531"><span class="lineNum">     531</span>              :                                           const float *, float *)&gt;</span>
+<span id="L532"><span class="lineNum">     532</span>              :                          v_func,</span>
+<span id="L533"><span class="lineNum">     533</span>              :                        Tensor &amp;output) const;</span>
 <span id="L534"><span class="lineNum">     534</span>              : </span>
 <span id="L535"><span class="lineNum">     535</span>              :   /**</span>
-<span id="L536"><span class="lineNum">     536</span>              :    * @copydoc Tensor::isValid()</span>
-<span id="L537"><span class="lineNum">     537</span>              :    */</span>
-<span id="L538"><span class="lineNum">     538</span>              :   bool isValid() const override;</span>
-<span id="L539"><span class="lineNum">     539</span>              : </span>
-<span id="L540"><span class="lineNum">     540</span>              :   /**</span>
-<span id="L541"><span class="lineNum">     541</span>              :    * @brief Float.dot(Float)</span>
-<span id="L542"><span class="lineNum">     542</span>              :    * @return Tensor&amp; reference to the output tensor</span>
+<span id="L536"><span class="lineNum">     536</span>              :    * @brief  Get the Data Type String object</span>
+<span id="L537"><span class="lineNum">     537</span>              :    * @return std::string of tensor data type (FP32)</span>
+<span id="L538"><span class="lineNum">     538</span>              :    */</span>
+<span id="L539"><span class="lineNum">     539</span> <span class="tlaGNC">           1 :   std::string getStringDataType() const override { return &quot;FP32&quot;; }</span></span>
+<span id="L540"><span class="lineNum">     540</span>              : </span>
+<span id="L541"><span class="lineNum">     541</span>              :   /**</span>
+<span id="L542"><span class="lineNum">     542</span>              :    * @copydoc Tensor::isValid()</span>
 <span id="L543"><span class="lineNum">     543</span>              :    */</span>
-<span id="L544"><span class="lineNum">     544</span>              :   Tensor &amp;dotFloat(Tensor const &amp;input, Tensor &amp;output, bool trans,</span>
-<span id="L545"><span class="lineNum">     545</span>              :                    bool trans_in, float beta) const;</span>
-<span id="L546"><span class="lineNum">     546</span>              : </span>
-<span id="L547"><span class="lineNum">     547</span>              :   /**</span>
-<span id="L548"><span class="lineNum">     548</span>              :    * @brief Float32.dot(Float16)</span>
-<span id="L549"><span class="lineNum">     549</span>              :    * @return Tensor&amp; reference to the output tensor</span>
-<span id="L550"><span class="lineNum">     550</span>              :    */</span>
-<span id="L551"><span class="lineNum">     551</span>              :   Tensor &amp;dotFloat32Float16(Tensor const &amp;input, Tensor &amp;output, bool trans,</span>
-<span id="L552"><span class="lineNum">     552</span>              :                             bool trans_in, float beta) const;</span>
-<span id="L553"><span class="lineNum">     553</span>              : </span>
-<span id="L554"><span class="lineNum">     554</span>              :   /**</span>
-<span id="L555"><span class="lineNum">     555</span>              :    * @brief Float.dot(Q4K/Q6K)</span>
-<span id="L556"><span class="lineNum">     556</span>              :    * @return Tensor&amp; reference to the output tensor</span>
-<span id="L557"><span class="lineNum">     557</span>              :    */</span>
-<span id="L558"><span class="lineNum">     558</span>              :   Tensor &amp;dotQnK(Tensor const &amp;input, Tensor &amp;output, bool trans, bool trans_in,</span>
-<span id="L559"><span class="lineNum">     559</span>              :                  float beta, Tdatatype dtype) const;</span>
-<span id="L560"><span class="lineNum">     560</span>              : </span>
-<span id="L561"><span class="lineNum">     561</span>              :   /**</span>
-<span id="L562"><span class="lineNum">     562</span>              :    * @brief Float.dot(QINT4/QINT8/QINT16)</span>
-<span id="L563"><span class="lineNum">     563</span>              :    * @return Tensor&amp; reference to the output tensor</span>
-<span id="L564"><span class="lineNum">     564</span>              :    */</span>
-<span id="L565"><span class="lineNum">     565</span>              :   Tensor &amp;dotQInteger(Tensor const &amp;input, Tensor &amp;output, bool trans,</span>
-<span id="L566"><span class="lineNum">     566</span>              :                       bool trans_in, float beta, Tdatatype dtype) const;</span>
-<span id="L567"><span class="lineNum">     567</span>              : };</span>
-<span id="L568"><span class="lineNum">     568</span>              : </span>
-<span id="L569"><span class="lineNum">     569</span>              : } // namespace nntrainer</span>
-<span id="L570"><span class="lineNum">     570</span>              : </span>
-<span id="L571"><span class="lineNum">     571</span>              : #endif /* __cplusplus */</span>
-<span id="L572"><span class="lineNum">     572</span>              : #endif /* __FLOAT_TENSOR_H__ */</span>
+<span id="L544"><span class="lineNum">     544</span>              :   bool isValid() const override;</span>
+<span id="L545"><span class="lineNum">     545</span>              : </span>
+<span id="L546"><span class="lineNum">     546</span>              :   /**</span>
+<span id="L547"><span class="lineNum">     547</span>              :    * @brief Float.dot(Float)</span>
+<span id="L548"><span class="lineNum">     548</span>              :    * @return Tensor&amp; reference to the output tensor</span>
+<span id="L549"><span class="lineNum">     549</span>              :    */</span>
+<span id="L550"><span class="lineNum">     550</span>              :   Tensor &amp;dotFloat(Tensor const &amp;input, Tensor &amp;output, bool trans,</span>
+<span id="L551"><span class="lineNum">     551</span>              :                    bool trans_in, float beta) const;</span>
+<span id="L552"><span class="lineNum">     552</span>              : </span>
+<span id="L553"><span class="lineNum">     553</span>              :   /**</span>
+<span id="L554"><span class="lineNum">     554</span>              :    * @brief Float32.dot(Float16)</span>
+<span id="L555"><span class="lineNum">     555</span>              :    * @return Tensor&amp; reference to the output tensor</span>
+<span id="L556"><span class="lineNum">     556</span>              :    */</span>
+<span id="L557"><span class="lineNum">     557</span>              :   Tensor &amp;dotFloat32Float16(Tensor const &amp;input, Tensor &amp;output, bool trans,</span>
+<span id="L558"><span class="lineNum">     558</span>              :                             bool trans_in, float beta) const;</span>
+<span id="L559"><span class="lineNum">     559</span>              : </span>
+<span id="L560"><span class="lineNum">     560</span>              :   /**</span>
+<span id="L561"><span class="lineNum">     561</span>              :    * @brief Float.dot(Q4K/Q6K)</span>
+<span id="L562"><span class="lineNum">     562</span>              :    * @return Tensor&amp; reference to the output tensor</span>
+<span id="L563"><span class="lineNum">     563</span>              :    */</span>
+<span id="L564"><span class="lineNum">     564</span>              :   Tensor &amp;dotQnK(Tensor const &amp;input, Tensor &amp;output, bool trans, bool trans_in,</span>
+<span id="L565"><span class="lineNum">     565</span>              :                  float beta, Tdatatype dtype) const;</span>
+<span id="L566"><span class="lineNum">     566</span>              : </span>
+<span id="L567"><span class="lineNum">     567</span>              :   /**</span>
+<span id="L568"><span class="lineNum">     568</span>              :    * @brief Float.dot(QINT4/QINT8/QINT16)</span>
+<span id="L569"><span class="lineNum">     569</span>              :    * @return Tensor&amp; reference to the output tensor</span>
+<span id="L570"><span class="lineNum">     570</span>              :    */</span>
+<span id="L571"><span class="lineNum">     571</span>              :   Tensor &amp;dotQInteger(Tensor const &amp;input, Tensor &amp;output, bool trans,</span>
+<span id="L572"><span class="lineNum">     572</span>              :                       bool trans_in, float beta, Tdatatype dtype) const;</span>
+<span id="L573"><span class="lineNum">     573</span>              : };</span>
+<span id="L574"><span class="lineNum">     574</span>              : </span>
+<span id="L575"><span class="lineNum">     575</span>              : } // namespace nntrainer</span>
+<span id="L576"><span class="lineNum">     576</span>              : </span>
+<span id="L577"><span class="lineNum">     577</span>              : #endif /* __cplusplus */</span>
+<span id="L578"><span class="lineNum">     578</span>              : #endif /* __FLOAT_TENSOR_H__ */</span>
         </pre>
               </td>
             </tr>

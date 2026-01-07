@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-01-06 20:41:07</td>
+            <td class="headerValue">2026-01-07 20:42:51</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">50.0&nbsp;%</td>
@@ -68,7 +68,7 @@
 <span id="L6"><span class="lineNum">       6</span>              :  * @date   09 April 2021</span>
 <span id="L7"><span class="lineNum">       7</span>              :  * @brief  This file contains list of common properties widely used across</span>
 <span id="L8"><span class="lineNum">       8</span>              :  * layers</span>
-<span id="L9"><span class="lineNum">       9</span>              :  * @see    https://github.com/nnstreamer/nntrainer</span>
+<span id="L9"><span class="lineNum">       9</span>              :  * @see    https://github.com/nntrainer/nntrainer</span>
 <span id="L10"><span class="lineNum">      10</span>              :  * @author Jihoon Lee &lt;jhoon.it.lee@samsung.com&gt;</span>
 <span id="L11"><span class="lineNum">      11</span>              :  * @bug    No known bugs except for NYI items</span>
 <span id="L12"><span class="lineNum">      12</span>              :  */</span>
@@ -1388,367 +1388,376 @@
 <span id="L1326"><span class="lineNum">    1326</span>              : };</span>
 <span id="L1327"><span class="lineNum">    1327</span>              : </span>
 <span id="L1328"><span class="lineNum">    1328</span>              : /**</span>
-<span id="L1329"><span class="lineNum">    1329</span>              :  * @brief scaled dot product property, used to check</span>
-<span id="L1330"><span class="lineNum">    1330</span>              :  * whether attention layer is a kind of scaled dot product attention</span>
-<span id="L1331"><span class="lineNum">    1331</span>              :  *</span>
-<span id="L1332"><span class="lineNum">    1332</span>              :  */</span>
-<span id="L1333"><span class="lineNum">    1333</span>              : class ScaledDotProduct : public nntrainer::Property&lt;bool&gt; {</span>
-<span id="L1334"><span class="lineNum">    1334</span>              : public:</span>
-<span id="L1335"><span class="lineNum">    1335</span>              :   /**</span>
-<span id="L1336"><span class="lineNum">    1336</span>              :    * @brief Construct a new ScaledDotProduct object</span>
-<span id="L1337"><span class="lineNum">    1337</span>              :    *</span>
-<span id="L1338"><span class="lineNum">    1338</span>              :    */</span>
-<span id="L1339"><span class="lineNum">    1339</span>              :   ScaledDotProduct(bool value = false);</span>
-<span id="L1340"><span class="lineNum">    1340</span>              :   static constexpr const char *key = &quot;scaled_dot_product&quot;;</span>
-<span id="L1341"><span class="lineNum">    1341</span>              :   using prop_tag = bool_prop_tag;</span>
-<span id="L1342"><span class="lineNum">    1342</span>              : };</span>
-<span id="L1343"><span class="lineNum">    1343</span>              : </span>
-<span id="L1344"><span class="lineNum">    1344</span>              : /**</span>
-<span id="L1345"><span class="lineNum">    1345</span>              :  * @brief causal mask property, used in attention layer</span>
-<span id="L1346"><span class="lineNum">    1346</span>              :  *</span>
-<span id="L1347"><span class="lineNum">    1347</span>              :  */</span>
-<span id="L1348"><span class="lineNum">    1348</span>              : class CausalMask : public nntrainer::Property&lt;bool&gt; {</span>
-<span id="L1349"><span class="lineNum">    1349</span>              : public:</span>
-<span id="L1350"><span class="lineNum">    1350</span>              :   /**</span>
-<span id="L1351"><span class="lineNum">    1351</span>              :    * @brief Construct a new CausalMask object</span>
-<span id="L1352"><span class="lineNum">    1352</span>              :    *</span>
-<span id="L1353"><span class="lineNum">    1353</span>              :    */</span>
-<span id="L1354"><span class="lineNum">    1354</span>              :   CausalMask(bool value = false);</span>
-<span id="L1355"><span class="lineNum">    1355</span>              :   static constexpr const char *key = &quot;causal_mask&quot;;</span>
-<span id="L1356"><span class="lineNum">    1356</span>              :   using prop_tag = bool_prop_tag;</span>
-<span id="L1357"><span class="lineNum">    1357</span>              : };</span>
-<span id="L1358"><span class="lineNum">    1358</span>              : </span>
-<span id="L1359"><span class="lineNum">    1359</span>              : /**</span>
-<span id="L1360"><span class="lineNum">    1360</span>              :  * @brief Print object</span>
-<span id="L1361"><span class="lineNum">    1361</span>              :  *</span>
-<span id="L1362"><span class="lineNum">    1362</span>              :  */</span>
-<span id="L1363"><span class="lineNum">    1363</span> <span class="tlaGNC">         718 : class Print : public nntrainer::Property&lt;bool&gt; {</span></span>
-<span id="L1364"><span class="lineNum">    1364</span>              : public:</span>
-<span id="L1365"><span class="lineNum">    1365</span>              :   /**</span>
-<span id="L1366"><span class="lineNum">    1366</span>              :    * @brief Construct a new Print object</span>
-<span id="L1367"><span class="lineNum">    1367</span>              :    *</span>
-<span id="L1368"><span class="lineNum">    1368</span>              :    */</span>
-<span id="L1369"><span class="lineNum">    1369</span> <span class="tlaGNC">        2804 :   Print(bool value = false) { set(value); }</span></span>
-<span id="L1370"><span class="lineNum">    1370</span>              :   static constexpr const char *key = &quot;print&quot;;</span>
-<span id="L1371"><span class="lineNum">    1371</span>              :   using prop_tag = bool_prop_tag;</span>
-<span id="L1372"><span class="lineNum">    1372</span>              : };</span>
-<span id="L1373"><span class="lineNum">    1373</span>              : </span>
-<span id="L1374"><span class="lineNum">    1374</span>              : /**</span>
-<span id="L1375"><span class="lineNum">    1375</span>              :  * @brief K property, K is the size of the three projections in MoL attention</span>
-<span id="L1376"><span class="lineNum">    1376</span>              :  *</span>
-<span id="L1377"><span class="lineNum">    1377</span>              :  */</span>
-<span id="L1378"><span class="lineNum">    1378</span> <span class="tlaGNC">          19 : class MoL_K : public PositiveIntegerProperty {</span></span>
-<span id="L1379"><span class="lineNum">    1379</span>              : public:</span>
-<span id="L1380"><span class="lineNum">    1380</span>              :   static constexpr const char *key = &quot;MoL_K&quot;; /**&lt; unique key to access */</span>
-<span id="L1381"><span class="lineNum">    1381</span>              :   using prop_tag = uint_prop_tag;             /**&lt; property type */</span>
-<span id="L1382"><span class="lineNum">    1382</span>              : };</span>
-<span id="L1383"><span class="lineNum">    1383</span>              : </span>
-<span id="L1384"><span class="lineNum">    1384</span>              : /**</span>
-<span id="L1385"><span class="lineNum">    1385</span>              :  * @brief NumHeads property, NumHeads is number of head in multi head attention</span>
-<span id="L1386"><span class="lineNum">    1386</span>              :  *</span>
-<span id="L1387"><span class="lineNum">    1387</span>              :  */</span>
-<span id="L1388"><span class="lineNum">    1388</span> <span class="tlaGNC">         298 : class NumHeads : public PositiveIntegerProperty {</span></span>
-<span id="L1389"><span class="lineNum">    1389</span>              : public:</span>
-<span id="L1390"><span class="lineNum">    1390</span>              :   /**</span>
-<span id="L1391"><span class="lineNum">    1391</span>              :    * @brief Construct a new NumHeads object with default value 1</span>
-<span id="L1392"><span class="lineNum">    1392</span>              :    *</span>
-<span id="L1393"><span class="lineNum">    1393</span>              :    */</span>
-<span id="L1394"><span class="lineNum">    1394</span>              :   NumHeads(unsigned int value = 1);</span>
-<span id="L1395"><span class="lineNum">    1395</span>              :   static constexpr const char *key = &quot;num_heads&quot;; /**&lt; unique key to access */</span>
-<span id="L1396"><span class="lineNum">    1396</span>              :   using prop_tag = uint_prop_tag;                 /**&lt; property type */</span>
-<span id="L1397"><span class="lineNum">    1397</span>              : };</span>
-<span id="L1398"><span class="lineNum">    1398</span>              : </span>
-<span id="L1399"><span class="lineNum">    1399</span>              : /**</span>
-<span id="L1400"><span class="lineNum">    1400</span>              :  * @brief ProjectedKeyDim property, projected key dim per head in multi head</span>
-<span id="L1401"><span class="lineNum">    1401</span>              :  * attention</span>
-<span id="L1402"><span class="lineNum">    1402</span>              :  * @details Correspond with key_dim of tensorflow</span>
-<span id="L1403"><span class="lineNum">    1403</span>              :  *</span>
-<span id="L1404"><span class="lineNum">    1404</span>              :  */</span>
-<span id="L1405"><span class="lineNum">    1405</span> <span class="tlaGNC">         149 : class ProjectedKeyDim : public PositiveIntegerProperty {</span></span>
-<span id="L1406"><span class="lineNum">    1406</span>              : public:</span>
-<span id="L1407"><span class="lineNum">    1407</span>              :   static constexpr const char *key =</span>
-<span id="L1408"><span class="lineNum">    1408</span>              :     &quot;projected_key_dim&quot;;          /**&lt; unique key to access */</span>
-<span id="L1409"><span class="lineNum">    1409</span>              :   using prop_tag = uint_prop_tag; /**&lt; property type */</span>
-<span id="L1410"><span class="lineNum">    1410</span>              : };</span>
-<span id="L1411"><span class="lineNum">    1411</span>              : </span>
-<span id="L1412"><span class="lineNum">    1412</span>              : /**</span>
-<span id="L1413"><span class="lineNum">    1413</span>              :  * @brief ProjectedValueDim property, projected value dim per head in multi head</span>
-<span id="L1414"><span class="lineNum">    1414</span>              :  * attention</span>
-<span id="L1415"><span class="lineNum">    1415</span>              :  * @details Correspond with value_dim of tensorflow</span>
-<span id="L1416"><span class="lineNum">    1416</span>              :  *</span>
-<span id="L1417"><span class="lineNum">    1417</span>              :  */</span>
-<span id="L1418"><span class="lineNum">    1418</span> <span class="tlaGNC">         149 : class ProjectedValueDim : public PositiveIntegerProperty {</span></span>
-<span id="L1419"><span class="lineNum">    1419</span>              : public:</span>
-<span id="L1420"><span class="lineNum">    1420</span>              :   static constexpr const char *key =</span>
-<span id="L1421"><span class="lineNum">    1421</span>              :     &quot;projected_value_dim&quot;;        /**&lt; unique key to access */</span>
-<span id="L1422"><span class="lineNum">    1422</span>              :   using prop_tag = uint_prop_tag; /**&lt; property type */</span>
-<span id="L1423"><span class="lineNum">    1423</span>              : };</span>
-<span id="L1424"><span class="lineNum">    1424</span>              : </span>
-<span id="L1425"><span class="lineNum">    1425</span>              : /**</span>
-<span id="L1426"><span class="lineNum">    1426</span>              :  * @brief OutputShape property, output shape of multi head</span>
-<span id="L1427"><span class="lineNum">    1427</span>              :  * attention</span>
-<span id="L1428"><span class="lineNum">    1428</span>              :  * @details Correspond with output_shape of tensorflow</span>
-<span id="L1429"><span class="lineNum">    1429</span>              :  *</span>
-<span id="L1430"><span class="lineNum">    1430</span>              :  */</span>
-<span id="L1431"><span class="lineNum">    1431</span> <span class="tlaGNC">         447 : class OutputShape : public PositiveIntegerProperty {</span></span>
-<span id="L1432"><span class="lineNum">    1432</span>              : public:</span>
-<span id="L1433"><span class="lineNum">    1433</span>              :   static constexpr const char *key =</span>
-<span id="L1434"><span class="lineNum">    1434</span>              :     &quot;output_shape&quot;;               /**&lt; unique key to access */</span>
-<span id="L1435"><span class="lineNum">    1435</span>              :   using prop_tag = uint_prop_tag; /**&lt; property type */</span>
-<span id="L1436"><span class="lineNum">    1436</span>              : };</span>
-<span id="L1437"><span class="lineNum">    1437</span>              : </span>
-<span id="L1438"><span class="lineNum">    1438</span>              : /**</span>
-<span id="L1439"><span class="lineNum">    1439</span>              :  * @brief Enumeration of return attention weight</span>
-<span id="L1440"><span class="lineNum">    1440</span>              :  */</span>
-<span id="L1441"><span class="lineNum">    1441</span>              : struct ReturnAttentionWeightInfo {</span>
-<span id="L1442"><span class="lineNum">    1442</span>              :   enum class Enum { none, before, after };</span>
-<span id="L1443"><span class="lineNum">    1443</span>              :   static constexpr std::initializer_list&lt;Enum&gt; EnumList = {</span>
-<span id="L1444"><span class="lineNum">    1444</span>              :     Enum::none, Enum::before, Enum::after};</span>
-<span id="L1445"><span class="lineNum">    1445</span>              : </span>
-<span id="L1446"><span class="lineNum">    1446</span>              :   static constexpr const char *EnumStr[] = {&quot;none&quot;, &quot;before&quot;, &quot;after&quot;};</span>
-<span id="L1447"><span class="lineNum">    1447</span>              : };</span>
-<span id="L1448"><span class="lineNum">    1448</span>              : </span>
-<span id="L1449"><span class="lineNum">    1449</span>              : /**</span>
-<span id="L1450"><span class="lineNum">    1450</span>              :  * @brief ReturnAttentionWeight, return attention weight</span>
-<span id="L1451"><span class="lineNum">    1451</span>              :  * @details &quot;none&quot; won't return attention weight.</span>
-<span id="L1452"><span class="lineNum">    1452</span>              :  *          &quot;before&quot;/&quot;after&quot; will return attention weight before/after applying</span>
-<span id="L1453"><span class="lineNum">    1453</span>              :  * dropout</span>
-<span id="L1454"><span class="lineNum">    1454</span>              :  * @note Correspond with return_attention_scores of tensorflow and Correspond</span>
-<span id="L1455"><span class="lineNum">    1455</span>              :  *       with need_weights of torch</span>
-<span id="L1456"><span class="lineNum">    1456</span>              :  *</span>
-<span id="L1457"><span class="lineNum">    1457</span>              :  */</span>
-<span id="L1458"><span class="lineNum">    1458</span> <span class="tlaGNC">         149 : class ReturnAttentionWeight : public EnumProperty&lt;ReturnAttentionWeightInfo&gt; {</span></span>
-<span id="L1459"><span class="lineNum">    1459</span>              : public:</span>
-<span id="L1460"><span class="lineNum">    1460</span>              :   static constexpr const char *key =</span>
-<span id="L1461"><span class="lineNum">    1461</span>              :     &quot;return_attention_weight&quot;;          /**&lt; unique key to access */</span>
-<span id="L1462"><span class="lineNum">    1462</span>              :   using prop_tag = enum_class_prop_tag; /**&lt; property type */</span>
-<span id="L1463"><span class="lineNum">    1463</span>              : </span>
-<span id="L1464"><span class="lineNum">    1464</span>              :   /**</span>
-<span id="L1465"><span class="lineNum">    1465</span>              :    * @brief Construct a new ReturnAttentionWeight object</span>
-<span id="L1466"><span class="lineNum">    1466</span>              :    *</span>
-<span id="L1467"><span class="lineNum">    1467</span>              :    */</span>
-<span id="L1468"><span class="lineNum">    1468</span>              :   ReturnAttentionWeight(ReturnAttentionWeightInfo::Enum value =</span>
-<span id="L1469"><span class="lineNum">    1469</span>              :                           ReturnAttentionWeightInfo::Enum::none);</span>
-<span id="L1470"><span class="lineNum">    1470</span>              : };</span>
-<span id="L1471"><span class="lineNum">    1471</span>              : </span>
-<span id="L1472"><span class="lineNum">    1472</span>              : /**</span>
-<span id="L1473"><span class="lineNum">    1473</span>              :  * @brief AverageAttentionWeight, average attention weight</span>
-<span id="L1474"><span class="lineNum">    1474</span>              :  * @details Correspond with average_attn_weights of torch</span>
-<span id="L1475"><span class="lineNum">    1475</span>              :  *</span>
-<span id="L1476"><span class="lineNum">    1476</span>              :  */</span>
-<span id="L1477"><span class="lineNum">    1477</span> <span class="tlaGNC">         447 : class AverageAttentionWeight : public Property&lt;bool&gt; {</span></span>
-<span id="L1478"><span class="lineNum">    1478</span>              : public:</span>
-<span id="L1479"><span class="lineNum">    1479</span>              :   static constexpr const char *key =</span>
-<span id="L1480"><span class="lineNum">    1480</span>              :     &quot;average_attention_weight&quot;;   /**&lt; unique key to access */</span>
-<span id="L1481"><span class="lineNum">    1481</span>              :   using prop_tag = bool_prop_tag; /**&lt; property type */</span>
-<span id="L1482"><span class="lineNum">    1482</span>              : };</span>
-<span id="L1483"><span class="lineNum">    1483</span>              : </span>
-<span id="L1484"><span class="lineNum">    1484</span>              : /**</span>
-<span id="L1485"><span class="lineNum">    1485</span>              :  * @brief LoRA rank property, it is used to set rank of LoRA weight.</span>
-<span id="L1486"><span class="lineNum">    1486</span>              :  * @details</span>
-<span id="L1487"><span class="lineNum">    1487</span>              :  */</span>
-<span id="L1488"><span class="lineNum">    1488</span> <span class="tlaGNC">         943 : class LoraRank : public PositiveIntegerProperty {</span></span>
-<span id="L1489"><span class="lineNum">    1489</span>              : public:</span>
-<span id="L1490"><span class="lineNum">    1490</span>              :   static constexpr const char *key = &quot;lora_rank&quot;; /**&lt; unique key to access */</span>
-<span id="L1491"><span class="lineNum">    1491</span>              :   using prop_tag = uint_prop_tag;                 /**&lt; property type */</span>
-<span id="L1492"><span class="lineNum">    1492</span>              : };</span>
-<span id="L1493"><span class="lineNum">    1493</span>              : </span>
-<span id="L1494"><span class="lineNum">    1494</span>              : /**</span>
-<span id="L1495"><span class="lineNum">    1495</span>              :  * @brief LoRA alpha parameter</span>
-<span id="L1496"><span class="lineNum">    1496</span>              :  * @details It is used to set the scaling factor of LoRA, which is calculated as</span>
-<span id="L1497"><span class="lineNum">    1497</span>              :  * `scaling = alpha / rank` in the original paper.</span>
-<span id="L1498"><span class="lineNum">    1498</span>              :  */</span>
-<span id="L1499"><span class="lineNum">    1499</span> <span class="tlaGNC">        1886 : class LoraAlpha : public PositiveIntegerProperty {</span></span>
-<span id="L1500"><span class="lineNum">    1500</span>              : public:</span>
-<span id="L1501"><span class="lineNum">    1501</span>              :   static constexpr const char *key = &quot;lora_alpha&quot;; /**&lt; unique key to access */</span>
-<span id="L1502"><span class="lineNum">    1502</span>              :   using prop_tag = uint_prop_tag;                  /**&lt; property type */</span>
-<span id="L1503"><span class="lineNum">    1503</span>              : };</span>
-<span id="L1504"><span class="lineNum">    1504</span>              : </span>
-<span id="L1505"><span class="lineNum">    1505</span>              : /**</span>
-<span id="L1506"><span class="lineNum">    1506</span>              :  * @brief properties for getting the clipping value to clip the gradient by norm</span>
-<span id="L1507"><span class="lineNum">    1507</span>              :  *</span>
-<span id="L1508"><span class="lineNum">    1508</span>              :  */</span>
-<span id="L1509"><span class="lineNum">    1509</span> <span class="tlaGNC">       21786 : class ClipGradByGlobalNorm : public Property&lt;float&gt; {</span></span>
-<span id="L1510"><span class="lineNum">    1510</span>              : public:</span>
-<span id="L1511"><span class="lineNum">    1511</span>              :   static constexpr const char *key =</span>
-<span id="L1512"><span class="lineNum">    1512</span>              :     &quot;clip_grad_by_norm&quot;;           /**&lt; unique key to access */</span>
-<span id="L1513"><span class="lineNum">    1513</span>              :   using prop_tag = float_prop_tag; /**&lt; property type */</span>
-<span id="L1514"><span class="lineNum">    1514</span>              : };</span>
-<span id="L1515"><span class="lineNum">    1515</span>              : </span>
-<span id="L1516"><span class="lineNum">    1516</span>              : /**</span>
-<span id="L1517"><span class="lineNum">    1517</span>              :  * @brief properties for getting the loss scale value to mixed precision</span>
-<span id="L1518"><span class="lineNum">    1518</span>              :  *</span>
-<span id="L1519"><span class="lineNum">    1519</span>              :  */</span>
-<span id="L1520"><span class="lineNum">    1520</span> <span class="tlaGNC">       18573 : class LossScaleForMixed : public Property&lt;float&gt; {</span></span>
-<span id="L1521"><span class="lineNum">    1521</span>              : public:</span>
-<span id="L1522"><span class="lineNum">    1522</span>              :   static constexpr const char *key = &quot;loss_scale&quot;; /**&lt; unique key to access */</span>
-<span id="L1523"><span class="lineNum">    1523</span>              :   using prop_tag = float_prop_tag;                 /**&lt; property type */</span>
+<span id="L1329"><span class="lineNum">    1329</span>              :  * @brief Scale, Scaling factor property</span>
+<span id="L1330"><span class="lineNum">    1330</span>              :  */</span>
+<span id="L1331"><span class="lineNum">    1331</span>              : class Scale : public nntrainer::Property&lt;float&gt; {</span>
+<span id="L1332"><span class="lineNum">    1332</span>              : public:</span>
+<span id="L1333"><span class="lineNum">    1333</span>              :   static constexpr const char *key = &quot;scale&quot;; /**&lt; unique key to access */</span>
+<span id="L1334"><span class="lineNum">    1334</span>              :   using prop_tag = nntrainer::float_prop_tag; /**&lt; property type */</span>
+<span id="L1335"><span class="lineNum">    1335</span>              : };</span>
+<span id="L1336"><span class="lineNum">    1336</span>              : </span>
+<span id="L1337"><span class="lineNum">    1337</span>              : /**</span>
+<span id="L1338"><span class="lineNum">    1338</span>              :  * @brief scaled dot product property, used to check</span>
+<span id="L1339"><span class="lineNum">    1339</span>              :  * whether attention layer is a kind of scaled dot product attention</span>
+<span id="L1340"><span class="lineNum">    1340</span>              :  *</span>
+<span id="L1341"><span class="lineNum">    1341</span>              :  */</span>
+<span id="L1342"><span class="lineNum">    1342</span>              : class ScaledDotProduct : public nntrainer::Property&lt;bool&gt; {</span>
+<span id="L1343"><span class="lineNum">    1343</span>              : public:</span>
+<span id="L1344"><span class="lineNum">    1344</span>              :   /**</span>
+<span id="L1345"><span class="lineNum">    1345</span>              :    * @brief Construct a new ScaledDotProduct object</span>
+<span id="L1346"><span class="lineNum">    1346</span>              :    *</span>
+<span id="L1347"><span class="lineNum">    1347</span>              :    */</span>
+<span id="L1348"><span class="lineNum">    1348</span>              :   ScaledDotProduct(bool value = false);</span>
+<span id="L1349"><span class="lineNum">    1349</span>              :   static constexpr const char *key = &quot;scaled_dot_product&quot;;</span>
+<span id="L1350"><span class="lineNum">    1350</span>              :   using prop_tag = bool_prop_tag;</span>
+<span id="L1351"><span class="lineNum">    1351</span>              : };</span>
+<span id="L1352"><span class="lineNum">    1352</span>              : </span>
+<span id="L1353"><span class="lineNum">    1353</span>              : /**</span>
+<span id="L1354"><span class="lineNum">    1354</span>              :  * @brief causal mask property, used in attention layer</span>
+<span id="L1355"><span class="lineNum">    1355</span>              :  *</span>
+<span id="L1356"><span class="lineNum">    1356</span>              :  */</span>
+<span id="L1357"><span class="lineNum">    1357</span>              : class CausalMask : public nntrainer::Property&lt;bool&gt; {</span>
+<span id="L1358"><span class="lineNum">    1358</span>              : public:</span>
+<span id="L1359"><span class="lineNum">    1359</span>              :   /**</span>
+<span id="L1360"><span class="lineNum">    1360</span>              :    * @brief Construct a new CausalMask object</span>
+<span id="L1361"><span class="lineNum">    1361</span>              :    *</span>
+<span id="L1362"><span class="lineNum">    1362</span>              :    */</span>
+<span id="L1363"><span class="lineNum">    1363</span>              :   CausalMask(bool value = false);</span>
+<span id="L1364"><span class="lineNum">    1364</span>              :   static constexpr const char *key = &quot;causal_mask&quot;;</span>
+<span id="L1365"><span class="lineNum">    1365</span>              :   using prop_tag = bool_prop_tag;</span>
+<span id="L1366"><span class="lineNum">    1366</span>              : };</span>
+<span id="L1367"><span class="lineNum">    1367</span>              : </span>
+<span id="L1368"><span class="lineNum">    1368</span>              : /**</span>
+<span id="L1369"><span class="lineNum">    1369</span>              :  * @brief Print object</span>
+<span id="L1370"><span class="lineNum">    1370</span>              :  *</span>
+<span id="L1371"><span class="lineNum">    1371</span>              :  */</span>
+<span id="L1372"><span class="lineNum">    1372</span> <span class="tlaGNC">         718 : class Print : public nntrainer::Property&lt;bool&gt; {</span></span>
+<span id="L1373"><span class="lineNum">    1373</span>              : public:</span>
+<span id="L1374"><span class="lineNum">    1374</span>              :   /**</span>
+<span id="L1375"><span class="lineNum">    1375</span>              :    * @brief Construct a new Print object</span>
+<span id="L1376"><span class="lineNum">    1376</span>              :    *</span>
+<span id="L1377"><span class="lineNum">    1377</span>              :    */</span>
+<span id="L1378"><span class="lineNum">    1378</span> <span class="tlaGNC">        2804 :   Print(bool value = false) { set(value); }</span></span>
+<span id="L1379"><span class="lineNum">    1379</span>              :   static constexpr const char *key = &quot;print&quot;;</span>
+<span id="L1380"><span class="lineNum">    1380</span>              :   using prop_tag = bool_prop_tag;</span>
+<span id="L1381"><span class="lineNum">    1381</span>              : };</span>
+<span id="L1382"><span class="lineNum">    1382</span>              : </span>
+<span id="L1383"><span class="lineNum">    1383</span>              : /**</span>
+<span id="L1384"><span class="lineNum">    1384</span>              :  * @brief K property, K is the size of the three projections in MoL attention</span>
+<span id="L1385"><span class="lineNum">    1385</span>              :  *</span>
+<span id="L1386"><span class="lineNum">    1386</span>              :  */</span>
+<span id="L1387"><span class="lineNum">    1387</span> <span class="tlaGNC">          19 : class MoL_K : public PositiveIntegerProperty {</span></span>
+<span id="L1388"><span class="lineNum">    1388</span>              : public:</span>
+<span id="L1389"><span class="lineNum">    1389</span>              :   static constexpr const char *key = &quot;MoL_K&quot;; /**&lt; unique key to access */</span>
+<span id="L1390"><span class="lineNum">    1390</span>              :   using prop_tag = uint_prop_tag;             /**&lt; property type */</span>
+<span id="L1391"><span class="lineNum">    1391</span>              : };</span>
+<span id="L1392"><span class="lineNum">    1392</span>              : </span>
+<span id="L1393"><span class="lineNum">    1393</span>              : /**</span>
+<span id="L1394"><span class="lineNum">    1394</span>              :  * @brief NumHeads property, NumHeads is number of head in multi head attention</span>
+<span id="L1395"><span class="lineNum">    1395</span>              :  *</span>
+<span id="L1396"><span class="lineNum">    1396</span>              :  */</span>
+<span id="L1397"><span class="lineNum">    1397</span> <span class="tlaGNC">         298 : class NumHeads : public PositiveIntegerProperty {</span></span>
+<span id="L1398"><span class="lineNum">    1398</span>              : public:</span>
+<span id="L1399"><span class="lineNum">    1399</span>              :   /**</span>
+<span id="L1400"><span class="lineNum">    1400</span>              :    * @brief Construct a new NumHeads object with default value 1</span>
+<span id="L1401"><span class="lineNum">    1401</span>              :    *</span>
+<span id="L1402"><span class="lineNum">    1402</span>              :    */</span>
+<span id="L1403"><span class="lineNum">    1403</span>              :   NumHeads(unsigned int value = 1);</span>
+<span id="L1404"><span class="lineNum">    1404</span>              :   static constexpr const char *key = &quot;num_heads&quot;; /**&lt; unique key to access */</span>
+<span id="L1405"><span class="lineNum">    1405</span>              :   using prop_tag = uint_prop_tag;                 /**&lt; property type */</span>
+<span id="L1406"><span class="lineNum">    1406</span>              : };</span>
+<span id="L1407"><span class="lineNum">    1407</span>              : </span>
+<span id="L1408"><span class="lineNum">    1408</span>              : /**</span>
+<span id="L1409"><span class="lineNum">    1409</span>              :  * @brief ProjectedKeyDim property, projected key dim per head in multi head</span>
+<span id="L1410"><span class="lineNum">    1410</span>              :  * attention</span>
+<span id="L1411"><span class="lineNum">    1411</span>              :  * @details Correspond with key_dim of tensorflow</span>
+<span id="L1412"><span class="lineNum">    1412</span>              :  *</span>
+<span id="L1413"><span class="lineNum">    1413</span>              :  */</span>
+<span id="L1414"><span class="lineNum">    1414</span> <span class="tlaGNC">         149 : class ProjectedKeyDim : public PositiveIntegerProperty {</span></span>
+<span id="L1415"><span class="lineNum">    1415</span>              : public:</span>
+<span id="L1416"><span class="lineNum">    1416</span>              :   static constexpr const char *key =</span>
+<span id="L1417"><span class="lineNum">    1417</span>              :     &quot;projected_key_dim&quot;;          /**&lt; unique key to access */</span>
+<span id="L1418"><span class="lineNum">    1418</span>              :   using prop_tag = uint_prop_tag; /**&lt; property type */</span>
+<span id="L1419"><span class="lineNum">    1419</span>              : };</span>
+<span id="L1420"><span class="lineNum">    1420</span>              : </span>
+<span id="L1421"><span class="lineNum">    1421</span>              : /**</span>
+<span id="L1422"><span class="lineNum">    1422</span>              :  * @brief ProjectedValueDim property, projected value dim per head in multi head</span>
+<span id="L1423"><span class="lineNum">    1423</span>              :  * attention</span>
+<span id="L1424"><span class="lineNum">    1424</span>              :  * @details Correspond with value_dim of tensorflow</span>
+<span id="L1425"><span class="lineNum">    1425</span>              :  *</span>
+<span id="L1426"><span class="lineNum">    1426</span>              :  */</span>
+<span id="L1427"><span class="lineNum">    1427</span> <span class="tlaGNC">         149 : class ProjectedValueDim : public PositiveIntegerProperty {</span></span>
+<span id="L1428"><span class="lineNum">    1428</span>              : public:</span>
+<span id="L1429"><span class="lineNum">    1429</span>              :   static constexpr const char *key =</span>
+<span id="L1430"><span class="lineNum">    1430</span>              :     &quot;projected_value_dim&quot;;        /**&lt; unique key to access */</span>
+<span id="L1431"><span class="lineNum">    1431</span>              :   using prop_tag = uint_prop_tag; /**&lt; property type */</span>
+<span id="L1432"><span class="lineNum">    1432</span>              : };</span>
+<span id="L1433"><span class="lineNum">    1433</span>              : </span>
+<span id="L1434"><span class="lineNum">    1434</span>              : /**</span>
+<span id="L1435"><span class="lineNum">    1435</span>              :  * @brief OutputShape property, output shape of multi head</span>
+<span id="L1436"><span class="lineNum">    1436</span>              :  * attention</span>
+<span id="L1437"><span class="lineNum">    1437</span>              :  * @details Correspond with output_shape of tensorflow</span>
+<span id="L1438"><span class="lineNum">    1438</span>              :  *</span>
+<span id="L1439"><span class="lineNum">    1439</span>              :  */</span>
+<span id="L1440"><span class="lineNum">    1440</span> <span class="tlaGNC">         447 : class OutputShape : public PositiveIntegerProperty {</span></span>
+<span id="L1441"><span class="lineNum">    1441</span>              : public:</span>
+<span id="L1442"><span class="lineNum">    1442</span>              :   static constexpr const char *key =</span>
+<span id="L1443"><span class="lineNum">    1443</span>              :     &quot;output_shape&quot;;               /**&lt; unique key to access */</span>
+<span id="L1444"><span class="lineNum">    1444</span>              :   using prop_tag = uint_prop_tag; /**&lt; property type */</span>
+<span id="L1445"><span class="lineNum">    1445</span>              : };</span>
+<span id="L1446"><span class="lineNum">    1446</span>              : </span>
+<span id="L1447"><span class="lineNum">    1447</span>              : /**</span>
+<span id="L1448"><span class="lineNum">    1448</span>              :  * @brief Enumeration of return attention weight</span>
+<span id="L1449"><span class="lineNum">    1449</span>              :  */</span>
+<span id="L1450"><span class="lineNum">    1450</span>              : struct ReturnAttentionWeightInfo {</span>
+<span id="L1451"><span class="lineNum">    1451</span>              :   enum class Enum { none, before, after };</span>
+<span id="L1452"><span class="lineNum">    1452</span>              :   static constexpr std::initializer_list&lt;Enum&gt; EnumList = {</span>
+<span id="L1453"><span class="lineNum">    1453</span>              :     Enum::none, Enum::before, Enum::after};</span>
+<span id="L1454"><span class="lineNum">    1454</span>              : </span>
+<span id="L1455"><span class="lineNum">    1455</span>              :   static constexpr const char *EnumStr[] = {&quot;none&quot;, &quot;before&quot;, &quot;after&quot;};</span>
+<span id="L1456"><span class="lineNum">    1456</span>              : };</span>
+<span id="L1457"><span class="lineNum">    1457</span>              : </span>
+<span id="L1458"><span class="lineNum">    1458</span>              : /**</span>
+<span id="L1459"><span class="lineNum">    1459</span>              :  * @brief ReturnAttentionWeight, return attention weight</span>
+<span id="L1460"><span class="lineNum">    1460</span>              :  * @details &quot;none&quot; won't return attention weight.</span>
+<span id="L1461"><span class="lineNum">    1461</span>              :  *          &quot;before&quot;/&quot;after&quot; will return attention weight before/after applying</span>
+<span id="L1462"><span class="lineNum">    1462</span>              :  * dropout</span>
+<span id="L1463"><span class="lineNum">    1463</span>              :  * @note Correspond with return_attention_scores of tensorflow and Correspond</span>
+<span id="L1464"><span class="lineNum">    1464</span>              :  *       with need_weights of torch</span>
+<span id="L1465"><span class="lineNum">    1465</span>              :  *</span>
+<span id="L1466"><span class="lineNum">    1466</span>              :  */</span>
+<span id="L1467"><span class="lineNum">    1467</span> <span class="tlaGNC">         149 : class ReturnAttentionWeight : public EnumProperty&lt;ReturnAttentionWeightInfo&gt; {</span></span>
+<span id="L1468"><span class="lineNum">    1468</span>              : public:</span>
+<span id="L1469"><span class="lineNum">    1469</span>              :   static constexpr const char *key =</span>
+<span id="L1470"><span class="lineNum">    1470</span>              :     &quot;return_attention_weight&quot;;          /**&lt; unique key to access */</span>
+<span id="L1471"><span class="lineNum">    1471</span>              :   using prop_tag = enum_class_prop_tag; /**&lt; property type */</span>
+<span id="L1472"><span class="lineNum">    1472</span>              : </span>
+<span id="L1473"><span class="lineNum">    1473</span>              :   /**</span>
+<span id="L1474"><span class="lineNum">    1474</span>              :    * @brief Construct a new ReturnAttentionWeight object</span>
+<span id="L1475"><span class="lineNum">    1475</span>              :    *</span>
+<span id="L1476"><span class="lineNum">    1476</span>              :    */</span>
+<span id="L1477"><span class="lineNum">    1477</span>              :   ReturnAttentionWeight(ReturnAttentionWeightInfo::Enum value =</span>
+<span id="L1478"><span class="lineNum">    1478</span>              :                           ReturnAttentionWeightInfo::Enum::none);</span>
+<span id="L1479"><span class="lineNum">    1479</span>              : };</span>
+<span id="L1480"><span class="lineNum">    1480</span>              : </span>
+<span id="L1481"><span class="lineNum">    1481</span>              : /**</span>
+<span id="L1482"><span class="lineNum">    1482</span>              :  * @brief AverageAttentionWeight, average attention weight</span>
+<span id="L1483"><span class="lineNum">    1483</span>              :  * @details Correspond with average_attn_weights of torch</span>
+<span id="L1484"><span class="lineNum">    1484</span>              :  *</span>
+<span id="L1485"><span class="lineNum">    1485</span>              :  */</span>
+<span id="L1486"><span class="lineNum">    1486</span> <span class="tlaGNC">         447 : class AverageAttentionWeight : public Property&lt;bool&gt; {</span></span>
+<span id="L1487"><span class="lineNum">    1487</span>              : public:</span>
+<span id="L1488"><span class="lineNum">    1488</span>              :   static constexpr const char *key =</span>
+<span id="L1489"><span class="lineNum">    1489</span>              :     &quot;average_attention_weight&quot;;   /**&lt; unique key to access */</span>
+<span id="L1490"><span class="lineNum">    1490</span>              :   using prop_tag = bool_prop_tag; /**&lt; property type */</span>
+<span id="L1491"><span class="lineNum">    1491</span>              : };</span>
+<span id="L1492"><span class="lineNum">    1492</span>              : </span>
+<span id="L1493"><span class="lineNum">    1493</span>              : /**</span>
+<span id="L1494"><span class="lineNum">    1494</span>              :  * @brief LoRA rank property, it is used to set rank of LoRA weight.</span>
+<span id="L1495"><span class="lineNum">    1495</span>              :  * @details</span>
+<span id="L1496"><span class="lineNum">    1496</span>              :  */</span>
+<span id="L1497"><span class="lineNum">    1497</span> <span class="tlaGNC">         943 : class LoraRank : public PositiveIntegerProperty {</span></span>
+<span id="L1498"><span class="lineNum">    1498</span>              : public:</span>
+<span id="L1499"><span class="lineNum">    1499</span>              :   static constexpr const char *key = &quot;lora_rank&quot;; /**&lt; unique key to access */</span>
+<span id="L1500"><span class="lineNum">    1500</span>              :   using prop_tag = uint_prop_tag;                 /**&lt; property type */</span>
+<span id="L1501"><span class="lineNum">    1501</span>              : };</span>
+<span id="L1502"><span class="lineNum">    1502</span>              : </span>
+<span id="L1503"><span class="lineNum">    1503</span>              : /**</span>
+<span id="L1504"><span class="lineNum">    1504</span>              :  * @brief LoRA alpha parameter</span>
+<span id="L1505"><span class="lineNum">    1505</span>              :  * @details It is used to set the scaling factor of LoRA, which is calculated as</span>
+<span id="L1506"><span class="lineNum">    1506</span>              :  * `scaling = alpha / rank` in the original paper.</span>
+<span id="L1507"><span class="lineNum">    1507</span>              :  */</span>
+<span id="L1508"><span class="lineNum">    1508</span> <span class="tlaGNC">        1886 : class LoraAlpha : public PositiveIntegerProperty {</span></span>
+<span id="L1509"><span class="lineNum">    1509</span>              : public:</span>
+<span id="L1510"><span class="lineNum">    1510</span>              :   static constexpr const char *key = &quot;lora_alpha&quot;; /**&lt; unique key to access */</span>
+<span id="L1511"><span class="lineNum">    1511</span>              :   using prop_tag = uint_prop_tag;                  /**&lt; property type */</span>
+<span id="L1512"><span class="lineNum">    1512</span>              : };</span>
+<span id="L1513"><span class="lineNum">    1513</span>              : </span>
+<span id="L1514"><span class="lineNum">    1514</span>              : /**</span>
+<span id="L1515"><span class="lineNum">    1515</span>              :  * @brief properties for getting the clipping value to clip the gradient by norm</span>
+<span id="L1516"><span class="lineNum">    1516</span>              :  *</span>
+<span id="L1517"><span class="lineNum">    1517</span>              :  */</span>
+<span id="L1518"><span class="lineNum">    1518</span> <span class="tlaGNC">       21786 : class ClipGradByGlobalNorm : public Property&lt;float&gt; {</span></span>
+<span id="L1519"><span class="lineNum">    1519</span>              : public:</span>
+<span id="L1520"><span class="lineNum">    1520</span>              :   static constexpr const char *key =</span>
+<span id="L1521"><span class="lineNum">    1521</span>              :     &quot;clip_grad_by_norm&quot;;           /**&lt; unique key to access */</span>
+<span id="L1522"><span class="lineNum">    1522</span>              :   using prop_tag = float_prop_tag; /**&lt; property type */</span>
+<span id="L1523"><span class="lineNum">    1523</span>              : };</span>
 <span id="L1524"><span class="lineNum">    1524</span>              : </span>
-<span id="L1525"><span class="lineNum">    1525</span>              :   /**</span>
-<span id="L1526"><span class="lineNum">    1526</span>              :    * @brief check if given value is valid</span>
-<span id="L1527"><span class="lineNum">    1527</span>              :    *</span>
-<span id="L1528"><span class="lineNum">    1528</span>              :    * @param value value to check</span>
-<span id="L1529"><span class="lineNum">    1529</span>              :    * @retval true if it is Not 0</span>
-<span id="L1530"><span class="lineNum">    1530</span>              :    * @retval false if it is 0</span>
-<span id="L1531"><span class="lineNum">    1531</span>              :    */</span>
-<span id="L1532"><span class="lineNum">    1532</span>              :   bool isValid(const float &amp;value) const override;</span>
-<span id="L1533"><span class="lineNum">    1533</span>              : };</span>
-<span id="L1534"><span class="lineNum">    1534</span>              : </span>
-<span id="L1535"><span class="lineNum">    1535</span>              : /**</span>
-<span id="L1536"><span class="lineNum">    1536</span>              :  * @brief Learning Rate props</span>
-<span id="L1537"><span class="lineNum">    1537</span>              :  *</span>
-<span id="L1538"><span class="lineNum">    1538</span>              :  */</span>
-<span id="L1539"><span class="lineNum">    1539</span> <span class="tlaGNC">        1486 : class LearningRate : public Property&lt;float&gt; {</span></span>
-<span id="L1540"><span class="lineNum">    1540</span>              : public:</span>
-<span id="L1541"><span class="lineNum">    1541</span>              :   static constexpr const char *key =</span>
-<span id="L1542"><span class="lineNum">    1542</span>              :     &quot;learning_rate&quot;;               /**&lt; unique key to access */</span>
-<span id="L1543"><span class="lineNum">    1543</span>              :   using prop_tag = float_prop_tag; /**&lt; property type */</span>
-<span id="L1544"><span class="lineNum">    1544</span>              : };</span>
-<span id="L1545"><span class="lineNum">    1545</span>              : </span>
-<span id="L1546"><span class="lineNum">    1546</span>              : /**</span>
-<span id="L1547"><span class="lineNum">    1547</span>              :  * @brief Max Learning Rate props</span>
-<span id="L1548"><span class="lineNum">    1548</span>              :  *</span>
-<span id="L1549"><span class="lineNum">    1549</span>              :  */</span>
-<span id="L1550"><span class="lineNum">    1550</span> <span class="tlaGNC">          20 : class MaxLearningRate : public Property&lt;float&gt; {</span></span>
-<span id="L1551"><span class="lineNum">    1551</span>              : public:</span>
-<span id="L1552"><span class="lineNum">    1552</span>              :   static constexpr const char *key =</span>
-<span id="L1553"><span class="lineNum">    1553</span>              :     &quot;max_learning_rate&quot;;           /**&lt; unique key to access */</span>
-<span id="L1554"><span class="lineNum">    1554</span>              :   using prop_tag = float_prop_tag; /**&lt; property type */</span>
-<span id="L1555"><span class="lineNum">    1555</span>              : };</span>
-<span id="L1556"><span class="lineNum">    1556</span>              : </span>
-<span id="L1557"><span class="lineNum">    1557</span>              : /**</span>
-<span id="L1558"><span class="lineNum">    1558</span>              :  * @brief Min Learning Rate props</span>
-<span id="L1559"><span class="lineNum">    1559</span>              :  *</span>
-<span id="L1560"><span class="lineNum">    1560</span>              :  */</span>
-<span id="L1561"><span class="lineNum">    1561</span> <span class="tlaGNC">          20 : class MinLearningRate : public Property&lt;float&gt; {</span></span>
-<span id="L1562"><span class="lineNum">    1562</span>              : public:</span>
-<span id="L1563"><span class="lineNum">    1563</span>              :   static constexpr const char *key =</span>
-<span id="L1564"><span class="lineNum">    1564</span>              :     &quot;min_learning_rate&quot;;           /**&lt; unique key to access */</span>
-<span id="L1565"><span class="lineNum">    1565</span>              :   using prop_tag = float_prop_tag; /**&lt; property type */</span>
-<span id="L1566"><span class="lineNum">    1566</span>              : };</span>
-<span id="L1567"><span class="lineNum">    1567</span>              : </span>
-<span id="L1568"><span class="lineNum">    1568</span>              : /**</span>
-<span id="L1569"><span class="lineNum">    1569</span>              :  * @brief Iteration props</span>
-<span id="L1570"><span class="lineNum">    1570</span>              :  *</span>
-<span id="L1571"><span class="lineNum">    1571</span>              :  */</span>
-<span id="L1572"><span class="lineNum">    1572</span> <span class="tlaGNC">          51 : class Iteration : public Property&lt;unsigned int&gt; {</span></span>
-<span id="L1573"><span class="lineNum">    1573</span>              : public:</span>
-<span id="L1574"><span class="lineNum">    1574</span>              :   static constexpr const char *key = &quot;iteration&quot;; /**&lt; unique key to access */</span>
-<span id="L1575"><span class="lineNum">    1575</span>              :   using prop_tag = uint_prop_tag;                 /**&lt; property type */</span>
-<span id="L1576"><span class="lineNum">    1576</span>              : };</span>
-<span id="L1577"><span class="lineNum">    1577</span>              : </span>
-<span id="L1578"><span class="lineNum">    1578</span>              : /**</span>
-<span id="L1579"><span class="lineNum">    1579</span>              :  * @brief Decay rate property</span>
-<span id="L1580"><span class="lineNum">    1580</span>              :  *</span>
-<span id="L1581"><span class="lineNum">    1581</span>              :  */</span>
-<span id="L1582"><span class="lineNum">    1582</span> <span class="tlaGNC">         869 : class DecayRate : public Property&lt;float&gt; {</span></span>
-<span id="L1583"><span class="lineNum">    1583</span>              : public:</span>
-<span id="L1584"><span class="lineNum">    1584</span>              :   static constexpr const char *key = &quot;decay_rate&quot;; /**&lt; unique key to access */</span>
-<span id="L1585"><span class="lineNum">    1585</span>              :   using prop_tag = float_prop_tag;                 /**&lt; property type */</span>
-<span id="L1586"><span class="lineNum">    1586</span>              : };</span>
-<span id="L1587"><span class="lineNum">    1587</span>              : </span>
-<span id="L1588"><span class="lineNum">    1588</span>              : /**</span>
-<span id="L1589"><span class="lineNum">    1589</span>              :  * @brief decay steps property</span>
-<span id="L1590"><span class="lineNum">    1590</span>              :  *</span>
-<span id="L1591"><span class="lineNum">    1591</span>              :  */</span>
-<span id="L1592"><span class="lineNum">    1592</span> <span class="tlaGNC">         889 : class DecaySteps : public PositiveIntegerProperty {</span></span>
-<span id="L1593"><span class="lineNum">    1593</span>              : public:</span>
-<span id="L1594"><span class="lineNum">    1594</span>              :   static constexpr const char *key = &quot;decay_steps&quot;; /**&lt; unique key to access */</span>
-<span id="L1595"><span class="lineNum">    1595</span>              :   using prop_tag = uint_prop_tag;                   /**&lt; property type */</span>
-<span id="L1596"><span class="lineNum">    1596</span>              : };</span>
-<span id="L1597"><span class="lineNum">    1597</span>              : </span>
-<span id="L1598"><span class="lineNum">    1598</span>              : /**</span>
-<span id="L1599"><span class="lineNum">    1599</span>              :  * @brief User data props</span>
-<span id="L1600"><span class="lineNum">    1600</span>              :  *</span>
-<span id="L1601"><span class="lineNum">    1601</span>              :  */</span>
-<span id="L1602"><span class="lineNum">    1602</span>              : class PropsUserData final : public Property&lt;void *&gt; {</span>
-<span id="L1603"><span class="lineNum">    1603</span>              : public:</span>
-<span id="L1604"><span class="lineNum">    1604</span>              :   PropsUserData(void *user_data);</span>
-<span id="L1605"><span class="lineNum">    1605</span>              :   static constexpr const char *key = &quot;user_data&quot;;</span>
-<span id="L1606"><span class="lineNum">    1606</span>              :   using prop_tag = ptr_prop_tag;</span>
-<span id="L1607"><span class="lineNum">    1607</span>              : };</span>
-<span id="L1608"><span class="lineNum">    1608</span>              : </span>
-<span id="L1609"><span class="lineNum">    1609</span>              : /**</span>
-<span id="L1610"><span class="lineNum">    1610</span>              :  * @brief Enumeration of Tensor Life Spacn</span>
-<span id="L1611"><span class="lineNum">    1611</span>              :  */</span>
-<span id="L1612"><span class="lineNum">    1612</span>              : struct TensorLifeInfo {</span>
-<span id="L1613"><span class="lineNum">    1613</span>              :   using Enum = nntrainer::TensorLifespan;</span>
-<span id="L1614"><span class="lineNum">    1614</span>              :   static constexpr std::initializer_list&lt;Enum&gt; EnumList = {</span>
-<span id="L1615"><span class="lineNum">    1615</span>              :     Enum::UNMANAGED,</span>
-<span id="L1616"><span class="lineNum">    1616</span>              :     Enum::FORWARD_FUNC_LIFESPAN,</span>
-<span id="L1617"><span class="lineNum">    1617</span>              :     Enum::CALC_DERIV_LIFESPAN,</span>
-<span id="L1618"><span class="lineNum">    1618</span>              :     Enum::CALC_GRAD_LIFESPAN,</span>
-<span id="L1619"><span class="lineNum">    1619</span>              :     Enum::CALC_AGRAD_LIFESPAN,</span>
-<span id="L1620"><span class="lineNum">    1620</span>              :     Enum::CALC_GRAD_DERIV_LIFESPAN,</span>
-<span id="L1621"><span class="lineNum">    1621</span>              :     Enum::CALC_GRAD_DERIV_AGRAD_LIFESPAN,</span>
-<span id="L1622"><span class="lineNum">    1622</span>              :     Enum::FORWARD_GRAD_LIFESPAN,</span>
-<span id="L1623"><span class="lineNum">    1623</span>              :     Enum::FORWARD_GRAD_AGRAD_LIFESPAN,</span>
-<span id="L1624"><span class="lineNum">    1624</span>              :     Enum::FORWARD_DERIV_LIFESPAN,</span>
-<span id="L1625"><span class="lineNum">    1625</span>              :     Enum::BACKWARD_FUNC_LIFESPAN,</span>
-<span id="L1626"><span class="lineNum">    1626</span>              :     Enum::CALC_GRAD_DERIV_AGRAD_LIFESPAN,</span>
-<span id="L1627"><span class="lineNum">    1627</span>              :     Enum::ITERATION_LIFESPAN,</span>
-<span id="L1628"><span class="lineNum">    1628</span>              :     Enum::EPOCH_LIFESPAN,</span>
-<span id="L1629"><span class="lineNum">    1629</span>              :     Enum::FORWARD_INFER_LIFESPAN,</span>
-<span id="L1630"><span class="lineNum">    1630</span>              :     Enum::MAX_LIFESPAN};</span>
-<span id="L1631"><span class="lineNum">    1631</span>              : </span>
-<span id="L1632"><span class="lineNum">    1632</span>              :   static constexpr const char *EnumStr[] = {&quot;unmanaged&quot;,</span>
-<span id="L1633"><span class="lineNum">    1633</span>              :                                             &quot;forward&quot;,</span>
-<span id="L1634"><span class="lineNum">    1634</span>              :                                             &quot;deriv&quot;,</span>
-<span id="L1635"><span class="lineNum">    1635</span>              :                                             &quot;grad&quot;,</span>
-<span id="L1636"><span class="lineNum">    1636</span>              :                                             &quot;agrad&quot;,</span>
-<span id="L1637"><span class="lineNum">    1637</span>              :                                             &quot;grad_deriv&quot;,</span>
-<span id="L1638"><span class="lineNum">    1638</span>              :                                             &quot;grad_deriv_agrad&quot;,</span>
-<span id="L1639"><span class="lineNum">    1639</span>              :                                             &quot;forward_grad&quot;,</span>
-<span id="L1640"><span class="lineNum">    1640</span>              :                                             &quot;forward_grad_agrad&quot;,</span>
-<span id="L1641"><span class="lineNum">    1641</span>              :                                             &quot;forward_deriv&quot;,</span>
-<span id="L1642"><span class="lineNum">    1642</span>              :                                             &quot;backward&quot;,</span>
-<span id="L1643"><span class="lineNum">    1643</span>              :                                             &quot;grad_deriv_agrad&quot;,</span>
-<span id="L1644"><span class="lineNum">    1644</span>              :                                             &quot;iteration&quot;,</span>
-<span id="L1645"><span class="lineNum">    1645</span>              :                                             &quot;epoch&quot;,</span>
-<span id="L1646"><span class="lineNum">    1646</span>              :                                             &quot;forward_infer&quot;,</span>
-<span id="L1647"><span class="lineNum">    1647</span>              :                                             &quot;max&quot;};</span>
-<span id="L1648"><span class="lineNum">    1648</span>              : };</span>
-<span id="L1649"><span class="lineNum">    1649</span>              : </span>
-<span id="L1650"><span class="lineNum">    1650</span>              : /**</span>
-<span id="L1651"><span class="lineNum">    1651</span>              :  * @brief TensorLifeSpacn, return TensorLifespan</span>
-<span id="L1652"><span class="lineNum">    1652</span>              :  *</span>
-<span id="L1653"><span class="lineNum">    1653</span>              :  */</span>
-<span id="L1654"><span class="lineNum">    1654</span> <span class="tlaUNC tlaBgUNC">           0 : class TensorLife : public EnumProperty&lt;TensorLifeInfo&gt; {</span></span>
-<span id="L1655"><span class="lineNum">    1655</span>              : public:</span>
-<span id="L1656"><span class="lineNum">    1656</span>              :   static constexpr const char *key = &quot;tensor_life&quot;; /**&lt; unique key to access */</span>
-<span id="L1657"><span class="lineNum">    1657</span>              :   using prop_tag = enum_class_prop_tag;             /**&lt; property type */</span>
+<span id="L1525"><span class="lineNum">    1525</span>              : /**</span>
+<span id="L1526"><span class="lineNum">    1526</span>              :  * @brief properties for getting the loss scale value to mixed precision</span>
+<span id="L1527"><span class="lineNum">    1527</span>              :  *</span>
+<span id="L1528"><span class="lineNum">    1528</span>              :  */</span>
+<span id="L1529"><span class="lineNum">    1529</span> <span class="tlaGNC">       18573 : class LossScaleForMixed : public Property&lt;float&gt; {</span></span>
+<span id="L1530"><span class="lineNum">    1530</span>              : public:</span>
+<span id="L1531"><span class="lineNum">    1531</span>              :   static constexpr const char *key = &quot;loss_scale&quot;; /**&lt; unique key to access */</span>
+<span id="L1532"><span class="lineNum">    1532</span>              :   using prop_tag = float_prop_tag;                 /**&lt; property type */</span>
+<span id="L1533"><span class="lineNum">    1533</span>              : </span>
+<span id="L1534"><span class="lineNum">    1534</span>              :   /**</span>
+<span id="L1535"><span class="lineNum">    1535</span>              :    * @brief check if given value is valid</span>
+<span id="L1536"><span class="lineNum">    1536</span>              :    *</span>
+<span id="L1537"><span class="lineNum">    1537</span>              :    * @param value value to check</span>
+<span id="L1538"><span class="lineNum">    1538</span>              :    * @retval true if it is Not 0</span>
+<span id="L1539"><span class="lineNum">    1539</span>              :    * @retval false if it is 0</span>
+<span id="L1540"><span class="lineNum">    1540</span>              :    */</span>
+<span id="L1541"><span class="lineNum">    1541</span>              :   bool isValid(const float &amp;value) const override;</span>
+<span id="L1542"><span class="lineNum">    1542</span>              : };</span>
+<span id="L1543"><span class="lineNum">    1543</span>              : </span>
+<span id="L1544"><span class="lineNum">    1544</span>              : /**</span>
+<span id="L1545"><span class="lineNum">    1545</span>              :  * @brief Learning Rate props</span>
+<span id="L1546"><span class="lineNum">    1546</span>              :  *</span>
+<span id="L1547"><span class="lineNum">    1547</span>              :  */</span>
+<span id="L1548"><span class="lineNum">    1548</span> <span class="tlaGNC">        1486 : class LearningRate : public Property&lt;float&gt; {</span></span>
+<span id="L1549"><span class="lineNum">    1549</span>              : public:</span>
+<span id="L1550"><span class="lineNum">    1550</span>              :   static constexpr const char *key =</span>
+<span id="L1551"><span class="lineNum">    1551</span>              :     &quot;learning_rate&quot;;               /**&lt; unique key to access */</span>
+<span id="L1552"><span class="lineNum">    1552</span>              :   using prop_tag = float_prop_tag; /**&lt; property type */</span>
+<span id="L1553"><span class="lineNum">    1553</span>              : };</span>
+<span id="L1554"><span class="lineNum">    1554</span>              : </span>
+<span id="L1555"><span class="lineNum">    1555</span>              : /**</span>
+<span id="L1556"><span class="lineNum">    1556</span>              :  * @brief Max Learning Rate props</span>
+<span id="L1557"><span class="lineNum">    1557</span>              :  *</span>
+<span id="L1558"><span class="lineNum">    1558</span>              :  */</span>
+<span id="L1559"><span class="lineNum">    1559</span> <span class="tlaGNC">          20 : class MaxLearningRate : public Property&lt;float&gt; {</span></span>
+<span id="L1560"><span class="lineNum">    1560</span>              : public:</span>
+<span id="L1561"><span class="lineNum">    1561</span>              :   static constexpr const char *key =</span>
+<span id="L1562"><span class="lineNum">    1562</span>              :     &quot;max_learning_rate&quot;;           /**&lt; unique key to access */</span>
+<span id="L1563"><span class="lineNum">    1563</span>              :   using prop_tag = float_prop_tag; /**&lt; property type */</span>
+<span id="L1564"><span class="lineNum">    1564</span>              : };</span>
+<span id="L1565"><span class="lineNum">    1565</span>              : </span>
+<span id="L1566"><span class="lineNum">    1566</span>              : /**</span>
+<span id="L1567"><span class="lineNum">    1567</span>              :  * @brief Min Learning Rate props</span>
+<span id="L1568"><span class="lineNum">    1568</span>              :  *</span>
+<span id="L1569"><span class="lineNum">    1569</span>              :  */</span>
+<span id="L1570"><span class="lineNum">    1570</span> <span class="tlaGNC">          20 : class MinLearningRate : public Property&lt;float&gt; {</span></span>
+<span id="L1571"><span class="lineNum">    1571</span>              : public:</span>
+<span id="L1572"><span class="lineNum">    1572</span>              :   static constexpr const char *key =</span>
+<span id="L1573"><span class="lineNum">    1573</span>              :     &quot;min_learning_rate&quot;;           /**&lt; unique key to access */</span>
+<span id="L1574"><span class="lineNum">    1574</span>              :   using prop_tag = float_prop_tag; /**&lt; property type */</span>
+<span id="L1575"><span class="lineNum">    1575</span>              : };</span>
+<span id="L1576"><span class="lineNum">    1576</span>              : </span>
+<span id="L1577"><span class="lineNum">    1577</span>              : /**</span>
+<span id="L1578"><span class="lineNum">    1578</span>              :  * @brief Iteration props</span>
+<span id="L1579"><span class="lineNum">    1579</span>              :  *</span>
+<span id="L1580"><span class="lineNum">    1580</span>              :  */</span>
+<span id="L1581"><span class="lineNum">    1581</span> <span class="tlaGNC">          51 : class Iteration : public Property&lt;unsigned int&gt; {</span></span>
+<span id="L1582"><span class="lineNum">    1582</span>              : public:</span>
+<span id="L1583"><span class="lineNum">    1583</span>              :   static constexpr const char *key = &quot;iteration&quot;; /**&lt; unique key to access */</span>
+<span id="L1584"><span class="lineNum">    1584</span>              :   using prop_tag = uint_prop_tag;                 /**&lt; property type */</span>
+<span id="L1585"><span class="lineNum">    1585</span>              : };</span>
+<span id="L1586"><span class="lineNum">    1586</span>              : </span>
+<span id="L1587"><span class="lineNum">    1587</span>              : /**</span>
+<span id="L1588"><span class="lineNum">    1588</span>              :  * @brief Decay rate property</span>
+<span id="L1589"><span class="lineNum">    1589</span>              :  *</span>
+<span id="L1590"><span class="lineNum">    1590</span>              :  */</span>
+<span id="L1591"><span class="lineNum">    1591</span> <span class="tlaGNC">         869 : class DecayRate : public Property&lt;float&gt; {</span></span>
+<span id="L1592"><span class="lineNum">    1592</span>              : public:</span>
+<span id="L1593"><span class="lineNum">    1593</span>              :   static constexpr const char *key = &quot;decay_rate&quot;; /**&lt; unique key to access */</span>
+<span id="L1594"><span class="lineNum">    1594</span>              :   using prop_tag = float_prop_tag;                 /**&lt; property type */</span>
+<span id="L1595"><span class="lineNum">    1595</span>              : };</span>
+<span id="L1596"><span class="lineNum">    1596</span>              : </span>
+<span id="L1597"><span class="lineNum">    1597</span>              : /**</span>
+<span id="L1598"><span class="lineNum">    1598</span>              :  * @brief decay steps property</span>
+<span id="L1599"><span class="lineNum">    1599</span>              :  *</span>
+<span id="L1600"><span class="lineNum">    1600</span>              :  */</span>
+<span id="L1601"><span class="lineNum">    1601</span> <span class="tlaGNC">         889 : class DecaySteps : public PositiveIntegerProperty {</span></span>
+<span id="L1602"><span class="lineNum">    1602</span>              : public:</span>
+<span id="L1603"><span class="lineNum">    1603</span>              :   static constexpr const char *key = &quot;decay_steps&quot;; /**&lt; unique key to access */</span>
+<span id="L1604"><span class="lineNum">    1604</span>              :   using prop_tag = uint_prop_tag;                   /**&lt; property type */</span>
+<span id="L1605"><span class="lineNum">    1605</span>              : };</span>
+<span id="L1606"><span class="lineNum">    1606</span>              : </span>
+<span id="L1607"><span class="lineNum">    1607</span>              : /**</span>
+<span id="L1608"><span class="lineNum">    1608</span>              :  * @brief User data props</span>
+<span id="L1609"><span class="lineNum">    1609</span>              :  *</span>
+<span id="L1610"><span class="lineNum">    1610</span>              :  */</span>
+<span id="L1611"><span class="lineNum">    1611</span>              : class PropsUserData final : public Property&lt;void *&gt; {</span>
+<span id="L1612"><span class="lineNum">    1612</span>              : public:</span>
+<span id="L1613"><span class="lineNum">    1613</span>              :   PropsUserData(void *user_data);</span>
+<span id="L1614"><span class="lineNum">    1614</span>              :   static constexpr const char *key = &quot;user_data&quot;;</span>
+<span id="L1615"><span class="lineNum">    1615</span>              :   using prop_tag = ptr_prop_tag;</span>
+<span id="L1616"><span class="lineNum">    1616</span>              : };</span>
+<span id="L1617"><span class="lineNum">    1617</span>              : </span>
+<span id="L1618"><span class="lineNum">    1618</span>              : /**</span>
+<span id="L1619"><span class="lineNum">    1619</span>              :  * @brief Enumeration of Tensor Life Spacn</span>
+<span id="L1620"><span class="lineNum">    1620</span>              :  */</span>
+<span id="L1621"><span class="lineNum">    1621</span>              : struct TensorLifeInfo {</span>
+<span id="L1622"><span class="lineNum">    1622</span>              :   using Enum = nntrainer::TensorLifespan;</span>
+<span id="L1623"><span class="lineNum">    1623</span>              :   static constexpr std::initializer_list&lt;Enum&gt; EnumList = {</span>
+<span id="L1624"><span class="lineNum">    1624</span>              :     Enum::UNMANAGED,</span>
+<span id="L1625"><span class="lineNum">    1625</span>              :     Enum::FORWARD_FUNC_LIFESPAN,</span>
+<span id="L1626"><span class="lineNum">    1626</span>              :     Enum::CALC_DERIV_LIFESPAN,</span>
+<span id="L1627"><span class="lineNum">    1627</span>              :     Enum::CALC_GRAD_LIFESPAN,</span>
+<span id="L1628"><span class="lineNum">    1628</span>              :     Enum::CALC_AGRAD_LIFESPAN,</span>
+<span id="L1629"><span class="lineNum">    1629</span>              :     Enum::CALC_GRAD_DERIV_LIFESPAN,</span>
+<span id="L1630"><span class="lineNum">    1630</span>              :     Enum::CALC_GRAD_DERIV_AGRAD_LIFESPAN,</span>
+<span id="L1631"><span class="lineNum">    1631</span>              :     Enum::FORWARD_GRAD_LIFESPAN,</span>
+<span id="L1632"><span class="lineNum">    1632</span>              :     Enum::FORWARD_GRAD_AGRAD_LIFESPAN,</span>
+<span id="L1633"><span class="lineNum">    1633</span>              :     Enum::FORWARD_DERIV_LIFESPAN,</span>
+<span id="L1634"><span class="lineNum">    1634</span>              :     Enum::BACKWARD_FUNC_LIFESPAN,</span>
+<span id="L1635"><span class="lineNum">    1635</span>              :     Enum::CALC_GRAD_DERIV_AGRAD_LIFESPAN,</span>
+<span id="L1636"><span class="lineNum">    1636</span>              :     Enum::ITERATION_LIFESPAN,</span>
+<span id="L1637"><span class="lineNum">    1637</span>              :     Enum::EPOCH_LIFESPAN,</span>
+<span id="L1638"><span class="lineNum">    1638</span>              :     Enum::FORWARD_INFER_LIFESPAN,</span>
+<span id="L1639"><span class="lineNum">    1639</span>              :     Enum::MAX_LIFESPAN};</span>
+<span id="L1640"><span class="lineNum">    1640</span>              : </span>
+<span id="L1641"><span class="lineNum">    1641</span>              :   static constexpr const char *EnumStr[] = {&quot;unmanaged&quot;,</span>
+<span id="L1642"><span class="lineNum">    1642</span>              :                                             &quot;forward&quot;,</span>
+<span id="L1643"><span class="lineNum">    1643</span>              :                                             &quot;deriv&quot;,</span>
+<span id="L1644"><span class="lineNum">    1644</span>              :                                             &quot;grad&quot;,</span>
+<span id="L1645"><span class="lineNum">    1645</span>              :                                             &quot;agrad&quot;,</span>
+<span id="L1646"><span class="lineNum">    1646</span>              :                                             &quot;grad_deriv&quot;,</span>
+<span id="L1647"><span class="lineNum">    1647</span>              :                                             &quot;grad_deriv_agrad&quot;,</span>
+<span id="L1648"><span class="lineNum">    1648</span>              :                                             &quot;forward_grad&quot;,</span>
+<span id="L1649"><span class="lineNum">    1649</span>              :                                             &quot;forward_grad_agrad&quot;,</span>
+<span id="L1650"><span class="lineNum">    1650</span>              :                                             &quot;forward_deriv&quot;,</span>
+<span id="L1651"><span class="lineNum">    1651</span>              :                                             &quot;backward&quot;,</span>
+<span id="L1652"><span class="lineNum">    1652</span>              :                                             &quot;grad_deriv_agrad&quot;,</span>
+<span id="L1653"><span class="lineNum">    1653</span>              :                                             &quot;iteration&quot;,</span>
+<span id="L1654"><span class="lineNum">    1654</span>              :                                             &quot;epoch&quot;,</span>
+<span id="L1655"><span class="lineNum">    1655</span>              :                                             &quot;forward_infer&quot;,</span>
+<span id="L1656"><span class="lineNum">    1656</span>              :                                             &quot;max&quot;};</span>
+<span id="L1657"><span class="lineNum">    1657</span>              : };</span>
 <span id="L1658"><span class="lineNum">    1658</span>              : </span>
-<span id="L1659"><span class="lineNum">    1659</span>              :   /**</span>
-<span id="L1660"><span class="lineNum">    1660</span>              :    * @brief Construct a new ReturnAttentionWeight object</span>
-<span id="L1661"><span class="lineNum">    1661</span>              :    *</span>
-<span id="L1662"><span class="lineNum">    1662</span>              :    */</span>
-<span id="L1663"><span class="lineNum">    1663</span> <span class="tlaUNC">           0 :   TensorLife(TensorLifeInfo::Enum value = TensorLifeInfo::Enum::MAX_LIFESPAN) {</span></span>
-<span id="L1664"><span class="lineNum">    1664</span> <span class="tlaUNC">           0 :     set(value);</span></span>
-<span id="L1665"><span class="lineNum">    1665</span> <span class="tlaUNC">           0 :   };</span></span>
-<span id="L1666"><span class="lineNum">    1666</span>              : };</span>
+<span id="L1659"><span class="lineNum">    1659</span>              : /**</span>
+<span id="L1660"><span class="lineNum">    1660</span>              :  * @brief TensorLifeSpacn, return TensorLifespan</span>
+<span id="L1661"><span class="lineNum">    1661</span>              :  *</span>
+<span id="L1662"><span class="lineNum">    1662</span>              :  */</span>
+<span id="L1663"><span class="lineNum">    1663</span> <span class="tlaUNC tlaBgUNC">           0 : class TensorLife : public EnumProperty&lt;TensorLifeInfo&gt; {</span></span>
+<span id="L1664"><span class="lineNum">    1664</span>              : public:</span>
+<span id="L1665"><span class="lineNum">    1665</span>              :   static constexpr const char *key = &quot;tensor_life&quot;; /**&lt; unique key to access */</span>
+<span id="L1666"><span class="lineNum">    1666</span>              :   using prop_tag = enum_class_prop_tag;             /**&lt; property type */</span>
 <span id="L1667"><span class="lineNum">    1667</span>              : </span>
-<span id="L1668"><span class="lineNum">    1668</span>              : /**</span>
-<span id="L1669"><span class="lineNum">    1669</span>              :  * @brief WeightName,  WeightName property</span>
-<span id="L1670"><span class="lineNum">    1670</span>              :  */</span>
-<span id="L1671"><span class="lineNum">    1671</span> <span class="tlaGNC tlaBgGNC">         111 : class WeightName : public Name {</span></span>
-<span id="L1672"><span class="lineNum">    1672</span>              : public:</span>
-<span id="L1673"><span class="lineNum">    1673</span>              :   static constexpr const char *key = &quot;weight_name&quot;;</span>
-<span id="L1674"><span class="lineNum">    1674</span>              :   using prop_tag = str_prop_tag;</span>
+<span id="L1668"><span class="lineNum">    1668</span>              :   /**</span>
+<span id="L1669"><span class="lineNum">    1669</span>              :    * @brief Construct a new ReturnAttentionWeight object</span>
+<span id="L1670"><span class="lineNum">    1670</span>              :    *</span>
+<span id="L1671"><span class="lineNum">    1671</span>              :    */</span>
+<span id="L1672"><span class="lineNum">    1672</span> <span class="tlaUNC">           0 :   TensorLife(TensorLifeInfo::Enum value = TensorLifeInfo::Enum::MAX_LIFESPAN) {</span></span>
+<span id="L1673"><span class="lineNum">    1673</span> <span class="tlaUNC">           0 :     set(value);</span></span>
+<span id="L1674"><span class="lineNum">    1674</span> <span class="tlaUNC">           0 :   };</span></span>
 <span id="L1675"><span class="lineNum">    1675</span>              : };</span>
 <span id="L1676"><span class="lineNum">    1676</span>              : </span>
 <span id="L1677"><span class="lineNum">    1677</span>              : /**</span>
-<span id="L1678"><span class="lineNum">    1678</span>              :  * @brief TensorName,  TensorName property</span>
+<span id="L1678"><span class="lineNum">    1678</span>              :  * @brief WeightName,  WeightName property</span>
 <span id="L1679"><span class="lineNum">    1679</span>              :  */</span>
-<span id="L1680"><span class="lineNum">    1680</span> <span class="tlaUNC tlaBgUNC">           0 : class TensorName : public Name {</span></span>
+<span id="L1680"><span class="lineNum">    1680</span> <span class="tlaGNC tlaBgGNC">         111 : class WeightName : public Name {</span></span>
 <span id="L1681"><span class="lineNum">    1681</span>              : public:</span>
-<span id="L1682"><span class="lineNum">    1682</span>              :   static constexpr const char *key = &quot;tensor_name&quot;;</span>
+<span id="L1682"><span class="lineNum">    1682</span>              :   static constexpr const char *key = &quot;weight_name&quot;;</span>
 <span id="L1683"><span class="lineNum">    1683</span>              :   using prop_tag = str_prop_tag;</span>
 <span id="L1684"><span class="lineNum">    1684</span>              : };</span>
 <span id="L1685"><span class="lineNum">    1685</span>              : </span>
-<span id="L1686"><span class="lineNum">    1686</span>              : } // namespace props</span>
-<span id="L1687"><span class="lineNum">    1687</span>              : } // namespace nntrainer</span>
-<span id="L1688"><span class="lineNum">    1688</span>              : </span>
-<span id="L1689"><span class="lineNum">    1689</span>              : #endif // __COMMON_PROPERTIES_H__</span>
+<span id="L1686"><span class="lineNum">    1686</span>              : /**</span>
+<span id="L1687"><span class="lineNum">    1687</span>              :  * @brief TensorName,  TensorName property</span>
+<span id="L1688"><span class="lineNum">    1688</span>              :  */</span>
+<span id="L1689"><span class="lineNum">    1689</span> <span class="tlaUNC tlaBgUNC">           0 : class TensorName : public Name {</span></span>
+<span id="L1690"><span class="lineNum">    1690</span>              : public:</span>
+<span id="L1691"><span class="lineNum">    1691</span>              :   static constexpr const char *key = &quot;tensor_name&quot;;</span>
+<span id="L1692"><span class="lineNum">    1692</span>              :   using prop_tag = str_prop_tag;</span>
+<span id="L1693"><span class="lineNum">    1693</span>              : };</span>
+<span id="L1694"><span class="lineNum">    1694</span>              : </span>
+<span id="L1695"><span class="lineNum">    1695</span>              : } // namespace props</span>
+<span id="L1696"><span class="lineNum">    1696</span>              : } // namespace nntrainer</span>
+<span id="L1697"><span class="lineNum">    1697</span>              : </span>
+<span id="L1698"><span class="lineNum">    1698</span>              : #endif // __COMMON_PROPERTIES_H__</span>
         </pre>
               </td>
             </tr>

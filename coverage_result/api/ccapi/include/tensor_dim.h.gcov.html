@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-01-06 20:41:07</td>
+            <td class="headerValue">2026-01-07 20:42:51</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -68,7 +68,7 @@
 <span id="L6"><span class="lineNum">       6</span>              :  * @file   tensor_dim.h</span>
 <span id="L7"><span class="lineNum">       7</span>              :  * @date   22 May 2020</span>
 <span id="L8"><span class="lineNum">       8</span>              :  * @brief  This is Tensor Dimension Class</span>
-<span id="L9"><span class="lineNum">       9</span>              :  * @see    https://github.com/nnstreamer/nntrainer</span>
+<span id="L9"><span class="lineNum">       9</span>              :  * @see    https://github.com/nntrainer/nntrainer</span>
 <span id="L10"><span class="lineNum">      10</span>              :  * @author Jijoong Moon &lt;jijoong.moon@samsung.com&gt;</span>
 <span id="L11"><span class="lineNum">      11</span>              :  * @bug    No known bugs except for NYI items</span>
 <span id="L12"><span class="lineNum">      12</span>              :  *</span>
@@ -168,8 +168,8 @@
 <span id="L106"><span class="lineNum">     106</span>              :      * @brief     Default creator of Tensor Type with Format &amp; DataType</span>
 <span id="L107"><span class="lineNum">     107</span>              :      */</span>
 <span id="L108"><span class="lineNum">     108</span>              :     TensorType(Format fm, DataType d_type,</span>
-<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">      739661 :                StorageOrder order = StorageOrder::ROW_MAJOR) :</span></span>
-<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">      728838 :       format(fm), data_type(d_type), storage_order(order){};</span></span>
+<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">      739671 :                StorageOrder order = StorageOrder::ROW_MAJOR) :</span></span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">      728848 :       format(fm), data_type(d_type), storage_order(order){};</span></span>
 <span id="L111"><span class="lineNum">     111</span>              :   };</span>
 <span id="L112"><span class="lineNum">     112</span>              : </span>
 <span id="L113"><span class="lineNum">     113</span>              :   /**</span>
@@ -609,13 +609,13 @@
 <span id="L547"><span class="lineNum">     547</span>              :    * @brief getFormat</span>
 <span id="L548"><span class="lineNum">     548</span>              :    *</span>
 <span id="L549"><span class="lineNum">     549</span>              :    */</span>
-<span id="L550"><span class="lineNum">     550</span> <span class="tlaGNC">   105394020 :   TensorDim::Format getFormat() const { return t_type.format; };</span></span>
+<span id="L550"><span class="lineNum">     550</span> <span class="tlaGNC">   105394035 :   TensorDim::Format getFormat() const { return t_type.format; };</span></span>
 <span id="L551"><span class="lineNum">     551</span>              : </span>
 <span id="L552"><span class="lineNum">     552</span>              :   /**</span>
 <span id="L553"><span class="lineNum">     553</span>              :    * @brief getType</span>
 <span id="L554"><span class="lineNum">     554</span>              :    *</span>
 <span id="L555"><span class="lineNum">     555</span>              :    */</span>
-<span id="L556"><span class="lineNum">     556</span> <span class="tlaGNC">      485134 :   TensorDim::DataType getDataType() const { return t_type.data_type; };</span></span>
+<span id="L556"><span class="lineNum">     556</span> <span class="tlaGNC">      485139 :   TensorDim::DataType getDataType() const { return t_type.data_type; };</span></span>
 <span id="L557"><span class="lineNum">     557</span>              : </span>
 <span id="L558"><span class="lineNum">     558</span>              :   /**</span>
 <span id="L559"><span class="lineNum">     559</span>              :    * @brief getStorageOrder</span>

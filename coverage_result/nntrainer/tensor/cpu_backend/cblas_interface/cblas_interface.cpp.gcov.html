@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-01-06 20:41:07</td>
+            <td class="headerValue">2026-01-07 20:42:51</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryMed">88.9&nbsp;%</td>
@@ -66,7 +66,7 @@
 <span id="L4"><span class="lineNum">       4</span>              :  *</span>
 <span id="L5"><span class="lineNum">       5</span>              :  * @file cblas_interface.cpp</span>
 <span id="L6"><span class="lineNum">       6</span>              :  * @date   23 April 2024</span>
-<span id="L7"><span class="lineNum">       7</span>              :  * @see    https://github.com/nnstreamer/nntrainer</span>
+<span id="L7"><span class="lineNum">       7</span>              :  * @see    https://github.com/nntrainer/nntrainer</span>
 <span id="L8"><span class="lineNum">       8</span>              :  * @author Sungsik Kong &lt;ss.kong@samsung.com&gt;</span>
 <span id="L9"><span class="lineNum">       9</span>              :  * @bug    No known bugs except for NYI items</span>
 <span id="L10"><span class="lineNum">      10</span>              :  * @brief  Function interface to use cblas lib from cpu_backend</span>
@@ -125,14 +125,14 @@
 <span id="L63"><span class="lineNum">      63</span> <span class="tlaUNC">           0 :   cblas_scopy(N, X, incX, Y, incY);</span></span>
 <span id="L64"><span class="lineNum">      64</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L65"><span class="lineNum">      65</span>              : </span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC tlaBgGNC">        2609 : void __cblas_sscal(const unsigned int N, const float alpha, float *X,</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC tlaBgGNC">        2613 : void __cblas_sscal(const unsigned int N, const float alpha, float *X,</span></span>
 <span id="L67"><span class="lineNum">      67</span>              :                    const unsigned int incX) {</span>
-<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">        2609 :   cblas_sscal(N, alpha, X, incX);</span></span>
-<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">        2609 : }</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">        2613 :   cblas_sscal(N, alpha, X, incX);</span></span>
+<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">        2613 : }</span></span>
 <span id="L70"><span class="lineNum">      70</span>              : </span>
-<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">        1931 : float __cblas_snrm2(const unsigned int N, const float *X,</span></span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">        1935 : float __cblas_snrm2(const unsigned int N, const float *X,</span></span>
 <span id="L72"><span class="lineNum">      72</span>              :                     const unsigned int incX) {</span>
-<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">        1931 :   return cblas_snrm2(N, X, incX);</span></span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">        1935 :   return cblas_snrm2(N, X, incX);</span></span>
 <span id="L74"><span class="lineNum">      74</span>              : }</span>
 <span id="L75"><span class="lineNum">      75</span>              : </span>
 <span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">       16977 : void __cblas_sgemm(const unsigned int TStorageOrder, bool TransA, bool TransB,</span></span>

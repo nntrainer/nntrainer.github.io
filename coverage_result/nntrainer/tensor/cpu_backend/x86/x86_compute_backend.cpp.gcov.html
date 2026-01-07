@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-01-06 20:41:07</td>
+            <td class="headerValue">2026-01-07 20:42:51</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">64.4&nbsp;%</td>
@@ -66,7 +66,7 @@
 <span id="L4"><span class="lineNum">       4</span>              :  *</span>
 <span id="L5"><span class="lineNum">       5</span>              :  * @file   x86_compute_backend.cpp</span>
 <span id="L6"><span class="lineNum">       6</span>              :  * @date   23 April 2024</span>
-<span id="L7"><span class="lineNum">       7</span>              :  * @see    https://github.com/nnstreamer/nntrainer</span>
+<span id="L7"><span class="lineNum">       7</span>              :  * @see    https://github.com/nntrainer/nntrainer</span>
 <span id="L8"><span class="lineNum">       8</span>              :  * @author Sungsik Kong &lt;ss.kong@samsung.com&gt;</span>
 <span id="L9"><span class="lineNum">       9</span>              :  * @bug    No known bugs except for NYI items</span>
 <span id="L10"><span class="lineNum">      10</span>              :  * @brief  Compute backend for x86</span>
@@ -286,18 +286,18 @@
 <span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">      173980 :   nntrainer::avx2::custom_scopy(N, X, incX, Y, incY);</span></span>
 <span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">      173980 : }</span></span>
 <span id="L226"><span class="lineNum">     226</span>              : </span>
-<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">        2609 : void sscal(const unsigned int N, const float alpha, float *X,</span></span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">        2613 : void sscal(const unsigned int N, const float alpha, float *X,</span></span>
 <span id="L228"><span class="lineNum">     228</span>              :            const unsigned int incX) {</span>
 <span id="L229"><span class="lineNum">     229</span>              : #ifdef USE_BLAS</span>
-<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">        2609 :   __cblas_sscal(N, alpha, X, incX);</span></span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">        2613 :   __cblas_sscal(N, alpha, X, incX);</span></span>
 <span id="L231"><span class="lineNum">     231</span>              : #else</span>
 <span id="L232"><span class="lineNum">     232</span>              :   __fallback_sscal(N, alpha, X, incX);</span>
 <span id="L233"><span class="lineNum">     233</span>              : #endif</span>
-<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">        2609 : }</span></span>
+<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">        2613 : }</span></span>
 <span id="L235"><span class="lineNum">     235</span>              : </span>
-<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">        1931 : float snrm2(const unsigned int N, const float *X, const unsigned int incX) {</span></span>
+<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">        1935 : float snrm2(const unsigned int N, const float *X, const unsigned int incX) {</span></span>
 <span id="L237"><span class="lineNum">     237</span>              : #ifdef USE_BLAS</span>
-<span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">        1931 :   return __cblas_snrm2(N, X, incX);</span></span>
+<span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">        1935 :   return __cblas_snrm2(N, X, incX);</span></span>
 <span id="L239"><span class="lineNum">     239</span>              : #else</span>
 <span id="L240"><span class="lineNum">     240</span>              :   return __fallback_snrm2(N, X, incX);</span>
 <span id="L241"><span class="lineNum">     241</span>              : #endif</span>

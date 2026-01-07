@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-01-06 20:41:07</td>
+            <td class="headerValue">2026-01-07 20:42:51</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryMed">82.9&nbsp;%</td>
@@ -65,7 +65,7 @@
 <span id="L3"><span class="lineNum">       3</span>              :  * @file        tensor.h</span>
 <span id="L4"><span class="lineNum">       4</span>              :  * @date        01 December 2023</span>
 <span id="L5"><span class="lineNum">       5</span>              :  * @brief       This is a Tensor class</span>
-<span id="L6"><span class="lineNum">       6</span>              :  * @see         https://github.com/nnstreamer/nntrainer</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * @see         https://github.com/nntrainer/nntrainer</span>
 <span id="L7"><span class="lineNum">       7</span>              :  * @author      Jijoong Moon &lt;jijoong.moon@samsung.com&gt;</span>
 <span id="L8"><span class="lineNum">       8</span>              :  * @author      Donghyeon Jeong &lt;dhyeon.jeong@samsung.com&gt;</span>
 <span id="L9"><span class="lineNum">       9</span>              :  * @bug         No known bugs except for NYI items</span>
@@ -153,10 +153,10 @@
 <span id="L91"><span class="lineNum">      91</span>              :    * @param[in] d_type Tensor Data Type</span>
 <span id="L92"><span class="lineNum">      92</span>              :    * @param[in] qscheme_ Quantization scheme (only applies to Quantized Tensor)</span>
 <span id="L93"><span class="lineNum">      93</span>              :    */</span>
-<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC tlaBgGNC">        2152 :   Tensor(size_t d0, size_t d1, size_t d2, size_t d3, Tformat fm = Tformat::NCHW,</span></span>
+<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC tlaBgGNC">        2157 :   Tensor(size_t d0, size_t d1, size_t d2, size_t d3, Tformat fm = Tformat::NCHW,</span></span>
 <span id="L95"><span class="lineNum">      95</span>              :          Tdatatype d_type = Tdatatype::FP32,</span>
-<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">        2152 :          QScheme qscheme_ = QScheme::PER_TENSOR_AFFINE) :</span></span>
-<span id="L97"><span class="lineNum">      97</span> <span class="tlaGNC">        2152 :     Tensor(TensorDim(d0, d1, d2, d3, fm, d_type), nullptr, qscheme_){};</span></span>
+<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">        2157 :          QScheme qscheme_ = QScheme::PER_TENSOR_AFFINE) :</span></span>
+<span id="L97"><span class="lineNum">      97</span> <span class="tlaGNC">        2157 :     Tensor(TensorDim(d0, d1, d2, d3, fm, d_type), nullptr, qscheme_){};</span></span>
 <span id="L98"><span class="lineNum">      98</span>              : </span>
 <span id="L99"><span class="lineNum">      99</span>              :   /**</span>
 <span id="L100"><span class="lineNum">     100</span>              :    * @brief     Constructor of Tensor</span>
@@ -509,11 +509,11 @@
 <span id="L447"><span class="lineNum">     447</span>              :   /**</span>
 <span id="L448"><span class="lineNum">     448</span>              :    * @brief Basic Destructor</span>
 <span id="L449"><span class="lineNum">     449</span>              :    */</span>
-<span id="L450"><span class="lineNum">     450</span> <span class="tlaGNC">     1392779 :   ~Tensor() noexcept {</span></span>
-<span id="L451"><span class="lineNum">     451</span> <span class="tlaGNC">     1392779 :     if (is_virtual &amp;&amp; mapped_ptr != nullptr) {</span></span>
+<span id="L450"><span class="lineNum">     450</span> <span class="tlaGNC">     1392784 :   ~Tensor() noexcept {</span></span>
+<span id="L451"><span class="lineNum">     451</span> <span class="tlaGNC">     1392784 :     if (is_virtual &amp;&amp; mapped_ptr != nullptr) {</span></span>
 <span id="L452"><span class="lineNum">     452</span> <span class="tlaUNC tlaBgUNC">           0 :       deactivate();</span></span>
 <span id="L453"><span class="lineNum">     453</span>              :     }</span>
-<span id="L454"><span class="lineNum">     454</span> <span class="tlaGNC tlaBgGNC">     1392779 :   };</span></span>
+<span id="L454"><span class="lineNum">     454</span> <span class="tlaGNC tlaBgGNC">     1392784 :   };</span></span>
 <span id="L455"><span class="lineNum">     455</span>              : </span>
 <span id="L456"><span class="lineNum">     456</span>              :   /**</span>
 <span id="L457"><span class="lineNum">     457</span>              :    *  @brief  Copy constructor of Tensor.</span>
@@ -618,7 +618,7 @@
 <span id="L556"><span class="lineNum">     556</span>              :    * @retval    template T pointer</span>
 <span id="L557"><span class="lineNum">     557</span>              :    */</span>
 <span id="L558"><span class="lineNum">     558</span>              :   template &lt;typename T = float&gt; T *getData() const {</span>
-<span id="L559"><span class="lineNum">     559</span> <span class="tlaGNC tlaBgGNC">    63802778 :     return (T *)itensor_-&gt;getData();</span></span>
+<span id="L559"><span class="lineNum">     559</span> <span class="tlaGNC tlaBgGNC">    63802783 :     return (T *)itensor_-&gt;getData();</span></span>
 <span id="L560"><span class="lineNum">     560</span>              :   }</span>
 <span id="L561"><span class="lineNum">     561</span>              : </span>
 <span id="L562"><span class="lineNum">     562</span>              :   /**</span>
@@ -1390,721 +1390,729 @@
 <span id="L1328"><span class="lineNum">    1328</span>              :   Tensor &amp;standardization(Tensor &amp;output) const;</span>
 <span id="L1329"><span class="lineNum">    1329</span>              : </span>
 <span id="L1330"><span class="lineNum">    1330</span>              :   /**</span>
-<span id="L1331"><span class="lineNum">    1331</span>              :    * @brief     Normalize the Tensor elements in-place</span>
-<span id="L1332"><span class="lineNum">    1332</span>              :    * @retval    Calculated Tensor</span>
+<span id="L1331"><span class="lineNum">    1331</span>              :    * @brief     Normalize the Tensor elements (in-place)</span>
+<span id="L1332"><span class="lineNum">    1332</span>              :    * @note      min-max normalization</span>
 <span id="L1333"><span class="lineNum">    1333</span>              :    */</span>
 <span id="L1334"><span class="lineNum">    1334</span>              :   void normalization_i();</span>
 <span id="L1335"><span class="lineNum">    1335</span>              : </span>
 <span id="L1336"><span class="lineNum">    1336</span>              :   /**</span>
-<span id="L1337"><span class="lineNum">    1337</span>              :    * @brief     Standardize the Tensor elements in-place</span>
-<span id="L1338"><span class="lineNum">    1338</span>              :    * @retval    Calculated Tensor</span>
-<span id="L1339"><span class="lineNum">    1339</span>              :    */</span>
-<span id="L1340"><span class="lineNum">    1340</span>              :   void standardization_i();</span>
-<span id="L1341"><span class="lineNum">    1341</span>              : </span>
-<span id="L1342"><span class="lineNum">    1342</span>              :   /**</span>
-<span id="L1343"><span class="lineNum">    1343</span>              :    * @brief     Dot Product of Tensor ( equal MxM )</span>
-<span id="L1344"><span class="lineNum">    1344</span>              :    * @details   This applies dot of the last dimension of this and second-last</span>
-<span id="L1345"><span class="lineNum">    1345</span>              :    * dimension of passed input tensor.</span>
-<span id="L1346"><span class="lineNum">    1346</span>              :    * @param[in] input Tensor</span>
-<span id="L1347"><span class="lineNum">    1347</span>              :    * @param[in] trans Transpose</span>
-<span id="L1348"><span class="lineNum">    1348</span>              :    * @param[in] trans_in Transpose input</span>
-<span id="L1349"><span class="lineNum">    1349</span>              :    * @retval    Calculated Tensor</span>
-<span id="L1350"><span class="lineNum">    1350</span>              :    */</span>
-<span id="L1351"><span class="lineNum">    1351</span>              :   Tensor dot(Tensor const &amp;input, bool trans = false,</span>
-<span id="L1352"><span class="lineNum">    1352</span>              :              bool trans_in = false) const;</span>
-<span id="L1353"><span class="lineNum">    1353</span>              : </span>
-<span id="L1354"><span class="lineNum">    1354</span>              :   /**</span>
-<span id="L1355"><span class="lineNum">    1355</span>              :    * @brief     Dot Product of Tensor ( equal MxM )</span>
-<span id="L1356"><span class="lineNum">    1356</span>              :    * @details   This applies dot of the last dimension of this and</span>
-<span id="L1357"><span class="lineNum">    1357</span>              :    * second-last dimension of passed input tensor.</span>
-<span id="L1358"><span class="lineNum">    1358</span>              :    * @param[in] input Tensor</span>
-<span id="L1359"><span class="lineNum">    1359</span>              :    * @param[in] output output Tensor</span>
-<span id="L1360"><span class="lineNum">    1360</span>              :    * @param[in] trans Transpose</span>
-<span id="L1361"><span class="lineNum">    1361</span>              :    * @param[in] trans_in Transpose input</span>
-<span id="L1362"><span class="lineNum">    1362</span>              :    * @param[in] beta beta</span>
-<span id="L1363"><span class="lineNum">    1363</span>              :    * @retval    Calculated Tensor</span>
-<span id="L1364"><span class="lineNum">    1364</span>              :    */</span>
-<span id="L1365"><span class="lineNum">    1365</span>              :   Tensor &amp;dot(Tensor const &amp;input, Tensor &amp;output, bool trans = false,</span>
-<span id="L1366"><span class="lineNum">    1366</span>              :               bool trans_in = false, float beta = 0.0f) const;</span>
-<span id="L1367"><span class="lineNum">    1367</span>              : </span>
-<span id="L1368"><span class="lineNum">    1368</span>              :   void dot(std::vector&lt;Tensor *&gt; inputs, std::vector&lt;Tensor *&gt; outputs,</span>
-<span id="L1369"><span class="lineNum">    1369</span>              :            bool trans = false, bool trans_in = false, float beta = 0.0f) const;</span>
-<span id="L1370"><span class="lineNum">    1370</span>              : </span>
-<span id="L1371"><span class="lineNum">    1371</span>              :   /**</span>
-<span id="L1372"><span class="lineNum">    1372</span>              :    * @brief compute the derivative of this in the current tensor</span>
-<span id="L1373"><span class="lineNum">    1373</span>              :    * @param input same as given to the dot()</span>
-<span id="L1374"><span class="lineNum">    1374</span>              :    * @param output_deriv the derivative of the output</span>
-<span id="L1375"><span class="lineNum">    1375</span>              :    * @param[in] trans same as given to the dot()</span>
-<span id="L1376"><span class="lineNum">    1376</span>              :    * @param[in] trans_in same as given to the dot()</span>
-<span id="L1377"><span class="lineNum">    1377</span>              :    * @param[in] beta same as given to the dot()</span>
-<span id="L1378"><span class="lineNum">    1378</span>              :    * @note This will compute the derivative in-place and will overwrite</span>
-<span id="L1379"><span class="lineNum">    1379</span>              :    existing</span>
-<span id="L1380"><span class="lineNum">    1380</span>              :    * data in the tensor</span>
-<span id="L1381"><span class="lineNum">    1381</span>              :    */</span>
-<span id="L1382"><span class="lineNum">    1382</span>              :   Tensor &amp;dot_deriv_wrt_1(Tensor const &amp;input, Tensor const &amp;output_deriv,</span>
-<span id="L1383"><span class="lineNum">    1383</span>              :                           bool trans = false, bool trans_in = false,</span>
-<span id="L1384"><span class="lineNum">    1384</span>              :                           float beta = 0.0f);</span>
-<span id="L1385"><span class="lineNum">    1385</span>              : </span>
-<span id="L1386"><span class="lineNum">    1386</span>              :   /**</span>
-<span id="L1387"><span class="lineNum">    1387</span>              :    * @brief compute the derivative wrt m in the input tensor</span>
-<span id="L1388"><span class="lineNum">    1388</span>              :    * @param input_deriv tensor where derivative wrt m will be stored</span>
-<span id="L1389"><span class="lineNum">    1389</span>              :    * @param output_deriv the derivative of the output</span>
-<span id="L1390"><span class="lineNum">    1390</span>              :    * @param[in] trans same as given to the dot()</span>
-<span id="L1391"><span class="lineNum">    1391</span>              :    * @param[in] trans_in same as given to the dot()</span>
-<span id="L1392"><span class="lineNum">    1392</span>              :    * @param[in] beta same as given to the dot()</span>
-<span id="L1393"><span class="lineNum">    1393</span>              :    * @note The caller tensor must be the same tensor as the one which called</span>
-<span id="L1394"><span class="lineNum">    1394</span>              :    the dot() product.</span>
-<span id="L1395"><span class="lineNum">    1395</span>              :    */</span>
-<span id="L1396"><span class="lineNum">    1396</span>              :   Tensor &amp;dot_deriv_wrt_2(Tensor &amp;input_deriv, Tensor const &amp;output_deriv,</span>
-<span id="L1397"><span class="lineNum">    1397</span>              :                           bool trans = false, bool trans_in = false,</span>
-<span id="L1398"><span class="lineNum">    1398</span>              :                           float beta = 0.0f) const;</span>
-<span id="L1399"><span class="lineNum">    1399</span>              : </span>
-<span id="L1400"><span class="lineNum">    1400</span>              :   /**</span>
-<span id="L1401"><span class="lineNum">    1401</span>              :    * @copydoc Tensor::dot(Tensor const &amp;input, Tensor &amp;output, bool trans,</span>
-<span id="L1402"><span class="lineNum">    1402</span>              :               bool trans_in, float beta) const</span>
-<span id="L1403"><span class="lineNum">    1403</span>              :    * @details performs dot operation over a batch of inputs. If the batch sizes</span>
-<span id="L1404"><span class="lineNum">    1404</span>              :    of the given two tensors are different, the bigger one should be a multiple</span>
-<span id="L1405"><span class="lineNum">    1405</span>              :    of the smaller one.</span>
-<span id="L1406"><span class="lineNum">    1406</span>              :    */</span>
-<span id="L1407"><span class="lineNum">    1407</span>              :   Tensor &amp;dotBatched(Tensor const &amp;input, Tensor &amp;result, bool trans = false,</span>
-<span id="L1408"><span class="lineNum">    1408</span>              :                      bool trans_in = false, float beta = 0.0f) const;</span>
-<span id="L1409"><span class="lineNum">    1409</span>              : </span>
-<span id="L1410"><span class="lineNum">    1410</span>              :   /**</span>
-<span id="L1411"><span class="lineNum">    1411</span>              :    * @copydoc Tensor::dot_deriv_wrt_1(Tensor const &amp;input, Tensor const</span>
-<span id="L1412"><span class="lineNum">    1412</span>              :    &amp;output_deriv, bool trans, bool trans_in, float beta)</span>
-<span id="L1413"><span class="lineNum">    1413</span>              :    */</span>
-<span id="L1414"><span class="lineNum">    1414</span>              :   Tensor &amp;dot_batched_deriv_wrt_1(Tensor const &amp;input,</span>
-<span id="L1415"><span class="lineNum">    1415</span>              :                                   Tensor const &amp;output_deriv,</span>
-<span id="L1416"><span class="lineNum">    1416</span>              :                                   bool trans = false, bool trans_in = false,</span>
-<span id="L1417"><span class="lineNum">    1417</span>              :                                   float beta = 0.0f);</span>
-<span id="L1418"><span class="lineNum">    1418</span>              : </span>
-<span id="L1419"><span class="lineNum">    1419</span>              :   /**</span>
-<span id="L1420"><span class="lineNum">    1420</span>              :    * @brief Tensor::dot_deriv_wrt_2(Tensor const &amp;input_deriv, Tensor const</span>
-<span id="L1421"><span class="lineNum">    1421</span>              :    &amp;output_deriv, bool trans, bool trans_in, float beta) const</span>
-<span id="L1422"><span class="lineNum">    1422</span>              :    */</span>
-<span id="L1423"><span class="lineNum">    1423</span>              :   Tensor &amp;dot_batched_deriv_wrt_2(Tensor &amp;input_deriv,</span>
-<span id="L1424"><span class="lineNum">    1424</span>              :                                   Tensor const &amp;output_deriv,</span>
-<span id="L1425"><span class="lineNum">    1425</span>              :                                   bool trans = false, bool trans_in = false,</span>
-<span id="L1426"><span class="lineNum">    1426</span>              :                                   float beta = 0.0f) const;</span>
-<span id="L1427"><span class="lineNum">    1427</span>              : </span>
-<span id="L1428"><span class="lineNum">    1428</span>              :   /**</span>
-<span id="L1429"><span class="lineNum">    1429</span>              :    * @brief Calculate Drop Out Mask : x * 1.0/(1.0-rate)</span>
-<span id="L1430"><span class="lineNum">    1430</span>              :    * @param dropout drop out rate</span>
-<span id="L1431"><span class="lineNum">    1431</span>              :    * @retval Tensor&amp; reference of drop out mask</span>
-<span id="L1432"><span class="lineNum">    1432</span>              :    */</span>
-<span id="L1433"><span class="lineNum">    1433</span>              :   Tensor dropout_mask(float dropout) const;</span>
-<span id="L1434"><span class="lineNum">    1434</span>              : </span>
-<span id="L1435"><span class="lineNum">    1435</span>              :   /**</span>
-<span id="L1436"><span class="lineNum">    1436</span>              :    * @brief Calculate Drop Out Mask : x * 1.0/(1.0-rate) inplace</span>
-<span id="L1437"><span class="lineNum">    1437</span>              :    * @param dropout drop out rate</span>
-<span id="L1438"><span class="lineNum">    1438</span>              :    */</span>
-<span id="L1439"><span class="lineNum">    1439</span>              :   void dropout_mask(float dropout);</span>
-<span id="L1440"><span class="lineNum">    1440</span>              : </span>
-<span id="L1441"><span class="lineNum">    1441</span>              :   /**</span>
-<span id="L1442"><span class="lineNum">    1442</span>              :    * @brief Calculate filter mask</span>
-<span id="L1443"><span class="lineNum">    1443</span>              :    * @param mask_len length of each mask along the last axis</span>
-<span id="L1444"><span class="lineNum">    1444</span>              :    * @param invert invert the mask</span>
-<span id="L1445"><span class="lineNum">    1445</span>              :    */</span>
-<span id="L1446"><span class="lineNum">    1446</span>              :   void filter_mask(const Tensor &amp;mask_len, bool reverse = false);</span>
-<span id="L1447"><span class="lineNum">    1447</span>              : </span>
-<span id="L1448"><span class="lineNum">    1448</span>              :   /**</span>
-<span id="L1449"><span class="lineNum">    1449</span>              :    * @brief Calculate 2 Zone Out Mask</span>
-<span id="L1450"><span class="lineNum">    1450</span>              :    * @details Calculate zone out mask according to the bernoulli distribution.</span>
-<span id="L1451"><span class="lineNum">    1451</span>              :    * Zone out mask with rate @a zoneout for inplace and the other zone out mask</span>
-<span id="L1452"><span class="lineNum">    1452</span>              :    * with rate @a (1-zoneout).</span>
-<span id="L1453"><span class="lineNum">    1453</span>              :    * @param zoneout zone out rate</span>
-<span id="L1454"><span class="lineNum">    1454</span>              :    * @retval Tensor zone out mask for opposite tensor</span>
-<span id="L1455"><span class="lineNum">    1455</span>              :    */</span>
-<span id="L1456"><span class="lineNum">    1456</span>              :   Tensor zoneout_mask(float zoneout);</span>
-<span id="L1457"><span class="lineNum">    1457</span>              : </span>
-<span id="L1458"><span class="lineNum">    1458</span>              :   /**</span>
-<span id="L1459"><span class="lineNum">    1459</span>              :    * @brief Calculate 2 Zone Out Mask</span>
-<span id="L1460"><span class="lineNum">    1460</span>              :    * @details Calculate zone out mask according to the bernoulli distribution.</span>
-<span id="L1461"><span class="lineNum">    1461</span>              :    * Zone out mask with rate @a zoneout for inplace and the other zone out mask</span>
-<span id="L1462"><span class="lineNum">    1462</span>              :    * with rate @a (1-zoneout).</span>
-<span id="L1463"><span class="lineNum">    1463</span>              :    * @param opposite opposite zone out mask</span>
-<span id="L1464"><span class="lineNum">    1464</span>              :    * @param zoneout zone out rate</span>
-<span id="L1465"><span class="lineNum">    1465</span>              :    */</span>
-<span id="L1466"><span class="lineNum">    1466</span>              :   void zoneout_mask(Tensor &amp;opposite, float zoneout);</span>
-<span id="L1467"><span class="lineNum">    1467</span>              : </span>
-<span id="L1468"><span class="lineNum">    1468</span>              :   /**</span>
-<span id="L1469"><span class="lineNum">    1469</span>              :    * @brief split tensor along axis.</span>
-<span id="L1470"><span class="lineNum">    1470</span>              :    *</span>
-<span id="L1471"><span class="lineNum">    1471</span>              :    * @param num_size num_size</span>
-<span id="L1472"><span class="lineNum">    1472</span>              :    * @param axis axis</span>
-<span id="L1473"><span class="lineNum">    1473</span>              :    * @return Tensor splitted tensor</span>
-<span id="L1474"><span class="lineNum">    1474</span>              :    */</span>
-<span id="L1475"><span class="lineNum">    1475</span>              :   std::vector&lt;Tensor&gt; split(unsigned num_size, int axis = 0);</span>
-<span id="L1476"><span class="lineNum">    1476</span>              : </span>
-<span id="L1477"><span class="lineNum">    1477</span>              :   /**</span>
-<span id="L1478"><span class="lineNum">    1478</span>              :    * @brief split tensor along axis.</span>
-<span id="L1479"><span class="lineNum">    1479</span>              :    *</span>
-<span id="L1480"><span class="lineNum">    1480</span>              :    * @param sizes sizes</span>
-<span id="L1481"><span class="lineNum">    1481</span>              :    * @param axis axis</span>
-<span id="L1482"><span class="lineNum">    1482</span>              :    * @return Tensor splitted tensor</span>
-<span id="L1483"><span class="lineNum">    1483</span>              :    * @note if the given array sizes is just a 1 unsigned int value, assumes that</span>
-<span id="L1484"><span class="lineNum">    1484</span>              :    * it divide tensor by given size evenly</span>
-<span id="L1485"><span class="lineNum">    1485</span>              :    */</span>
-<span id="L1486"><span class="lineNum">    1486</span>              :   std::vector&lt;Tensor&gt; split(std::vector&lt;size_t&gt; sizes, int axis = 0);</span>
-<span id="L1487"><span class="lineNum">    1487</span>              : </span>
-<span id="L1488"><span class="lineNum">    1488</span>              :   /**</span>
-<span id="L1489"><span class="lineNum">    1489</span>              :    * @brief concatenate tensors along axis</span>
-<span id="L1490"><span class="lineNum">    1490</span>              :    *</span>
-<span id="L1491"><span class="lineNum">    1491</span>              :    * @param tensors tensors to be concatenated to the first tensor</span>
-<span id="L1492"><span class="lineNum">    1492</span>              :    * @param axis axis</span>
-<span id="L1493"><span class="lineNum">    1493</span>              :    * @param output output tensor to store the result</span>
-<span id="L1494"><span class="lineNum">    1494</span>              :    * @return Tensor concatenated tensor</span>
-<span id="L1495"><span class="lineNum">    1495</span>              :    *</span>
-<span id="L1496"><span class="lineNum">    1496</span>              :    * @note  This function should not be used directly. Please use cat() instead.</span>
-<span id="L1497"><span class="lineNum">    1497</span>              :    */</span>
-<span id="L1498"><span class="lineNum">    1498</span>              :   Tensor concat(const std::vector&lt;Tensor&gt; &amp;tensors, int axis, Tensor &amp;output);</span>
-<span id="L1499"><span class="lineNum">    1499</span>              : </span>
-<span id="L1500"><span class="lineNum">    1500</span>              :   /**</span>
-<span id="L1501"><span class="lineNum">    1501</span>              :    * @brief concatenate tensors along axis</span>
-<span id="L1502"><span class="lineNum">    1502</span>              :    *</span>
-<span id="L1503"><span class="lineNum">    1503</span>              :    * @param tensors tensors to be concatenated to the first tensor</span>
-<span id="L1504"><span class="lineNum">    1504</span>              :    * @param axis axis</span>
-<span id="L1505"><span class="lineNum">    1505</span>              :    * @return Tensor concatenated tensor</span>
-<span id="L1506"><span class="lineNum">    1506</span>              :    */</span>
-<span id="L1507"><span class="lineNum">    1507</span>              :   static Tensor cat(const std::vector&lt;Tensor&gt; &amp;tensors, int axis = 0);</span>
-<span id="L1508"><span class="lineNum">    1508</span>              : </span>
-<span id="L1509"><span class="lineNum">    1509</span>              :   /**</span>
-<span id="L1510"><span class="lineNum">    1510</span>              :    * @brief concatenate tensors along axis</span>
-<span id="L1511"><span class="lineNum">    1511</span>              :    *</span>
-<span id="L1512"><span class="lineNum">    1512</span>              :    * @param tensors tensors to be concatenated to the first tensor</span>
-<span id="L1513"><span class="lineNum">    1513</span>              :    * @param axis axis</span>
-<span id="L1514"><span class="lineNum">    1514</span>              :    * @param output output tensor to store the result</span>
-<span id="L1515"><span class="lineNum">    1515</span>              :    * @return Tensor concatenated tensor</span>
-<span id="L1516"><span class="lineNum">    1516</span>              :    */</span>
-<span id="L1517"><span class="lineNum">    1517</span>              :   static Tensor cat(const std::vector&lt;Tensor&gt; &amp;tensors, int axis,</span>
-<span id="L1518"><span class="lineNum">    1518</span>              :                     Tensor &amp;output);</span>
-<span id="L1519"><span class="lineNum">    1519</span>              : </span>
-<span id="L1520"><span class="lineNum">    1520</span>              :   /**</span>
-<span id="L1521"><span class="lineNum">    1521</span>              :    * @brief     Print element</span>
-<span id="L1522"><span class="lineNum">    1522</span>              :    * @param[in] out out stream</span>
-<span id="L1523"><span class="lineNum">    1523</span>              :    */</span>
-<span id="L1524"><span class="lineNum">    1524</span>              :   void print(std::ostream &amp;out) const;</span>
-<span id="L1525"><span class="lineNum">    1525</span>              : </span>
-<span id="L1526"><span class="lineNum">    1526</span>              :   /**</span>
-<span id="L1527"><span class="lineNum">    1527</span>              :    * @brief     put data of Tensor</span>
-<span id="L1528"><span class="lineNum">    1528</span>              :    * @note      It is only effective when fsu is used</span>
-<span id="L1529"><span class="lineNum">    1529</span>              :    */</span>
-<span id="L1530"><span class="lineNum">    1530</span>              :   void putData() const;</span>
-<span id="L1531"><span class="lineNum">    1531</span>              : </span>
-<span id="L1532"><span class="lineNum">    1532</span>              :   /**</span>
-<span id="L1533"><span class="lineNum">    1533</span>              :    * @brief Set the memory buffer for the tensor</span>
-<span id="L1534"><span class="lineNum">    1534</span>              :    *</span>
-<span id="L1535"><span class="lineNum">    1535</span>              :    * @param buf the memory buffer</span>
-<span id="L1536"><span class="lineNum">    1536</span>              :    * @param init intialize the buffer</span>
+<span id="L1337"><span class="lineNum">    1337</span>              :    * @brief     Normalize the Tensor along dimension (in-place)</span>
+<span id="L1338"><span class="lineNum">    1338</span>              :    * @param[in] dim Dimension to normalize</span>
+<span id="L1339"><span class="lineNum">    1339</span>              :    * @param[in] p Norm order (default 2.0)</span>
+<span id="L1340"><span class="lineNum">    1340</span>              :    * @param[in] epsilon Epsilon for stability</span>
+<span id="L1341"><span class="lineNum">    1341</span>              :    */</span>
+<span id="L1342"><span class="lineNum">    1342</span>              :   void normalization_i(unsigned int dim, float p = 2.0, float epsilon = 1e-12);</span>
+<span id="L1343"><span class="lineNum">    1343</span>              : </span>
+<span id="L1344"><span class="lineNum">    1344</span>              :   /**</span>
+<span id="L1345"><span class="lineNum">    1345</span>              :    * @brief     Standardize the Tensor elements in-place</span>
+<span id="L1346"><span class="lineNum">    1346</span>              :    * @retval    Calculated Tensor</span>
+<span id="L1347"><span class="lineNum">    1347</span>              :    */</span>
+<span id="L1348"><span class="lineNum">    1348</span>              :   void standardization_i();</span>
+<span id="L1349"><span class="lineNum">    1349</span>              : </span>
+<span id="L1350"><span class="lineNum">    1350</span>              :   /**</span>
+<span id="L1351"><span class="lineNum">    1351</span>              :    * @brief     Dot Product of Tensor ( equal MxM )</span>
+<span id="L1352"><span class="lineNum">    1352</span>              :    * @details   This applies dot of the last dimension of this and second-last</span>
+<span id="L1353"><span class="lineNum">    1353</span>              :    * dimension of passed input tensor.</span>
+<span id="L1354"><span class="lineNum">    1354</span>              :    * @param[in] input Tensor</span>
+<span id="L1355"><span class="lineNum">    1355</span>              :    * @param[in] trans Transpose</span>
+<span id="L1356"><span class="lineNum">    1356</span>              :    * @param[in] trans_in Transpose input</span>
+<span id="L1357"><span class="lineNum">    1357</span>              :    * @retval    Calculated Tensor</span>
+<span id="L1358"><span class="lineNum">    1358</span>              :    */</span>
+<span id="L1359"><span class="lineNum">    1359</span>              :   Tensor dot(Tensor const &amp;input, bool trans = false,</span>
+<span id="L1360"><span class="lineNum">    1360</span>              :              bool trans_in = false) const;</span>
+<span id="L1361"><span class="lineNum">    1361</span>              : </span>
+<span id="L1362"><span class="lineNum">    1362</span>              :   /**</span>
+<span id="L1363"><span class="lineNum">    1363</span>              :    * @brief     Dot Product of Tensor ( equal MxM )</span>
+<span id="L1364"><span class="lineNum">    1364</span>              :    * @details   This applies dot of the last dimension of this and</span>
+<span id="L1365"><span class="lineNum">    1365</span>              :    * second-last dimension of passed input tensor.</span>
+<span id="L1366"><span class="lineNum">    1366</span>              :    * @param[in] input Tensor</span>
+<span id="L1367"><span class="lineNum">    1367</span>              :    * @param[in] output output Tensor</span>
+<span id="L1368"><span class="lineNum">    1368</span>              :    * @param[in] trans Transpose</span>
+<span id="L1369"><span class="lineNum">    1369</span>              :    * @param[in] trans_in Transpose input</span>
+<span id="L1370"><span class="lineNum">    1370</span>              :    * @param[in] beta beta</span>
+<span id="L1371"><span class="lineNum">    1371</span>              :    * @retval    Calculated Tensor</span>
+<span id="L1372"><span class="lineNum">    1372</span>              :    */</span>
+<span id="L1373"><span class="lineNum">    1373</span>              :   Tensor &amp;dot(Tensor const &amp;input, Tensor &amp;output, bool trans = false,</span>
+<span id="L1374"><span class="lineNum">    1374</span>              :               bool trans_in = false, float beta = 0.0f) const;</span>
+<span id="L1375"><span class="lineNum">    1375</span>              : </span>
+<span id="L1376"><span class="lineNum">    1376</span>              :   void dot(std::vector&lt;Tensor *&gt; inputs, std::vector&lt;Tensor *&gt; outputs,</span>
+<span id="L1377"><span class="lineNum">    1377</span>              :            bool trans = false, bool trans_in = false, float beta = 0.0f) const;</span>
+<span id="L1378"><span class="lineNum">    1378</span>              : </span>
+<span id="L1379"><span class="lineNum">    1379</span>              :   /**</span>
+<span id="L1380"><span class="lineNum">    1380</span>              :    * @brief compute the derivative of this in the current tensor</span>
+<span id="L1381"><span class="lineNum">    1381</span>              :    * @param input same as given to the dot()</span>
+<span id="L1382"><span class="lineNum">    1382</span>              :    * @param output_deriv the derivative of the output</span>
+<span id="L1383"><span class="lineNum">    1383</span>              :    * @param[in] trans same as given to the dot()</span>
+<span id="L1384"><span class="lineNum">    1384</span>              :    * @param[in] trans_in same as given to the dot()</span>
+<span id="L1385"><span class="lineNum">    1385</span>              :    * @param[in] beta same as given to the dot()</span>
+<span id="L1386"><span class="lineNum">    1386</span>              :    * @note This will compute the derivative in-place and will overwrite</span>
+<span id="L1387"><span class="lineNum">    1387</span>              :    existing</span>
+<span id="L1388"><span class="lineNum">    1388</span>              :    * data in the tensor</span>
+<span id="L1389"><span class="lineNum">    1389</span>              :    */</span>
+<span id="L1390"><span class="lineNum">    1390</span>              :   Tensor &amp;dot_deriv_wrt_1(Tensor const &amp;input, Tensor const &amp;output_deriv,</span>
+<span id="L1391"><span class="lineNum">    1391</span>              :                           bool trans = false, bool trans_in = false,</span>
+<span id="L1392"><span class="lineNum">    1392</span>              :                           float beta = 0.0f);</span>
+<span id="L1393"><span class="lineNum">    1393</span>              : </span>
+<span id="L1394"><span class="lineNum">    1394</span>              :   /**</span>
+<span id="L1395"><span class="lineNum">    1395</span>              :    * @brief compute the derivative wrt m in the input tensor</span>
+<span id="L1396"><span class="lineNum">    1396</span>              :    * @param input_deriv tensor where derivative wrt m will be stored</span>
+<span id="L1397"><span class="lineNum">    1397</span>              :    * @param output_deriv the derivative of the output</span>
+<span id="L1398"><span class="lineNum">    1398</span>              :    * @param[in] trans same as given to the dot()</span>
+<span id="L1399"><span class="lineNum">    1399</span>              :    * @param[in] trans_in same as given to the dot()</span>
+<span id="L1400"><span class="lineNum">    1400</span>              :    * @param[in] beta same as given to the dot()</span>
+<span id="L1401"><span class="lineNum">    1401</span>              :    * @note The caller tensor must be the same tensor as the one which called</span>
+<span id="L1402"><span class="lineNum">    1402</span>              :    the dot() product.</span>
+<span id="L1403"><span class="lineNum">    1403</span>              :    */</span>
+<span id="L1404"><span class="lineNum">    1404</span>              :   Tensor &amp;dot_deriv_wrt_2(Tensor &amp;input_deriv, Tensor const &amp;output_deriv,</span>
+<span id="L1405"><span class="lineNum">    1405</span>              :                           bool trans = false, bool trans_in = false,</span>
+<span id="L1406"><span class="lineNum">    1406</span>              :                           float beta = 0.0f) const;</span>
+<span id="L1407"><span class="lineNum">    1407</span>              : </span>
+<span id="L1408"><span class="lineNum">    1408</span>              :   /**</span>
+<span id="L1409"><span class="lineNum">    1409</span>              :    * @copydoc Tensor::dot(Tensor const &amp;input, Tensor &amp;output, bool trans,</span>
+<span id="L1410"><span class="lineNum">    1410</span>              :               bool trans_in, float beta) const</span>
+<span id="L1411"><span class="lineNum">    1411</span>              :    * @details performs dot operation over a batch of inputs. If the batch sizes</span>
+<span id="L1412"><span class="lineNum">    1412</span>              :    of the given two tensors are different, the bigger one should be a multiple</span>
+<span id="L1413"><span class="lineNum">    1413</span>              :    of the smaller one.</span>
+<span id="L1414"><span class="lineNum">    1414</span>              :    */</span>
+<span id="L1415"><span class="lineNum">    1415</span>              :   Tensor &amp;dotBatched(Tensor const &amp;input, Tensor &amp;result, bool trans = false,</span>
+<span id="L1416"><span class="lineNum">    1416</span>              :                      bool trans_in = false, float beta = 0.0f) const;</span>
+<span id="L1417"><span class="lineNum">    1417</span>              : </span>
+<span id="L1418"><span class="lineNum">    1418</span>              :   /**</span>
+<span id="L1419"><span class="lineNum">    1419</span>              :    * @copydoc Tensor::dot_deriv_wrt_1(Tensor const &amp;input, Tensor const</span>
+<span id="L1420"><span class="lineNum">    1420</span>              :    &amp;output_deriv, bool trans, bool trans_in, float beta)</span>
+<span id="L1421"><span class="lineNum">    1421</span>              :    */</span>
+<span id="L1422"><span class="lineNum">    1422</span>              :   Tensor &amp;dot_batched_deriv_wrt_1(Tensor const &amp;input,</span>
+<span id="L1423"><span class="lineNum">    1423</span>              :                                   Tensor const &amp;output_deriv,</span>
+<span id="L1424"><span class="lineNum">    1424</span>              :                                   bool trans = false, bool trans_in = false,</span>
+<span id="L1425"><span class="lineNum">    1425</span>              :                                   float beta = 0.0f);</span>
+<span id="L1426"><span class="lineNum">    1426</span>              : </span>
+<span id="L1427"><span class="lineNum">    1427</span>              :   /**</span>
+<span id="L1428"><span class="lineNum">    1428</span>              :    * @brief Tensor::dot_deriv_wrt_2(Tensor const &amp;input_deriv, Tensor const</span>
+<span id="L1429"><span class="lineNum">    1429</span>              :    &amp;output_deriv, bool trans, bool trans_in, float beta) const</span>
+<span id="L1430"><span class="lineNum">    1430</span>              :    */</span>
+<span id="L1431"><span class="lineNum">    1431</span>              :   Tensor &amp;dot_batched_deriv_wrt_2(Tensor &amp;input_deriv,</span>
+<span id="L1432"><span class="lineNum">    1432</span>              :                                   Tensor const &amp;output_deriv,</span>
+<span id="L1433"><span class="lineNum">    1433</span>              :                                   bool trans = false, bool trans_in = false,</span>
+<span id="L1434"><span class="lineNum">    1434</span>              :                                   float beta = 0.0f) const;</span>
+<span id="L1435"><span class="lineNum">    1435</span>              : </span>
+<span id="L1436"><span class="lineNum">    1436</span>              :   /**</span>
+<span id="L1437"><span class="lineNum">    1437</span>              :    * @brief Calculate Drop Out Mask : x * 1.0/(1.0-rate)</span>
+<span id="L1438"><span class="lineNum">    1438</span>              :    * @param dropout drop out rate</span>
+<span id="L1439"><span class="lineNum">    1439</span>              :    * @retval Tensor&amp; reference of drop out mask</span>
+<span id="L1440"><span class="lineNum">    1440</span>              :    */</span>
+<span id="L1441"><span class="lineNum">    1441</span>              :   Tensor dropout_mask(float dropout) const;</span>
+<span id="L1442"><span class="lineNum">    1442</span>              : </span>
+<span id="L1443"><span class="lineNum">    1443</span>              :   /**</span>
+<span id="L1444"><span class="lineNum">    1444</span>              :    * @brief Calculate Drop Out Mask : x * 1.0/(1.0-rate) inplace</span>
+<span id="L1445"><span class="lineNum">    1445</span>              :    * @param dropout drop out rate</span>
+<span id="L1446"><span class="lineNum">    1446</span>              :    */</span>
+<span id="L1447"><span class="lineNum">    1447</span>              :   void dropout_mask(float dropout);</span>
+<span id="L1448"><span class="lineNum">    1448</span>              : </span>
+<span id="L1449"><span class="lineNum">    1449</span>              :   /**</span>
+<span id="L1450"><span class="lineNum">    1450</span>              :    * @brief Calculate filter mask</span>
+<span id="L1451"><span class="lineNum">    1451</span>              :    * @param mask_len length of each mask along the last axis</span>
+<span id="L1452"><span class="lineNum">    1452</span>              :    * @param invert invert the mask</span>
+<span id="L1453"><span class="lineNum">    1453</span>              :    */</span>
+<span id="L1454"><span class="lineNum">    1454</span>              :   void filter_mask(const Tensor &amp;mask_len, bool reverse = false);</span>
+<span id="L1455"><span class="lineNum">    1455</span>              : </span>
+<span id="L1456"><span class="lineNum">    1456</span>              :   /**</span>
+<span id="L1457"><span class="lineNum">    1457</span>              :    * @brief Calculate 2 Zone Out Mask</span>
+<span id="L1458"><span class="lineNum">    1458</span>              :    * @details Calculate zone out mask according to the bernoulli distribution.</span>
+<span id="L1459"><span class="lineNum">    1459</span>              :    * Zone out mask with rate @a zoneout for inplace and the other zone out mask</span>
+<span id="L1460"><span class="lineNum">    1460</span>              :    * with rate @a (1-zoneout).</span>
+<span id="L1461"><span class="lineNum">    1461</span>              :    * @param zoneout zone out rate</span>
+<span id="L1462"><span class="lineNum">    1462</span>              :    * @retval Tensor zone out mask for opposite tensor</span>
+<span id="L1463"><span class="lineNum">    1463</span>              :    */</span>
+<span id="L1464"><span class="lineNum">    1464</span>              :   Tensor zoneout_mask(float zoneout);</span>
+<span id="L1465"><span class="lineNum">    1465</span>              : </span>
+<span id="L1466"><span class="lineNum">    1466</span>              :   /**</span>
+<span id="L1467"><span class="lineNum">    1467</span>              :    * @brief Calculate 2 Zone Out Mask</span>
+<span id="L1468"><span class="lineNum">    1468</span>              :    * @details Calculate zone out mask according to the bernoulli distribution.</span>
+<span id="L1469"><span class="lineNum">    1469</span>              :    * Zone out mask with rate @a zoneout for inplace and the other zone out mask</span>
+<span id="L1470"><span class="lineNum">    1470</span>              :    * with rate @a (1-zoneout).</span>
+<span id="L1471"><span class="lineNum">    1471</span>              :    * @param opposite opposite zone out mask</span>
+<span id="L1472"><span class="lineNum">    1472</span>              :    * @param zoneout zone out rate</span>
+<span id="L1473"><span class="lineNum">    1473</span>              :    */</span>
+<span id="L1474"><span class="lineNum">    1474</span>              :   void zoneout_mask(Tensor &amp;opposite, float zoneout);</span>
+<span id="L1475"><span class="lineNum">    1475</span>              : </span>
+<span id="L1476"><span class="lineNum">    1476</span>              :   /**</span>
+<span id="L1477"><span class="lineNum">    1477</span>              :    * @brief split tensor along axis.</span>
+<span id="L1478"><span class="lineNum">    1478</span>              :    *</span>
+<span id="L1479"><span class="lineNum">    1479</span>              :    * @param num_size num_size</span>
+<span id="L1480"><span class="lineNum">    1480</span>              :    * @param axis axis</span>
+<span id="L1481"><span class="lineNum">    1481</span>              :    * @return Tensor splitted tensor</span>
+<span id="L1482"><span class="lineNum">    1482</span>              :    */</span>
+<span id="L1483"><span class="lineNum">    1483</span>              :   std::vector&lt;Tensor&gt; split(unsigned num_size, int axis = 0);</span>
+<span id="L1484"><span class="lineNum">    1484</span>              : </span>
+<span id="L1485"><span class="lineNum">    1485</span>              :   /**</span>
+<span id="L1486"><span class="lineNum">    1486</span>              :    * @brief split tensor along axis.</span>
+<span id="L1487"><span class="lineNum">    1487</span>              :    *</span>
+<span id="L1488"><span class="lineNum">    1488</span>              :    * @param sizes sizes</span>
+<span id="L1489"><span class="lineNum">    1489</span>              :    * @param axis axis</span>
+<span id="L1490"><span class="lineNum">    1490</span>              :    * @return Tensor splitted tensor</span>
+<span id="L1491"><span class="lineNum">    1491</span>              :    * @note if the given array sizes is just a 1 unsigned int value, assumes that</span>
+<span id="L1492"><span class="lineNum">    1492</span>              :    * it divide tensor by given size evenly</span>
+<span id="L1493"><span class="lineNum">    1493</span>              :    */</span>
+<span id="L1494"><span class="lineNum">    1494</span>              :   std::vector&lt;Tensor&gt; split(std::vector&lt;size_t&gt; sizes, int axis = 0);</span>
+<span id="L1495"><span class="lineNum">    1495</span>              : </span>
+<span id="L1496"><span class="lineNum">    1496</span>              :   /**</span>
+<span id="L1497"><span class="lineNum">    1497</span>              :    * @brief concatenate tensors along axis</span>
+<span id="L1498"><span class="lineNum">    1498</span>              :    *</span>
+<span id="L1499"><span class="lineNum">    1499</span>              :    * @param tensors tensors to be concatenated to the first tensor</span>
+<span id="L1500"><span class="lineNum">    1500</span>              :    * @param axis axis</span>
+<span id="L1501"><span class="lineNum">    1501</span>              :    * @param output output tensor to store the result</span>
+<span id="L1502"><span class="lineNum">    1502</span>              :    * @return Tensor concatenated tensor</span>
+<span id="L1503"><span class="lineNum">    1503</span>              :    *</span>
+<span id="L1504"><span class="lineNum">    1504</span>              :    * @note  This function should not be used directly. Please use cat() instead.</span>
+<span id="L1505"><span class="lineNum">    1505</span>              :    */</span>
+<span id="L1506"><span class="lineNum">    1506</span>              :   Tensor concat(const std::vector&lt;Tensor&gt; &amp;tensors, int axis, Tensor &amp;output);</span>
+<span id="L1507"><span class="lineNum">    1507</span>              : </span>
+<span id="L1508"><span class="lineNum">    1508</span>              :   /**</span>
+<span id="L1509"><span class="lineNum">    1509</span>              :    * @brief concatenate tensors along axis</span>
+<span id="L1510"><span class="lineNum">    1510</span>              :    *</span>
+<span id="L1511"><span class="lineNum">    1511</span>              :    * @param tensors tensors to be concatenated to the first tensor</span>
+<span id="L1512"><span class="lineNum">    1512</span>              :    * @param axis axis</span>
+<span id="L1513"><span class="lineNum">    1513</span>              :    * @return Tensor concatenated tensor</span>
+<span id="L1514"><span class="lineNum">    1514</span>              :    */</span>
+<span id="L1515"><span class="lineNum">    1515</span>              :   static Tensor cat(const std::vector&lt;Tensor&gt; &amp;tensors, int axis = 0);</span>
+<span id="L1516"><span class="lineNum">    1516</span>              : </span>
+<span id="L1517"><span class="lineNum">    1517</span>              :   /**</span>
+<span id="L1518"><span class="lineNum">    1518</span>              :    * @brief concatenate tensors along axis</span>
+<span id="L1519"><span class="lineNum">    1519</span>              :    *</span>
+<span id="L1520"><span class="lineNum">    1520</span>              :    * @param tensors tensors to be concatenated to the first tensor</span>
+<span id="L1521"><span class="lineNum">    1521</span>              :    * @param axis axis</span>
+<span id="L1522"><span class="lineNum">    1522</span>              :    * @param output output tensor to store the result</span>
+<span id="L1523"><span class="lineNum">    1523</span>              :    * @return Tensor concatenated tensor</span>
+<span id="L1524"><span class="lineNum">    1524</span>              :    */</span>
+<span id="L1525"><span class="lineNum">    1525</span>              :   static Tensor cat(const std::vector&lt;Tensor&gt; &amp;tensors, int axis,</span>
+<span id="L1526"><span class="lineNum">    1526</span>              :                     Tensor &amp;output);</span>
+<span id="L1527"><span class="lineNum">    1527</span>              : </span>
+<span id="L1528"><span class="lineNum">    1528</span>              :   /**</span>
+<span id="L1529"><span class="lineNum">    1529</span>              :    * @brief     Print element</span>
+<span id="L1530"><span class="lineNum">    1530</span>              :    * @param[in] out out stream</span>
+<span id="L1531"><span class="lineNum">    1531</span>              :    */</span>
+<span id="L1532"><span class="lineNum">    1532</span>              :   void print(std::ostream &amp;out) const;</span>
+<span id="L1533"><span class="lineNum">    1533</span>              : </span>
+<span id="L1534"><span class="lineNum">    1534</span>              :   /**</span>
+<span id="L1535"><span class="lineNum">    1535</span>              :    * @brief     put data of Tensor</span>
+<span id="L1536"><span class="lineNum">    1536</span>              :    * @note      It is only effective when fsu is used</span>
 <span id="L1537"><span class="lineNum">    1537</span>              :    */</span>
-<span id="L1538"><span class="lineNum">    1538</span>              :   void setData(const std::shared_ptr&lt;MemoryData&gt; buf, size_t off = 0,</span>
-<span id="L1539"><span class="lineNum">    1539</span>              :                bool init = false);</span>
-<span id="L1540"><span class="lineNum">    1540</span>              : </span>
-<span id="L1541"><span class="lineNum">    1541</span>              :   /**</span>
-<span id="L1542"><span class="lineNum">    1542</span>              :    * @brief     return Data pointer of Tensor</span>
-<span id="L1543"><span class="lineNum">    1543</span>              :    * @retval    template T pointer (float pointer as default)</span>
-<span id="L1544"><span class="lineNum">    1544</span>              :    */</span>
-<span id="L1545"><span class="lineNum">    1545</span>              :   const std::shared_ptr&lt;MemoryData&gt; getMemoryData() const;</span>
-<span id="L1546"><span class="lineNum">    1546</span>              : </span>
-<span id="L1547"><span class="lineNum">    1547</span>              :   /**</span>
-<span id="L1548"><span class="lineNum">    1548</span>              :    * @brief     return offset</span>
-<span id="L1549"><span class="lineNum">    1549</span>              :    */</span>
-<span id="L1550"><span class="lineNum">    1550</span>              :   size_t getOffset() const;</span>
-<span id="L1551"><span class="lineNum">    1551</span>              : </span>
-<span id="L1552"><span class="lineNum">    1552</span>              :   /**</span>
-<span id="L1553"><span class="lineNum">    1553</span>              :    * @brief     Copy the Tensor</span>
-<span id="L1554"><span class="lineNum">    1554</span>              :    * @param[in] from Tensor to be copied</span>
-<span id="L1555"><span class="lineNum">    1555</span>              :    *</span>
-<span id="L1556"><span class="lineNum">    1556</span>              :    * @note copy can reshape the tensor to match the shape</span>
-<span id="L1557"><span class="lineNum">    1557</span>              :    * @note support copying data from multiple data type</span>
-<span id="L1558"><span class="lineNum">    1558</span>              :    */</span>
-<span id="L1559"><span class="lineNum">    1559</span>              :   void copy(const Tensor &amp;from);</span>
-<span id="L1560"><span class="lineNum">    1560</span>              : </span>
-<span id="L1561"><span class="lineNum">    1561</span>              :   /**</span>
-<span id="L1562"><span class="lineNum">    1562</span>              :    * @brief     Copy the Tensor</span>
-<span id="L1563"><span class="lineNum">    1563</span>              :    * @param[in] from Tensor to be copied</span>
-<span id="L1564"><span class="lineNum">    1564</span>              :    * @note      support copying data from multiple data type</span>
-<span id="L1565"><span class="lineNum">    1565</span>              :    */</span>
-<span id="L1566"><span class="lineNum">    1566</span>              :   void copyData(const Tensor &amp;from);</span>
-<span id="L1567"><span class="lineNum">    1567</span>              : </span>
-<span id="L1568"><span class="lineNum">    1568</span>              :   /**</span>
-<span id="L1569"><span class="lineNum">    1569</span>              :    * @brief     Copy the Tensor</span>
-<span id="L1570"><span class="lineNum">    1570</span>              :    * @param[in] from Tensor to be copied</span>
-<span id="L1571"><span class="lineNum">    1571</span>              :    * @note      only support copying data from tensor with the same data type</span>
-<span id="L1572"><span class="lineNum">    1572</span>              :    */</span>
-<span id="L1573"><span class="lineNum">    1573</span>              :   void copy_with_stride(const Tensor &amp;from);</span>
-<span id="L1574"><span class="lineNum">    1574</span>              : </span>
-<span id="L1575"><span class="lineNum">    1575</span>              :   /**</span>
-<span id="L1576"><span class="lineNum">    1576</span>              :    * @brief Get slice of the tensor, sliced by batch</span>
-<span id="L1577"><span class="lineNum">    1577</span>              :    * @param[in] offset offset in batch to start the slice</span>
-<span id="L1578"><span class="lineNum">    1578</span>              :    * @param[in] size size of the slice</span>
-<span id="L1579"><span class="lineNum">    1579</span>              :    * @retval slice of this tensor</span>
-<span id="L1580"><span class="lineNum">    1580</span>              :    * @note This function provides a slice of this tensor, and does not create a</span>
-<span id="L1581"><span class="lineNum">    1581</span>              :    * copy</span>
-<span id="L1582"><span class="lineNum">    1582</span>              :    */</span>
-<span id="L1583"><span class="lineNum">    1583</span>              :   Tensor getBatchSlice(size_t offset, unsigned int size) const;</span>
-<span id="L1584"><span class="lineNum">    1584</span>              : </span>
-<span id="L1585"><span class="lineNum">    1585</span>              :   /**</span>
-<span id="L1586"><span class="lineNum">    1586</span>              :    * @brief Extract sub-tensor containing specified batch indices</span>
-<span id="L1587"><span class="lineNum">    1587</span>              :    *</span>
-<span id="L1588"><span class="lineNum">    1588</span>              :    * @param indices List of batch indices to extract (0-based) Duplicates are</span>
-<span id="L1589"><span class="lineNum">    1589</span>              :    * allowed and will result in the same batch data being copied multiple times.</span>
-<span id="L1590"><span class="lineNum">    1590</span>              :    * @return Tensor New tensor containing only specified batches  (copied</span>
-<span id="L1591"><span class="lineNum">    1591</span>              :    * tensor!)</span>
-<span id="L1592"><span class="lineNum">    1592</span>              :    *</span>
-<span id="L1593"><span class="lineNum">    1593</span>              :    * @details</span>
-<span id="L1594"><span class="lineNum">    1594</span>              :    * This function creates a new tensor containing copies of data from</span>
-<span id="L1595"><span class="lineNum">    1595</span>              :    * specified batch indices of the original tensor. The operation:</span>
-<span id="L1596"><span class="lineNum">    1596</span>              :    * - Requires the original tensor to be contiguous in memory</span>
-<span id="L1597"><span class="lineNum">    1597</span>              :    * - Preserves channel/height/width dimensions</span>
-<span id="L1598"><span class="lineNum">    1598</span>              :    * - Maintains data ordering within each batch</span>
-<span id="L1599"><span class="lineNum">    1599</span>              :    * - Uses memcpy for efficient memory operations</span>
+<span id="L1538"><span class="lineNum">    1538</span>              :   void putData() const;</span>
+<span id="L1539"><span class="lineNum">    1539</span>              : </span>
+<span id="L1540"><span class="lineNum">    1540</span>              :   /**</span>
+<span id="L1541"><span class="lineNum">    1541</span>              :    * @brief Set the memory buffer for the tensor</span>
+<span id="L1542"><span class="lineNum">    1542</span>              :    *</span>
+<span id="L1543"><span class="lineNum">    1543</span>              :    * @param buf the memory buffer</span>
+<span id="L1544"><span class="lineNum">    1544</span>              :    * @param init intialize the buffer</span>
+<span id="L1545"><span class="lineNum">    1545</span>              :    */</span>
+<span id="L1546"><span class="lineNum">    1546</span>              :   void setData(const std::shared_ptr&lt;MemoryData&gt; buf, size_t off = 0,</span>
+<span id="L1547"><span class="lineNum">    1547</span>              :                bool init = false);</span>
+<span id="L1548"><span class="lineNum">    1548</span>              : </span>
+<span id="L1549"><span class="lineNum">    1549</span>              :   /**</span>
+<span id="L1550"><span class="lineNum">    1550</span>              :    * @brief     return Data pointer of Tensor</span>
+<span id="L1551"><span class="lineNum">    1551</span>              :    * @retval    template T pointer (float pointer as default)</span>
+<span id="L1552"><span class="lineNum">    1552</span>              :    */</span>
+<span id="L1553"><span class="lineNum">    1553</span>              :   const std::shared_ptr&lt;MemoryData&gt; getMemoryData() const;</span>
+<span id="L1554"><span class="lineNum">    1554</span>              : </span>
+<span id="L1555"><span class="lineNum">    1555</span>              :   /**</span>
+<span id="L1556"><span class="lineNum">    1556</span>              :    * @brief     return offset</span>
+<span id="L1557"><span class="lineNum">    1557</span>              :    */</span>
+<span id="L1558"><span class="lineNum">    1558</span>              :   size_t getOffset() const;</span>
+<span id="L1559"><span class="lineNum">    1559</span>              : </span>
+<span id="L1560"><span class="lineNum">    1560</span>              :   /**</span>
+<span id="L1561"><span class="lineNum">    1561</span>              :    * @brief     Copy the Tensor</span>
+<span id="L1562"><span class="lineNum">    1562</span>              :    * @param[in] from Tensor to be copied</span>
+<span id="L1563"><span class="lineNum">    1563</span>              :    *</span>
+<span id="L1564"><span class="lineNum">    1564</span>              :    * @note copy can reshape the tensor to match the shape</span>
+<span id="L1565"><span class="lineNum">    1565</span>              :    * @note support copying data from multiple data type</span>
+<span id="L1566"><span class="lineNum">    1566</span>              :    */</span>
+<span id="L1567"><span class="lineNum">    1567</span>              :   void copy(const Tensor &amp;from);</span>
+<span id="L1568"><span class="lineNum">    1568</span>              : </span>
+<span id="L1569"><span class="lineNum">    1569</span>              :   /**</span>
+<span id="L1570"><span class="lineNum">    1570</span>              :    * @brief     Copy the Tensor</span>
+<span id="L1571"><span class="lineNum">    1571</span>              :    * @param[in] from Tensor to be copied</span>
+<span id="L1572"><span class="lineNum">    1572</span>              :    * @note      support copying data from multiple data type</span>
+<span id="L1573"><span class="lineNum">    1573</span>              :    */</span>
+<span id="L1574"><span class="lineNum">    1574</span>              :   void copyData(const Tensor &amp;from);</span>
+<span id="L1575"><span class="lineNum">    1575</span>              : </span>
+<span id="L1576"><span class="lineNum">    1576</span>              :   /**</span>
+<span id="L1577"><span class="lineNum">    1577</span>              :    * @brief     Copy the Tensor</span>
+<span id="L1578"><span class="lineNum">    1578</span>              :    * @param[in] from Tensor to be copied</span>
+<span id="L1579"><span class="lineNum">    1579</span>              :    * @note      only support copying data from tensor with the same data type</span>
+<span id="L1580"><span class="lineNum">    1580</span>              :    */</span>
+<span id="L1581"><span class="lineNum">    1581</span>              :   void copy_with_stride(const Tensor &amp;from);</span>
+<span id="L1582"><span class="lineNum">    1582</span>              : </span>
+<span id="L1583"><span class="lineNum">    1583</span>              :   /**</span>
+<span id="L1584"><span class="lineNum">    1584</span>              :    * @brief Get slice of the tensor, sliced by batch</span>
+<span id="L1585"><span class="lineNum">    1585</span>              :    * @param[in] offset offset in batch to start the slice</span>
+<span id="L1586"><span class="lineNum">    1586</span>              :    * @param[in] size size of the slice</span>
+<span id="L1587"><span class="lineNum">    1587</span>              :    * @retval slice of this tensor</span>
+<span id="L1588"><span class="lineNum">    1588</span>              :    * @note This function provides a slice of this tensor, and does not create a</span>
+<span id="L1589"><span class="lineNum">    1589</span>              :    * copy</span>
+<span id="L1590"><span class="lineNum">    1590</span>              :    */</span>
+<span id="L1591"><span class="lineNum">    1591</span>              :   Tensor getBatchSlice(size_t offset, unsigned int size) const;</span>
+<span id="L1592"><span class="lineNum">    1592</span>              : </span>
+<span id="L1593"><span class="lineNum">    1593</span>              :   /**</span>
+<span id="L1594"><span class="lineNum">    1594</span>              :    * @brief Extract sub-tensor containing specified batch indices</span>
+<span id="L1595"><span class="lineNum">    1595</span>              :    *</span>
+<span id="L1596"><span class="lineNum">    1596</span>              :    * @param indices List of batch indices to extract (0-based) Duplicates are</span>
+<span id="L1597"><span class="lineNum">    1597</span>              :    * allowed and will result in the same batch data being copied multiple times.</span>
+<span id="L1598"><span class="lineNum">    1598</span>              :    * @return Tensor New tensor containing only specified batches  (copied</span>
+<span id="L1599"><span class="lineNum">    1599</span>              :    * tensor!)</span>
 <span id="L1600"><span class="lineNum">    1600</span>              :    *</span>
-<span id="L1601"><span class="lineNum">    1601</span>              :    * @note Duplicate indices: If the same index appears multiple times, the</span>
-<span id="L1602"><span class="lineNum">    1602</span>              :    * corresponding batch data will be copied to each position in the output</span>
-<span id="L1603"><span class="lineNum">    1603</span>              :    * tensor. Example: indices {0, 1, 1} creates output with 3 batches where</span>
-<span id="L1604"><span class="lineNum">    1604</span>              :    * positions 1 and 2 contain identical copies  of input batch 1.</span>
-<span id="L1605"><span class="lineNum">    1605</span>              :    *</span>
-<span id="L1606"><span class="lineNum">    1606</span>              :    * @note</span>
-<span id="L1607"><span class="lineNum">    1607</span>              :    * - Time complexity: O(k*C*H*W) where k = num_indices</span>
-<span id="L1608"><span class="lineNum">    1608</span>              :    * - Memory complexity: O(k*C*H*W)</span>
-<span id="L1609"><span class="lineNum">    1609</span>              :    * - Thread-safe when using different indices in parallel</span>
-<span id="L1610"><span class="lineNum">    1610</span>              :    *</span>
-<span id="L1611"><span class="lineNum">    1611</span>              :    * @throw std::runtime_error If:</span>
-<span id="L1612"><span class="lineNum">    1612</span>              :    * - Tensor is not contiguous</span>
-<span id="L1613"><span class="lineNum">    1613</span>              :    * - Any index is out of bounds</span>
-<span id="L1614"><span class="lineNum">    1614</span>              :    */</span>
-<span id="L1615"><span class="lineNum">    1615</span>              :   Tensor getBatchSlice(const std::vector&lt;unsigned int&gt; &amp;indices) const;</span>
-<span id="L1616"><span class="lineNum">    1616</span>              : </span>
-<span id="L1617"><span class="lineNum">    1617</span>              :   /**</span>
-<span id="L1618"><span class="lineNum">    1618</span>              :    * @brief     Convient wrapper for inplace copy of @a this.</span>
-<span id="L1619"><span class="lineNum">    1619</span>              :    * @retval    Copied version of this</span>
-<span id="L1620"><span class="lineNum">    1620</span>              :    */</span>
-<span id="L1621"><span class="lineNum">    1621</span>              :   Tensor clone() const;</span>
-<span id="L1622"><span class="lineNum">    1622</span>              : </span>
-<span id="L1623"><span class="lineNum">    1623</span>              :   /**</span>
-<span id="L1624"><span class="lineNum">    1624</span>              :    * @brief     Convient wrapper for inplace copy of @a this.</span>
-<span id="L1625"><span class="lineNum">    1625</span>              :    * @param[in] type output tensor data type</span>
-<span id="L1626"><span class="lineNum">    1626</span>              :    * @retval    Copied version of this</span>
-<span id="L1627"><span class="lineNum">    1627</span>              :    */</span>
-<span id="L1628"><span class="lineNum">    1628</span>              :   Tensor clone(ml::train::TensorDim::DataType type) const;</span>
-<span id="L1629"><span class="lineNum">    1629</span>              : </span>
-<span id="L1630"><span class="lineNum">    1630</span>              :   /**</span>
-<span id="L1631"><span class="lineNum">    1631</span>              :    * @brief     Read the Tensor For FSU</span>
-<span id="L1632"><span class="lineNum">    1632</span>              :    *</span>
-<span id="L1633"><span class="lineNum">    1633</span>              :    */</span>
-<span id="L1634"><span class="lineNum">    1634</span>              :   void readFSU();</span>
-<span id="L1635"><span class="lineNum">    1635</span>              : </span>
-<span id="L1636"><span class="lineNum">    1636</span>              :   /**</span>
-<span id="L1637"><span class="lineNum">    1637</span>              :    * @brief     Save the Tensor into file</span>
-<span id="L1638"><span class="lineNum">    1638</span>              :    * @param[in] file output file stream</span>
-<span id="L1639"><span class="lineNum">    1639</span>              :    */</span>
-<span id="L1640"><span class="lineNum">    1640</span>              :   void save(std::ostream &amp;file);</span>
-<span id="L1641"><span class="lineNum">    1641</span>              : </span>
-<span id="L1642"><span class="lineNum">    1642</span>              :   /**</span>
-<span id="L1643"><span class="lineNum">    1643</span>              :    * @brief     Read the Tensor from file</span>
-<span id="L1644"><span class="lineNum">    1644</span>              :    * @param[in] file input file stream</span>
-<span id="L1645"><span class="lineNum">    1645</span>              :    */</span>
-<span id="L1646"><span class="lineNum">    1646</span>              :   void read(std::ifstream &amp;file, size_t start_offset = 0,</span>
-<span id="L1647"><span class="lineNum">    1647</span>              :             bool read_from_offset = false, int file_fd = -1);</span>
-<span id="L1648"><span class="lineNum">    1648</span>              : </span>
-<span id="L1649"><span class="lineNum">    1649</span>              :   /**</span>
-<span id="L1650"><span class="lineNum">    1650</span>              :    * @brief     ReadSource</span>
-<span id="L1651"><span class="lineNum">    1651</span>              :    * @param[in] ReadSource input file source</span>
-<span id="L1652"><span class="lineNum">    1652</span>              :    */</span>
-<span id="L1653"><span class="lineNum">    1653</span>              :   void read(ReadSource src, size_t start_offset = 0,</span>
-<span id="L1654"><span class="lineNum">    1654</span>              :             bool read_from_offset = false);</span>
-<span id="L1655"><span class="lineNum">    1655</span>              : </span>
-<span id="L1656"><span class="lineNum">    1656</span>              :   /**</span>
-<span id="L1657"><span class="lineNum">    1657</span>              :    * @brief     return argument index which value is max by batch</span>
-<span id="L1658"><span class="lineNum">    1658</span>              :    * @retval    unsigned int argument indices</span>
-<span id="L1659"><span class="lineNum">    1659</span>              :    */</span>
-<span id="L1660"><span class="lineNum">    1660</span>              :   std::vector&lt;unsigned int&gt; argmax() const;</span>
-<span id="L1661"><span class="lineNum">    1661</span>              : </span>
-<span id="L1662"><span class="lineNum">    1662</span>              :   /**</span>
-<span id="L1663"><span class="lineNum">    1663</span>              :    * @brief     return argument index which value is min by batch</span>
-<span id="L1664"><span class="lineNum">    1664</span>              :    * @retval    unsigned int argument indices</span>
-<span id="L1665"><span class="lineNum">    1665</span>              :    */</span>
-<span id="L1666"><span class="lineNum">    1666</span>              :   std::vector&lt;unsigned int&gt; argmin() const;</span>
-<span id="L1667"><span class="lineNum">    1667</span>              : </span>
-<span id="L1668"><span class="lineNum">    1668</span>              :   /**</span>
-<span id="L1669"><span class="lineNum">    1669</span>              :    * @brief Find top-K maximum values along the width dimension and return</span>
-<span id="L1670"><span class="lineNum">    1670</span>              :    * results as tensors</span>
-<span id="L1671"><span class="lineNum">    1671</span>              :    *</span>
-<span id="L1672"><span class="lineNum">    1672</span>              :    * @details This function computes the top-K maximum values and their</span>
-<span id="L1673"><span class="lineNum">    1673</span>              :    * corresponding indices along the **width** dimension for each batch,</span>
-<span id="L1674"><span class="lineNum">    1674</span>              :    * channel, and height slice. The operation preserves the original tensor</span>
-<span id="L1675"><span class="lineNum">    1675</span>              :    * format (NCHW/NHWC) while reducing the width dimension to size K. The</span>
-<span id="L1676"><span class="lineNum">    1676</span>              :    * indices are returned as a separate tensor of type `UINT32`.</span>
-<span id="L1677"><span class="lineNum">    1677</span>              :    *</span>
-<span id="L1678"><span class="lineNum">    1678</span>              :    * @param[in] k Number of largest elements to select (1 &lt;= k &lt;= width_size)</span>
+<span id="L1601"><span class="lineNum">    1601</span>              :    * @details</span>
+<span id="L1602"><span class="lineNum">    1602</span>              :    * This function creates a new tensor containing copies of data from</span>
+<span id="L1603"><span class="lineNum">    1603</span>              :    * specified batch indices of the original tensor. The operation:</span>
+<span id="L1604"><span class="lineNum">    1604</span>              :    * - Requires the original tensor to be contiguous in memory</span>
+<span id="L1605"><span class="lineNum">    1605</span>              :    * - Preserves channel/height/width dimensions</span>
+<span id="L1606"><span class="lineNum">    1606</span>              :    * - Maintains data ordering within each batch</span>
+<span id="L1607"><span class="lineNum">    1607</span>              :    * - Uses memcpy for efficient memory operations</span>
+<span id="L1608"><span class="lineNum">    1608</span>              :    *</span>
+<span id="L1609"><span class="lineNum">    1609</span>              :    * @note Duplicate indices: If the same index appears multiple times, the</span>
+<span id="L1610"><span class="lineNum">    1610</span>              :    * corresponding batch data will be copied to each position in the output</span>
+<span id="L1611"><span class="lineNum">    1611</span>              :    * tensor. Example: indices {0, 1, 1} creates output with 3 batches where</span>
+<span id="L1612"><span class="lineNum">    1612</span>              :    * positions 1 and 2 contain identical copies  of input batch 1.</span>
+<span id="L1613"><span class="lineNum">    1613</span>              :    *</span>
+<span id="L1614"><span class="lineNum">    1614</span>              :    * @note</span>
+<span id="L1615"><span class="lineNum">    1615</span>              :    * - Time complexity: O(k*C*H*W) where k = num_indices</span>
+<span id="L1616"><span class="lineNum">    1616</span>              :    * - Memory complexity: O(k*C*H*W)</span>
+<span id="L1617"><span class="lineNum">    1617</span>              :    * - Thread-safe when using different indices in parallel</span>
+<span id="L1618"><span class="lineNum">    1618</span>              :    *</span>
+<span id="L1619"><span class="lineNum">    1619</span>              :    * @throw std::runtime_error If:</span>
+<span id="L1620"><span class="lineNum">    1620</span>              :    * - Tensor is not contiguous</span>
+<span id="L1621"><span class="lineNum">    1621</span>              :    * - Any index is out of bounds</span>
+<span id="L1622"><span class="lineNum">    1622</span>              :    */</span>
+<span id="L1623"><span class="lineNum">    1623</span>              :   Tensor getBatchSlice(const std::vector&lt;unsigned int&gt; &amp;indices) const;</span>
+<span id="L1624"><span class="lineNum">    1624</span>              : </span>
+<span id="L1625"><span class="lineNum">    1625</span>              :   /**</span>
+<span id="L1626"><span class="lineNum">    1626</span>              :    * @brief     Convient wrapper for inplace copy of @a this.</span>
+<span id="L1627"><span class="lineNum">    1627</span>              :    * @retval    Copied version of this</span>
+<span id="L1628"><span class="lineNum">    1628</span>              :    */</span>
+<span id="L1629"><span class="lineNum">    1629</span>              :   Tensor clone() const;</span>
+<span id="L1630"><span class="lineNum">    1630</span>              : </span>
+<span id="L1631"><span class="lineNum">    1631</span>              :   /**</span>
+<span id="L1632"><span class="lineNum">    1632</span>              :    * @brief     Convient wrapper for inplace copy of @a this.</span>
+<span id="L1633"><span class="lineNum">    1633</span>              :    * @param[in] type output tensor data type</span>
+<span id="L1634"><span class="lineNum">    1634</span>              :    * @retval    Copied version of this</span>
+<span id="L1635"><span class="lineNum">    1635</span>              :    */</span>
+<span id="L1636"><span class="lineNum">    1636</span>              :   Tensor clone(ml::train::TensorDim::DataType type) const;</span>
+<span id="L1637"><span class="lineNum">    1637</span>              : </span>
+<span id="L1638"><span class="lineNum">    1638</span>              :   /**</span>
+<span id="L1639"><span class="lineNum">    1639</span>              :    * @brief     Read the Tensor For FSU</span>
+<span id="L1640"><span class="lineNum">    1640</span>              :    *</span>
+<span id="L1641"><span class="lineNum">    1641</span>              :    */</span>
+<span id="L1642"><span class="lineNum">    1642</span>              :   void readFSU();</span>
+<span id="L1643"><span class="lineNum">    1643</span>              : </span>
+<span id="L1644"><span class="lineNum">    1644</span>              :   /**</span>
+<span id="L1645"><span class="lineNum">    1645</span>              :    * @brief     Save the Tensor into file</span>
+<span id="L1646"><span class="lineNum">    1646</span>              :    * @param[in] file output file stream</span>
+<span id="L1647"><span class="lineNum">    1647</span>              :    */</span>
+<span id="L1648"><span class="lineNum">    1648</span>              :   void save(std::ostream &amp;file);</span>
+<span id="L1649"><span class="lineNum">    1649</span>              : </span>
+<span id="L1650"><span class="lineNum">    1650</span>              :   /**</span>
+<span id="L1651"><span class="lineNum">    1651</span>              :    * @brief     Read the Tensor from file</span>
+<span id="L1652"><span class="lineNum">    1652</span>              :    * @param[in] file input file stream</span>
+<span id="L1653"><span class="lineNum">    1653</span>              :    */</span>
+<span id="L1654"><span class="lineNum">    1654</span>              :   void read(std::ifstream &amp;file, size_t start_offset = 0,</span>
+<span id="L1655"><span class="lineNum">    1655</span>              :             bool read_from_offset = false, int file_fd = -1);</span>
+<span id="L1656"><span class="lineNum">    1656</span>              : </span>
+<span id="L1657"><span class="lineNum">    1657</span>              :   /**</span>
+<span id="L1658"><span class="lineNum">    1658</span>              :    * @brief     ReadSource</span>
+<span id="L1659"><span class="lineNum">    1659</span>              :    * @param[in] ReadSource input file source</span>
+<span id="L1660"><span class="lineNum">    1660</span>              :    */</span>
+<span id="L1661"><span class="lineNum">    1661</span>              :   void read(ReadSource src, size_t start_offset = 0,</span>
+<span id="L1662"><span class="lineNum">    1662</span>              :             bool read_from_offset = false);</span>
+<span id="L1663"><span class="lineNum">    1663</span>              : </span>
+<span id="L1664"><span class="lineNum">    1664</span>              :   /**</span>
+<span id="L1665"><span class="lineNum">    1665</span>              :    * @brief     return argument index which value is max by batch</span>
+<span id="L1666"><span class="lineNum">    1666</span>              :    * @retval    unsigned int argument indices</span>
+<span id="L1667"><span class="lineNum">    1667</span>              :    */</span>
+<span id="L1668"><span class="lineNum">    1668</span>              :   std::vector&lt;unsigned int&gt; argmax() const;</span>
+<span id="L1669"><span class="lineNum">    1669</span>              : </span>
+<span id="L1670"><span class="lineNum">    1670</span>              :   /**</span>
+<span id="L1671"><span class="lineNum">    1671</span>              :    * @brief     return argument index which value is min by batch</span>
+<span id="L1672"><span class="lineNum">    1672</span>              :    * @retval    unsigned int argument indices</span>
+<span id="L1673"><span class="lineNum">    1673</span>              :    */</span>
+<span id="L1674"><span class="lineNum">    1674</span>              :   std::vector&lt;unsigned int&gt; argmin() const;</span>
+<span id="L1675"><span class="lineNum">    1675</span>              : </span>
+<span id="L1676"><span class="lineNum">    1676</span>              :   /**</span>
+<span id="L1677"><span class="lineNum">    1677</span>              :    * @brief Find top-K maximum values along the width dimension and return</span>
+<span id="L1678"><span class="lineNum">    1678</span>              :    * results as tensors</span>
 <span id="L1679"><span class="lineNum">    1679</span>              :    *</span>
-<span id="L1680"><span class="lineNum">    1680</span>              :    * @return std::pair&lt;Tensor, Tensor&gt; containing:</span>
-<span id="L1681"><span class="lineNum">    1681</span>              :    *         - First: Output tensor of shape [batch][channel][height][k] (NCHW)</span>
-<span id="L1682"><span class="lineNum">    1682</span>              :    * or [batch][height][k][channel] (NHWC) with top-K values</span>
-<span id="L1683"><span class="lineNum">    1683</span>              :    *         - Second: Indices tensor of shape [batch][channel][height][k]</span>
-<span id="L1684"><span class="lineNum">    1684</span>              :    * (NCHW) or [batch][height][k][channel] (NHWC) with original width positions</span>
+<span id="L1680"><span class="lineNum">    1680</span>              :    * @details This function computes the top-K maximum values and their</span>
+<span id="L1681"><span class="lineNum">    1681</span>              :    * corresponding indices along the **width** dimension for each batch,</span>
+<span id="L1682"><span class="lineNum">    1682</span>              :    * channel, and height slice. The operation preserves the original tensor</span>
+<span id="L1683"><span class="lineNum">    1683</span>              :    * format (NCHW/NHWC) while reducing the width dimension to size K. The</span>
+<span id="L1684"><span class="lineNum">    1684</span>              :    * indices are returned as a separate tensor of type `UINT32`.</span>
 <span id="L1685"><span class="lineNum">    1685</span>              :    *</span>
-<span id="L1686"><span class="lineNum">    1686</span>              :    * @throw std::invalid_argument If:</span>
-<span id="L1687"><span class="lineNum">    1687</span>              :    *         - k is 0 or exceeds width dimension size</span>
-<span id="L1688"><span class="lineNum">    1688</span>              :    *         - Called on non-floating point tensor (UINT8/UINT16/etc)</span>
-<span id="L1689"><span class="lineNum">    1689</span>              :    *</span>
-<span id="L1690"><span class="lineNum">    1690</span>              :    * @note</span>
-<span id="L1691"><span class="lineNum">    1691</span>              :    * - Indices represent positions in the **original width dimension**</span>
-<span id="L1692"><span class="lineNum">    1692</span>              :    * - Sorting is done in descending order</span>
-<span id="L1693"><span class="lineNum">    1693</span>              :    * - Preserves tensor format (NCHW/NHWC) of the original tensor</span>
-<span id="L1694"><span class="lineNum">    1694</span>              :    */</span>
-<span id="L1695"><span class="lineNum">    1695</span>              :   std::pair&lt;Tensor, Tensor&gt; topK(unsigned int k) const;</span>
-<span id="L1696"><span class="lineNum">    1696</span>              : </span>
-<span id="L1697"><span class="lineNum">    1697</span>              :   /**</span>
-<span id="L1698"><span class="lineNum">    1698</span>              :    * @brief     return max of the absolute values of the tensor</span>
-<span id="L1699"><span class="lineNum">    1699</span>              :    * @retval    maximum absolute value</span>
-<span id="L1700"><span class="lineNum">    1700</span>              :    */</span>
-<span id="L1701"><span class="lineNum">    1701</span>              :   float max_abs() const;</span>
-<span id="L1702"><span class="lineNum">    1702</span>              : </span>
-<span id="L1703"><span class="lineNum">    1703</span>              :   /**</span>
-<span id="L1704"><span class="lineNum">    1704</span>              :    * @brief  return maximum value</span>
-<span id="L1705"><span class="lineNum">    1705</span>              :    * @retval Maximum value of the tensor data</span>
-<span id="L1706"><span class="lineNum">    1706</span>              :    */</span>
-<span id="L1707"><span class="lineNum">    1707</span>              :   float maxValue() const;</span>
-<span id="L1708"><span class="lineNum">    1708</span>              : </span>
-<span id="L1709"><span class="lineNum">    1709</span>              :   /**</span>
-<span id="L1710"><span class="lineNum">    1710</span>              :    * @brief  return minimum value</span>
-<span id="L1711"><span class="lineNum">    1711</span>              :    * @retval Minimum value of the tensor data</span>
-<span id="L1712"><span class="lineNum">    1712</span>              :    */</span>
-<span id="L1713"><span class="lineNum">    1713</span>              :   float minValue() const;</span>
-<span id="L1714"><span class="lineNum">    1714</span>              : </span>
-<span id="L1715"><span class="lineNum">    1715</span>              :   /**</span>
-<span id="L1716"><span class="lineNum">    1716</span>              :    * @brief  Transpose Tensor</span>
-<span id="L1717"><span class="lineNum">    1717</span>              :    * @param  direction to transpose ex) 0:2:1</span>
-<span id="L1718"><span class="lineNum">    1718</span>              :    * @return Tensor</span>
-<span id="L1719"><span class="lineNum">    1719</span>              :    */</span>
-<span id="L1720"><span class="lineNum">    1720</span>              :   Tensor transpose(const std::string &amp;direction) const;</span>
-<span id="L1721"><span class="lineNum">    1721</span>              : </span>
-<span id="L1722"><span class="lineNum">    1722</span>              :   /**</span>
-<span id="L1723"><span class="lineNum">    1723</span>              :    * @brief      Transpose Tensor</span>
-<span id="L1724"><span class="lineNum">    1724</span>              :    * @param      direction to transpose ex) 0:2:1</span>
-<span id="L1725"><span class="lineNum">    1725</span>              :    * @param[out] Tensor to save to, dimension is always reshaped.</span>
-<span id="L1726"><span class="lineNum">    1726</span>              :    * @retval     Tensor&amp; reference to the out</span>
+<span id="L1686"><span class="lineNum">    1686</span>              :    * @param[in] k Number of largest elements to select (1 &lt;= k &lt;= width_size)</span>
+<span id="L1687"><span class="lineNum">    1687</span>              :    *</span>
+<span id="L1688"><span class="lineNum">    1688</span>              :    * @return std::pair&lt;Tensor, Tensor&gt; containing:</span>
+<span id="L1689"><span class="lineNum">    1689</span>              :    *         - First: Output tensor of shape [batch][channel][height][k] (NCHW)</span>
+<span id="L1690"><span class="lineNum">    1690</span>              :    * or [batch][height][k][channel] (NHWC) with top-K values</span>
+<span id="L1691"><span class="lineNum">    1691</span>              :    *         - Second: Indices tensor of shape [batch][channel][height][k]</span>
+<span id="L1692"><span class="lineNum">    1692</span>              :    * (NCHW) or [batch][height][k][channel] (NHWC) with original width positions</span>
+<span id="L1693"><span class="lineNum">    1693</span>              :    *</span>
+<span id="L1694"><span class="lineNum">    1694</span>              :    * @throw std::invalid_argument If:</span>
+<span id="L1695"><span class="lineNum">    1695</span>              :    *         - k is 0 or exceeds width dimension size</span>
+<span id="L1696"><span class="lineNum">    1696</span>              :    *         - Called on non-floating point tensor (UINT8/UINT16/etc)</span>
+<span id="L1697"><span class="lineNum">    1697</span>              :    *</span>
+<span id="L1698"><span class="lineNum">    1698</span>              :    * @note</span>
+<span id="L1699"><span class="lineNum">    1699</span>              :    * - Indices represent positions in the **original width dimension**</span>
+<span id="L1700"><span class="lineNum">    1700</span>              :    * - Sorting is done in descending order</span>
+<span id="L1701"><span class="lineNum">    1701</span>              :    * - Preserves tensor format (NCHW/NHWC) of the original tensor</span>
+<span id="L1702"><span class="lineNum">    1702</span>              :    */</span>
+<span id="L1703"><span class="lineNum">    1703</span>              :   std::pair&lt;Tensor, Tensor&gt; topK(unsigned int k) const;</span>
+<span id="L1704"><span class="lineNum">    1704</span>              : </span>
+<span id="L1705"><span class="lineNum">    1705</span>              :   /**</span>
+<span id="L1706"><span class="lineNum">    1706</span>              :    * @brief     return max of the absolute values of the tensor</span>
+<span id="L1707"><span class="lineNum">    1707</span>              :    * @retval    maximum absolute value</span>
+<span id="L1708"><span class="lineNum">    1708</span>              :    */</span>
+<span id="L1709"><span class="lineNum">    1709</span>              :   float max_abs() const;</span>
+<span id="L1710"><span class="lineNum">    1710</span>              : </span>
+<span id="L1711"><span class="lineNum">    1711</span>              :   /**</span>
+<span id="L1712"><span class="lineNum">    1712</span>              :    * @brief  return maximum value</span>
+<span id="L1713"><span class="lineNum">    1713</span>              :    * @retval Maximum value of the tensor data</span>
+<span id="L1714"><span class="lineNum">    1714</span>              :    */</span>
+<span id="L1715"><span class="lineNum">    1715</span>              :   float maxValue() const;</span>
+<span id="L1716"><span class="lineNum">    1716</span>              : </span>
+<span id="L1717"><span class="lineNum">    1717</span>              :   /**</span>
+<span id="L1718"><span class="lineNum">    1718</span>              :    * @brief  return minimum value</span>
+<span id="L1719"><span class="lineNum">    1719</span>              :    * @retval Minimum value of the tensor data</span>
+<span id="L1720"><span class="lineNum">    1720</span>              :    */</span>
+<span id="L1721"><span class="lineNum">    1721</span>              :   float minValue() const;</span>
+<span id="L1722"><span class="lineNum">    1722</span>              : </span>
+<span id="L1723"><span class="lineNum">    1723</span>              :   /**</span>
+<span id="L1724"><span class="lineNum">    1724</span>              :    * @brief  Transpose Tensor</span>
+<span id="L1725"><span class="lineNum">    1725</span>              :    * @param  direction to transpose ex) 0:2:1</span>
+<span id="L1726"><span class="lineNum">    1726</span>              :    * @return Tensor</span>
 <span id="L1727"><span class="lineNum">    1727</span>              :    */</span>
-<span id="L1728"><span class="lineNum">    1728</span>              :   Tensor &amp;transpose(const std::string &amp;direction, Tensor &amp;out) const;</span>
+<span id="L1728"><span class="lineNum">    1728</span>              :   Tensor transpose(const std::string &amp;direction) const;</span>
 <span id="L1729"><span class="lineNum">    1729</span>              : </span>
 <span id="L1730"><span class="lineNum">    1730</span>              :   /**</span>
-<span id="L1731"><span class="lineNum">    1731</span>              :    * @brief     set Tensor Dim</span>
-<span id="L1732"><span class="lineNum">    1732</span>              :    * @param[in] d TensorDim</span>
-<span id="L1733"><span class="lineNum">    1733</span>              :    * @note      Throws std::invalid_argument if size mismatch</span>
-<span id="L1734"><span class="lineNum">    1734</span>              :    */</span>
-<span id="L1735"><span class="lineNum">    1735</span>              :   void reshape(const TensorDim &amp;d);</span>
-<span id="L1736"><span class="lineNum">    1736</span>              : </span>
-<span id="L1737"><span class="lineNum">    1737</span>              :   /**</span>
-<span id="L1738"><span class="lineNum">    1738</span>              :    * @brief fill tensor data with current value,</span>
-<span id="L1739"><span class="lineNum">    1739</span>              :    * if dimension is not exactly same, it is a hard error in this function</span>
-<span id="L1740"><span class="lineNum">    1740</span>              :    * so, only stride is overriden to @a this</span>
-<span id="L1741"><span class="lineNum">    1741</span>              :    *</span>
-<span id="L1742"><span class="lineNum">    1742</span>              :    * @param from Tensor to fill the data from</span>
-<span id="L1743"><span class="lineNum">    1743</span>              :    * @param allocate if unallocated, allocate with from.getDim()</span>
-<span id="L1744"><span class="lineNum">    1744</span>              :    * @throws std::invalid_argument if dimension and stride does not match</span>
-<span id="L1745"><span class="lineNum">    1745</span>              :    */</span>
-<span id="L1746"><span class="lineNum">    1746</span>              :   void fill(const Tensor &amp;from, bool allocate = false);</span>
-<span id="L1747"><span class="lineNum">    1747</span>              : </span>
-<span id="L1748"><span class="lineNum">    1748</span>              :   /**</span>
-<span id="L1749"><span class="lineNum">    1749</span>              :    * @brief     return a copy of the Tensor Dim</span>
-<span id="L1750"><span class="lineNum">    1750</span>              :    * @retval    TensorDim</span>
-<span id="L1751"><span class="lineNum">    1751</span>              :    */</span>
-<span id="L1752"><span class="lineNum">    1752</span>              :   TensorDim getDim() const;</span>
-<span id="L1753"><span class="lineNum">    1753</span>              : </span>
-<span id="L1754"><span class="lineNum">    1754</span>              :   /**</span>
-<span id="L1755"><span class="lineNum">    1755</span>              :    * @brief     return Tensor Type</span>
-<span id="L1756"><span class="lineNum">    1756</span>              :    */</span>
-<span id="L1757"><span class="lineNum">    1757</span>              :   TensorDim::TensorType getTensorType() const;</span>
-<span id="L1758"><span class="lineNum">    1758</span>              : </span>
-<span id="L1759"><span class="lineNum">    1759</span>              :   /**</span>
-<span id="L1760"><span class="lineNum">    1760</span>              :    * @brief Get initializer for the tensor</span>
-<span id="L1761"><span class="lineNum">    1761</span>              :    *</span>
-<span id="L1762"><span class="lineNum">    1762</span>              :    * @return initializer of the tensor</span>
-<span id="L1763"><span class="lineNum">    1763</span>              :    */</span>
-<span id="L1764"><span class="lineNum">    1764</span>              :   Initializer getInitializer() const;</span>
-<span id="L1765"><span class="lineNum">    1765</span>              : </span>
-<span id="L1766"><span class="lineNum">    1766</span>              :   /**</span>
-<span id="L1767"><span class="lineNum">    1767</span>              :    * @brief Get format for the tensor</span>
-<span id="L1768"><span class="lineNum">    1768</span>              :    * @return format of the tensor</span>
-<span id="L1769"><span class="lineNum">    1769</span>              :    */</span>
-<span id="L1770"><span class="lineNum">    1770</span>              :   TensorDim::Format getFormat() const;</span>
-<span id="L1771"><span class="lineNum">    1771</span>              : </span>
-<span id="L1772"><span class="lineNum">    1772</span>              :   /**</span>
-<span id="L1773"><span class="lineNum">    1773</span>              :    * @brief Get data type for the tensor</span>
-<span id="L1774"><span class="lineNum">    1774</span>              :    *</span>
-<span id="L1775"><span class="lineNum">    1775</span>              :    * @return data type of the tensor</span>
-<span id="L1776"><span class="lineNum">    1776</span>              :    */</span>
-<span id="L1777"><span class="lineNum">    1777</span>              :   Tdatatype getDataType() const;</span>
-<span id="L1778"><span class="lineNum">    1778</span>              : </span>
-<span id="L1779"><span class="lineNum">    1779</span>              :   /**</span>
-<span id="L1780"><span class="lineNum">    1780</span>              :    * @brief     update batch size for this tensor</span>
-<span id="L1781"><span class="lineNum">    1781</span>              :    * @param     batch size</span>
-<span id="L1782"><span class="lineNum">    1782</span>              :    * @note      The batchsize of src_tensor need not be related with this</span>
-<span id="L1783"><span class="lineNum">    1783</span>              :    * tensor's batch size</span>
-<span id="L1784"><span class="lineNum">    1784</span>              :    *</span>
-<span id="L1785"><span class="lineNum">    1785</span>              :    * @note      The memory for this tensor will re-allocated/re-assigned if the</span>
-<span id="L1786"><span class="lineNum">    1786</span>              :    * updated batch size is different than the current batch size.</span>
-<span id="L1787"><span class="lineNum">    1787</span>              :    *</span>
-<span id="L1788"><span class="lineNum">    1788</span>              :    * @note      If this tensor is/was the src_tensor for some other, then</span>
-<span id="L1789"><span class="lineNum">    1789</span>              :    * reduction in batch size can make the dependent tensors allocate fail due to</span>
-<span id="L1790"><span class="lineNum">    1790</span>              :    * memory smaller. Caller must handle this in their own end.</span>
-<span id="L1791"><span class="lineNum">    1791</span>              :    *</span>
-<span id="L1792"><span class="lineNum">    1792</span>              :    * @note      If this tensor is re-allocated, then the memory might not be</span>
-<span id="L1793"><span class="lineNum">    1793</span>              :    * immediately freed as the tensor already depending on this tensor also</span>
-<span id="L1794"><span class="lineNum">    1794</span>              :    * share the same memory. So, the peak memory consumption in worst case can</span>
-<span id="L1795"><span class="lineNum">    1795</span>              :    * reach the total memory requirements of a model with old batchsize and the</span>
-<span id="L1796"><span class="lineNum">    1796</span>              :    * new batch size. It is recommended to first deallocate all the tensors,</span>
-<span id="L1797"><span class="lineNum">    1797</span>              :    * updateBatch and then allocate again to avoid such issues.</span>
-<span id="L1798"><span class="lineNum">    1798</span>              :    */</span>
-<span id="L1799"><span class="lineNum">    1799</span>              :   void updateBatch(unsigned int batch);</span>
-<span id="L1800"><span class="lineNum">    1800</span>              : </span>
-<span id="L1801"><span class="lineNum">    1801</span>              :   /**</span>
-<span id="L1802"><span class="lineNum">    1802</span>              :    * @brief     update the dimension for this tensor</span>
-<span id="L1803"><span class="lineNum">    1803</span>              :    * @param     dimension dimension to be updated</span>
-<span id="L1804"><span class="lineNum">    1804</span>              :    * @note      if this tensor is allocated this will throw an error.</span>
-<span id="L1805"><span class="lineNum">    1805</span>              :    * @note      we assume that the caller checks if the tensor is not allocated</span>
+<span id="L1731"><span class="lineNum">    1731</span>              :    * @brief      Transpose Tensor</span>
+<span id="L1732"><span class="lineNum">    1732</span>              :    * @param      direction to transpose ex) 0:2:1</span>
+<span id="L1733"><span class="lineNum">    1733</span>              :    * @param[out] Tensor to save to, dimension is always reshaped.</span>
+<span id="L1734"><span class="lineNum">    1734</span>              :    * @retval     Tensor&amp; reference to the out</span>
+<span id="L1735"><span class="lineNum">    1735</span>              :    */</span>
+<span id="L1736"><span class="lineNum">    1736</span>              :   Tensor &amp;transpose(const std::string &amp;direction, Tensor &amp;out) const;</span>
+<span id="L1737"><span class="lineNum">    1737</span>              : </span>
+<span id="L1738"><span class="lineNum">    1738</span>              :   /**</span>
+<span id="L1739"><span class="lineNum">    1739</span>              :    * @brief     set Tensor Dim</span>
+<span id="L1740"><span class="lineNum">    1740</span>              :    * @param[in] d TensorDim</span>
+<span id="L1741"><span class="lineNum">    1741</span>              :    * @note      Throws std::invalid_argument if size mismatch</span>
+<span id="L1742"><span class="lineNum">    1742</span>              :    */</span>
+<span id="L1743"><span class="lineNum">    1743</span>              :   void reshape(const TensorDim &amp;d);</span>
+<span id="L1744"><span class="lineNum">    1744</span>              : </span>
+<span id="L1745"><span class="lineNum">    1745</span>              :   /**</span>
+<span id="L1746"><span class="lineNum">    1746</span>              :    * @brief fill tensor data with current value,</span>
+<span id="L1747"><span class="lineNum">    1747</span>              :    * if dimension is not exactly same, it is a hard error in this function</span>
+<span id="L1748"><span class="lineNum">    1748</span>              :    * so, only stride is overriden to @a this</span>
+<span id="L1749"><span class="lineNum">    1749</span>              :    *</span>
+<span id="L1750"><span class="lineNum">    1750</span>              :    * @param from Tensor to fill the data from</span>
+<span id="L1751"><span class="lineNum">    1751</span>              :    * @param allocate if unallocated, allocate with from.getDim()</span>
+<span id="L1752"><span class="lineNum">    1752</span>              :    * @throws std::invalid_argument if dimension and stride does not match</span>
+<span id="L1753"><span class="lineNum">    1753</span>              :    */</span>
+<span id="L1754"><span class="lineNum">    1754</span>              :   void fill(const Tensor &amp;from, bool allocate = false);</span>
+<span id="L1755"><span class="lineNum">    1755</span>              : </span>
+<span id="L1756"><span class="lineNum">    1756</span>              :   /**</span>
+<span id="L1757"><span class="lineNum">    1757</span>              :    * @brief     return a copy of the Tensor Dim</span>
+<span id="L1758"><span class="lineNum">    1758</span>              :    * @retval    TensorDim</span>
+<span id="L1759"><span class="lineNum">    1759</span>              :    */</span>
+<span id="L1760"><span class="lineNum">    1760</span>              :   TensorDim getDim() const;</span>
+<span id="L1761"><span class="lineNum">    1761</span>              : </span>
+<span id="L1762"><span class="lineNum">    1762</span>              :   /**</span>
+<span id="L1763"><span class="lineNum">    1763</span>              :    * @brief     return Tensor Type</span>
+<span id="L1764"><span class="lineNum">    1764</span>              :    */</span>
+<span id="L1765"><span class="lineNum">    1765</span>              :   TensorDim::TensorType getTensorType() const;</span>
+<span id="L1766"><span class="lineNum">    1766</span>              : </span>
+<span id="L1767"><span class="lineNum">    1767</span>              :   /**</span>
+<span id="L1768"><span class="lineNum">    1768</span>              :    * @brief Get initializer for the tensor</span>
+<span id="L1769"><span class="lineNum">    1769</span>              :    *</span>
+<span id="L1770"><span class="lineNum">    1770</span>              :    * @return initializer of the tensor</span>
+<span id="L1771"><span class="lineNum">    1771</span>              :    */</span>
+<span id="L1772"><span class="lineNum">    1772</span>              :   Initializer getInitializer() const;</span>
+<span id="L1773"><span class="lineNum">    1773</span>              : </span>
+<span id="L1774"><span class="lineNum">    1774</span>              :   /**</span>
+<span id="L1775"><span class="lineNum">    1775</span>              :    * @brief Get format for the tensor</span>
+<span id="L1776"><span class="lineNum">    1776</span>              :    * @return format of the tensor</span>
+<span id="L1777"><span class="lineNum">    1777</span>              :    */</span>
+<span id="L1778"><span class="lineNum">    1778</span>              :   TensorDim::Format getFormat() const;</span>
+<span id="L1779"><span class="lineNum">    1779</span>              : </span>
+<span id="L1780"><span class="lineNum">    1780</span>              :   /**</span>
+<span id="L1781"><span class="lineNum">    1781</span>              :    * @brief Get data type for the tensor</span>
+<span id="L1782"><span class="lineNum">    1782</span>              :    *</span>
+<span id="L1783"><span class="lineNum">    1783</span>              :    * @return data type of the tensor</span>
+<span id="L1784"><span class="lineNum">    1784</span>              :    */</span>
+<span id="L1785"><span class="lineNum">    1785</span>              :   Tdatatype getDataType() const;</span>
+<span id="L1786"><span class="lineNum">    1786</span>              : </span>
+<span id="L1787"><span class="lineNum">    1787</span>              :   /**</span>
+<span id="L1788"><span class="lineNum">    1788</span>              :    * @brief     update batch size for this tensor</span>
+<span id="L1789"><span class="lineNum">    1789</span>              :    * @param     batch size</span>
+<span id="L1790"><span class="lineNum">    1790</span>              :    * @note      The batchsize of src_tensor need not be related with this</span>
+<span id="L1791"><span class="lineNum">    1791</span>              :    * tensor's batch size</span>
+<span id="L1792"><span class="lineNum">    1792</span>              :    *</span>
+<span id="L1793"><span class="lineNum">    1793</span>              :    * @note      The memory for this tensor will re-allocated/re-assigned if the</span>
+<span id="L1794"><span class="lineNum">    1794</span>              :    * updated batch size is different than the current batch size.</span>
+<span id="L1795"><span class="lineNum">    1795</span>              :    *</span>
+<span id="L1796"><span class="lineNum">    1796</span>              :    * @note      If this tensor is/was the src_tensor for some other, then</span>
+<span id="L1797"><span class="lineNum">    1797</span>              :    * reduction in batch size can make the dependent tensors allocate fail due to</span>
+<span id="L1798"><span class="lineNum">    1798</span>              :    * memory smaller. Caller must handle this in their own end.</span>
+<span id="L1799"><span class="lineNum">    1799</span>              :    *</span>
+<span id="L1800"><span class="lineNum">    1800</span>              :    * @note      If this tensor is re-allocated, then the memory might not be</span>
+<span id="L1801"><span class="lineNum">    1801</span>              :    * immediately freed as the tensor already depending on this tensor also</span>
+<span id="L1802"><span class="lineNum">    1802</span>              :    * share the same memory. So, the peak memory consumption in worst case can</span>
+<span id="L1803"><span class="lineNum">    1803</span>              :    * reach the total memory requirements of a model with old batchsize and the</span>
+<span id="L1804"><span class="lineNum">    1804</span>              :    * new batch size. It is recommended to first deallocate all the tensors,</span>
+<span id="L1805"><span class="lineNum">    1805</span>              :    * updateBatch and then allocate again to avoid such issues.</span>
 <span id="L1806"><span class="lineNum">    1806</span>              :    */</span>
-<span id="L1807"><span class="lineNum">    1807</span>              :   void updateDimension(TensorDim dimension);</span>
+<span id="L1807"><span class="lineNum">    1807</span>              :   void updateBatch(unsigned int batch);</span>
 <span id="L1808"><span class="lineNum">    1808</span>              : </span>
 <span id="L1809"><span class="lineNum">    1809</span>              :   /**</span>
-<span id="L1810"><span class="lineNum">    1810</span>              :    * @brief     return whether tensor is contiguous or not.</span>
-<span id="L1811"><span class="lineNum">    1811</span>              :    * @retval    bool contiguous</span>
-<span id="L1812"><span class="lineNum">    1812</span>              :    */</span>
-<span id="L1813"><span class="lineNum">    1813</span>              :   const bool getContiguous() const noexcept;</span>
-<span id="L1814"><span class="lineNum">    1814</span>              : </span>
-<span id="L1815"><span class="lineNum">    1815</span>              :   /**</span>
-<span id="L1816"><span class="lineNum">    1816</span>              :    * @brief     return current stride of tensor.</span>
-<span id="L1817"><span class="lineNum">    1817</span>              :    * @retval    int[MAXDIM] strides</span>
-<span id="L1818"><span class="lineNum">    1818</span>              :    */</span>
-<span id="L1819"><span class="lineNum">    1819</span>              :   const std::array&lt;size_t, TensorDim::MAXDIM&gt; getStrides() const noexcept;</span>
-<span id="L1820"><span class="lineNum">    1820</span>              : </span>
-<span id="L1821"><span class="lineNum">    1821</span>              :   /**</span>
-<span id="L1822"><span class="lineNum">    1822</span>              :    * @brief     Check if two given axes are contiguous</span>
-<span id="L1823"><span class="lineNum">    1823</span>              :    * @param[in] np1 first axis</span>
-<span id="L1824"><span class="lineNum">    1824</span>              :    * @param[in] np2 second axis to compare with first axis</span>
-<span id="L1825"><span class="lineNum">    1825</span>              :    * @retval    bool continuous</span>
+<span id="L1810"><span class="lineNum">    1810</span>              :    * @brief     update the dimension for this tensor</span>
+<span id="L1811"><span class="lineNum">    1811</span>              :    * @param     dimension dimension to be updated</span>
+<span id="L1812"><span class="lineNum">    1812</span>              :    * @note      if this tensor is allocated this will throw an error.</span>
+<span id="L1813"><span class="lineNum">    1813</span>              :    * @note      we assume that the caller checks if the tensor is not allocated</span>
+<span id="L1814"><span class="lineNum">    1814</span>              :    */</span>
+<span id="L1815"><span class="lineNum">    1815</span>              :   void updateDimension(TensorDim dimension);</span>
+<span id="L1816"><span class="lineNum">    1816</span>              : </span>
+<span id="L1817"><span class="lineNum">    1817</span>              :   /**</span>
+<span id="L1818"><span class="lineNum">    1818</span>              :    * @brief     return whether tensor is contiguous or not.</span>
+<span id="L1819"><span class="lineNum">    1819</span>              :    * @retval    bool contiguous</span>
+<span id="L1820"><span class="lineNum">    1820</span>              :    */</span>
+<span id="L1821"><span class="lineNum">    1821</span>              :   const bool getContiguous() const noexcept;</span>
+<span id="L1822"><span class="lineNum">    1822</span>              : </span>
+<span id="L1823"><span class="lineNum">    1823</span>              :   /**</span>
+<span id="L1824"><span class="lineNum">    1824</span>              :    * @brief     return current stride of tensor.</span>
+<span id="L1825"><span class="lineNum">    1825</span>              :    * @retval    int[MAXDIM] strides</span>
 <span id="L1826"><span class="lineNum">    1826</span>              :    */</span>
-<span id="L1827"><span class="lineNum">    1827</span>              :   bool checkContinuous(unsigned int np1, unsigned int np2) const;</span>
+<span id="L1827"><span class="lineNum">    1827</span>              :   const std::array&lt;size_t, TensorDim::MAXDIM&gt; getStrides() const noexcept;</span>
 <span id="L1828"><span class="lineNum">    1828</span>              : </span>
 <span id="L1829"><span class="lineNum">    1829</span>              :   /**</span>
-<span id="L1830"><span class="lineNum">    1830</span>              :    * @brief     set FileOffset to Tensor</span>
-<span id="L1831"><span class="lineNum">    1831</span>              :    * @param     off FileOffset</span>
-<span id="L1832"><span class="lineNum">    1832</span>              :    */</span>
-<span id="L1833"><span class="lineNum">    1833</span>              :   void setFileOffset(size_t file_offset);</span>
-<span id="L1834"><span class="lineNum">    1834</span>              : </span>
-<span id="L1835"><span class="lineNum">    1835</span>              :   /**</span>
-<span id="L1836"><span class="lineNum">    1836</span>              :    * @brief     get FileOffset of Tensor</span>
-<span id="L1837"><span class="lineNum">    1837</span>              :    * @return    size_t fileOffset</span>
-<span id="L1838"><span class="lineNum">    1838</span>              :    */</span>
-<span id="L1839"><span class="lineNum">    1839</span>              :   size_t getFileOffset() const;</span>
-<span id="L1840"><span class="lineNum">    1840</span>              : </span>
-<span id="L1841"><span class="lineNum">    1841</span>              :   /**</span>
-<span id="L1842"><span class="lineNum">    1842</span>              :    * @brief     Set name of the tensor</span>
-<span id="L1843"><span class="lineNum">    1843</span>              :    * @param[in] name_ tensor name</span>
-<span id="L1844"><span class="lineNum">    1844</span>              :    */</span>
-<span id="L1845"><span class="lineNum">    1845</span>              :   void setName(const std::string &amp;name_);</span>
-<span id="L1846"><span class="lineNum">    1846</span>              : </span>
-<span id="L1847"><span class="lineNum">    1847</span>              :   /**</span>
-<span id="L1848"><span class="lineNum">    1848</span>              :    * @brief     Get name of the tensor</span>
-<span id="L1849"><span class="lineNum">    1849</span>              :    * @retval    string name</span>
-<span id="L1850"><span class="lineNum">    1850</span>              :    */</span>
-<span id="L1851"><span class="lineNum">    1851</span>              :   const std::string &amp;getName() const;</span>
-<span id="L1852"><span class="lineNum">    1852</span>              : </span>
-<span id="L1853"><span class="lineNum">    1853</span>              :   /**</span>
-<span id="L1854"><span class="lineNum">    1854</span>              :    * @brief Get linear index given the n-d index</span>
-<span id="L1855"><span class="lineNum">    1855</span>              :    */</span>
-<span id="L1856"><span class="lineNum">    1856</span>              :   size_t getIndex(unsigned int b, unsigned int c, unsigned int h,</span>
-<span id="L1857"><span class="lineNum">    1857</span>              :                   unsigned int w) const noexcept;</span>
-<span id="L1858"><span class="lineNum">    1858</span>              :   /**</span>
-<span id="L1859"><span class="lineNum">    1859</span>              :    * @brief     Get size of current tensor</span>
-<span id="L1860"><span class="lineNum">    1860</span>              :    * @retval    unsigned int size of the current tensor</span>
-<span id="L1861"><span class="lineNum">    1861</span>              :    */</span>
-<span id="L1862"><span class="lineNum">    1862</span>              :   size_t size() const;</span>
-<span id="L1863"><span class="lineNum">    1863</span>              : </span>
-<span id="L1864"><span class="lineNum">    1864</span>              :   /**</span>
-<span id="L1865"><span class="lineNum">    1865</span>              :    * @brief     Get if the tensor is empty</span>
-<span id="L1866"><span class="lineNum">    1866</span>              :    * @retval    true if the tensor is empty</span>
-<span id="L1867"><span class="lineNum">    1867</span>              :    */</span>
-<span id="L1868"><span class="lineNum">    1868</span>              :   bool empty() const;</span>
-<span id="L1869"><span class="lineNum">    1869</span>              : </span>
-<span id="L1870"><span class="lineNum">    1870</span>              :   /**</span>
-<span id="L1871"><span class="lineNum">    1871</span>              :    * @brief     Get size of the data in bytes</span>
-<span id="L1872"><span class="lineNum">    1872</span>              :    * @retval    size_t Size in bytes</span>
-<span id="L1873"><span class="lineNum">    1873</span>              :    */</span>
-<span id="L1874"><span class="lineNum">    1874</span>              :   size_t bytes() const;</span>
-<span id="L1875"><span class="lineNum">    1875</span>              : </span>
-<span id="L1876"><span class="lineNum">    1876</span>              :   /**</span>
-<span id="L1877"><span class="lineNum">    1877</span>              :    * @brief     Get a total size of the memory data in bytes</span>
-<span id="L1878"><span class="lineNum">    1878</span>              :    * @retval    size_t Size in bytes</span>
-<span id="L1879"><span class="lineNum">    1879</span>              :    * @note      This is the total size of the memory data, including the scale</span>
-<span id="L1880"><span class="lineNum">    1880</span>              :    * factors and the zero points. For float type, this will return the same as</span>
-<span id="L1881"><span class="lineNum">    1881</span>              :    * bytes()</span>
-<span id="L1882"><span class="lineNum">    1882</span>              :    */</span>
-<span id="L1883"><span class="lineNum">    1883</span>              :   size_t getMemoryBytes() const;</span>
-<span id="L1884"><span class="lineNum">    1884</span>              : </span>
-<span id="L1885"><span class="lineNum">    1885</span>              :   /**</span>
-<span id="L1886"><span class="lineNum">    1886</span>              :    * @brief     return Tensor batch size</span>
-<span id="L1887"><span class="lineNum">    1887</span>              :    * @retval    batch size</span>
-<span id="L1888"><span class="lineNum">    1888</span>              :    */</span>
-<span id="L1889"><span class="lineNum">    1889</span>              :   size_t batch() const;</span>
-<span id="L1890"><span class="lineNum">    1890</span>              : </span>
-<span id="L1891"><span class="lineNum">    1891</span>              :   /**</span>
-<span id="L1892"><span class="lineNum">    1892</span>              :    * @brief     return Tensor channel size</span>
-<span id="L1893"><span class="lineNum">    1893</span>              :    * @retval    channel size</span>
-<span id="L1894"><span class="lineNum">    1894</span>              :    */</span>
-<span id="L1895"><span class="lineNum">    1895</span>              :   size_t channel() const;</span>
-<span id="L1896"><span class="lineNum">    1896</span>              : </span>
-<span id="L1897"><span class="lineNum">    1897</span>              :   /**</span>
-<span id="L1898"><span class="lineNum">    1898</span>              :    * @brief     return Tensor height size</span>
-<span id="L1899"><span class="lineNum">    1899</span>              :    * @retval    height size</span>
-<span id="L1900"><span class="lineNum">    1900</span>              :    */</span>
-<span id="L1901"><span class="lineNum">    1901</span>              :   size_t height() const;</span>
-<span id="L1902"><span class="lineNum">    1902</span>              : </span>
-<span id="L1903"><span class="lineNum">    1903</span>              :   /**</span>
-<span id="L1904"><span class="lineNum">    1904</span>              :    * @brief     return Tensor width size</span>
-<span id="L1905"><span class="lineNum">    1905</span>              :    * @retval    width size</span>
-<span id="L1906"><span class="lineNum">    1906</span>              :    */</span>
-<span id="L1907"><span class="lineNum">    1907</span>              :   size_t width() const;</span>
-<span id="L1908"><span class="lineNum">    1908</span>              : </span>
-<span id="L1909"><span class="lineNum">    1909</span>              :   /**</span>
-<span id="L1910"><span class="lineNum">    1910</span>              :    * @brief     return Tensor scale factor size if exists</span>
-<span id="L1911"><span class="lineNum">    1911</span>              :    * @retval    scale factor size</span>
-<span id="L1912"><span class="lineNum">    1912</span>              :    */</span>
-<span id="L1913"><span class="lineNum">    1913</span>              :   size_t scale_size() const;</span>
-<span id="L1914"><span class="lineNum">    1914</span>              : </span>
-<span id="L1915"><span class="lineNum">    1915</span>              :   /**</span>
-<span id="L1916"><span class="lineNum">    1916</span>              :    * @brief     return Tensor quantization scheme</span>
-<span id="L1917"><span class="lineNum">    1917</span>              :    * @retval    Qscheme qscheme</span>
-<span id="L1918"><span class="lineNum">    1918</span>              :    */</span>
-<span id="L1919"><span class="lineNum">    1919</span>              :   QScheme q_scheme() const;</span>
-<span id="L1920"><span class="lineNum">    1920</span>              : </span>
-<span id="L1921"><span class="lineNum">    1921</span>              :   /**</span>
-<span id="L1922"><span class="lineNum">    1922</span>              :    * @brief Merge the given two axis for tensor at second axis inplace</span>
-<span id="L1923"><span class="lineNum">    1923</span>              :    *</span>
-<span id="L1924"><span class="lineNum">    1924</span>              :    * @param axis1 first axis to merge</span>
-<span id="L1925"><span class="lineNum">    1925</span>              :    * @param axis2 second axis to merge</span>
+<span id="L1830"><span class="lineNum">    1830</span>              :    * @brief     Check if two given axes are contiguous</span>
+<span id="L1831"><span class="lineNum">    1831</span>              :    * @param[in] np1 first axis</span>
+<span id="L1832"><span class="lineNum">    1832</span>              :    * @param[in] np2 second axis to compare with first axis</span>
+<span id="L1833"><span class="lineNum">    1833</span>              :    * @retval    bool continuous</span>
+<span id="L1834"><span class="lineNum">    1834</span>              :    */</span>
+<span id="L1835"><span class="lineNum">    1835</span>              :   bool checkContinuous(unsigned int np1, unsigned int np2) const;</span>
+<span id="L1836"><span class="lineNum">    1836</span>              : </span>
+<span id="L1837"><span class="lineNum">    1837</span>              :   /**</span>
+<span id="L1838"><span class="lineNum">    1838</span>              :    * @brief     set FileOffset to Tensor</span>
+<span id="L1839"><span class="lineNum">    1839</span>              :    * @param     off FileOffset</span>
+<span id="L1840"><span class="lineNum">    1840</span>              :    */</span>
+<span id="L1841"><span class="lineNum">    1841</span>              :   void setFileOffset(size_t file_offset);</span>
+<span id="L1842"><span class="lineNum">    1842</span>              : </span>
+<span id="L1843"><span class="lineNum">    1843</span>              :   /**</span>
+<span id="L1844"><span class="lineNum">    1844</span>              :    * @brief     get FileOffset of Tensor</span>
+<span id="L1845"><span class="lineNum">    1845</span>              :    * @return    size_t fileOffset</span>
+<span id="L1846"><span class="lineNum">    1846</span>              :    */</span>
+<span id="L1847"><span class="lineNum">    1847</span>              :   size_t getFileOffset() const;</span>
+<span id="L1848"><span class="lineNum">    1848</span>              : </span>
+<span id="L1849"><span class="lineNum">    1849</span>              :   /**</span>
+<span id="L1850"><span class="lineNum">    1850</span>              :    * @brief     Set name of the tensor</span>
+<span id="L1851"><span class="lineNum">    1851</span>              :    * @param[in] name_ tensor name</span>
+<span id="L1852"><span class="lineNum">    1852</span>              :    */</span>
+<span id="L1853"><span class="lineNum">    1853</span>              :   void setName(const std::string &amp;name_);</span>
+<span id="L1854"><span class="lineNum">    1854</span>              : </span>
+<span id="L1855"><span class="lineNum">    1855</span>              :   /**</span>
+<span id="L1856"><span class="lineNum">    1856</span>              :    * @brief     Get name of the tensor</span>
+<span id="L1857"><span class="lineNum">    1857</span>              :    * @retval    string name</span>
+<span id="L1858"><span class="lineNum">    1858</span>              :    */</span>
+<span id="L1859"><span class="lineNum">    1859</span>              :   const std::string &amp;getName() const;</span>
+<span id="L1860"><span class="lineNum">    1860</span>              : </span>
+<span id="L1861"><span class="lineNum">    1861</span>              :   /**</span>
+<span id="L1862"><span class="lineNum">    1862</span>              :    * @brief Get linear index given the n-d index</span>
+<span id="L1863"><span class="lineNum">    1863</span>              :    */</span>
+<span id="L1864"><span class="lineNum">    1864</span>              :   size_t getIndex(unsigned int b, unsigned int c, unsigned int h,</span>
+<span id="L1865"><span class="lineNum">    1865</span>              :                   unsigned int w) const noexcept;</span>
+<span id="L1866"><span class="lineNum">    1866</span>              :   /**</span>
+<span id="L1867"><span class="lineNum">    1867</span>              :    * @brief     Get size of current tensor</span>
+<span id="L1868"><span class="lineNum">    1868</span>              :    * @retval    unsigned int size of the current tensor</span>
+<span id="L1869"><span class="lineNum">    1869</span>              :    */</span>
+<span id="L1870"><span class="lineNum">    1870</span>              :   size_t size() const;</span>
+<span id="L1871"><span class="lineNum">    1871</span>              : </span>
+<span id="L1872"><span class="lineNum">    1872</span>              :   /**</span>
+<span id="L1873"><span class="lineNum">    1873</span>              :    * @brief     Get if the tensor is empty</span>
+<span id="L1874"><span class="lineNum">    1874</span>              :    * @retval    true if the tensor is empty</span>
+<span id="L1875"><span class="lineNum">    1875</span>              :    */</span>
+<span id="L1876"><span class="lineNum">    1876</span>              :   bool empty() const;</span>
+<span id="L1877"><span class="lineNum">    1877</span>              : </span>
+<span id="L1878"><span class="lineNum">    1878</span>              :   /**</span>
+<span id="L1879"><span class="lineNum">    1879</span>              :    * @brief     Get size of the data in bytes</span>
+<span id="L1880"><span class="lineNum">    1880</span>              :    * @retval    size_t Size in bytes</span>
+<span id="L1881"><span class="lineNum">    1881</span>              :    */</span>
+<span id="L1882"><span class="lineNum">    1882</span>              :   size_t bytes() const;</span>
+<span id="L1883"><span class="lineNum">    1883</span>              : </span>
+<span id="L1884"><span class="lineNum">    1884</span>              :   /**</span>
+<span id="L1885"><span class="lineNum">    1885</span>              :    * @brief     Get a total size of the memory data in bytes</span>
+<span id="L1886"><span class="lineNum">    1886</span>              :    * @retval    size_t Size in bytes</span>
+<span id="L1887"><span class="lineNum">    1887</span>              :    * @note      This is the total size of the memory data, including the scale</span>
+<span id="L1888"><span class="lineNum">    1888</span>              :    * factors and the zero points. For float type, this will return the same as</span>
+<span id="L1889"><span class="lineNum">    1889</span>              :    * bytes()</span>
+<span id="L1890"><span class="lineNum">    1890</span>              :    */</span>
+<span id="L1891"><span class="lineNum">    1891</span>              :   size_t getMemoryBytes() const;</span>
+<span id="L1892"><span class="lineNum">    1892</span>              : </span>
+<span id="L1893"><span class="lineNum">    1893</span>              :   /**</span>
+<span id="L1894"><span class="lineNum">    1894</span>              :    * @brief     return Tensor batch size</span>
+<span id="L1895"><span class="lineNum">    1895</span>              :    * @retval    batch size</span>
+<span id="L1896"><span class="lineNum">    1896</span>              :    */</span>
+<span id="L1897"><span class="lineNum">    1897</span>              :   size_t batch() const;</span>
+<span id="L1898"><span class="lineNum">    1898</span>              : </span>
+<span id="L1899"><span class="lineNum">    1899</span>              :   /**</span>
+<span id="L1900"><span class="lineNum">    1900</span>              :    * @brief     return Tensor channel size</span>
+<span id="L1901"><span class="lineNum">    1901</span>              :    * @retval    channel size</span>
+<span id="L1902"><span class="lineNum">    1902</span>              :    */</span>
+<span id="L1903"><span class="lineNum">    1903</span>              :   size_t channel() const;</span>
+<span id="L1904"><span class="lineNum">    1904</span>              : </span>
+<span id="L1905"><span class="lineNum">    1905</span>              :   /**</span>
+<span id="L1906"><span class="lineNum">    1906</span>              :    * @brief     return Tensor height size</span>
+<span id="L1907"><span class="lineNum">    1907</span>              :    * @retval    height size</span>
+<span id="L1908"><span class="lineNum">    1908</span>              :    */</span>
+<span id="L1909"><span class="lineNum">    1909</span>              :   size_t height() const;</span>
+<span id="L1910"><span class="lineNum">    1910</span>              : </span>
+<span id="L1911"><span class="lineNum">    1911</span>              :   /**</span>
+<span id="L1912"><span class="lineNum">    1912</span>              :    * @brief     return Tensor width size</span>
+<span id="L1913"><span class="lineNum">    1913</span>              :    * @retval    width size</span>
+<span id="L1914"><span class="lineNum">    1914</span>              :    */</span>
+<span id="L1915"><span class="lineNum">    1915</span>              :   size_t width() const;</span>
+<span id="L1916"><span class="lineNum">    1916</span>              : </span>
+<span id="L1917"><span class="lineNum">    1917</span>              :   /**</span>
+<span id="L1918"><span class="lineNum">    1918</span>              :    * @brief     return Tensor scale factor size if exists</span>
+<span id="L1919"><span class="lineNum">    1919</span>              :    * @retval    scale factor size</span>
+<span id="L1920"><span class="lineNum">    1920</span>              :    */</span>
+<span id="L1921"><span class="lineNum">    1921</span>              :   size_t scale_size() const;</span>
+<span id="L1922"><span class="lineNum">    1922</span>              : </span>
+<span id="L1923"><span class="lineNum">    1923</span>              :   /**</span>
+<span id="L1924"><span class="lineNum">    1924</span>              :    * @brief     return Tensor quantization scheme</span>
+<span id="L1925"><span class="lineNum">    1925</span>              :    * @retval    Qscheme qscheme</span>
 <span id="L1926"><span class="lineNum">    1926</span>              :    */</span>
-<span id="L1927"><span class="lineNum">    1927</span>              :   void mergeAxis(unsigned int axis1, unsigned int axis2);</span>
+<span id="L1927"><span class="lineNum">    1927</span>              :   QScheme q_scheme() const;</span>
 <span id="L1928"><span class="lineNum">    1928</span>              : </span>
 <span id="L1929"><span class="lineNum">    1929</span>              :   /**</span>
-<span id="L1930"><span class="lineNum">    1930</span>              :    * @brief Update destination tensor to share memory with source tensor</span>
+<span id="L1930"><span class="lineNum">    1930</span>              :    * @brief Merge the given two axis for tensor at second axis inplace</span>
 <span id="L1931"><span class="lineNum">    1931</span>              :    *</span>
-<span id="L1932"><span class="lineNum">    1932</span>              :    * @param src src tensor containing the memory</span>
-<span id="L1933"><span class="lineNum">    1933</span>              :    * @param dest destination tensor which will share the memory</span>
-<span id="L1934"><span class="lineNum">    1934</span>              :    * @param offset offset to be used from the start of the data in bytes</span>
-<span id="L1935"><span class="lineNum">    1935</span>              :    * @note The new tensor will share the same data as the current tensor but</span>
-<span id="L1936"><span class="lineNum">    1936</span>              :    * can have different size.</span>
-<span id="L1937"><span class="lineNum">    1937</span>              :    * @note New size added with offset must be less than the size of the original</span>
-<span id="L1938"><span class="lineNum">    1938</span>              :    * tensor.</span>
-<span id="L1939"><span class="lineNum">    1939</span>              :    */</span>
-<span id="L1940"><span class="lineNum">    1940</span>              :   void createSharedDataTensor(const Tensor &amp;src, Tensor &amp;dest,</span>
-<span id="L1941"><span class="lineNum">    1941</span>              :                               size_t offset) const;</span>
-<span id="L1942"><span class="lineNum">    1942</span>              : </span>
-<span id="L1943"><span class="lineNum">    1943</span>              :   /**</span>
-<span id="L1944"><span class="lineNum">    1944</span>              :    * @brief Get new tensor which shares memory with current tensor but different</span>
-<span id="L1945"><span class="lineNum">    1945</span>              :    * shape</span>
-<span id="L1946"><span class="lineNum">    1946</span>              :    *</span>
-<span id="L1947"><span class="lineNum">    1947</span>              :    * @param dim new dimension to be set for this tensor</span>
-<span id="L1948"><span class="lineNum">    1948</span>              :    * @param offset offset to be used from the start of the data in elements</span>
-<span id="L1949"><span class="lineNum">    1949</span>              :    * @note The new tensor will share the same data as the current tensor but</span>
-<span id="L1950"><span class="lineNum">    1950</span>              :    * can have different size.</span>
-<span id="L1951"><span class="lineNum">    1951</span>              :    * @note New size added with offset must be less than the size of the original</span>
-<span id="L1952"><span class="lineNum">    1952</span>              :    * tensor.</span>
-<span id="L1953"><span class="lineNum">    1953</span>              :    */</span>
-<span id="L1954"><span class="lineNum">    1954</span>              :   Tensor getSharedDataTensor(const TensorDim dim_, size_t offset,</span>
-<span id="L1955"><span class="lineNum">    1955</span>              :                              bool reset_stride = true,</span>
-<span id="L1956"><span class="lineNum">    1956</span>              :                              const std::string &amp;name_ = &quot;&quot;) const;</span>
-<span id="L1957"><span class="lineNum">    1957</span>              : </span>
-<span id="L1958"><span class="lineNum">    1958</span>              :   /**</span>
-<span id="L1959"><span class="lineNum">    1959</span>              :    * @brief    Swaps Tensor lhs and rhs</span>
-<span id="L1960"><span class="lineNum">    1960</span>              :    * @param[in] lhs Tensor to be swapped</span>
-<span id="L1961"><span class="lineNum">    1961</span>              :    * @param[in] rhs Tensor to be swapped</span>
-<span id="L1962"><span class="lineNum">    1962</span>              :    */</span>
-<span id="L1963"><span class="lineNum">    1963</span>              :   friend void swap(Tensor &amp;lhs, Tensor &amp;rhs) noexcept {</span>
-<span id="L1964"><span class="lineNum">    1964</span>              :     std::swap(lhs.itensor_, rhs.itensor_);</span>
-<span id="L1965"><span class="lineNum">    1965</span>              :   }</span>
-<span id="L1966"><span class="lineNum">    1966</span>              : </span>
-<span id="L1967"><span class="lineNum">    1967</span>              :   /**</span>
-<span id="L1968"><span class="lineNum">    1968</span>              :    * @brief      check if there is NaN or Inf element</span>
-<span id="L1969"><span class="lineNum">    1969</span>              :    * @param[out] bool false if there is NaN or Inf else false</span>
+<span id="L1932"><span class="lineNum">    1932</span>              :    * @param axis1 first axis to merge</span>
+<span id="L1933"><span class="lineNum">    1933</span>              :    * @param axis2 second axis to merge</span>
+<span id="L1934"><span class="lineNum">    1934</span>              :    */</span>
+<span id="L1935"><span class="lineNum">    1935</span>              :   void mergeAxis(unsigned int axis1, unsigned int axis2);</span>
+<span id="L1936"><span class="lineNum">    1936</span>              : </span>
+<span id="L1937"><span class="lineNum">    1937</span>              :   /**</span>
+<span id="L1938"><span class="lineNum">    1938</span>              :    * @brief Update destination tensor to share memory with source tensor</span>
+<span id="L1939"><span class="lineNum">    1939</span>              :    *</span>
+<span id="L1940"><span class="lineNum">    1940</span>              :    * @param src src tensor containing the memory</span>
+<span id="L1941"><span class="lineNum">    1941</span>              :    * @param dest destination tensor which will share the memory</span>
+<span id="L1942"><span class="lineNum">    1942</span>              :    * @param offset offset to be used from the start of the data in bytes</span>
+<span id="L1943"><span class="lineNum">    1943</span>              :    * @note The new tensor will share the same data as the current tensor but</span>
+<span id="L1944"><span class="lineNum">    1944</span>              :    * can have different size.</span>
+<span id="L1945"><span class="lineNum">    1945</span>              :    * @note New size added with offset must be less than the size of the original</span>
+<span id="L1946"><span class="lineNum">    1946</span>              :    * tensor.</span>
+<span id="L1947"><span class="lineNum">    1947</span>              :    */</span>
+<span id="L1948"><span class="lineNum">    1948</span>              :   void createSharedDataTensor(const Tensor &amp;src, Tensor &amp;dest,</span>
+<span id="L1949"><span class="lineNum">    1949</span>              :                               size_t offset) const;</span>
+<span id="L1950"><span class="lineNum">    1950</span>              : </span>
+<span id="L1951"><span class="lineNum">    1951</span>              :   /**</span>
+<span id="L1952"><span class="lineNum">    1952</span>              :    * @brief Get new tensor which shares memory with current tensor but different</span>
+<span id="L1953"><span class="lineNum">    1953</span>              :    * shape</span>
+<span id="L1954"><span class="lineNum">    1954</span>              :    *</span>
+<span id="L1955"><span class="lineNum">    1955</span>              :    * @param dim new dimension to be set for this tensor</span>
+<span id="L1956"><span class="lineNum">    1956</span>              :    * @param offset offset to be used from the start of the data in elements</span>
+<span id="L1957"><span class="lineNum">    1957</span>              :    * @note The new tensor will share the same data as the current tensor but</span>
+<span id="L1958"><span class="lineNum">    1958</span>              :    * can have different size.</span>
+<span id="L1959"><span class="lineNum">    1959</span>              :    * @note New size added with offset must be less than the size of the original</span>
+<span id="L1960"><span class="lineNum">    1960</span>              :    * tensor.</span>
+<span id="L1961"><span class="lineNum">    1961</span>              :    */</span>
+<span id="L1962"><span class="lineNum">    1962</span>              :   Tensor getSharedDataTensor(const TensorDim dim_, size_t offset,</span>
+<span id="L1963"><span class="lineNum">    1963</span>              :                              bool reset_stride = true,</span>
+<span id="L1964"><span class="lineNum">    1964</span>              :                              const std::string &amp;name_ = &quot;&quot;) const;</span>
+<span id="L1965"><span class="lineNum">    1965</span>              : </span>
+<span id="L1966"><span class="lineNum">    1966</span>              :   /**</span>
+<span id="L1967"><span class="lineNum">    1967</span>              :    * @brief    Swaps Tensor lhs and rhs</span>
+<span id="L1968"><span class="lineNum">    1968</span>              :    * @param[in] lhs Tensor to be swapped</span>
+<span id="L1969"><span class="lineNum">    1969</span>              :    * @param[in] rhs Tensor to be swapped</span>
 <span id="L1970"><span class="lineNum">    1970</span>              :    */</span>
-<span id="L1971"><span class="lineNum">    1971</span> <span class="tlaGNC">          12 :   bool isValid() const { return itensor_-&gt;isValid(); };</span></span>
-<span id="L1972"><span class="lineNum">    1972</span>              : </span>
-<span id="L1973"><span class="lineNum">    1973</span>              :   /**</span>
-<span id="L1974"><span class="lineNum">    1974</span>              :    * @brief check if tensor is virtual</span>
-<span id="L1975"><span class="lineNum">    1975</span>              :    * @param[out] bool false if tensor is not virtual else true</span>
-<span id="L1976"><span class="lineNum">    1976</span>              :    */</span>
-<span id="L1977"><span class="lineNum">    1977</span>              :   bool isVirtual() const { return is_virtual; }</span>
-<span id="L1978"><span class="lineNum">    1978</span>              : </span>
-<span id="L1979"><span class="lineNum">    1979</span>              :   /**</span>
-<span id="L1980"><span class="lineNum">    1980</span>              :    * @brief activate virtual tensor</span>
-<span id="L1981"><span class="lineNum">    1981</span>              :    * @note if the tensor is virtual, this method activates virtual tensor, which</span>
-<span id="L1982"><span class="lineNum">    1982</span>              :    * means allocate the tensor memory and read the corresponding value from the</span>
-<span id="L1983"><span class="lineNum">    1983</span>              :    * file descriptor</span>
-<span id="L1984"><span class="lineNum">    1984</span>              :    * @todo it is not supported on Windows yet</span>
-<span id="L1985"><span class="lineNum">    1985</span>              :    */</span>
-<span id="L1986"><span class="lineNum">    1986</span>              :   void activate();</span>
-<span id="L1987"><span class="lineNum">    1987</span>              : </span>
-<span id="L1988"><span class="lineNum">    1988</span>              :   /**</span>
-<span id="L1989"><span class="lineNum">    1989</span>              :    * @brief deactivate virtual tensor</span>
-<span id="L1990"><span class="lineNum">    1990</span>              :    * @note if the tensor is virtual and already activated, the tensor is</span>
-<span id="L1991"><span class="lineNum">    1991</span>              :    * deallocated.</span>
-<span id="L1992"><span class="lineNum">    1992</span>              :    */</span>
-<span id="L1993"><span class="lineNum">    1993</span>              :   void deactivate();</span>
-<span id="L1994"><span class="lineNum">    1994</span>              : </span>
-<span id="L1995"><span class="lineNum">    1995</span>              :   static constexpr float epsilon = 1e-5f;</span>
-<span id="L1996"><span class="lineNum">    1996</span>              : </span>
-<span id="L1997"><span class="lineNum">    1997</span>              : private:</span>
-<span id="L1998"><span class="lineNum">    1998</span>              :   std::unique_ptr&lt;TensorBase&gt; itensor_;</span>
-<span id="L1999"><span class="lineNum">    1999</span>              : </span>
-<span id="L2000"><span class="lineNum">    2000</span>              :   /**</span>
-<span id="L2001"><span class="lineNum">    2001</span>              :    * @brief properties for virtual tensor</span>
-<span id="L2002"><span class="lineNum">    2002</span>              :    * @note This should be removed by defining VirutalTensor class</span>
-<span id="L2003"><span class="lineNum">    2003</span>              :    * */</span>
-<span id="L2004"><span class="lineNum">    2004</span>              :   bool is_virtual = false;    /** flag to check virtual */</span>
-<span id="L2005"><span class="lineNum">    2005</span>              :   size_t read_offset;         /** save read_offset info for virtual */</span>
-<span id="L2006"><span class="lineNum">    2006</span>              :   int fd = -1;                /** save fd info for virtual */</span>
-<span id="L2007"><span class="lineNum">    2007</span>              :   void *mapped_ptr = nullptr; /** save mmap buf pointer for virtual */</span>
-<span id="L2008"><span class="lineNum">    2008</span>              : </span>
-<span id="L2009"><span class="lineNum">    2009</span>              :   /**</span>
-<span id="L2010"><span class="lineNum">    2010</span>              :    * @brief Set tensor variables</span>
-<span id="L2011"><span class="lineNum">    2011</span>              :    *</span>
-<span id="L2012"><span class="lineNum">    2012</span>              :    * @param[in] d TensorDim</span>
-<span id="L2013"><span class="lineNum">    2013</span>              :    * @param[in] buf buffer</span>
-<span id="L2014"><span class="lineNum">    2014</span>              :    * @param[in] offset offset to be used</span>
-<span id="L2015"><span class="lineNum">    2015</span>              :    */</span>
-<span id="L2016"><span class="lineNum">    2016</span>              :   void setTensorVar(TensorDim d, void *buf, size_t offset);</span>
-<span id="L2017"><span class="lineNum">    2017</span>              : </span>
-<span id="L2018"><span class="lineNum">    2018</span>              :   /**</span>
-<span id="L2019"><span class="lineNum">    2019</span>              :    * @brief Calculate the output tensor dimension of the concatenating a list of</span>
-<span id="L2020"><span class="lineNum">    2020</span>              :    * tensors as an input.</span>
-<span id="L2021"><span class="lineNum">    2021</span>              :    *</span>
-<span id="L2022"><span class="lineNum">    2022</span>              :    * @param[in] tensors tensors to be concatenated to the first tensor</span>
-<span id="L2023"><span class="lineNum">    2023</span>              :    * @param[in] axis axis</span>
-<span id="L2024"><span class="lineNum">    2024</span>              :    */</span>
-<span id="L2025"><span class="lineNum">    2025</span>              :   static TensorDim calculateConcatOutputDim(const std::vector&lt;Tensor&gt; &amp;tensors,</span>
-<span id="L2026"><span class="lineNum">    2026</span>              :                                             int axis);</span>
-<span id="L2027"><span class="lineNum">    2027</span>              : };</span>
-<span id="L2028"><span class="lineNum">    2028</span>              : </span>
-<span id="L2029"><span class="lineNum">    2029</span>              : /**</span>
-<span id="L2030"><span class="lineNum">    2030</span>              :  * @brief   Overriding output stream</span>
-<span id="L2031"><span class="lineNum">    2031</span>              :  */</span>
-<span id="L2032"><span class="lineNum">    2032</span>              : std::ostream &amp;operator&lt;&lt;(std::ostream &amp;out, Tensor const &amp;input);</span>
-<span id="L2033"><span class="lineNum">    2033</span>              : </span>
-<span id="L2034"><span class="lineNum">    2034</span>              : typedef std::shared_ptr&lt;Tensor&gt; sharedTensor;</span>
-<span id="L2035"><span class="lineNum">    2035</span>              : </span>
-<span id="L2036"><span class="lineNum">    2036</span>              : typedef std::shared_ptr&lt;const Tensor&gt; sharedConstTensor;</span>
-<span id="L2037"><span class="lineNum">    2037</span>              : </span>
-<span id="L2038"><span class="lineNum">    2038</span>              : typedef std::vector&lt;sharedConstTensor&gt; sharedConstTensors;</span>
-<span id="L2039"><span class="lineNum">    2039</span>              : </span>
-<span id="L2040"><span class="lineNum">    2040</span>              : typedef std::vector&lt;sharedTensor&gt; sharedTensors;</span>
+<span id="L1971"><span class="lineNum">    1971</span>              :   friend void swap(Tensor &amp;lhs, Tensor &amp;rhs) noexcept {</span>
+<span id="L1972"><span class="lineNum">    1972</span>              :     std::swap(lhs.itensor_, rhs.itensor_);</span>
+<span id="L1973"><span class="lineNum">    1973</span>              :   }</span>
+<span id="L1974"><span class="lineNum">    1974</span>              : </span>
+<span id="L1975"><span class="lineNum">    1975</span>              :   /**</span>
+<span id="L1976"><span class="lineNum">    1976</span>              :    * @brief      check if there is NaN or Inf element</span>
+<span id="L1977"><span class="lineNum">    1977</span>              :    * @param[out] bool false if there is NaN or Inf else false</span>
+<span id="L1978"><span class="lineNum">    1978</span>              :    */</span>
+<span id="L1979"><span class="lineNum">    1979</span> <span class="tlaGNC">          12 :   bool isValid() const { return itensor_-&gt;isValid(); };</span></span>
+<span id="L1980"><span class="lineNum">    1980</span>              : </span>
+<span id="L1981"><span class="lineNum">    1981</span>              :   /**</span>
+<span id="L1982"><span class="lineNum">    1982</span>              :    * @brief check if tensor is virtual</span>
+<span id="L1983"><span class="lineNum">    1983</span>              :    * @param[out] bool false if tensor is not virtual else true</span>
+<span id="L1984"><span class="lineNum">    1984</span>              :    */</span>
+<span id="L1985"><span class="lineNum">    1985</span>              :   bool isVirtual() const { return is_virtual; }</span>
+<span id="L1986"><span class="lineNum">    1986</span>              : </span>
+<span id="L1987"><span class="lineNum">    1987</span>              :   /**</span>
+<span id="L1988"><span class="lineNum">    1988</span>              :    * @brief activate virtual tensor</span>
+<span id="L1989"><span class="lineNum">    1989</span>              :    * @note if the tensor is virtual, this method activates virtual tensor, which</span>
+<span id="L1990"><span class="lineNum">    1990</span>              :    * means allocate the tensor memory and read the corresponding value from the</span>
+<span id="L1991"><span class="lineNum">    1991</span>              :    * file descriptor</span>
+<span id="L1992"><span class="lineNum">    1992</span>              :    * @todo it is not supported on Windows yet</span>
+<span id="L1993"><span class="lineNum">    1993</span>              :    */</span>
+<span id="L1994"><span class="lineNum">    1994</span>              :   void activate();</span>
+<span id="L1995"><span class="lineNum">    1995</span>              : </span>
+<span id="L1996"><span class="lineNum">    1996</span>              :   /**</span>
+<span id="L1997"><span class="lineNum">    1997</span>              :    * @brief deactivate virtual tensor</span>
+<span id="L1998"><span class="lineNum">    1998</span>              :    * @note if the tensor is virtual and already activated, the tensor is</span>
+<span id="L1999"><span class="lineNum">    1999</span>              :    * deallocated.</span>
+<span id="L2000"><span class="lineNum">    2000</span>              :    */</span>
+<span id="L2001"><span class="lineNum">    2001</span>              :   void deactivate();</span>
+<span id="L2002"><span class="lineNum">    2002</span>              : </span>
+<span id="L2003"><span class="lineNum">    2003</span>              :   static constexpr float epsilon = 1e-5f;</span>
+<span id="L2004"><span class="lineNum">    2004</span>              : </span>
+<span id="L2005"><span class="lineNum">    2005</span>              : private:</span>
+<span id="L2006"><span class="lineNum">    2006</span>              :   std::unique_ptr&lt;TensorBase&gt; itensor_;</span>
+<span id="L2007"><span class="lineNum">    2007</span>              : </span>
+<span id="L2008"><span class="lineNum">    2008</span>              :   /**</span>
+<span id="L2009"><span class="lineNum">    2009</span>              :    * @brief properties for virtual tensor</span>
+<span id="L2010"><span class="lineNum">    2010</span>              :    * @note This should be removed by defining VirutalTensor class</span>
+<span id="L2011"><span class="lineNum">    2011</span>              :    * */</span>
+<span id="L2012"><span class="lineNum">    2012</span>              :   bool is_virtual = false;    /** flag to check virtual */</span>
+<span id="L2013"><span class="lineNum">    2013</span>              :   size_t read_offset;         /** save read_offset info for virtual */</span>
+<span id="L2014"><span class="lineNum">    2014</span>              :   int fd = -1;                /** save fd info for virtual */</span>
+<span id="L2015"><span class="lineNum">    2015</span>              :   void *mapped_ptr = nullptr; /** save mmap buf pointer for virtual */</span>
+<span id="L2016"><span class="lineNum">    2016</span>              : </span>
+<span id="L2017"><span class="lineNum">    2017</span>              :   /**</span>
+<span id="L2018"><span class="lineNum">    2018</span>              :    * @brief Set tensor variables</span>
+<span id="L2019"><span class="lineNum">    2019</span>              :    *</span>
+<span id="L2020"><span class="lineNum">    2020</span>              :    * @param[in] d TensorDim</span>
+<span id="L2021"><span class="lineNum">    2021</span>              :    * @param[in] buf buffer</span>
+<span id="L2022"><span class="lineNum">    2022</span>              :    * @param[in] offset offset to be used</span>
+<span id="L2023"><span class="lineNum">    2023</span>              :    */</span>
+<span id="L2024"><span class="lineNum">    2024</span>              :   void setTensorVar(TensorDim d, void *buf, size_t offset);</span>
+<span id="L2025"><span class="lineNum">    2025</span>              : </span>
+<span id="L2026"><span class="lineNum">    2026</span>              :   /**</span>
+<span id="L2027"><span class="lineNum">    2027</span>              :    * @brief Calculate the output tensor dimension of the concatenating a list of</span>
+<span id="L2028"><span class="lineNum">    2028</span>              :    * tensors as an input.</span>
+<span id="L2029"><span class="lineNum">    2029</span>              :    *</span>
+<span id="L2030"><span class="lineNum">    2030</span>              :    * @param[in] tensors tensors to be concatenated to the first tensor</span>
+<span id="L2031"><span class="lineNum">    2031</span>              :    * @param[in] axis axis</span>
+<span id="L2032"><span class="lineNum">    2032</span>              :    */</span>
+<span id="L2033"><span class="lineNum">    2033</span>              :   static TensorDim calculateConcatOutputDim(const std::vector&lt;Tensor&gt; &amp;tensors,</span>
+<span id="L2034"><span class="lineNum">    2034</span>              :                                             int axis);</span>
+<span id="L2035"><span class="lineNum">    2035</span>              : };</span>
+<span id="L2036"><span class="lineNum">    2036</span>              : </span>
+<span id="L2037"><span class="lineNum">    2037</span>              : /**</span>
+<span id="L2038"><span class="lineNum">    2038</span>              :  * @brief   Overriding output stream</span>
+<span id="L2039"><span class="lineNum">    2039</span>              :  */</span>
+<span id="L2040"><span class="lineNum">    2040</span>              : std::ostream &amp;operator&lt;&lt;(std::ostream &amp;out, Tensor const &amp;input);</span>
 <span id="L2041"><span class="lineNum">    2041</span>              : </span>
-<span id="L2042"><span class="lineNum">    2042</span>              : } // namespace nntrainer</span>
+<span id="L2042"><span class="lineNum">    2042</span>              : typedef std::shared_ptr&lt;Tensor&gt; sharedTensor;</span>
 <span id="L2043"><span class="lineNum">    2043</span>              : </span>
-<span id="L2044"><span class="lineNum">    2044</span>              : #endif /* __cplusplus */</span>
-<span id="L2045"><span class="lineNum">    2045</span>              : #endif /* __TENSOR_H__ */</span>
+<span id="L2044"><span class="lineNum">    2044</span>              : typedef std::shared_ptr&lt;const Tensor&gt; sharedConstTensor;</span>
+<span id="L2045"><span class="lineNum">    2045</span>              : </span>
+<span id="L2046"><span class="lineNum">    2046</span>              : typedef std::vector&lt;sharedConstTensor&gt; sharedConstTensors;</span>
+<span id="L2047"><span class="lineNum">    2047</span>              : </span>
+<span id="L2048"><span class="lineNum">    2048</span>              : typedef std::vector&lt;sharedTensor&gt; sharedTensors;</span>
+<span id="L2049"><span class="lineNum">    2049</span>              : </span>
+<span id="L2050"><span class="lineNum">    2050</span>              : } // namespace nntrainer</span>
+<span id="L2051"><span class="lineNum">    2051</span>              : </span>
+<span id="L2052"><span class="lineNum">    2052</span>              : #endif /* __cplusplus */</span>
+<span id="L2053"><span class="lineNum">    2053</span>              : #endif /* __TENSOR_H__ */</span>
         </pre>
               </td>
             </tr>
